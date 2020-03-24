@@ -1,0 +1,221 @@
+$selectedColor: #e6f2ff;
+$lighterBlue: #409EFF;
+.drawing-board {
+  height: 100%;
+  position: relative;
+  border:1px dashed #ccc;
+  .components-body {
+    padding: 0;
+    margin: 0;
+    font-size: 0;
+  }
+  .sortable-ghost {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    &::before {
+      content: " ";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 3px;
+      background: #409EFF;
+      z-index: 2;
+    }
+  }
+  .components-item.sortable-ghost {
+    width: 100%;
+    height: 60px;
+    background-color: $selectedColor;
+  }
+  .active-from-item {
+    & > .el-form-item{
+      background: $selectedColor;
+      border-radius:6px;
+    }
+    & > .drawing-item-copy, & > .drawing-item-delete{
+      display: initial;
+    }
+    & > .component-name{
+      color: $lighterBlue;
+    }
+  }
+  .el-form-item{
+    margin-bottom: 15px;
+  }
+}
+.drawing-item{
+  position: relative;
+  cursor: move;
+  &.unfocus-bordered:not(.active-from-item) > div:first-child {
+    border: 1px dashed #ccc;
+  }
+  .el-form-item{
+    padding: 12px 10px;
+  }
+}
+.drawing-row-item{
+  position: relative;
+  cursor: move;
+  box-sizing: border-box;
+  border: 1px dashed #ccc;
+  border-radius: 3px;
+  padding: 0 2px;
+  margin-bottom: 15px;
+  .el-col{
+    margin-top: 22px;
+  }
+  .el-form-item{
+    margin-bottom: 0;
+  }
+  .drag-wrapper{
+    min-height: 80px;
+  }
+  &.active-from-item{
+    border: 1px dashed $lighterBlue;
+  }
+  .component-name{
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 12px;
+    color: #bbb;
+    display: inline-block;
+    padding: 0 6px;
+  }
+}
+.drawing-item, .drawing-row-item{
+  &:hover {
+    & > .el-form-item{
+      background: #ebeef5;
+    }
+    & > .drawing-item-copy, & > .drawing-item-delete{
+      display: initial;
+    }
+  }
+  & > .drawing-item-copy, & > .drawing-item-delete{
+    display: none;
+    position: absolute;
+    top: -10px;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 12px;
+    border: 1px solid;
+    cursor: pointer;
+    z-index: 1;
+  }
+  & > .drawing-item-copy{
+    right: 56px;
+    border-color: $lighterBlue;
+    color: $lighterBlue;
+    background: #fff;
+    &:hover{
+      background: $lighterBlue;
+      color: #fff;
+    }
+  }
+  & > .drawing-item-delete{
+    right: 24px;
+    border-color: #F56C6C;
+    color: #F56C6C;
+    background: #fff;
+    &:hover{
+      background: #F56C6C;
+      color: #fff;
+    }
+  }
+}
+.right-board {
+  width: 350px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding-top: 3px;
+  .field-box {
+    position: relative;
+    height: calc(100vh - 42px);
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .el-scrollbar {
+    height: 100%;
+  }
+}
+.select-item {
+  display: flex;
+  border: 1px dashed #fff;
+  box-sizing: border-box;
+  & .close-btn {
+    cursor: pointer;
+    color: #f56c6c;
+  }
+  & .el-input + .el-input {
+    margin-left: 4px;
+  }
+}
+.select-item + .select-item {
+  margin-top: 4px;
+}
+.select-item.sortable-chosen {
+  border: 1px dashed #409eff;
+}
+.select-line-icon {
+  line-height: 32px;
+  font-size: 22px;
+  padding: 0 4px;
+  color: #777;
+}
+.option-drag {
+  cursor: move;
+}
+.time-range {
+  .el-date-editor {
+    width: 227px;
+  }
+  ::v-deep .el-icon-time {
+    display: none;
+  }
+}
+.document-link {
+  position: absolute;
+  display: block;
+  width: 26px;
+  height: 26px;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  background: #409eff;
+  z-index: 1;
+  border-radius: 0 0 6px 0;
+  text-align: center;
+  line-height: 26px;
+  color: #fff;
+  font-size: 18px;
+}
+.node-label{
+  font-size: 14px;
+}
+.node-icon{
+  color: #bebfc3;
+}
+.center-tabs{
+  .el-tabs__header{
+    margin-bottom: 0!important;
+  }
+  .el-tabs__item{
+    width: 100%;
+    text-align: center;
+  }
+  .el-tabs__nav{
+    width: 100%;
+  }
+}
+.right-scrollbar {
+  .el-scrollbar__view {
+    padding: 12px 18px 15px 15px;
+  }
+}

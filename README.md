@@ -1,37 +1,44 @@
-# formDesigner
+## 简介
+Element UI表单设计及代码生成器，可将生成的代码直接运行在基于Element的vue项目中。 
+- [github pages地址](https://jakhuang.github.io/form-generator)
+- [gitee pages地址 较快](https://mrhj.gitee.io/form-generator)
+- [github仓库](https://github.com/JakHuang/form-generator)
+- [码云仓库](https://gitee.com/mrhj/form-generator)
+- [配套vscode插件](https://github.com/JakHuang/form-generator-plugin)
 
-#### 介绍
-基于https://gitee.com/mrhj/form-generator表单设计器的修改版。
+![image](https://ae01.alicdn.com/kf/U51bfb661aba945b48a4c71774421d414C.gif)
 
-#### 软件架构
-软件架构说明
+## 特点
+- 可视化设计表单
+- 一键生成原生的vue单页表单代码，100%拓展性
+- 在线编辑器修改生成的代码，并实时预览
+- 表单栅格化布局
+- 支持表单校验
+- 快速查阅Element UI官方文档
+- 配套vscode插件
 
-
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+## 插件
+vscode-plugin分支配套插件为：[form-generator-plugin](https://github.com/JakHuang/form-generator-plugin)；  
+使用插件可右键打开设计器，直接将代码保存到工程中。  
+安装插件请在vscode中搜索：
+>jakHuang   
+或  
+Form Generator Plugin
 
 
-#### 码云特技
+## 文档
+- [el-dialog的封装与调用](https://github.com/JakHuang/form-generator/wiki/el-dialog%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E8%B0%83%E7%94%A8)
+- [项目主要结构分析](https://github.com/JakHuang/form-generator/wiki/%E9%A1%B9%E7%9B%AE%E4%B8%BB%E8%A6%81%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90)
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5.  码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+## 交流
+- QQ群 976154366
+
+## 开发计划
+详见 [**迭代计划**](https://github.com/JakHuang/form-generator/projects/2)  
+欢迎提交PR
+
+## PR鸣谢
+- [IWANABETHATGUY](https://github.com/IWANABETHATGUY)
+
+## 开源协议
+[MIT](https://opensource.org/licenses/MIT)

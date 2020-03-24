@@ -1,0 +1,104 @@
+<template>
+  <div v-show="props.compType === 'date'">
+    <!-- <el-form-item label="字段名">
+      <el-input class="input" v-model="props"></el-input>
+    </el-form-item> -->
+    <el-form-item label="标题">
+      <el-input class="input" v-model="props.label"></el-input>
+    </el-form-item>
+    <el-form-item label="表单栅格">
+      <el-slider class="input" v-model="props.span" :max="24" :min="1" :marks="{12:''}"></el-slider>
+    </el-form-item>
+    <el-form-item label="栅格间隔">
+      <el-input-number v-model="props.gutter"  :min="0"></el-input-number>
+    </el-form-item>
+    <el-form-item label="标签宽度">
+      <el-input-number v-model="props.labelWidth"  :min="1" :max="200"></el-input-number>
+    </el-form-item>
+    <el-form-item label="显示标签">
+      <el-switch v-model="props.showLabel"></el-switch>
+    </el-form-item>
+    <el-form-item label="显示标签">
+      <el-input v-model="props.placeholder"></el-input>
+    </el-form-item>
+    <el-form-item label="必填">
+      <el-switch v-model="props.required"></el-switch>
+    </el-form-item>
+
+    <el-form-item label="时间类型">
+      <el-select v-model="props.type" @change="handlerFormatChange">
+        <el-option v-for="item in dateTypeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
+    </el-form-item>
+    <el-form-item label="时间格式">
+      <el-input :value="props.format"/>
+    </el-form-item>
+    <el-form-item label="清空">
+      <el-switch v-model="props.clearable"></el-switch>
+    </el-form-item>
+    <el-form-item label="只读">
+      <el-switch v-model="props.readonly"></el-switch>
+    </el-form-item>
+    <el-form-item label="禁用">
+      <el-switch v-model="props.disabled"></el-switch>
+    </el-form-item>
+    <el-form-item label="默认值">
+      <el-date-picker v-model="props.value" type="date" placeholder="选择日期"/>
+    </el-form-item>
+  </div>
+</template>
+<script>
+/**
+ * input的配置项
+ */
+const dateType =[
+    {
+      label: '日(date)',
+      value: 'date'
+    },
+    {
+      label: '周(week)',
+      value: 'week'
+    },
+    {
+      label: '月(month)',
+      value: 'month'
+    },
+    {
+      label: '年(year)',
+      value: 'year'
+    },
+    {
+      label: '日期时间(datetime)',
+      value: 'datetime'
+    }
+  ];
+const dateTimeFormat = {
+  date: 'yyyy-MM-dd',
+  week: 'yyyy 第 WW 周',
+  month: 'yyyy-MM',
+  year: 'yyyy',
+  datetime: 'yyyy-MM-dd HH:mm:ss',
+  daterange: 'yyyy-MM-dd',
+  monthrange: 'yyyy-MM',
+  datetimerange: 'yyyy-MM-dd HH:mm:ss'
+}
+export default {
+  name:"inputConfig",
+  props:{
+    props:{}
+  },
+  data(){
+    return {
+      dateTypeOptions:dateType
+    }
+  },
+  methods:{
+    handlerFormatChange(val){
+      this.props.format = dateTimeFormat[val];
+    }
+  },
+  mounted(){
+  }
+}
+</script>
