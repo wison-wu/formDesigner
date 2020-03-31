@@ -19,6 +19,7 @@
             :clone="cloneComponent"
             draggable=".components-item"
             :sort="false"
+            @start="onStart"
             @end="onEnd"
           >
             <div
@@ -80,6 +81,10 @@ export default {
         tempActiveData = clone;
       }
       this.$refs.designer.activeItem = tempActiveData;
+      console.log(this.$refs.designer.activeItem)
+    },
+    onStart(obj){
+      
     },
     onEnd(obj){
       if(obj.from !== obj.to){
@@ -89,7 +94,7 @@ export default {
           this.designList.splice(obj.newIndex,0,this.activeData);
         }
       }else{
-        //this.$refs.designer.activeItem = undefined;
+        this.$refs.designer.activeItem = undefined;
       }
       
     }
