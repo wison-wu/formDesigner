@@ -32,7 +32,7 @@ module.exports = {
     overlay: false,
     port: 8098
   },
-  productionSourceMap: false,
+  productionSourceMap: true,
   lintOnSave:false,
   configureWebpack: {
     externals: {

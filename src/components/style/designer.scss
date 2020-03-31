@@ -26,7 +26,7 @@ $lighterBlue: #409EFF;
   }
   .components-item.sortable-ghost {
     width: 100%;
-    height: 60px;
+    //height: 60px;
     background-color: $selectedColor;
   }
   .active-from-item {
@@ -53,6 +53,7 @@ $lighterBlue: #409EFF;
   }
   .el-form-item{
     padding: 12px 10px;
+    
   }
 }
 .drawing-row-item{
@@ -67,13 +68,18 @@ $lighterBlue: #409EFF;
     margin-top: 22px;
   }
   .el-form-item{
-    margin-bottom: 0;
+    margin-bottom: 15px;
   }
   .drag-wrapper{
     min-height: 80px;
   }
+  .drag-col-wrapper{
+    height: auto;
+    border: 1px dashed #ccc;
+  }
   &.active-from-item{
-    border: 1px dashed $lighterBlue;
+    border: 2px solid #e6a23c;
+    
   }
   .component-name{
     position: absolute;
@@ -86,6 +92,50 @@ $lighterBlue: #409EFF;
   }
 }
 .drawing-item, .drawing-row-item{
+  &:hover {
+    & > .el-form-item{
+      background: #ebeef5;
+    }
+    & > .drawing-item-copy, & > .drawing-item-delete{
+      display: initial;
+    }
+  }
+  & > .drawing-item-copy, & > .drawing-item-delete{
+    display: none;
+    position: absolute;
+    top: -10px;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 12px;
+    border: 1px solid;
+    cursor: pointer;
+    z-index: 1;
+  }
+  & > .drawing-item-copy{
+    right: 56px;
+    border-color: $lighterBlue;
+    color: $lighterBlue;
+    background: #fff;
+    &:hover{
+      background: $lighterBlue;
+      color: #fff;
+    }
+  }
+  & > .drawing-item-delete{
+    right: 24px;
+    border-color: #F56C6C;
+    color: #F56C6C;
+    background: #fff;
+    &:hover{
+      background: #F56C6C;
+      color: #fff;
+    }
+  }
+}
+.drawing-item, .drawing-form-item{
   &:hover {
     & > .el-form-item{
       background: #ebeef5;
@@ -218,4 +268,7 @@ $lighterBlue: #409EFF;
   .el-scrollbar__view {
     padding: 12px 18px 15px 15px;
   }
+}
+.drawing-row-item .el-col{
+  margin-bottom:10px;
 }

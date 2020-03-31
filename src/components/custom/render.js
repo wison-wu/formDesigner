@@ -29,6 +29,7 @@ const componentChild = {
       conf.options.forEach(item => {
         list.push(<el-option label={item.label} value={item.value} disabled={item.disabled}></el-option>)
       })
+      console.log(list);
       return list;
     }
   },
@@ -65,7 +66,6 @@ export default {
     }
     const confClone = JSON.parse(JSON.stringify(this.conf))
     const children = []
-
     const childObjs = componentChild[confClone.ele]
     if (childObjs) {
       Object.keys(childObjs).forEach(key => {

@@ -23,9 +23,12 @@
           :disabled="formConf.disabled"
           :label-width="formConf.labelWidth + 'px'"
         >
-        <draggable class="drawing-board" :list="list" :animation="250" group="componentsGroup">
-          
-          <design-item 
+        <draggable class="drawing-board" 
+                   :list="list" 
+                   :animation="100" 
+                   group="componentsGroup" 
+                   >
+        <design-item 
             v-for="(element,index) in list" 
             :key="index" 
             :model="element" 
@@ -92,6 +95,7 @@ import draggable from "vuedraggable";
 import configPanel from './configPanel'
 import designItem from './designItem'
 import {getSimpleId} from "./utils/IdGenerate";
+import {isLayout} from "./utils/index";
 import formConf from "./custom/formConf";
 import preview from "./preview";
 
@@ -113,6 +117,7 @@ export default {
     return {
       formConf:formConf,
       activeItem:{},
+      lastActiveItem:{},
       formConfVisible:false,
       previewVisible:false,
       itemList:[]
@@ -139,18 +144,52 @@ export default {
       this.$message('帮助！');
     },
     handlerActiveItemChange(obj){
+      this.lastActiveItem = this.activeItem;
       this.activeItem = obj;
     },
-    handlerItemCopy(origin){
-      const clone = JSON.parse(JSON.stringify(origin))
-      const uId = "fd_"+getSimpleId();
-      clone.id = uId;
-      this.list.push(clone);
-      this.handlerActiveItemChange(clone);
+    handlerItemCopy(origin,parent){
+      if(isLayout(origin)){ //布局组件，需要复制布局组件以及下面的组件
+          const clone = JSON.parse(JSON.stringify(origin))
+          const uId = "row_"+getSimpleId();
+          clone.id = uId;
+          clone.columns.map((column,index)=>{
+            let itemList = [];
+            column.list.map((item,i)=>{
+              const cloneitem = JSON.parse(JSON.stringify(item))
+              const uId = "fd_"+getSimpleId();
+              cloneitem.id = uId;
+              itemList.push(cloneitem);
+            })
+            column.list = [];
+            column.list = itemList;
+          })
+          this.list.push(clone);
+          this.handlerActiveItemChange(clone);
+      }else{  //如果是普通组件，需要判断他是否再布局组件下。
+        if(parent){
+          parent.columns.map((column,index)=>{
+            if(column.list.some(item => item.id === origin.id)){
+              const clone = JSON.parse(JSON.stringify(origin))
+              const uId = "fd_"+getSimpleId();
+              clone.id = uId;
+              column.list.push(clone);
+              this.handlerActiveItemChange(clone);
+            }
+          })
+        }else{
+          const clone = JSON.parse(JSON.stringify(origin))
+          const uId = "fd_"+getSimpleId();
+          clone.id = uId;
+          this.list.push(clone);
+          this.handlerActiveItemChange(clone);
+        }
+      }
+      
     },
     handlerItemDelete(origin){
       const index = this.list.findIndex(item=>item.id === origin.id);
       this.list.splice(index,1);
+      this.activeItem = this.lastActiveItem;
     },
     handlerSaveFormConf(){
       this.formConfVisible = false
@@ -162,10 +201,8 @@ export default {
     }
   },
   watch: {
-    list: {
-      handler(val){
-        this.activeItem = val[val.length-1];
-      }
+    activeItem (newValue,oldValue) {
+      this.lastActiveItem = oldValue;
     }
   }
 }

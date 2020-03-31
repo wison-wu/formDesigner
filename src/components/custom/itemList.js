@@ -9,6 +9,7 @@ import {slider} from "./items/slider";
 import {rate} from "./items/rate";
 import {date} from "./items/date";
 import {time} from "./items/time";
+import {row} from "./items/row";
 
 const formList = {
   input: input,
@@ -21,7 +22,8 @@ const formList = {
   slider:slider,
   rate:rate,
   date:date,
-  time:time
+  time:time,
+  row:row
 };
 let items = [];
 for (let i in formList) {

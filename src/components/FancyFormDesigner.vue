@@ -19,6 +19,7 @@
             :clone="cloneComponent"
             draggable=".components-item"
             :sort="false"
+            @start="onStart"
             @end="onEnd"
           >
             <div
@@ -33,7 +34,7 @@
         </div>
       </el-scrollbar>
     </div>
-    <designer :list="designList" @clear="designList = []"/>
+    <designer ref="designer" :list="designList" @clear="designList = []" :activeData="activeData"/>
   </div>
 </template>
 <script>
@@ -57,7 +58,7 @@ export default {
     return {
       formItems:formItems,
       designList:[],
-      activeData:''
+      activeData:{}
     }
   },
   mounted() {
@@ -69,15 +70,31 @@ export default {
     },
     cloneComponent(origin){
       const clone = JSON.parse(JSON.stringify(origin))
-      let uId = "fd_"+getSimpleId();
-      clone.id = uId;
-      tempActiveData = clone;
+      if (!clone.layout) clone.layout = 'colItem'
+      if (clone.layout === 'colItem') {
+        let uId = "fd_"+getSimpleId();
+        clone.id = uId;
+        tempActiveData = clone;
+      }else if(clone.layout === 'rowItem'){
+        let uId = "row_"+getSimpleId();
+        clone.id = uId;
+        tempActiveData = clone;
+      }
+      this.$refs.designer.activeItem = tempActiveData;
+      console.log(this.$refs.designer.activeItem)
+    },
+    onStart(obj){
+      
     },
     onEnd(obj){
-      
       if(obj.from !== obj.to){
         this.activeData = tempActiveData;
-        this.designList.splice(obj.newIndex,0,this.activeData);
+        this.$refs.designer.activeItem = this.activeData;
+        if(obj.to.className.indexOf('row-drag')<0){
+          this.designList.splice(obj.newIndex,0,this.activeData);
+        }
+      }else{
+        this.$refs.designer.activeItem = undefined;
       }
       
     }

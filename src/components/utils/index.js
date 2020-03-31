@@ -110,3 +110,7 @@ function parse(str) {
 export function jsonClone(obj) {
   return parse(stringify(obj))
 }
+
+export function isLayout(obj) {
+  return obj.compType === 'row';
+}

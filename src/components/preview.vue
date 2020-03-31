@@ -77,8 +77,8 @@ export default {
       })
     })
     
-    console.log(this.form);
-    console.log(this.rules);
+    // console.log(this.form);
+    // console.log(this.rules);
   },
   computed:{
   }
