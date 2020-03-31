@@ -10,8 +10,8 @@ const components = [
   'slider',
   'rate',
   'date',
-  'time'
-
+  'time',
+  'row'
 ];
 
 

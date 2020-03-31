@@ -184,12 +184,25 @@ export default {
           this.handlerActiveItemChange(clone);
         }
       }
-      
     },
-    handlerItemDelete(origin){
-      const index = this.list.findIndex(item=>item.id === origin.id);
-      this.list.splice(index,1);
-      this.activeItem = this.lastActiveItem;
+    handlerItemDelete(origin,parent){
+      if(isLayout(origin)){ //如果是布局组件,则直接删除
+        const index = this.list.findIndex(item=>item.id === origin.id);
+        this.list.splice(index,1);
+      }else{  //如果不是布局组件，则先判断是不是再布局内部，如果不是，则直接删除就可以，如果是，则要在布局内部删除
+        if(parent){
+          parent.columns.map((column,index)=>{
+            const colIndex = column.list.findIndex(item=>item.id === origin.id);
+            if(colIndex>-1){
+              column.list.splice(colIndex,1);
+            }
+          })
+        }else{
+          const index = this.list.findIndex(item=>item.id === origin.id);
+          this.list.splice(index,1);
+          
+        }
+      }
     },
     handlerSaveFormConf(){
       this.formConfVisible = false

@@ -20,6 +20,11 @@ export let row = {
   layout:'rowItem',
   // 是否可配置
   config: true,
+  //
+  flex:'default',
+  justify:'start',
+  align:'top',
+  gutter:0,
   columns:[
     {
       index:0,
