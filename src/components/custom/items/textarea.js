@@ -7,8 +7,8 @@ export let textarea = {
   ele: 'el-input',
   //控件名称(左侧显示)
   name:'多行文本',
-  //图标，暂不启用
-  icon:'',
+  //图标
+  icon:'textarea',
 
   // 是否可配置
   //暂时默认为true，无法更改，后期考虑某些时候无法配置

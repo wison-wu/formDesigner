@@ -1,17 +1,8 @@
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _terser = require("terser");
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+const {
+  minify: terserMinify
+} = require('terser');
 
 const buildTerserOptions = ({
   ecma,
@@ -34,16 +25,17 @@ const buildTerserOptions = ({
 } = {}) => ({
   ecma,
   warnings,
-  parse: _objectSpread({}, parse),
-  compress: typeof compress === 'boolean' ? compress : _objectSpread({}, compress),
+  parse: { ...parse
+  },
+  compress: typeof compress === 'boolean' ? compress : { ...compress
+  },
   // eslint-disable-next-line no-nested-ternary
-  mangle: mangle == null ? true : typeof mangle === 'boolean' ? mangle : _objectSpread({}, mangle),
-  output: _objectSpread({
-    shebang: true,
-    comments: false,
+  mangle: mangle == null ? true : typeof mangle === 'boolean' ? mangle : { ...mangle
+  },
+  output: {
     beautify: false,
-    semicolons: true
-  }, output),
+    ...output
+  },
   module,
   // Ignoring sourceMap from options
   sourceMap: null,
@@ -55,28 +47,32 @@ const buildTerserOptions = ({
   safari10
 });
 
+function isObject(value) {
+  const type = typeof value;
+  return value != null && (type === 'object' || type === 'function');
+}
+
 const buildComments = (options, terserOptions, extractedComments) => {
   const condition = {};
-  const commentsOpts = terserOptions.output.comments; // Use /^\**!|@preserve|@license|@cc_on/i RegExp
+  const commentsOpts = terserOptions.output.comments;
+  const {
+    extractComments
+  } = options;
+  condition.preserve = typeof commentsOpts !== 'undefined' ? commentsOpts : false;
 
-  if (typeof options.extractComments === 'boolean') {
-    condition.preserve = commentsOpts;
-    condition.extract = /^\**!|@preserve|@license|@cc_on/i;
-  } else if (typeof options.extractComments === 'string' || options.extractComments instanceof RegExp) {
-    // extractComments specifies the extract condition and commentsOpts specifies the preserve condition
-    condition.preserve = commentsOpts;
-    condition.extract = options.extractComments;
-  } else if (typeof options.extractComments === 'function') {
-    condition.preserve = commentsOpts;
-    condition.extract = options.extractComments;
-  } else if (Object.prototype.hasOwnProperty.call(options.extractComments, 'condition')) {
-    // Extract condition is given in extractComments.condition
-    condition.preserve = commentsOpts;
-    condition.extract = options.extractComments.condition;
+  if (typeof extractComments === 'boolean' && extractComments) {
+    condition.extract = 'some';
+  } else if (typeof extractComments === 'string' || extractComments instanceof RegExp) {
+    condition.extract = extractComments;
+  } else if (typeof extractComments === 'function') {
+    condition.extract = extractComments;
+  } else if (isObject(extractComments)) {
+    condition.extract = typeof extractComments.condition === 'boolean' && extractComments.condition ? 'some' : typeof extractComments.condition !== 'undefined' ? extractComments.condition : 'some';
   } else {
-    // No extract condition is given. Extract comments that match commentsOpts instead of preserving them
-    condition.preserve = false;
-    condition.extract = commentsOpts;
+    // No extract
+    // Preserve using "commentsOpts" or "some"
+    condition.preserve = typeof commentsOpts !== 'undefined' ? commentsOpts : 'some';
+    condition.extract = false;
   } // Ensure that both conditions are functions
 
 
@@ -101,7 +97,7 @@ const buildComments = (options, terserOptions, extractedComments) => {
 
         if (condition[key] === 'some') {
           condition[key] = (astNode, comment) => {
-            return comment.type === 'comment2' && /^\**!|@preserve|@license|@cc_on/i.test(comment.value);
+            return comment.type === 'comment2' && /@preserve|@lic|@cc_on|^\**!/i.test(comment.value);
           };
 
           break;
@@ -142,7 +138,6 @@ const minify = options => {
     file,
     input,
     inputSourceMap,
-    extractComments,
     minify: minifyFn
   } = options;
 
@@ -156,21 +151,19 @@ const minify = options => {
   const terserOptions = buildTerserOptions(options.terserOptions); // Let terser generate a SourceMap
 
   if (inputSourceMap) {
-    terserOptions.sourceMap = true;
+    terserOptions.sourceMap = {
+      asObject: true
+    };
   }
 
   const extractedComments = [];
-
-  if (extractComments) {
-    terserOptions.output.comments = buildComments(options, terserOptions, extractedComments);
-  }
-
+  terserOptions.output.comments = buildComments(options, terserOptions, extractedComments);
   const {
     error,
     map,
     code,
     warnings
-  } = (0, _terser.minify)({
+  } = terserMinify({
     [file]: input
   }, terserOptions);
   return {
@@ -182,5 +175,4 @@ const minify = options => {
   };
 };
 
-var _default = minify;
-exports.default = _default;
+module.exports = minify;

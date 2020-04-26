@@ -7,9 +7,11 @@
 const Queue = require("./util/Queue");
 
 const addToSet = (a, b) => {
+	const size = a.size;
 	for (const item of b) {
 		a.add(item);
 	}
+	return a.size !== size;
 };
 
 class FlagDependencyExportsPlugin {
@@ -56,11 +58,14 @@ class FlagDependencyExportsPlugin {
 							// break if it should move to the worst state
 							if (exports === true) {
 								module.buildMeta.providedExports = true;
+								notifyDependencies();
 								return true;
 							}
 							// merge in new exports
 							if (Array.isArray(exports)) {
-								addToSet(moduleProvidedExports, exports);
+								if (addToSet(moduleProvidedExports, exports)) {
+									notifyDependencies();
+								}
 							}
 							// store dependencies
 							const exportDeps = exportDesc.dependencies;
@@ -82,26 +87,6 @@ class FlagDependencyExportsPlugin {
 						const notifyDependencies = () => {
 							const deps = dependencies.get(module);
 							if (deps !== undefined) {
-								for (const dep of deps) {
-									queue.enqueue(dep);
-								}
-							}
-						};
-
-						const notifyDependenciesIfDifferent = (set, array) => {
-							const deps = dependencies.get(module);
-							if (deps !== undefined) {
-								if (set.size === array.length) {
-									let i = 0;
-									let different = false;
-									for (const item of set) {
-										if (item !== array[i++]) {
-											different = true;
-											break;
-										}
-									}
-									if (!different) return;
-								}
 								for (const dep of deps) {
 									queue.enqueue(dep);
 								}
@@ -131,20 +116,9 @@ class FlagDependencyExportsPlugin {
 								processDependenciesBlock(module);
 								module.buildInfo.temporaryProvidedExports = providedExportsAreTemporary;
 								if (!moduleWithExports) {
-									notifyDependencies();
 									module.buildMeta.providedExports = true;
-								} else if (module.buildMeta.providedExports === true) {
 									notifyDependencies();
-								} else if (!module.buildMeta.providedExports) {
-									notifyDependencies();
-									module.buildMeta.providedExports = Array.from(
-										moduleProvidedExports
-									);
-								} else {
-									notifyDependenciesIfDifferent(
-										moduleProvidedExports,
-										module.buildMeta.providedExports
-									);
+								} else if (module.buildMeta.providedExports !== true) {
 									module.buildMeta.providedExports = Array.from(
 										moduleProvidedExports
 									);

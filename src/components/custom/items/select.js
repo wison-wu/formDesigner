@@ -11,8 +11,8 @@ export let select = {
   name:'下拉框',
   //element标签
   ele: 'el-select',
-  //图标，暂不启用
-  icon:'',
+  //图标
+  icon:'select',
   // 是否可配置
   config: true,
   // 控件左侧label内容

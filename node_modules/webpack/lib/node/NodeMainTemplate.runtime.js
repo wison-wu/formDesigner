@@ -2,12 +2,7 @@
 	MIT License http://www.opensource.org/licenses/mit-license.php
 	Author Tobias Koppers @sokra
 */
-// eslint-disable-next-line no-unused-vars
-var $hotChunkFilename$ = undefined;
-var hotAddUpdateChunk = undefined;
-var installedChunks = undefined;
-var $hotMainFilename$ = undefined;
-
+/*global installedChunks $hotChunkFilename$ hotAddUpdateChunk $hotMainFilename$ */
 module.exports = function() {
 	// eslint-disable-next-line no-unused-vars
 	function hotDownloadUpdateChunk(chunkId) {

@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.skipAllButComputedKey = skipAllButComputedKey;
 exports.default = exports.environmentVisitor = void 0;
 
 var _traverse = _interopRequireDefault(require("@babel/traverse"));

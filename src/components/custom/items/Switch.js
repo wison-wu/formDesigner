@@ -8,8 +8,8 @@ export let Switch = {
   //控件名称(左侧显示)
   name:'开关',
   label: '开关',
-  //图标，暂不启用
-  icon:'',
+  //图标
+  icon:'switch',
   //暂时默认为true，无法更改，后期考虑某些时候无法配置
   config: true,
   // 控件左侧label内容

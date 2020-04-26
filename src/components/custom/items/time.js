@@ -7,8 +7,8 @@ export let time = {
   ele: 'el-time-picker',
   //控件名称(左侧显示)
   name:'时间',
-  //图标，暂不启用
-  icon:'',
+  //图标
+  icon:'time',
 
   // 是否可配置
   //暂时默认为true，无法更改，后期考虑某些时候无法配置

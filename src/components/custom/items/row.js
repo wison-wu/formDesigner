@@ -15,8 +15,8 @@ export let row = {
   name:'栅格布局',
   //element标签
   ele: 'el-row',
-  //图标，暂不启用
-  icon:'',
+  //图标
+  icon:'col',
   layout:'rowItem',
   // 是否可配置
   config: true,

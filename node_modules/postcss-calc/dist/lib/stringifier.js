@@ -28,25 +28,13 @@ function stringify(node, prec) {
             right = node.right,
             op = node.operator;
         var str = "";
-
-        if (left.type === 'MathExpression' && order[op] < order[left.operator]) {
-          str += `(${stringify(left, prec)})`;
-        } else {
-          str += stringify(left, prec);
-        }
-
+        if (left.type === 'MathExpression' && order[op] < order[left.operator]) str += `(${stringify(left, prec)})`;else str += stringify(left, prec);
         str += order[op] ? ` ${node.operator} ` : node.operator;
-
-        if (right.type === 'MathExpression' && order[op] < order[right.operator]) {
-          str += `(${stringify(right, prec)})`;
-        } else {
-          str += stringify(right, prec);
-        }
-
+        if (right.type === 'MathExpression' && order[op] < order[right.operator]) str += `(${stringify(right, prec)})`;else str += stringify(right, prec);
         return str;
       }
 
-    case 'Number':
+    case "Value":
       return round(node.value, prec);
 
     case 'Function':
@@ -59,9 +47,8 @@ function stringify(node, prec) {
 
 function _default(calc, node, originalValue, options, result, item) {
   var str = stringify(node, options.precision);
-  var shouldPrintCalc = node.type === "MathExpression" || node.type === "Function";
 
-  if (shouldPrintCalc) {
+  if (node.type === "MathExpression") {
     // if calc expression couldn't be resolved to a single value, re-wrap it as
     // a calc()
     str = `${calc}(${str})`; // if the warnWhenCannotResolve option is on, inform the user that the calc

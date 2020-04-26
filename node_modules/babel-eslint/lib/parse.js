@@ -19,7 +19,7 @@ module.exports = function(code, options) {
     ranges: true,
     tokens: true,
     plugins: [
-      ["flow", { all: true, enums: true }],
+      ["flow", { all: true }],
       "jsx",
       "estree",
       "asyncFunctions",

@@ -99,7 +99,7 @@ function compile (val) {
   for (var i = 0; i < trust.length; i++) {
     val = trust[i]
 
-    if (!Object.prototype.hasOwnProperty.call(IP_RANGES, val)) {
+    if (!IP_RANGES.hasOwnProperty(val)) {
       continue
     }
 

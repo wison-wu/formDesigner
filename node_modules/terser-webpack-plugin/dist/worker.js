@@ -1,17 +1,19 @@
 "use strict";
 
-var _minify = _interopRequireDefault(require("./minify"));
+const minify = require('./minify');
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function transform(options) {
+  // 'use strict' => this === undefined (Clean Scope)
+  // Safer for possible security issues, albeit not critical at all here
+  // eslint-disable-next-line no-new-func, no-param-reassign
+  options = new Function('exports', 'require', 'module', '__filename', '__dirname', `'use strict'\nreturn ${options}`)(exports, require, module, __filename, __dirname);
+  const result = minify(options);
 
-module.exports = (options, callback) => {
-  try {
-    // 'use strict' => this === undefined (Clean Scope)
-    // Safer for possible security issues, albeit not critical at all here
-    // eslint-disable-next-line no-new-func, no-param-reassign
-    options = new Function('exports', 'require', 'module', '__filename', '__dirname', `'use strict'\nreturn ${options}`)(exports, require, module, __filename, __dirname);
-    callback(null, (0, _minify.default)(options));
-  } catch (errors) {
-    callback(errors);
+  if (result.error) {
+    throw result.error;
+  } else {
+    return result;
   }
-};
+}
+
+module.exports.transform = transform;

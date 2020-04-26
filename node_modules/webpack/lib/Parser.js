@@ -1229,7 +1229,7 @@ class Parser extends Tapable {
 				this.walkPattern(param);
 			}
 			if (statement.body.type === "BlockStatement") {
-				this.detectMode(statement.body.body);
+				this.detectStrictMode(statement.body.body);
 				this.prewalkStatement(statement.body);
 				this.walkStatement(statement.body);
 			} else {
@@ -1697,7 +1697,7 @@ class Parser extends Tapable {
 				this.walkPattern(param);
 			}
 			if (expression.body.type === "BlockStatement") {
-				this.detectMode(expression.body.body);
+				this.detectStrictMode(expression.body.body);
 				this.prewalkStatement(expression.body);
 				this.walkStatement(expression.body);
 			} else {
@@ -1713,7 +1713,7 @@ class Parser extends Tapable {
 				this.walkPattern(param);
 			}
 			if (expression.body.type === "BlockStatement") {
-				this.detectMode(expression.body.body);
+				this.detectStrictMode(expression.body.body);
 				this.prewalkStatement(expression.body);
 				this.walkStatement(expression.body);
 			} else {
@@ -1894,7 +1894,6 @@ class Parser extends Tapable {
 				this.scope.renames.set(params[i].name, param);
 			}
 			if (functionExpression.body.type === "BlockStatement") {
-				this.detectMode(functionExpression.body.body);
 				this.prewalkStatement(functionExpression.body);
 				this.walkStatement(functionExpression.body);
 			} else {
@@ -2002,7 +2001,6 @@ class Parser extends Tapable {
 			inTry: false,
 			inShorthand: false,
 			isStrict: oldScope.isStrict,
-			isAsmJs: oldScope.isAsmJs,
 			definitions: oldScope.definitions.createChild(),
 			renames: oldScope.renames.createChild()
 		};
@@ -2026,7 +2024,6 @@ class Parser extends Tapable {
 			inTry: false,
 			inShorthand: false,
 			isStrict: oldScope.isStrict,
-			isAsmJs: oldScope.isAsmJs,
 			definitions: oldScope.definitions.createChild(),
 			renames: oldScope.renames.createChild()
 		};
@@ -2052,7 +2049,6 @@ class Parser extends Tapable {
 			inTry: oldScope.inTry,
 			inShorthand: false,
 			isStrict: oldScope.isStrict,
-			isAsmJs: oldScope.isAsmJs,
 			definitions: oldScope.definitions.createChild(),
 			renames: oldScope.renames.createChild()
 		};
@@ -2062,22 +2058,14 @@ class Parser extends Tapable {
 		this.scope = oldScope;
 	}
 
-	// TODO webpack 5: remove this methods
-	// only for backward-compat
 	detectStrictMode(statements) {
-		this.detectMode(statements);
-	}
-
-	detectMode(statements) {
-		const isLiteral =
+		const isStrict =
 			statements.length >= 1 &&
 			statements[0].type === "ExpressionStatement" &&
-			statements[0].expression.type === "Literal";
-		if (isLiteral && statements[0].expression.value === "use strict") {
+			statements[0].expression.type === "Literal" &&
+			statements[0].expression.value === "use strict";
+		if (isStrict) {
 			this.scope.isStrict = true;
-		}
-		if (isLiteral && statements[0].expression.value === "use asm") {
-			this.scope.isAsmJs = true;
 		}
 	}
 
@@ -2284,14 +2272,13 @@ class Parser extends Tapable {
 			inTry: false,
 			inShorthand: false,
 			isStrict: false,
-			isAsmJs: false,
 			definitions: new StackedSetMap(),
 			renames: new StackedSetMap()
 		};
 		const state = (this.state = initialState || {});
 		this.comments = comments;
 		if (this.hooks.program.call(ast, comments) === undefined) {
-			this.detectMode(ast.body);
+			this.detectStrictMode(ast.body);
 			this.prewalkStatements(ast.body);
 			this.blockPrewalkStatements(ast.body);
 			this.walkStatements(ast.body);

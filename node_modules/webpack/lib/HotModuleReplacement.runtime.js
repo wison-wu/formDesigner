@@ -2,17 +2,7 @@
 	MIT License http://www.opensource.org/licenses/mit-license.php
 	Author Tobias Koppers @sokra
 */
-// eslint-disable no-unused-vars
-var $hash$ = undefined;
-var $requestTimeout$ = undefined;
-var installedModules = undefined;
-var $require$ = undefined;
-var hotDownloadManifest = undefined;
-var hotDownloadUpdateChunk = undefined;
-var hotDisposeChunk = undefined;
-var modules = undefined;
-var chunkId = undefined;
-
+/*global $hash$ $requestTimeout$ installedModules $require$ hotDownloadManifest hotDownloadUpdateChunk hotDisposeChunk modules */
 module.exports = function() {
 	var hotApplyOnUpdate = true;
 	// eslint-disable-next-line no-unused-vars
@@ -214,6 +204,7 @@ module.exports = function() {
 			/*foreachInstalledChunks*/
 			// eslint-disable-next-line no-lone-blocks
 			{
+				/*globals chunkId */
 				hotEnsureUpdateChunk(chunkId);
 			}
 			if (

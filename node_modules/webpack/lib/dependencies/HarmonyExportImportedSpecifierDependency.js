@@ -304,13 +304,9 @@ class HarmonyExportImportedSpecifierDependency extends HarmonyImportDependency {
 		}
 
 		if (Array.isArray(importedModule.buildMeta.providedExports)) {
-			const activeFromOtherStarExports = this._discoverActiveExportsFromOtherStartExports();
 			return {
 				exports: importedModule.buildMeta.providedExports.filter(
-					id =>
-						id !== "default" &&
-						!activeFromOtherStarExports.has(id) &&
-						!this.activeExports.has(id)
+					id => id !== "default"
 				),
 				dependencies: [importedModule]
 			};

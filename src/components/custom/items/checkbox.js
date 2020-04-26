@@ -11,8 +11,8 @@ export let checkbox = {
   name:'复选框',
   //element标签
   ele: 'el-checkbox-group',
-  //图标，暂不启用
-  icon:'',
+  //图标
+  icon:'checkbox',
   // 是否可配置
   config: true,
   // 控件左侧label内容

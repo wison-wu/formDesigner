@@ -13,6 +13,7 @@
     "beautifier": "^0.1.7",
     "clipboard": "^2.0.4",
     "core-js": "^3.4.3",
+    "css-loader": "^3.5.3",
     "file-saver": "^2.0.2",
     "monaco": "^1.201704190613.0",
     "voca": "^1.4.0",

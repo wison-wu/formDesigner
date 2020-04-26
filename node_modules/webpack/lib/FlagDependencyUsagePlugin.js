@@ -93,7 +93,7 @@ class FlagDependencyUsagePlugin {
 					};
 
 					for (const module of modules) {
-						if (!module.used) module.used = false;
+						module.used = false;
 					}
 
 					/** @type {[Module, DependenciesBlock, UsedExports][]} */

@@ -11,8 +11,8 @@ export let radio = {
   name:'单选框',
   //element标签
   ele: 'el-radio-group',
-  //图标，暂不启用
-  icon:'',
+  //图标
+  icon:'radio',
   // 是否可配置
   config: true,
   // 控件左侧label内容

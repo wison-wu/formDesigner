@@ -420,10 +420,6 @@ module.exports = {
 }
 ```
 
-## Contributing
-
-[Our contributing guidelines](./CONTRIBUTING.md) will help you
-with making pull request to this project.
 
 ## Editors & IDE Integration
 

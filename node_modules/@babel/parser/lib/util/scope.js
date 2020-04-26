@@ -9,8 +9,6 @@ var _scopeflags = require("./scopeflags");
 
 var N = _interopRequireWildcard(require("../types"));
 
-var _location = require("../parser/location");
-
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -38,6 +36,24 @@ class ScopeHandler {
 
   get inFunction() {
     return (this.currentVarScope().flags & _scopeflags.SCOPE_FUNCTION) > 0;
+  }
+
+  get inGenerator() {
+    return (this.currentVarScope().flags & _scopeflags.SCOPE_GENERATOR) > 0;
+  }
+
+  get inAsync() {
+    for (let i = this.scopeStack.length - 1;; i--) {
+      const scope = this.scopeStack[i];
+      const isVarScope = scope.flags & _scopeflags.SCOPE_VAR;
+      const isClassScope = scope.flags & _scopeflags.SCOPE_CLASS;
+
+      if (isClassScope && !isVarScope) {
+        return false;
+      } else if (isVarScope) {
+        return (scope.flags & _scopeflags.SCOPE_ASYNC) > 0;
+      }
+    }
   }
 
   get allowSuper() {
@@ -114,7 +130,7 @@ class ScopeHandler {
 
   checkRedeclarationInScope(scope, name, bindingType, pos) {
     if (this.isRedeclaredInScope(scope, name, bindingType)) {
-      this.raise(pos, _location.Errors.VarRedeclaration, name);
+      this.raise(pos, `Identifier '${name}' has already been declared`);
     }
   }
 

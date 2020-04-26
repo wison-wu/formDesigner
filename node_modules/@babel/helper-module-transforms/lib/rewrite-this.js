@@ -5,8 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = rewriteThis;
 
-var _helperReplaceSupers = require("@babel/helper-replace-supers");
-
 function rewriteThis(programPath) {
   programPath.traverse(rewriteThisVisitor);
 }
@@ -17,11 +15,11 @@ const rewriteThisVisitor = {
   },
 
   Function(path) {
-    if (path.isMethod()) (0, _helperReplaceSupers.skipAllButComputedKey)(path);else if (!path.isArrowFunctionExpression()) path.skip();
+    if (!path.isArrowFunctionExpression()) path.skip();
   },
 
   ClassProperty(path) {
-    (0, _helperReplaceSupers.skipAllButComputedKey)(path);
+    path.skip();
   },
 
   ClassPrivateProperty(path) {

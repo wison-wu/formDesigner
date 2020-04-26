@@ -119,7 +119,6 @@ class ConstPlugin {
 
 				const handler = parser => {
 					parser.hooks.statementIf.tap("ConstPlugin", statement => {
-						if (parser.scope.isAsmJs) return;
 						const param = parser.evaluateExpression(statement.test);
 						const bool = param.asBool();
 						if (typeof bool === "boolean") {
@@ -190,7 +189,6 @@ class ConstPlugin {
 					parser.hooks.expressionConditionalOperator.tap(
 						"ConstPlugin",
 						expression => {
-							if (parser.scope.isAsmJs) return;
 							const param = parser.evaluateExpression(expression.test);
 							const bool = param.asBool();
 							if (typeof bool === "boolean") {
@@ -226,7 +224,6 @@ class ConstPlugin {
 					parser.hooks.expressionLogicalOperator.tap(
 						"ConstPlugin",
 						expression => {
-							if (parser.scope.isAsmJs) return;
 							if (
 								expression.operator === "&&" ||
 								expression.operator === "||"
@@ -312,7 +309,6 @@ class ConstPlugin {
 					parser.hooks.evaluateIdentifier
 						.for("__resourceQuery")
 						.tap("ConstPlugin", expr => {
-							if (parser.scope.isAsmJs) return;
 							if (!parser.state.module) return;
 							return ParserHelpers.evaluateToString(
 								getQuery(parser.state.module.resource)
@@ -321,7 +317,6 @@ class ConstPlugin {
 					parser.hooks.expression
 						.for("__resourceQuery")
 						.tap("ConstPlugin", () => {
-							if (parser.scope.isAsmJs) return;
 							if (!parser.state.module) return;
 							parser.state.current.addVariable(
 								"__resourceQuery",

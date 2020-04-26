@@ -22,23 +22,6 @@ const createHash = require("../util/createHash");
 /** @typedef {import("../Dependency")} Dependency */
 /** @typedef {import("../Compilation")} Compilation */
 /** @typedef {import("../util/createHash").Hash} Hash */
-/** @typedef {import("../RequestShortener")} RequestShortener */
-
-const joinIterableWithComma = iterable => {
-	// This is more performant than Array.from().join(", ")
-	// as it doesn't create an array
-	let str = "";
-	let first = true;
-	for (const item of iterable) {
-		if (first) {
-			first = false;
-		} else {
-			str += ", ";
-		}
-		str += item;
-	}
-	return str;
-};
 
 /**
  * @typedef {Object} ConcatenationEntry
@@ -302,41 +285,6 @@ const getPathInAst = (ast, node) => {
 			}
 		}
 	}
-};
-
-const getHarmonyExportImportedSpecifierDependencyExports = dep => {
-	const importModule = dep._module;
-	if (!importModule) return [];
-	if (dep._id) {
-		// export { named } from "module"
-		return [
-			{
-				name: dep.name,
-				id: dep._id,
-				module: importModule
-			}
-		];
-	}
-	if (dep.name) {
-		// export * as abc from "module"
-		return [
-			{
-				name: dep.name,
-				id: true,
-				module: importModule
-			}
-		];
-	}
-	// export * from "module"
-	return importModule.buildMeta.providedExports
-		.filter(exp => exp !== "default" && !dep.activeExports.has(exp))
-		.map(exp => {
-			return {
-				name: exp,
-				id: exp,
-				module: importModule
-			};
-		});
 };
 
 class ConcatenatedModule extends Module {
@@ -678,7 +626,10 @@ class ConcatenatedModule extends Module {
 		);
 		innerDependencyTemplates.set(
 			HarmonyExportSpecifierDependency,
-			new NullTemplate()
+			new HarmonyExportSpecifierDependencyConcatenatedTemplate(
+				dependencyTemplates.get(HarmonyExportSpecifierDependency),
+				this.rootModule
+			)
 		);
 		innerDependencyTemplates.set(
 			HarmonyExportExpressionDependency,
@@ -689,11 +640,19 @@ class ConcatenatedModule extends Module {
 		);
 		innerDependencyTemplates.set(
 			HarmonyExportImportedSpecifierDependency,
-			new NullTemplate()
+			new HarmonyExportImportedSpecifierDependencyConcatenatedTemplate(
+				dependencyTemplates.get(HarmonyExportImportedSpecifierDependency),
+				this.rootModule,
+				moduleToInfoMap
+			)
 		);
 		innerDependencyTemplates.set(
 			HarmonyCompatibilityDependency,
-			new NullTemplate()
+			new HarmonyCompatibilityDependencyConcatenatedTemplate(
+				dependencyTemplates.get(HarmonyCompatibilityDependency),
+				this.rootModule,
+				moduleToInfoMap
+			)
 		);
 
 		// Must use full identifier in our cache here to ensure that the source
@@ -1146,62 +1105,11 @@ class ConcatenatedModule extends Module {
 			}
 		}
 
-		// Map with all root exposed used exports
-		/** @type {Map<string, function(RequestShortener): string>} */
-		const exportsMap = new Map();
-
-		// Set with all root exposed unused exports
-		/** @type {Set<string>} */
-		const unusedExports = new Set();
-
-		for (const dep of this.rootModule.dependencies) {
-			if (dep instanceof HarmonyExportSpecifierDependency) {
-				const used = this.rootModule.isUsed(dep.name);
-				if (used) {
-					const info = moduleToInfoMap.get(this.rootModule);
-					if (!exportsMap.has(used)) {
-						exportsMap.set(
-							used,
-							() => `/* binding */ ${info.internalNames.get(dep.id)}`
-						);
-					}
-				} else {
-					unusedExports.add(dep.name || "namespace");
-				}
-			} else if (dep instanceof HarmonyExportImportedSpecifierDependency) {
-				const exportDefs = getHarmonyExportImportedSpecifierDependencyExports(
-					dep
-				);
-				for (const def of exportDefs) {
-					const info = moduleToInfoMap.get(def.module);
-					const used = dep.originModule.isUsed(def.name);
-					if (used) {
-						if (!exportsMap.has(used)) {
-							exportsMap.set(used, requestShortener => {
-								const finalName = getFinalName(
-									info,
-									def.id,
-									moduleToInfoMap,
-									requestShortener,
-									false,
-									this.rootModule.buildMeta.strictHarmonyModule
-								);
-								return `/* reexport */ ${finalName}`;
-							});
-						}
-					} else {
-						unusedExports.add(def.name);
-					}
-				}
-			}
-		}
-
 		const result = new ConcatSource();
 
 		// add harmony compatibility flag (must be first because of possible circular dependencies)
 		const usedExports = this.rootModule.usedExports;
 		if (usedExports === true || usedExports === null) {
-			result.add(`// ESM COMPAT FLAG\n`);
 			result.add(
 				runtimeTemplate.defineEsModuleFlagStatement({
 					exportsArgument: this.exportsArgument
@@ -1209,33 +1117,9 @@ class ConcatenatedModule extends Module {
 			);
 		}
 
-		// define exports
-		if (exportsMap.size > 0) {
-			result.add(`\n// EXPORTS\n`);
-			for (const [key, value] of exportsMap) {
-				result.add(
-					`__webpack_require__.d(${this.exportsArgument}, ${JSON.stringify(
-						key
-					)}, function() { return ${value(requestShortener)}; });\n`
-				);
-			}
-		}
-
-		// list unused exports
-		if (unusedExports.size > 0) {
-			result.add(
-				`\n// UNUSED EXPORTS: ${joinIterableWithComma(unusedExports)}\n`
-			);
-		}
-
 		// define required namespace objects (must be before evaluation modules)
 		for (const info of modulesWithInfo) {
 			if (info.namespaceObjectSource) {
-				result.add(
-					`\n// NAMESPACE OBJECT: ${info.module.readableIdentifier(
-						requestShortener
-					)}\n`
-				);
 				result.add(info.namespaceObjectSource);
 			}
 		}
@@ -1437,6 +1321,38 @@ class HarmonyImportSideEffectDependencyConcatenatedTemplate {
 	}
 }
 
+class HarmonyExportSpecifierDependencyConcatenatedTemplate {
+	constructor(originalTemplate, rootModule) {
+		this.originalTemplate = originalTemplate;
+		this.rootModule = rootModule;
+	}
+
+	getHarmonyInitOrder(dep) {
+		if (dep.originModule === this.rootModule) {
+			return this.originalTemplate.getHarmonyInitOrder(dep);
+		}
+		return NaN;
+	}
+
+	harmonyInit(dep, source, runtime, dependencyTemplates) {
+		if (dep.originModule === this.rootModule) {
+			this.originalTemplate.harmonyInit(
+				dep,
+				source,
+				runtime,
+				dependencyTemplates
+			);
+			return;
+		}
+	}
+
+	apply(dep, source, runtime, dependencyTemplates) {
+		if (dep.originModule === this.rootModule) {
+			this.originalTemplate.apply(dep, source, runtime, dependencyTemplates);
+		}
+	}
+}
+
 class HarmonyExportExpressionDependencyConcatenatedTemplate {
 	constructor(originalTemplate, rootModule) {
 		this.originalTemplate = originalTemplate;
@@ -1470,8 +1386,119 @@ class HarmonyExportExpressionDependencyConcatenatedTemplate {
 	}
 }
 
-class NullTemplate {
-	apply() {}
+class HarmonyExportImportedSpecifierDependencyConcatenatedTemplate {
+	constructor(originalTemplate, rootModule, modulesMap) {
+		this.originalTemplate = originalTemplate;
+		this.rootModule = rootModule;
+		this.modulesMap = modulesMap;
+	}
+
+	getExports(dep) {
+		const importModule = dep._module;
+		if (dep._id) {
+			// export { named } from "module"
+			return [
+				{
+					name: dep.name,
+					id: dep._id,
+					module: importModule
+				}
+			];
+		}
+		if (dep.name) {
+			// export * as abc from "module"
+			return [
+				{
+					name: dep.name,
+					id: true,
+					module: importModule
+				}
+			];
+		}
+		// export * from "module"
+		return importModule.buildMeta.providedExports
+			.filter(exp => exp !== "default" && !dep.activeExports.has(exp))
+			.map(exp => {
+				return {
+					name: exp,
+					id: exp,
+					module: importModule
+				};
+			});
+	}
+
+	getHarmonyInitOrder(dep) {
+		const module = dep._module;
+		const info = this.modulesMap.get(module);
+		if (!info) {
+			return this.originalTemplate.getHarmonyInitOrder(dep);
+		}
+		return NaN;
+	}
+
+	harmonyInit(dep, source, runtime, dependencyTemplates) {
+		const module = dep._module;
+		const info = this.modulesMap.get(module);
+		if (!info) {
+			this.originalTemplate.harmonyInit(
+				dep,
+				source,
+				runtime,
+				dependencyTemplates
+			);
+			return;
+		}
+	}
+
+	apply(dep, source, runtime, dependencyTemplates) {
+		if (dep.originModule === this.rootModule) {
+			if (this.modulesMap.get(dep._module)) {
+				const exportDefs = this.getExports(dep);
+				for (const def of exportDefs) {
+					const info = this.modulesMap.get(def.module);
+					const used = dep.originModule.isUsed(def.name);
+					if (!used) {
+						source.insert(
+							-1,
+							`/* unused concated harmony import ${def.name} */\n`
+						);
+						continue;
+					}
+					let finalName;
+					const strictFlag = dep.originModule.buildMeta.strictHarmonyModule
+						? "_strict"
+						: "";
+					if (def.id === true) {
+						finalName = `__WEBPACK_MODULE_REFERENCE__${info.index}_ns${strictFlag}__`;
+					} else {
+						const exportData = Buffer.from(def.id, "utf-8").toString("hex");
+						finalName = `__WEBPACK_MODULE_REFERENCE__${info.index}_${exportData}${strictFlag}__`;
+					}
+					const exportsName = this.rootModule.exportsArgument;
+					const content =
+						`/* concated harmony reexport ${def.name} */` +
+						`__webpack_require__.d(${exportsName}, ` +
+						`${JSON.stringify(used)}, ` +
+						`function() { return ${finalName}; });\n`;
+					source.insert(-1, content);
+				}
+			} else {
+				this.originalTemplate.apply(dep, source, runtime, dependencyTemplates);
+			}
+		}
+	}
+}
+
+class HarmonyCompatibilityDependencyConcatenatedTemplate {
+	constructor(originalTemplate, rootModule, modulesMap) {
+		this.originalTemplate = originalTemplate;
+		this.rootModule = rootModule;
+		this.modulesMap = modulesMap;
+	}
+
+	apply(dep, source, runtime, dependencyTemplates) {
+		// do nothing
+	}
 }
 
 module.exports = ConcatenatedModule;

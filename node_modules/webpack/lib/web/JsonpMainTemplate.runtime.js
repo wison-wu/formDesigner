@@ -2,14 +2,7 @@
 	MIT License http://www.opensource.org/licenses/mit-license.php
 	Author Tobias Koppers @sokra
 */
-// eslint-disable-next-line no-unused-vars
-var hotAddUpdateChunk = undefined;
-var parentHotUpdateCallback = undefined;
-var $require$ = undefined;
-var $hotMainFilename$ = undefined;
-var $hotChunkFilename$ = undefined;
-var $crossOriginLoading$ = undefined;
-
+/*globals hotAddUpdateChunk parentHotUpdateCallback document XMLHttpRequest $require$ $hotChunkFilename$ $hotMainFilename$ $crossOriginLoading$ */
 module.exports = function() {
 	// eslint-disable-next-line no-unused-vars
 	function webpackHotUpdateCallback(chunkId, moreModules) {

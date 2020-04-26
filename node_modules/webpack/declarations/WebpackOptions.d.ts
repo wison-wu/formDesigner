@@ -132,7 +132,7 @@ export type RuleSetCondition =
  * This interface was referenced by `WebpackOptions`'s JSON-Schema
  * via the `definition` "RuleSetConditions".
  */
-export type RuleSetConditions = RuleSetCondition[];
+export type RuleSetConditions = RuleSetConditionsRecursive;
 /**
  * One or multiple rule conditions
  *
@@ -181,7 +181,7 @@ export type RuleSetConditionAbsolute =
  * This interface was referenced by `WebpackOptions`'s JSON-Schema
  * via the `definition` "RuleSetConditionsAbsolute".
  */
-export type RuleSetConditionsAbsolute = RuleSetConditionAbsolute[];
+export type RuleSetConditionsAbsolute = RuleSetConditionsAbsoluteRecursive;
 /**
  * This interface was referenced by `WebpackOptions`'s JSON-Schema
  * via the `definition` "RuleSetLoader".
@@ -1118,7 +1118,7 @@ export interface OutputOptions {
 	/**
 	 * The filename of the Hot Update Chunks. They are inside the output.path directory.
 	 */
-	hotUpdateChunkFilename?: string;
+	hotUpdateChunkFilename?: string | Function;
 	/**
 	 * The JSONP function used by webpack for async loading of hot update chunks.
 	 */

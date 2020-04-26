@@ -2,13 +2,14 @@ var webpackConfig = require('./webpack.config.js');
 
 module.exports = function (karma) {
     karma.set({
-        plugins: ['karma-webpack', 'karma-chai', 'karma-sinon', 'karma-mocha', 'karma-chrome-launcher'],
+        plugins: ['karma-webpack', 'karma-chai', 'karma-sinon', 'karma-mocha', 'karma-phantomjs-launcher'],
 
         frameworks: ['chai', 'sinon', 'mocha'],
 
         files: [
             'src/**/*.js',
             'test/**/*.js',
+            './node_modules/phantomjs-polyfill/bind-polyfill.js'
         ],
 
         preprocessors: {
@@ -25,6 +26,6 @@ module.exports = function (karma) {
             stats: 'errors-only'
         },
 
-        browsers: ['ChromeHeadless']
+        browsers: ['PhantomJS']
     });
 };

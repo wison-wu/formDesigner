@@ -7,8 +7,6 @@ exports.default = exports.ClassScope = void 0;
 
 var _scopeflags = require("./scopeflags");
 
-var _location = require("../parser/location");
-
 class ClassScope {
   constructor() {
     this.privateNames = new Set();
@@ -47,7 +45,7 @@ class ClassScopeHandler {
           current.undefinedPrivateNames.set(name, pos);
         }
       } else {
-        this.raise(pos, _location.Errors.InvalidPrivateFieldResolution, name);
+        this.raiseUndeclaredPrivateName(name, pos);
       }
     }
   }
@@ -72,7 +70,7 @@ class ClassScopeHandler {
     }
 
     if (redefined) {
-      this.raise(pos, _location.Errors.PrivateNameRedeclaration, name);
+      this.raise(pos, `Duplicate private name #${name}`);
     }
 
     classScope.privateNames.add(name);
@@ -90,8 +88,12 @@ class ClassScopeHandler {
     if (classScope) {
       classScope.undefinedPrivateNames.set(name, pos);
     } else {
-      this.raise(pos, _location.Errors.InvalidPrivateFieldResolution, name);
+      this.raiseUndeclaredPrivateName(name, pos);
     }
+  }
+
+  raiseUndeclaredPrivateName(name, pos) {
+    this.raise(pos, `Private name #${name} is not defined`);
   }
 
 }

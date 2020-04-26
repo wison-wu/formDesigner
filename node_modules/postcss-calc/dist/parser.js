@@ -610,36 +610,35 @@ symbols_: {
   "$accept": 0,
   "$end": 1,
   "ADD": 6,
-  "ANGLE": 12,
+  "ANGLE": 13,
   "CALC": 3,
   "CHS": 19,
   "DIV": 9,
   "EMS": 17,
   "EOF": 1,
   "EXS": 18,
-  "FREQ": 14,
-  "FUNCTION": 10,
-  "LENGTH": 11,
+  "FREQ": 15,
+  "FUNCTION": 11,
+  "LENGTH": 12,
   "LPAREN": 4,
   "MUL": 8,
-  "NUMBER": 26,
+  "NUMBER": 10,
   "PERCENTAGE": 25,
   "REMS": 20,
-  "RES": 15,
+  "RES": 16,
   "RPAREN": 5,
   "SUB": 7,
-  "TIME": 13,
-  "UNKNOWN_DIMENSION": 16,
+  "TIME": 14,
   "VHS": 21,
   "VMAXS": 24,
   "VMINS": 23,
   "VWS": 22,
-  "dimension": 30,
+  "css_value": 30,
   "error": 2,
-  "expression": 27,
+  "expression": 26,
   "function": 29,
-  "math_expression": 28,
-  "number": 31
+  "math_expression": 27,
+  "value": 28
 },
 terminals_: {
   1: "EOF",
@@ -651,13 +650,13 @@ terminals_: {
   7: "SUB",
   8: "MUL",
   9: "DIV",
-  10: "FUNCTION",
-  11: "LENGTH",
-  12: "ANGLE",
-  13: "TIME",
-  14: "FREQ",
-  15: "RES",
-  16: "UNKNOWN_DIMENSION",
+  10: "NUMBER",
+  11: "FUNCTION",
+  12: "LENGTH",
+  13: "ANGLE",
+  14: "TIME",
+  15: "FREQ",
+  16: "RES",
   17: "EMS",
   18: "EXS",
   19: "CHS",
@@ -666,8 +665,7 @@ terminals_: {
   22: "VWS",
   23: "VMINS",
   24: "VMAXS",
-  25: "PERCENTAGE",
-  26: "NUMBER"
+  25: "PERCENTAGE"
 },
 TERROR: 2,
     EOF: 1,
@@ -773,14 +771,14 @@ TERROR: 2,
     },
 productions_: bp({
   pop: u([
-  27,
+  26,
   s,
-  [28, 9],
+  [27, 9],
+  28,
+  28,
   29,
   s,
-  [30, 17],
-  s,
-  [31, 3]
+  [30, 15]
 ]),
   rule: u([
   2,
@@ -788,11 +786,11 @@ productions_: bp({
   s,
   [3, 5],
   s,
-  [1, 19],
+  [1, 4],
   2,
-  2,
-  c,
-  [3, 3]
+  s,
+  [1, 15],
+  2
 ])
 }),
 performAction: function parser__PerformAction(yystate /* action[1] */, yysp, yyvstack) {
@@ -849,203 +847,180 @@ case 6:
 case 8:
     /*! Production::    math_expression : function */
 case 9:
-    /*! Production::    math_expression : dimension */
+    /*! Production::    math_expression : css_value */
 case 10:
-    /*! Production::    math_expression : number */
+    /*! Production::    math_expression : value */
 
     this.$ = yyvstack[yysp];
     break;
 
 case 11:
+    /*! Production::    value : NUMBER */
+
+    this.$ = { type: 'Value', value: parseFloat(yyvstack[yysp]) };
+    break;
+
+case 12:
+    /*! Production::    value : SUB NUMBER */
+
+    this.$ = { type: 'Value', value: parseFloat(yyvstack[yysp]) * -1 };
+    break;
+
+case 13:
     /*! Production::    function : FUNCTION */
 
     this.$ = { type: 'Function', value: yyvstack[yysp] };
     break;
 
-case 12:
-    /*! Production::    dimension : LENGTH */
-
-    this.$ = { type: 'LengthValue', value: parseFloat(yyvstack[yysp]), unit: /[a-z]+$/i.exec(yyvstack[yysp])[0] };
-    break;
-
-case 13:
-    /*! Production::    dimension : ANGLE */
-
-    this.$ = { type: 'AngleValue', value: parseFloat(yyvstack[yysp]), unit: /[a-z]+$/i.exec(yyvstack[yysp])[0] };
-    break;
-
 case 14:
-    /*! Production::    dimension : TIME */
+    /*! Production::    css_value : LENGTH */
 
-    this.$ = { type: 'TimeValue', value: parseFloat(yyvstack[yysp]), unit: /[a-z]+$/i.exec(yyvstack[yysp])[0] };
+    this.$ = { type: 'LengthValue', value: parseFloat(yyvstack[yysp]), unit: /[a-z]+/.exec(yyvstack[yysp])[0] };
     break;
 
 case 15:
-    /*! Production::    dimension : FREQ */
+    /*! Production::    css_value : ANGLE */
 
-    this.$ = { type: 'FrequencyValue', value: parseFloat(yyvstack[yysp]), unit: /[a-z]+$/i.exec(yyvstack[yysp])[0] };
+    this.$ = { type: 'AngleValue', value: parseFloat(yyvstack[yysp]), unit: /[a-z]+/.exec(yyvstack[yysp])[0] };
     break;
 
 case 16:
-    /*! Production::    dimension : RES */
+    /*! Production::    css_value : TIME */
 
-    this.$ = { type: 'ResolutionValue', value: parseFloat(yyvstack[yysp]), unit: /[a-z]+$/i.exec(yyvstack[yysp])[0] };
+    this.$ = { type: 'TimeValue', value: parseFloat(yyvstack[yysp]), unit: /[a-z]+/.exec(yyvstack[yysp])[0] };
     break;
 
 case 17:
-    /*! Production::    dimension : UNKNOWN_DIMENSION */
+    /*! Production::    css_value : FREQ */
 
-    this.$ = { type: 'UnknownDimension', value: parseFloat(yyvstack[yysp]), unit: /[a-z]+$/i.exec(yyvstack[yysp])[0] };
+    this.$ = { type: 'FrequencyValue', value: parseFloat(yyvstack[yysp]), unit: /[a-z]+/.exec(yyvstack[yysp])[0] };
     break;
 
 case 18:
-    /*! Production::    dimension : EMS */
+    /*! Production::    css_value : RES */
+
+    this.$ = { type: 'ResolutionValue', value: parseFloat(yyvstack[yysp]), unit: /[a-z]+/.exec(yyvstack[yysp])[0] };
+    break;
+
+case 19:
+    /*! Production::    css_value : EMS */
 
     this.$ = { type: 'EmValue', value: parseFloat(yyvstack[yysp]), unit: 'em' };
     break;
 
-case 19:
-    /*! Production::    dimension : EXS */
+case 20:
+    /*! Production::    css_value : EXS */
 
     this.$ = { type: 'ExValue', value: parseFloat(yyvstack[yysp]), unit: 'ex' };
     break;
 
-case 20:
-    /*! Production::    dimension : CHS */
+case 21:
+    /*! Production::    css_value : CHS */
 
     this.$ = { type: 'ChValue', value: parseFloat(yyvstack[yysp]), unit: 'ch' };
     break;
 
-case 21:
-    /*! Production::    dimension : REMS */
+case 22:
+    /*! Production::    css_value : REMS */
 
     this.$ = { type: 'RemValue', value: parseFloat(yyvstack[yysp]), unit: 'rem' };
     break;
 
-case 22:
-    /*! Production::    dimension : VHS */
+case 23:
+    /*! Production::    css_value : VHS */
 
     this.$ = { type: 'VhValue', value: parseFloat(yyvstack[yysp]), unit: 'vh' };
     break;
 
-case 23:
-    /*! Production::    dimension : VWS */
+case 24:
+    /*! Production::    css_value : VWS */
 
     this.$ = { type: 'VwValue', value: parseFloat(yyvstack[yysp]), unit: 'vw' };
     break;
 
-case 24:
-    /*! Production::    dimension : VMINS */
+case 25:
+    /*! Production::    css_value : VMINS */
 
     this.$ = { type: 'VminValue', value: parseFloat(yyvstack[yysp]), unit: 'vmin' };
     break;
 
-case 25:
-    /*! Production::    dimension : VMAXS */
+case 26:
+    /*! Production::    css_value : VMAXS */
 
     this.$ = { type: 'VmaxValue', value: parseFloat(yyvstack[yysp]), unit: 'vmax' };
     break;
 
-case 26:
-    /*! Production::    dimension : PERCENTAGE */
+case 27:
+    /*! Production::    css_value : PERCENTAGE */
 
     this.$ = { type: 'PercentageValue', value: parseFloat(yyvstack[yysp]), unit: '%' };
     break;
 
-case 27:
-    /*! Production::    dimension : ADD dimension */
-
-    var prev = yyvstack[yysp]; this.$ = prev;
-    break;
-
 case 28:
-    /*! Production::    dimension : SUB dimension */
+    /*! Production::    css_value : SUB css_value */
 
     var prev = yyvstack[yysp]; prev.value *= -1; this.$ = prev;
-    break;
-
-case 29:
-    /*! Production::    number : NUMBER */
-case 30:
-    /*! Production::    number : ADD NUMBER */
-
-    this.$ = { type: 'Number', value: parseFloat(yyvstack[yysp]) };
-    break;
-
-case 31:
-    /*! Production::    number : SUB NUMBER */
-
-    this.$ = { type: 'Number', value: parseFloat(yyvstack[yysp]) * -1 };
     break;
 
 }
 },
 table: bt({
   len: u([
-  26,
+  24,
   1,
   5,
   1,
-  25,
+  23,
   s,
-  [0, 19],
-  19,
-  19,
+  [0, 18],
+  17,
   0,
   0,
   s,
-  [25, 5],
+  [23, 5],
   5,
   0,
   0,
-  18,
-  18,
-  0,
-  0,
+  16,
   6,
   6,
   0,
   0,
   c,
-  [11, 3]
+  [8, 3]
 ]),
   symbol: u([
   3,
   4,
-  6,
   7,
   s,
-  [10, 22, 1],
+  [10, 21, 1],
   1,
   1,
   s,
   [6, 4, 1],
   4,
   c,
-  [33, 21],
+  [31, 19],
   c,
-  [32, 4],
-  6,
+  [30, 4],
   7,
+  10,
   c,
-  [22, 16],
+  [20, 14],
   30,
   c,
-  [19, 19],
+  [40, 23],
   c,
-  [63, 25],
-  c,
-  [25, 100],
+  [23, 92],
   s,
   [5, 5, 1],
+  7,
   c,
-  [149, 17],
-  c,
-  [167, 18],
-  30,
+  [136, 15],
   1,
   c,
-  [42, 5],
+  [22, 5],
   c,
   [6, 6],
   c,
@@ -1053,57 +1028,52 @@ table: bt({
 ]),
   type: u([
   s,
-  [2, 21],
+  [2, 19],
   s,
   [0, 5],
   1,
   s,
-  [2, 27],
+  [2, 25],
   s,
   [0, 4],
   c,
-  [22, 19],
+  [20, 17],
   c,
-  [19, 37],
+  [40, 39],
   c,
-  [63, 25],
+  [23, 95],
   c,
-  [25, 103],
-  c,
-  [148, 19],
-  c,
-  [18, 18]
+  [136, 19]
 ]),
   state: u([
   1,
   2,
+  7,
   5,
   6,
-  7,
-  33,
+  31,
   c,
   [4, 3],
-  34,
+  32,
+  35,
+  c,
+  [5, 3],
+  36,
+  c,
+  [4, 3],
+  37,
+  c,
+  [4, 3],
   38,
-  40,
-  c,
-  [6, 3],
-  41,
   c,
   [4, 3],
-  42,
+  39,
   c,
-  [4, 3],
-  43,
-  c,
-  [4, 3],
-  44,
-  c,
-  [22, 5]
+  [21, 4]
 ]),
   mode: u([
   s,
-  [1, 228],
+  [1, 175],
   s,
   [2, 4],
   c,
@@ -1114,70 +1084,64 @@ table: bt({
   goto: u([
   3,
   4,
+  23,
   24,
-  25,
   s,
-  [8, 16, 1],
+  [8, 15, 1],
   s,
-  [26, 7, 1],
+  [25, 6, 1],
   c,
-  [27, 21],
-  36,
-  37,
+  [25, 19],
+  34,
+  33,
   c,
-  [18, 15],
-  35,
+  [16, 14],
   c,
-  [18, 17],
-  39,
+  [35, 19],
   c,
-  [57, 21],
+  [19, 76],
+  40,
   c,
-  [21, 84],
-  45,
+  [136, 4],
+  34,
   c,
-  [168, 4],
-  c,
-  [128, 17],
-  c,
-  [17, 17],
+  [39, 15],
   s,
-  [3, 4],
-  30,
-  31,
+  [3, 3],
+  28,
+  29,
   s,
   [4, 4],
-  30,
-  31,
-  46,
+  28,
+  29,
+  41,
   c,
-  [51, 4]
+  [32, 4]
 ])
 }),
 defaultActions: bda({
   idx: u([
   s,
-  [5, 19, 1],
-  26,
-  27,
-  34,
-  35,
+  [5, 18, 1],
+  24,
+  25,
+  32,
+  33,
+  37,
   38,
-  39,
-  42,
-  43,
-  45,
-  46
+  40,
+  41
 ]),
   goto: u([
+  8,
+  9,
+  10,
   s,
-  [8, 19, 1],
-  29,
+  [13, 15, 1],
+  11,
   1,
-  27,
-  30,
   28,
-  31,
+  12,
   5,
   6,
   7,
@@ -1221,7 +1185,7 @@ parse: function parse(input) {
     var TERROR = this.TERROR;
     var EOF = this.EOF;
     var ERROR_RECOVERY_TOKEN_DISCARD_COUNT = (this.options.errorRecoveryTokenDiscardCount | 0) || 3;
-    var NO_ACTION = [0, 47 /* === table.length :: ensures that anyone using this new state will fail dramatically! */];
+    var NO_ACTION = [0, 42 /* === table.length :: ensures that anyone using this new state will fail dramatically! */];
 
     var lexer;
     if (this.__lexer__) {
@@ -3509,8 +3473,7 @@ EOF: 1,
     },
 
     options: {
-      trackPosition: true,
-      caseInsensitive: true
+      trackPosition: true
     },
 
     JisonLexerError: JisonLexerError,
@@ -3538,7 +3501,7 @@ EOF: 1,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       [a-z][a-z0-9-]*\s*\((?:(?:"(?:\\.|[^\"\\])*"|'(?:\\.|[^\'\\])*')|\([^)]*\)|[^\(\)]*)*\) */
-      2: 10,
+      2: 11,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       \* */
@@ -3557,174 +3520,164 @@ EOF: 1,
       6: 7,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)em\b */
-      7: 17,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)px\b */
+      7: 12,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)ex\b */
-      8: 18,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)cm\b */
+      8: 12,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)ch\b */
-      9: 19,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)mm\b */
+      9: 12,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)rem\b */
-      10: 20,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)in\b */
+      10: 12,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)vw\b */
-      11: 22,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)pt\b */
+      11: 12,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)vh\b */
-      12: 21,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)pc\b */
+      12: 12,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)vmin\b */
-      13: 23,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)deg\b */
+      13: 13,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)vmax\b */
-      14: 24,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)grad\b */
+      14: 13,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)cm\b */
-      15: 11,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)rad\b */
+      15: 13,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)mm\b */
-      16: 11,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)turn\b */
+      16: 13,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)Q\b */
-      17: 11,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)s\b */
+      17: 14,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)in\b */
-      18: 11,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)ms\b */
+      18: 14,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)pt\b */
-      19: 11,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)Hz\b */
+      19: 15,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)pc\b */
-      20: 11,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)kHz\b */
+      20: 15,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)px\b */
-      21: 11,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)dpi\b */
+      21: 16,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)deg\b */
-      22: 12,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)dpcm\b */
+      22: 16,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)grad\b */
-      23: 12,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)dppx\b */
+      23: 16,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)rad\b */
-      24: 12,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)em\b */
+      24: 17,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)turn\b */
-      25: 12,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)ex\b */
+      25: 18,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)s\b */
-      26: 13,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)ch\b */
+      26: 19,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)ms\b */
-      27: 13,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)rem\b */
+      27: 20,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)Hz\b */
-      28: 14,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)vw\b */
+      28: 22,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)kHz\b */
-      29: 14,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)vh\b */
+      29: 21,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)dpi\b */
-      30: 15,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)vmin\b */
+      30: 23,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)dpcm\b */
-      31: 15,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)vmax\b */
+      31: 24,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)dppx\b */
-      32: 15,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)% */
+      32: 25,
 
       /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)% */
-      33: 25,
-
-      /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)\b */
-      34: 26,
-
-      /*! Conditions:: INITIAL */
-      /*! Rule::       (([0-9]+(\.[0-9]+)?|\.[0-9]+)(e(\+|-)[0-9]+)?)-?([a-zA-Z_]|[\240-\377]|(\\[0-9a-fA-F]{1,6}(\r\n|[ \t\r\n\f])?|\\[^\r\n\f0-9a-fA-F]))([a-zA-Z0-9_-]|[\240-\377]|(\\[0-9a-fA-F]{1,6}(\r\n|[ \t\r\n\f])?|\\[^\r\n\f0-9a-fA-F]))*\b */
-      35: 16,
+      /*! Rule::       ([0-9]+(\.[0-9]+)?|\.[0-9]+)\b */
+      33: 10,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       \( */
-      36: 4,
+      34: 4,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       \) */
-      37: 5,
+      35: 5,
 
       /*! Conditions:: INITIAL */
       /*! Rule::       $ */
-      38: 1
+      36: 1
     },
 
     rules: [
-      /*  0: */  /^(?:\s+)/i,
-      /*  1: */  /^(?:(-(webkit|moz)-)?calc\b)/i,
-      /*  2: */  /^(?:[a-z][\d\-a-z]*\s*\((?:(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')|\([^)]*\)|[^()]*)*\))/i,
-      /*  3: */  /^(?:\*)/i,
-      /*  4: */  /^(?:\/)/i,
-      /*  5: */  /^(?:\+)/i,
-      /*  6: */  /^(?:-)/i,
-      /*  7: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)em\b)/i,
-      /*  8: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)ex\b)/i,
-      /*  9: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)ch\b)/i,
-      /* 10: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)rem\b)/i,
-      /* 11: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)vw\b)/i,
-      /* 12: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)vh\b)/i,
-      /* 13: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)vmin\b)/i,
-      /* 14: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)vmax\b)/i,
-      /* 15: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)cm\b)/i,
-      /* 16: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)mm\b)/i,
-      /* 17: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)Q\b)/i,
-      /* 18: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)in\b)/i,
-      /* 19: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)pt\b)/i,
-      /* 20: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)pc\b)/i,
-      /* 21: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)px\b)/i,
-      /* 22: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)deg\b)/i,
-      /* 23: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)grad\b)/i,
-      /* 24: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)rad\b)/i,
-      /* 25: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)turn\b)/i,
-      /* 26: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)s\b)/i,
-      /* 27: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)ms\b)/i,
-      /* 28: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)Hz\b)/i,
-      /* 29: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)kHz\b)/i,
-      /* 30: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)dpi\b)/i,
-      /* 31: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)dpcm\b)/i,
-      /* 32: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)dppx\b)/i,
-      /* 33: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)%)/i,
-      /* 34: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)\b)/i,
-      /* 35: */  /^(?:((\d+(\.\d+)?|\.\d+)(e(\+|-)\d+)?)-?([^\W\d]|[ -ÿ]|(\\[\dA-Fa-f]{1,6}(\r\n|[\t\n\f\r ])?|\\[^\d\n\f\rA-Fa-f]))([\w\-]|[ -ÿ]|(\\[\dA-Fa-f]{1,6}(\r\n|[\t\n\f\r ])?|\\[^\d\n\f\rA-Fa-f]))*\b)/i,
-      /* 36: */  /^(?:\()/i,
-      /* 37: */  /^(?:\))/i,
-      /* 38: */  /^(?:$)/i
+      /*  0: */  /^(?:\s+)/,
+      /*  1: */  /^(?:(-(webkit|moz)-)?calc\b)/,
+      /*  2: */  /^(?:[a-z][\d\-a-z]*\s*\((?:(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')|\([^)]*\)|[^()]*)*\))/,
+      /*  3: */  /^(?:\*)/,
+      /*  4: */  /^(?:\/)/,
+      /*  5: */  /^(?:\+)/,
+      /*  6: */  /^(?:-)/,
+      /*  7: */  /^(?:(\d+(\.\d+)?|\.\d+)px\b)/,
+      /*  8: */  /^(?:(\d+(\.\d+)?|\.\d+)cm\b)/,
+      /*  9: */  /^(?:(\d+(\.\d+)?|\.\d+)mm\b)/,
+      /* 10: */  /^(?:(\d+(\.\d+)?|\.\d+)in\b)/,
+      /* 11: */  /^(?:(\d+(\.\d+)?|\.\d+)pt\b)/,
+      /* 12: */  /^(?:(\d+(\.\d+)?|\.\d+)pc\b)/,
+      /* 13: */  /^(?:(\d+(\.\d+)?|\.\d+)deg\b)/,
+      /* 14: */  /^(?:(\d+(\.\d+)?|\.\d+)grad\b)/,
+      /* 15: */  /^(?:(\d+(\.\d+)?|\.\d+)rad\b)/,
+      /* 16: */  /^(?:(\d+(\.\d+)?|\.\d+)turn\b)/,
+      /* 17: */  /^(?:(\d+(\.\d+)?|\.\d+)s\b)/,
+      /* 18: */  /^(?:(\d+(\.\d+)?|\.\d+)ms\b)/,
+      /* 19: */  /^(?:(\d+(\.\d+)?|\.\d+)Hz\b)/,
+      /* 20: */  /^(?:(\d+(\.\d+)?|\.\d+)kHz\b)/,
+      /* 21: */  /^(?:(\d+(\.\d+)?|\.\d+)dpi\b)/,
+      /* 22: */  /^(?:(\d+(\.\d+)?|\.\d+)dpcm\b)/,
+      /* 23: */  /^(?:(\d+(\.\d+)?|\.\d+)dppx\b)/,
+      /* 24: */  /^(?:(\d+(\.\d+)?|\.\d+)em\b)/,
+      /* 25: */  /^(?:(\d+(\.\d+)?|\.\d+)ex\b)/,
+      /* 26: */  /^(?:(\d+(\.\d+)?|\.\d+)ch\b)/,
+      /* 27: */  /^(?:(\d+(\.\d+)?|\.\d+)rem\b)/,
+      /* 28: */  /^(?:(\d+(\.\d+)?|\.\d+)vw\b)/,
+      /* 29: */  /^(?:(\d+(\.\d+)?|\.\d+)vh\b)/,
+      /* 30: */  /^(?:(\d+(\.\d+)?|\.\d+)vmin\b)/,
+      /* 31: */  /^(?:(\d+(\.\d+)?|\.\d+)vmax\b)/,
+      /* 32: */  /^(?:(\d+(\.\d+)?|\.\d+)%)/,
+      /* 33: */  /^(?:(\d+(\.\d+)?|\.\d+)\b)/,
+      /* 34: */  /^(?:\()/,
+      /* 35: */  /^(?:\))/,
+      /* 36: */  /^(?:$)/
     ],
 
     conditions: {
@@ -3766,9 +3719,7 @@ EOF: 1,
           33,
           34,
           35,
-          36,
-          37,
-          38
+          36
         ],
 
         inclusive: true

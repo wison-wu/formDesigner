@@ -1,0 +1,205 @@
+{
+  "id": "1782818",
+  "name": "form-designer",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "13562655",
+      "name": "workbench_personal center_secondary password",
+      "font_class": "-password",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "14007479",
+      "name": "lock",
+      "font_class": "-lock",
+      "unicode": "e822",
+      "unicode_decimal": 59426
+    },
+    {
+      "icon_id": "11889820",
+      "name": "HTML",
+      "font_class": "-html",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "886505",
+      "name": "时间",
+      "font_class": "-time",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "1634604",
+      "name": "chart-area",
+      "font_class": "-chart1",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "1708415",
+      "name": "时间范围",
+      "font_class": "-timerange",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "2883120",
+      "name": "多选项",
+      "font_class": "-checkbox",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "3541137",
+      "name": "日期",
+      "font_class": "-date",
+      "unicode": "e7b2",
+      "unicode_decimal": 59314
+    },
+    {
+      "icon_id": "5112503",
+      "name": "编辑器",
+      "font_class": "-setting",
+      "unicode": "e7fe",
+      "unicode_decimal": 59390
+    },
+    {
+      "icon_id": "5672533",
+      "name": "滑块",
+      "font_class": "-slider",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "5920510",
+      "name": "表格",
+      "font_class": "-table",
+      "unicode": "e802",
+      "unicode_decimal": 59394
+    },
+    {
+      "icon_id": "5981330",
+      "name": "stream list",
+      "font_class": "-list",
+      "unicode": "e7dc",
+      "unicode_decimal": 59356
+    },
+    {
+      "icon_id": "6664173",
+      "name": "input",
+      "font_class": "-input",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "7036392",
+      "name": "开关 关",
+      "font_class": "-switch",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
+    {
+      "icon_id": "8036637",
+      "name": "评分",
+      "font_class": "-rate",
+      "unicode": "e829",
+      "unicode_decimal": 59433
+    },
+    {
+      "icon_id": "8171626",
+      "name": "附 件",
+      "font_class": "-att",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "9529563",
+      "name": "html",
+      "font_class": "-doc",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "9702638",
+      "name": "编辑器",
+      "font_class": "-editor",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "9750331",
+      "name": "textarea",
+      "font_class": "-textarea",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "10995620",
+      "name": "定位",
+      "font_class": "-location",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "11020734",
+      "name": "栅格",
+      "font_class": "-col",
+      "unicode": "e69d",
+      "unicode_decimal": 59037
+    },
+    {
+      "icon_id": "11809961",
+      "name": "分割线",
+      "font_class": "-divider",
+      "unicode": "e73e",
+      "unicode_decimal": 59198
+    },
+    {
+      "icon_id": "12263722",
+      "name": "日期范围",
+      "font_class": "-daterange",
+      "unicode": "e73b",
+      "unicode_decimal": 59195
+    },
+    {
+      "icon_id": "12278783",
+      "name": "下 拉",
+      "font_class": "-select",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "13176332",
+      "name": "单选",
+      "font_class": "-radio",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "13225654",
+      "name": "chart-line",
+      "font_class": "-chart",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "14006818",
+      "name": "计数器",
+      "font_class": "-inputNumber",
+      "unicode": "e6a7",
+      "unicode_decimal": 59047
+    },
+    {
+      "icon_id": "14066795",
+      "name": "tab",
+      "font_class": "-tab",
+      "unicode": "e6b4",
+      "unicode_decimal": 59060
+    }
+  ]
+}

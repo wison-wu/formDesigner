@@ -27,7 +27,7 @@
               @click="addComponent(element)"
             >
               <div class="components-body">
-                {{ element.name}}
+               <icon :code="element.icon" :text="element.name"/>
               </div>
             </div>
           </draggable>
@@ -44,6 +44,7 @@
 import draggable from "vuedraggable";
 import formItems from "./custom/itemList";
 import Designer from "./Designer";
+import Icon from "./icon";
 import {getSimpleId} from "./utils/IdGenerate";
 
 let tempActiveData;
@@ -52,7 +53,8 @@ export default {
   name:"fancyFormDesigner",
   components:{
     draggable
-    ,Designer
+    ,Designer,
+    Icon
   },
   data() {
     return {

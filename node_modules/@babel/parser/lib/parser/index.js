@@ -15,12 +15,6 @@ var _scope = _interopRequireDefault(require("../util/scope"));
 
 var _classScope = _interopRequireDefault(require("../util/class-scope"));
 
-var _productionParameter = _interopRequireWildcard(require("../util/production-parameter"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class Parser extends _statement.default {
@@ -31,7 +25,6 @@ class Parser extends _statement.default {
     this.options = options;
     this.inModule = this.options.sourceType === "module";
     this.scope = new ScopeHandler(this.raise.bind(this), this.inModule);
-    this.prodParam = new _productionParameter.default();
     this.classScope = new _classScope.default(this.raise.bind(this));
     this.plugins = pluginsMap(this.options.plugins);
     this.filename = options.sourceFilename;
@@ -42,14 +35,13 @@ class Parser extends _statement.default {
   }
 
   parse() {
-    let paramFlags = _productionParameter.PARAM;
+    let scopeFlags = _scopeflags.SCOPE_PROGRAM;
 
     if (this.hasPlugin("topLevelAwait") && this.inModule) {
-      paramFlags |= _productionParameter.PARAM_AWAIT;
+      scopeFlags |= _scopeflags.SCOPE_ASYNC;
     }
 
-    this.scope.enter(_scopeflags.SCOPE_PROGRAM);
-    this.prodParam.enter(paramFlags);
+    this.scope.enter(scopeFlags);
     const file = this.startNode();
     const program = this.startNode();
     this.nextToken();

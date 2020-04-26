@@ -149,10 +149,6 @@ class Referencer extends OriginalReferencer {
     }
   }
 
-  EnumDeclaration(node) {
-    this._createScopeVariable(node, node.id);
-  }
-
   TypeAlias(node) {
     this._createScopeVariable(node, node.id);
 
