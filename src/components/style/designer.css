@@ -1,4 +1,7 @@
 
+body{
+  margin:0px;
+}
 .container {
   position: relative;
   width: 100%;
@@ -116,4 +119,7 @@
 }
 .center-board-row .el-form {
   height: calc(100vh - 69px);
+}
+.el-scrollbar__wrap{
+  overflow-x: hidden!important;
 }

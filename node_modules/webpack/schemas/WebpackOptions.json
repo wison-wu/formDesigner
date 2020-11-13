@@ -940,16 +940,8 @@
         },
         "hotUpdateChunkFilename": {
           "description": "The filename of the Hot Update Chunks. They are inside the output.path directory.",
-          "anyOf": [
-            {
-              "type": "string",
-              "absolutePath": false
-            },
-            {
-              "instanceof": "Function",
-              "tsType": "Function"
-            }
-          ]
+          "type": "string",
+          "absolutePath": false
         },
         "hotUpdateFunction": {
           "description": "The JSONP function used by webpack for async loading of hot update chunks.",
@@ -1428,8 +1420,7 @@
             "$ref": "#/definitions/RuleSetCondition"
           }
         ]
-      },
-      "tsType": "RuleSetConditionsRecursive"
+      }
     },
     "RuleSetConditionsAbsolute": {
       "type": "array",
@@ -1440,8 +1431,7 @@
             "$ref": "#/definitions/RuleSetConditionAbsolute"
           }
         ]
-      },
-      "tsType": "RuleSetConditionsAbsoluteRecursive"
+      }
     },
     "RuleSetLoader": {
       "type": "string",

@@ -6,23 +6,37 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 
 ## [Unreleased]
 
+## [2.20.1] - 2020-02-01
+### Fixed
+- [`export`]: Handle function overloading in `*.d.ts` ([#1619], thanks [@IvanGoncharov])
+- [`no-absolute-path`]: fix a crash with invalid import syntax ([#1616], thanks [@ljharb])
+- [`import/external-module-folders` setting] now correctly works with directories containing modules symlinked from `node_modules` ([#1605], thanks [@skozin])
+- [`extensions`]: for invalid code where `name` does not exist, do not crash ([#1613], thanks [@ljharb])
+- [`extentions`]: Fix scope regex ([#1611], thanks [@yordis])
+- [`no-duplicates`]: allow duplicate imports if one is a namespace and the other not ([#1612], thanks [@sveyret])
+- Add some missing rule meta schemas and types ([#1620], thanks [@bmish])
+- [`named`]: for importing from a module which re-exports named exports from a `node_modules` module ([#1569], [#1447], thanks [@redbugz], [@kentcdodds])
+- [`order`]: Fix alphabetize for mixed requires and imports ([#5625], thanks [@wschurman])
+
+### Changed
+- [`import/external-module-folders` setting] behavior is more strict now: it will only match complete path segments ([#1605], thanks [@skozin])
+- [meta] fix "files" field to include/exclude the proper files ([#1635], thanks [@ljharb])
+
 ## [2.20.0] - 2020-01-10
 ### Added
 - [`order`]: added `caseInsensitive` as an additional option to `alphabetize` ([#1586], thanks [@dbrewer5])
 - [`no-restricted-paths`]: New `except` option per `zone`, allowing exceptions to be defined for a restricted zone ([#1238], thanks [@rsolomon])
+- [`order`]: add option pathGroupsExcludedImportTypes to allow ordering of external import types ([#1565], thanks [@Mairu])
 
 ### Fixed
 - [`no-unused-modules`]: fix usage of `import/extensions` settings ([#1560], thanks [@stekycz])
-- [`import/extensions`]: ignore non-main modules ([#1563], thanks [@saschanaz])
+- [`extensions`]: ignore non-main modules ([#1563], thanks [@saschanaz])
 - TypeScript config: lookup for external modules in @types folder ([#1526], thanks [@joaovieira])
 - [`no-extraneous-dependencies`]: ensure `node.source` is truthy ([#1589], thanks [@ljharb])
 - [`extensions`]: Ignore query strings when checking for extensions ([#1572], thanks [@pcorpet])
 
 ### Docs
 - [`extensions`]: improve `ignorePackages` docs ([#1248], thanks [@ivo-stefchev])
-
-### Added
-- [`order`]: add option pathGroupsExcludedImportTypes to allow ordering of external import types ([#1565], thanks [@Mairu])
 
 ## [2.19.1] - 2019-12-08
 ### Fixed
@@ -638,9 +652,19 @@ for info on changes for earlier releases.
 
 [`memo-parser`]: ./memo-parser/README.md
 
+[#1635]: https://github.com/benmosher/eslint-plugin-import/issues/1635
+[#1625]: https://github.com/benmosher/eslint-plugin-import/pull/1625
+[#1620]: https://github.com/benmosher/eslint-plugin-import/pull/1620
+[#1619]: https://github.com/benmosher/eslint-plugin-import/pull/1619
+[#1616]: https://github.com/benmosher/eslint-plugin-import/issues/1616
+[#1613]: https://github.com/benmosher/eslint-plugin-import/issues/1613
+[#1612]: https://github.com/benmosher/eslint-plugin-import/pull/1612
+[#1611]: https://github.com/benmosher/eslint-plugin-import/pull/1611
+[#1605]: https://github.com/benmosher/eslint-plugin-import/pull/1605
 [#1589]: https://github.com/benmosher/eslint-plugin-import/issues/1589
 [#1586]: https://github.com/benmosher/eslint-plugin-import/pull/1586
 [#1572]: https://github.com/benmosher/eslint-plugin-import/pull/1572
+[#1569]: https://github.com/benmosher/eslint-plugin-import/pull/1569
 [#1563]: https://github.com/benmosher/eslint-plugin-import/pull/1563
 [#1560]: https://github.com/benmosher/eslint-plugin-import/pull/1560
 [#1551]: https://github.com/benmosher/eslint-plugin-import/pull/1551
@@ -656,6 +680,7 @@ for info on changes for earlier releases.
 [#1493]: https://github.com/benmosher/eslint-plugin-import/pull/1493
 [#1472]: https://github.com/benmosher/eslint-plugin-import/pull/1472
 [#1470]: https://github.com/benmosher/eslint-plugin-import/pull/1470
+[#1447]: https://github.com/benmosher/eslint-plugin-import/pull/1447
 [#1439]: https://github.com/benmosher/eslint-plugin-import/pull/1439
 [#1436]: https://github.com/benmosher/eslint-plugin-import/pull/1436
 [#1435]: https://github.com/benmosher/eslint-plugin-import/pull/1435
@@ -883,7 +908,8 @@ for info on changes for earlier releases.
 [#119]: https://github.com/benmosher/eslint-plugin-import/issues/119
 [#89]: https://github.com/benmosher/eslint-plugin-import/issues/89
 
-[Unreleased]: https://github.com/benmosher/eslint-plugin-import/compare/v2.20.0...HEAD
+[Unreleased]: https://github.com/benmosher/eslint-plugin-import/compare/v2.20.1...HEAD
+[2.20.0]: https://github.com/benmosher/eslint-plugin-import/compare/v2.20.0...v2.20.1
 [2.19.1]: https://github.com/benmosher/eslint-plugin-import/compare/v2.19.1...v2.20.0
 [2.19.1]: https://github.com/benmosher/eslint-plugin-import/compare/v2.19.0...v2.19.1
 [2.19.0]: https://github.com/benmosher/eslint-plugin-import/compare/v2.18.2...v2.19.0
@@ -1071,3 +1097,11 @@ for info on changes for earlier releases.
 [@rsolomon]: https://github.com/rsolomon
 [@joaovieira]: https://github.com/joaovieira
 [@ivo-stefchev]: https://github.com/ivo-stefchev
+[@skozin]: https://github.com/skozin
+[@yordis]: https://github.com/yordis
+[@sveyret]: https://github.com/sveyret
+[@bmish]: https://github.com/bmish
+[@redbugz]: https://github.com/redbugz
+[@kentcdodds]: https://github.com/kentcdodds
+[@IvanGoncharov]: https://github.com/IvanGoncharov
+[@wschurman]: https://github.com/wschurman

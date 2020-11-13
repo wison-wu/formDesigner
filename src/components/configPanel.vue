@@ -42,6 +42,8 @@ export default {
 }
 </script>
 
-<style lang="scss" >
-
+<style scoped >
+.right-scrollbar >>> .el-scrollbar__wrap{
+  overflow-x: hidden;
+}
 </style>

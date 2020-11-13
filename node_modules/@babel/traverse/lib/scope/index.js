@@ -146,14 +146,14 @@ const collectorVisitor = {
   BlockScoped(path) {
     let scope = path.scope;
     if (scope.path === path) scope = scope.parent;
-    scope.getBlockParent().registerDeclaration(path);
-  },
+    const parent = scope.getBlockParent();
+    parent.registerDeclaration(path);
 
-  ClassDeclaration(path) {
-    const id = path.node.id;
-    if (!id) return;
-    const name = id.name;
-    path.scope.bindings[name] = path.scope.getBinding(name);
+    if (path.isClassDeclaration() && path.node.id) {
+      const id = path.node.id;
+      const name = id.name;
+      path.scope.bindings[name] = path.scope.parent.getBinding(name);
+    }
   },
 
   Block(path) {

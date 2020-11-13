@@ -112,9 +112,11 @@ This plugin intends to support linting of ES2015+ (ES6+) import/export syntax, a
 [`no-named-export`]: ./docs/rules/no-named-export.md
 [`dynamic-import-chunkname`]: ./docs/rules/dynamic-import-chunkname.md
 
-## Support
+## `eslint-plugin-import` for enterprise
 
-[Get supported eslint-plugin-import with the Tidelift Subscription](https://tidelift.com/subscription/pkg/npm-eslint-plugin-import?utm_source=npm-eslint-plugin-import&utm_medium=referral&utm_campaign=readme)
+Available as part of the Tidelift Subscription.
+
+The maintainers of `eslint-plugin-import` and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source dependencies you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use. [Learn more.](https://tidelift.com/subscription/pkg/npm-eslint-plugin-import?utm_source=npm-eslint-plugin-import&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
 
 ## Installation
 
@@ -339,7 +341,19 @@ Contribution of more such shared configs for other platforms are welcome!
 
 #### `import/external-module-folders`
 
-An array of folders. Resolved modules only from those folders will be considered as "external". By default - `["node_modules"]`. Makes sense if you have configured your path or webpack to handle your internal paths differently and want to considered modules from some folders, for example `bower_components` or `jspm_modules`, as "external".
+An array of folders. Resolved modules only from those folders will be considered as "external". By default - `["node_modules"]`. Makes sense if you have configured your path or webpack to handle your internal paths differently and want to consider modules from some folders, for example `bower_components` or `jspm_modules`, as "external".
+
+This option is also useful in a monorepo setup: list here all directories that contain monorepo's packages and they will be treated as external ones no matter which resolver is used.
+
+Each item in this array is either a folder's name, its subpath, or its absolute prefix path:
+
+- `jspm_modules` will match any file or folder named `jspm_modules` or which has a direct or non-direct parent named `jspm_modules`, e.g. `/home/me/project/jspm_modules` or `/home/me/project/jspm_modules/some-pkg/index.js`.
+
+- `packages/core` will match any path that contains these two segments, for example `/home/me/project/packages/core/src/utils.js`.
+
+- `/home/me/project/packages` will only match files and directories inside this directory, and the directory itself.
+
+Please note that incomplete names are not allowed here so `components` won't match `bower_components` and `packages/ui` won't match `packages/ui-utils` (but will match `packages/ui/utils`).
 
 #### `import/parsers`
 
@@ -406,9 +420,9 @@ settings:
 
 A regex for packages should be treated as internal. Useful when you are utilizing a monorepo setup or developing a set of packages that depend on each other.
 
-By default, any package referenced from [`import/external-module-folders`](#importexternal-module-folders) will be considered as "external", including packages in a monorepo like yarn workspace or lerna emvironentment. If you want to mark these packages as "internal" this will be useful.
+By default, any package referenced from [`import/external-module-folders`](#importexternal-module-folders) will be considered as "external", including packages in a monorepo like yarn workspace or lerna environment. If you want to mark these packages as "internal" this will be useful.
 
-For example, if you pacakges in a monorepo are all in `@scope`, you can configure `import/internal-regex` like this
+For example, if your packages in a monorepo are all in `@scope`, you can configure `import/internal-regex` like this
 
 ```yaml
 # .eslintrc.yml

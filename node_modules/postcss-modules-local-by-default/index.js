@@ -43,6 +43,8 @@ function normalizeNodeArray(nodes) {
 function localizeNode(rule, mode, localAliasMap) {
   const isScopePseudo = node =>
     node.value === ':local' || node.value === ':global';
+  const isImportExportPseudo = node =>
+    node.value === ':import' || node.value === ':export';
 
   const transform = (node, context) => {
     if (context.ignoreNextSpacing && !isSpacing(node)) {
@@ -115,9 +117,12 @@ function localizeNode(rule, mode, localAliasMap) {
         let childContext;
         const isNested = !!node.length;
         const isScoped = isScopePseudo(node);
+        const isImportExport = isImportExportPseudo(node);
 
+        if (isImportExport) {
+          context.hasLocals = true;
         // :local(.foo)
-        if (isNested) {
+        } else if (isNested) {
           if (isScoped) {
             if (node.nodes.length === 0) {
               throw new Error(`${node.value}() can't be empty`);

@@ -41,7 +41,6 @@ class State {
     this.decoratorStack = [[]];
     this.yieldPos = -1;
     this.awaitPos = -1;
-    this.tokens = [];
     this.comments = [];
     this.trailingComments = [];
     this.leadingComments = [];
@@ -63,6 +62,7 @@ class State {
     this.containsOctal = false;
     this.octalPosition = null;
     this.exportedIdentifiers = [];
+    this.tokensLength = 0;
   }
 
   init(options) {

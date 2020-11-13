@@ -46,17 +46,20 @@ const _size = Symbol('_size')
 const _write = Symbol('_write')
 const _writing = Symbol('_writing')
 const _defaultFlag = Symbol('_defaultFlag')
+const _errored = Symbol('_errored')
 
 class ReadStream extends MiniPass {
   constructor (path, opt) {
     opt = opt || {}
     super(opt)
 
+    this.readable = true
     this.writable = false
 
     if (typeof path !== 'string')
       throw new TypeError('path must be a string')
 
+    this[_errored] = false
     this[_fd] = typeof opt.fd === 'number' ? opt.fd : null
     this[_path] = path
     this[_readSize] = opt.readSize || 16*1024*1024
@@ -106,7 +109,8 @@ class ReadStream extends MiniPass {
       this[_reading] = true
       const buf = this[_makeBuf]()
       /* istanbul ignore if */
-      if (buf.length === 0) return process.nextTick(() => this[_onread](null, 0, buf))
+      if (buf.length === 0)
+        return process.nextTick(() => this[_onread](null, 0, buf))
       fs.read(this[_fd], buf, 0, buf.length, null, (er, br, buf) =>
         this[_onread](er, br, buf))
     }
@@ -122,8 +126,9 @@ class ReadStream extends MiniPass {
 
   [_close] () {
     if (this[_autoClose] && typeof this[_fd] === 'number') {
-      fs.close(this[_fd], _ => this.emit('close'))
+      const fd = this[_fd]
       this[_fd] = null
+      fs.close(fd, er => er ? this.emit('error', er) : this.emit('close'))
     }
   }
 
@@ -160,6 +165,12 @@ class ReadStream extends MiniPass {
           this[_read]()
         break
 
+      case 'error':
+        if (this[_errored])
+          return
+        this[_errored] = true
+        return super.emit(ev, data)
+
       default:
         return super.emit(ev, data)
     }
@@ -186,7 +197,8 @@ class ReadStreamSync extends ReadStream {
         do {
           const buf = this[_makeBuf]()
           /* istanbul ignore next */
-          const br = buf.length === 0 ? 0 : fs.readSync(this[_fd], buf, 0, buf.length, null)
+          const br = buf.length === 0 ? 0
+            : fs.readSync(this[_fd], buf, 0, buf.length, null)
           if (!this[_handleChunk](br, buf))
             break
         } while (true)
@@ -201,10 +213,9 @@ class ReadStreamSync extends ReadStream {
 
   [_close] () {
     if (this[_autoClose] && typeof this[_fd] === 'number') {
-      try {
-        fs.closeSync(this[_fd])
-      } catch (er) {}
+      const fd = this[_fd]
       this[_fd] = null
+      fs.closeSync(fd)
       this.emit('close')
     }
   }
@@ -215,6 +226,8 @@ class WriteStream extends EE {
     opt = opt || {}
     super(opt)
     this.readable = false
+    this.writable = true
+    this[_errored] = false
     this[_writing] = false
     this[_ended] = false
     this[_needDrain] = false
@@ -234,6 +247,16 @@ class WriteStream extends EE {
     if (this[_fd] === null)
       this[_open]()
   }
+
+  emit (ev, data) {
+    if (ev === 'error') {
+      if (this[_errored])
+        return
+      this[_errored] = true
+    }
+    return super.emit(ev, data)
+  }
+
 
   get fd () { return this[_fd] }
   get path () { return this[_path] }
@@ -274,6 +297,7 @@ class WriteStream extends EE {
     if (!this[_writing] && !this[_queue].length &&
         typeof this[_fd] === 'number')
       this[_onwrite](null, 0)
+    return this
   }
 
   write (buf, enc) {
@@ -340,8 +364,9 @@ class WriteStream extends EE {
 
   [_close] () {
     if (this[_autoClose] && typeof this[_fd] === 'number') {
-      fs.close(this[_fd], _ => this.emit('close'))
+      const fd = this[_fd]
       this[_fd] = null
+      fs.close(fd, er => er ? this.emit('error', er) : this.emit('close'))
     }
   }
 }
@@ -349,36 +374,43 @@ class WriteStream extends EE {
 class WriteStreamSync extends WriteStream {
   [_open] () {
     let fd
-    try {
+    // only wrap in a try{} block if we know we'll retry, to avoid
+    // the rethrow obscuring the error's source frame in most cases.
+    if (this[_defaultFlag] && this[_flags] === 'r+') {
+      try {
+        fd = fs.openSync(this[_path], this[_flags], this[_mode])
+      } catch (er) {
+        if (er.code === 'ENOENT') {
+          this[_flags] = 'w'
+          return this[_open]()
+        } else
+          throw er
+      }
+    } else
       fd = fs.openSync(this[_path], this[_flags], this[_mode])
-    } catch (er) {
-      if (this[_defaultFlag] &&
-          this[_flags] === 'r+' &&
-          er && er.code === 'ENOENT') {
-        this[_flags] = 'w'
-        return this[_open]()
-      } else
-        throw er
-    }
+
     this[_onopen](null, fd)
   }
 
   [_close] () {
     if (this[_autoClose] && typeof this[_fd] === 'number') {
-      try {
-        fs.closeSync(this[_fd])
-      } catch (er) {}
+      const fd = this[_fd]
       this[_fd] = null
+      fs.closeSync(fd)
       this.emit('close')
     }
   }
 
   [_write] (buf) {
+    // throw the original, but try to close if it fails
+    let threw = true
     try {
       this[_onwrite](null,
         fs.writeSync(this[_fd], buf, 0, buf.length, this[_pos]))
-    } catch (er) {
-      this[_onwrite](er, 0)
+      threw = false
+    } finally {
+      if (threw)
+        try { this[_close]() } catch (_) {}
     }
   }
 }
