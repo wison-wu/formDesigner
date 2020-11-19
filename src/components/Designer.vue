@@ -221,10 +221,12 @@ export default {
 }
 
 </script>
-<style lang="scss">
-@import "./style/designer.css";
-@import "./style/designer.scss";
+<style  scoped>
+
 .el-rate{
   display:inline-block;
+}
+.center-scrollbar >>> .el-scrollbar__bar.is-horizontal {
+  display: none;
 }
 </style>
