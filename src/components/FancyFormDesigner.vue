@@ -83,7 +83,6 @@ export default {
         tempActiveData = clone;
       }
       this.$refs.designer.activeItem = tempActiveData;
-      console.log(this.$refs.designer.activeItem)
     },
     onStart(obj){
       

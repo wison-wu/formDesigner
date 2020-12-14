@@ -128,9 +128,9 @@ export default {
   },
   methods: {
     preview(){
-      this.previewVisible= true;
       const clone = JSON.parse(JSON.stringify(this.list))
       this.itemList = clone;
+      this.previewVisible= true;
     },
     setting(){
       this.formConfVisible = true;

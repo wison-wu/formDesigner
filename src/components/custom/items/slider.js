@@ -18,7 +18,7 @@ export let slider = {
   gutter:15,
   labelWidth: '80',
   value: undefined,
-  span: 12,
+  span: 24,
   disabled: false,
   required: true,
   //最小值

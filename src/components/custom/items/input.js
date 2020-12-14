@@ -25,7 +25,7 @@ export let input = {
   //栅格间隔
   gutter:15,
   //默认栅格
-  span:12,
+  span:24,
   //是否可清空
   clearable:true,
   disabled:false,

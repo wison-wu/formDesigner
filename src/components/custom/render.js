@@ -29,7 +29,6 @@ const componentChild = {
       conf.options.forEach(item => {
         list.push(<el-option label={item.label} value={item.value} disabled={item.disabled}></el-option>)
       })
-      console.log(list);
       return list;
     }
   },

@@ -21,7 +21,7 @@ export let checkbox = {
   // 最大长度
   maxLength: 50,
   //表单栅格
-  span:12,
+  span:24,
   //栅格间隔
   gutter:'15',
   //标签宽度

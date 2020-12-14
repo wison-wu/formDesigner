@@ -18,7 +18,7 @@ export let Switch = {
   gutter:15,
   labelWidth: '80',
   value: false,
-  span: 12,
+  span: 24,
   disabled: false,
   required: true,
   'active-color': '#409EFF',

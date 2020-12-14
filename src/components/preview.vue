@@ -12,7 +12,7 @@
             :label-width="formConf.labelWidth + 'px'"
           >
             <preview-item 
-              v-for="(element,index) in list" 
+              v-for="(element,index) in itemList" 
               :key="index" 
               :model="element"
               @itemCreate="handlerItemCreate"
@@ -76,11 +76,6 @@ export default {
         }
       })
     })
-    
-    // console.log(this.form);
-    // console.log(this.rules);
-  },
-  computed:{
   }
 }
 </script>

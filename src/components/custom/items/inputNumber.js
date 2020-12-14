@@ -18,7 +18,7 @@ export let inputNumber = {
   gutter:15,
   labelWidth: '80',
   value: 0,
-  span: 12,
+  span: 24,
   min: 0,
   max: 100,
   step: 1,
