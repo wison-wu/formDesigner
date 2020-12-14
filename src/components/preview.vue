@@ -11,12 +11,31 @@
             :validate-on-rule-change="false"
             :label-width="formConf.labelWidth + 'px'"
           >
-            <preview-item 
-              v-for="(element,index) in itemList" 
-              :key="index" 
+          <template v-for="(element,index) in itemList"  >
+            <!-- <el-input v-model="element.id" placeholder=""></el-input> -->
+             <preview-row-item 
+              v-if="element.compType === 'row'"
+              :key="'row-'+index" 
               :model="element"
-              @itemCreate="handlerItemCreate"
+              >
+              <el-col v-for="(column) in element.columns" :key="column.index" :span="column.span">
+                <preview-item 
+                v-for="(item) in column.list"
+                :key="item.id" 
+                :model="item"
+                v-model="form[item.id]"
+                />
+              </el-col>
+            </preview-row-item> 
+            <!--item-->
+            <el-col class="drag-col-wrapper" :key="index"   :span="element.span" v-else>
+              <preview-item 
+                :model="element"
+                v-model="form[element.id]"
+                @itemCreate="handlerItemCreate"
               />
+            </el-col>
+          </template>
           </el-form>
       </el-row>
       <center>
@@ -29,12 +48,12 @@
 </template>
 <script>
 import previewItem from "./previewItem";
-
+import previewRowItem from "./previewRowItem";
 export default {
   name:'preview',
   props:['itemList','formConf'],
   components:{
-    previewItem
+    previewItem,previewRowItem
   },
   data(){
     return{
@@ -76,6 +95,14 @@ export default {
         }
       })
     })
+  },
+  watch:{
+    'list':{
+      handler(newValue){
+        console.log(newValue);
+      },
+      deep:true
+    }
   }
 }
 </script>
