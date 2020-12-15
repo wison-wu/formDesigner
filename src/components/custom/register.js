@@ -1,6 +1,7 @@
 //在此注册组件
 const components = [
   'input',
+  'button',
   'select',
   'radio',
   'checkbox',

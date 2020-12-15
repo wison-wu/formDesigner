@@ -9,11 +9,11 @@ Element UI表单设计及代码生成器，可将生成的代码直接运行在�
 
 ## 后期规划
 - 增加校验
-- 基础控件的功能
+- 基础控件的功能完善
 - 增加部分其他组件
 
 ## 感谢作者
 - [form-generator](https://gitee.com/mrhj/form-generator)
 
 ## 开源协议
-[MIT](https://opensource.org/licenses/MIT)
+[MIT]

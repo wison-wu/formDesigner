@@ -1,4 +1,5 @@
 import {input} from "./items/input";
+import {button} from "./items/button";
 import {select} from "./items/select";
 import {radio} from "./items/radio";
 import {checkbox} from "./items/checkbox";
@@ -11,8 +12,10 @@ import {date} from "./items/date";
 import {time} from "./items/time";
 import {row} from "./items/row";
 
+
 const formList = {
   input: input,
+  button: button,
   select: select,
   radio:radio,
   checkbox:checkbox,
