@@ -14,14 +14,16 @@ export let button = {
   config: true,
   // 控件左侧label内容
   showLabel:false,
-  label: '',
-  labelWidth: '0',
+  label: '单行文本',
+  labelWidth: '10',
   //是否可以禁用
   disabled:false,
   //大小，medium / small / mini
   size:'medium',
   //primary / success / warning / danger / info / text
   type:'primary',
+  span:5,
+  text:'按钮',
   //简单
   plain:false,
   //圆角
