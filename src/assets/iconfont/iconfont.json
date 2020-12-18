@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "7038155",
+      "name": "按钮",
+      "font_class": "anniu",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    },
+    {
+      "icon_id": "16859933",
+      "name": "按钮",
+      "font_class": "-button",
+      "unicode": "e648",
+      "unicode_decimal": 58952
+    },
+    {
+      "icon_id": "17692220",
+      "name": "按钮",
+      "font_class": "anniu1",
+      "unicode": "e705",
+      "unicode_decimal": 59141
+    },
+    {
+      "icon_id": "5278848",
+      "name": "加号",
+      "font_class": "add",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
       "icon_id": "13562655",
       "name": "workbench_personal center_secondary password",
       "font_class": "-password",

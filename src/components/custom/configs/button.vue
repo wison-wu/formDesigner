@@ -18,15 +18,16 @@
     <el-form-item label="占用列数" v-show="props.span">
       <el-input-number v-model="props.span"  :min="1" :max="24"></el-input-number>
     </el-form-item>
+    
     <el-form-item label="按钮类型" >
-      <el-radio-group v-model="props.type">
-        <el-radio-button label="primary">1</el-radio-button>
-        <el-radio-button label="success">2</el-radio-button>
-        <el-radio-button label="warning">3</el-radio-button>
-        <el-radio-button label="danger">4</el-radio-button>
-        <el-radio-button label="info">5</el-radio-button>
-        <el-radio-button label="text">6</el-radio-button>
-      </el-radio-group>
+      <el-select v-model="props.type" placeholder="请选择">
+        <el-option label="primary" value="primary"/>
+        <el-option label="success" value="success"/>
+        <el-option label="warning" value="warning"/>
+        <el-option label="danger" value="danger"/>
+        <el-option label="info" value="info"/>
+        <el-option label="text" value="text"/>
+      </el-select>
     </el-form-item>
     <el-form-item label="按钮大小">
       <el-radio-group v-model="props.size">
