@@ -26,7 +26,9 @@ const layouts = {
     let labelWidth = element.labelWidth ? `${element.labelWidth}px` : null
     const {onActiveItemChange} = this.$listeners;
     return (
+      <el-col span={element.span}>
       <div  class={className}>
+        
         <el-form-item label={element.showLabel ? element.label : ''}
                       label-width={labelWidth} 
                       required={element.required} nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}> 
@@ -36,8 +38,8 @@ const layouts = {
           />
         </el-form-item>
         {components.itemBtns.apply(this, arguments)}
-
       </div>
+      </el-col>
     ) 
   },
   rowItem(h, element){
