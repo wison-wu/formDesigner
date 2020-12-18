@@ -2,7 +2,7 @@
   "name": "form-generator",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
+  "homepage": "http://wurong19870715.gitee.io/formdesigner/",
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
