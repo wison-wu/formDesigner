@@ -12,9 +12,10 @@ Element UI表单设计及代码生成器，可将生成的代码直接运行在�
 - 基础控件的功能完善
 - 增加部分其他组件
 ## 预览地址
-  http://wurong19870715.gitee.io/formdesigner/#/
+  [formdesigner](http://wurong19870715.gitee.io/formdesigner)
+  
 ## 感谢作者
-- [formdesigner](https://gitee.com/mrhj/formdesigner)
+- [formdesigner](https://gitee.com/mrhj/form-generator)
 
 如果这个项目对您有帮助，麻烦给个star，谢谢！
 ## 开源协议
