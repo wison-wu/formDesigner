@@ -52,6 +52,11 @@ const componentChild = {
       })
       return list
     }
+  },
+  'el-button': {
+    innerText(conf) {
+      return conf.text;
+    }
   }
   
 }
@@ -65,10 +70,10 @@ export default {
       style: {}
     }
     const confClone = JSON.parse(JSON.stringify(this.conf))
-    const children = []
+    let children = []
 
     const childObjs = componentChild[confClone.ele]
-    if (childObjs) {
+    if (childObjs&&childObjs.options) {
       Object.keys(childObjs).forEach(key => {
         const childFunc = childObjs[key]
         if (confClone[key]) {
@@ -76,7 +81,9 @@ export default {
         }
       })
     }
-
+    if (childObjs&&childObjs.innerText) {
+      children = childObjs.innerText(confClone);
+    }
     Object.keys(confClone).forEach(key => {
       const val = confClone[key]
       if (key === 'id') {
