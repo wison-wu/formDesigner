@@ -1,7 +1,7 @@
 # formDesigner
 
 #### Description
-基于https://gitee.com/mrhj/form-generator表单设计器的修改版。
+基于https://gitee.com/mrhj/formdesigner表单设计器的修改版。
 
 #### Software Architecture
 Software architecture description
