@@ -28,7 +28,6 @@ const layouts = {
     return (
       <el-col span={element.span}>
       <div  class={className}>
-        
         <el-form-item label={element.showLabel ? element.label : ''}
                       label-width={labelWidth} 
                       required={element.required} nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}> 

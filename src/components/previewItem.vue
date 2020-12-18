@@ -9,10 +9,11 @@ const layout = {
     //if (element.showLabel === false) labelWidth = '0'
     const {itemCreate} = this.$listeners;
     return (
-      <el-col span={element.span}  required={element.required}>
+      <el-col span={element.span}  >
         <el-form-item label={element.showLabel ? element.label : ''}
                       label-width={labelWidth} 
                       prop={element.id}
+                      required={element.required}
                       > 
           <render key={element.id} conf={element}  onInput={ event => {
               this.$set(element,'value',event);
