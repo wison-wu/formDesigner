@@ -19,7 +19,7 @@
     "voca": "^1.4.0",
     "vue": "^2.6.11",
     "vue-router": "^3.1.6",
-    "vuedraggable": "^2.23.2"
+    "vuedraggable": "^2.24.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",

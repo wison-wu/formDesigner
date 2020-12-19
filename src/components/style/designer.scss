@@ -25,11 +25,20 @@ $lighterBlue: #409EFF;
   }
   .components-item.sortable-ghost {
     width: 100%;
-    //height: 60px;
+    height: 5px;
+    background-color: $selectedColor;
+  }
+  .drawing-item.sortable-ghost {
+    width: 100%;
+    height: 5px;
     background-color: $selectedColor;
   }
   .active-from-item {
     & > .el-form-item{
+      background: $selectedColor;
+      border-radius:6px;
+    }
+    & > .dynamic-table{
       background: $selectedColor;
       border-radius:6px;
     }
@@ -40,6 +49,7 @@ $lighterBlue: #409EFF;
       color: $lighterBlue;
     }
   }
+  
   .el-form-item{
     margin-bottom: 15px;
   }
@@ -52,6 +62,14 @@ $lighterBlue: #409EFF;
   }
   .el-form-item{
     padding: 12px 10px;
+    
+  }
+}
+.drawing-item{
+  position: relative;
+  cursor: move;
+  .dynamic-table{
+    padding: 12px 5px;
     
   }
 }
