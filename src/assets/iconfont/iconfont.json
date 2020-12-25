@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "14007542",
+      "name": "dialog",
+      "font_class": "dialog",
+      "unicode": "e82a",
+      "unicode_decimal": 59434
+    },
+    {
+      "icon_id": "16188455",
+      "name": "地图",
+      "font_class": "_map",
+      "unicode": "e68a",
+      "unicode_decimal": 59018
+    },
+    {
+      "icon_id": "18195942",
+      "name": "编辑器",
+      "font_class": "bianjiqi",
+      "unicode": "e7bd",
+      "unicode_decimal": 59325
+    },
+    {
+      "icon_id": "9434384",
+      "name": "divider",
+      "font_class": "divider",
+      "unicode": "e6b3",
+      "unicode_decimal": 59059
+    },
+    {
       "icon_id": "7038155",
       "name": "按钮",
       "font_class": "anniu",

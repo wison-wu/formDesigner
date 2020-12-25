@@ -6,7 +6,7 @@ export let divider = {
   compType: 'divider',
   ele: 'el-divider',
   name:'分割线',
-  icon:'button',
+  icon:'divider',
   config: true,
   form:false,
   //内容坐标 left|center|right

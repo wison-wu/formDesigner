@@ -1,11 +1,5 @@
 <template>
   <div v-show="props.compType === 'divider'">
-    <!-- <el-form-item label="字段名">
-      <el-input class="input" v-model="props"></el-input>
-    </el-form-item> -->
-    <el-form-item label="显示标签">
-      <el-switch v-model="props.showLabel"></el-switch>
-    </el-form-item>
     <el-form-item label="文字">
       <el-input class="input" v-model="props.text"></el-input>
     </el-form-item>
