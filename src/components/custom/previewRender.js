@@ -57,6 +57,11 @@ const componentChild = {
     innerText(conf) {
       return conf.text;
     }
+  },
+  'el-divider': {
+    innerText(conf) {
+      return conf.text;
+    }
   }
   
 }

@@ -2,6 +2,7 @@
 const components = [
   'input',
   'button',
+  'divider',
   'select',
   'radio',
   'checkbox',

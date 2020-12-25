@@ -1,5 +1,6 @@
 import {input} from "./items/input";
 import {button} from "./items/button";
+import {divider} from "./items/divider";
 import {select} from "./items/select";
 import {radio} from "./items/radio";
 import {checkbox} from "./items/checkbox";
@@ -16,6 +17,7 @@ import {row} from "./items/row";
 const formList = {
   input: input,
   button: button,
+  divider: divider,
   select: select,
   radio:radio,
   checkbox:checkbox,
