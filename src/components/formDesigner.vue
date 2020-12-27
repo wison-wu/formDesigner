@@ -6,6 +6,7 @@
           Form designer
         </div>
       </div>
+      
       <el-scrollbar class="left-scrollbar">
         <!--左侧组件列表-->
         <div class="components-list">
