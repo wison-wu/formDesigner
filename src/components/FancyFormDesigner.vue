@@ -3,7 +3,12 @@
     <div class="left-board">
       <div class="logo-wrapper">
         <div class="logo">
-          Form designer
+          Form Designer
+          <a href="https://gitee.com/wurong19870715/formDesigner" target="_blank" title="gitee">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#iconlogo_gitee_icon"></use>
+            </svg>
+          </a>
         </div>
       </div>
       <el-scrollbar class="left-scrollbar">

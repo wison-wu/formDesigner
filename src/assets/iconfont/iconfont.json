@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "8372144",
+      "name": "gitee",
+      "font_class": "logo_gitee_icon",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "18789786",
+      "name": "Logo GitHub",
+      "font_class": "github",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
       "icon_id": "14007542",
       "name": "dialog",
       "font_class": "dialog",
