@@ -59,7 +59,6 @@ const layouts = {
                   onAdd={(e)=>{this.handlerAdd(e,item,element)}}
                   >
                     {
-                      
                       item.list.map((obj,objIndex)=>{
                         return renderChildren.call(this,h,obj,element)
                       })

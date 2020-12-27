@@ -17,6 +17,7 @@
               v-if="element.compType === 'row'"
               :key="'row-'+index" 
               :model="element"
+              
               >
               <el-col v-for="(column) in element.columns" :key="column.index" :span="column.span">
                 <template v-for="(col) in column.list">
@@ -24,6 +25,7 @@
                   :key="col.id" 
                   :model="col"
                   v-model="form[col.id]"
+                  @valChange="handlerValChange"
                   />
                 </template>
               </el-col>
@@ -33,6 +35,7 @@
               <preview-item 
                 :model="element"
                 v-model="form[element.id]"
+                @valChange="handlerValChange"
               />
             </el-col>
           </template>
@@ -68,7 +71,10 @@ export default {
   },
   methods:{
     handlerGetValue(){
-      
+
+    },
+    handlerValChange(key,orign){
+      this.$set(this.form,key,orign);
     },
     handlerSubForm(){
       this.$refs[this.formConf.formModel].validate((valid) => {

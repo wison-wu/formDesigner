@@ -5,12 +5,18 @@ const layouts = {
   colItem(h, element,value) {
     let labelWidth = element.labelWidth ? `${element.labelWidth}px` : null
     const {valChange} = this.$listeners;
+    let r = [];
+    if(element.required){
+      r.push({required: true, message: element.label+'不能为空', trigger: ['blur','change']});
+    }
     return (
         <el-form-item label={element.showLabel ? element.label : ''}
                       label-width={labelWidth} 
                       prop={element.id}
+                      rules={r}
                       > 
-          <render key={element.id} conf={element} value={value}  onInput={ event => {
+          <render key={element.id} conf={element} value={value} onInput={ event => {
+            this.$emit('valChange',element.id,event);
           }}/>
         </el-form-item>
     )
