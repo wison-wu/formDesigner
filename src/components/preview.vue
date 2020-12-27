@@ -66,7 +66,7 @@ export default {
     return{
       list: this.itemList,
       form:{},
-      rules:{},
+      rules:{}
     }
   },
   methods:{
