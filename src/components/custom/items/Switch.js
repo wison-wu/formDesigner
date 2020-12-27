@@ -3,6 +3,7 @@
  */
 export let Switch = {
   id:'',
+  _id:'',
   compType: 'Switch',
   ele: 'el-switch',
   //控件名称(左侧显示)
@@ -20,9 +21,16 @@ export let Switch = {
   value: false,
   span: 24,
   disabled: false,
-  required: true,
+  required: false,
+  value:false,
   'active-color': '#409EFF',
   'inactive-color': '#DCDFE6',
   'active-value': 'true',
-  'inactive-value': 'false'
+  'inactive-value': 'false',
+  event:{
+    change:''
+  },
+  watch:{
+    method:''  
+  }
 }

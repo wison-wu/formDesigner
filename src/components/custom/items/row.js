@@ -10,6 +10,7 @@
 
 export let row = {
   id:'',
+  _id:'',
   compType: 'row',
   //控件名称
   name:'栅格布局',

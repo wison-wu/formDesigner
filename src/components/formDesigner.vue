@@ -3,12 +3,7 @@
     <div class="left-board">
       <div class="logo-wrapper">
         <div class="logo">
-          Form Designer
-          <a href="https://gitee.com/wurong19870715/formDesigner" target="_blank" title="gitee">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#iconlogo_gitee_icon"></use>
-            </svg>
-          </a>
+          Form designer
         </div>
       </div>
       <el-scrollbar class="left-scrollbar">
@@ -32,7 +27,7 @@
               @click="addComponent(element)"
             >
               <div class="components-body">
-               <icon :code="element.icon" :text="element.name"/>
+                <icon :code="element.icon" :text="element.name"/>
               </div>
             </div>
           </draggable>
@@ -48,18 +43,18 @@
  */
 import draggable from "vuedraggable";
 import formItems from "./custom/itemList";
-import Designer from "./Designer";
+import Designer from "./designer";
 import Icon from "./icon";
 import {getSimpleId} from "./utils/IdGenerate";
 
 let tempActiveData;
 
 export default {
-  name:"fancyFormDesigner",
+  name:"formDesigner",
   components:{
     draggable
-    ,Designer,
-    Icon
+    ,Designer
+    ,Icon
   },
   data() {
     return {
@@ -78,13 +73,15 @@ export default {
     cloneComponent(origin){
       const clone = JSON.parse(JSON.stringify(origin))
       if (!clone.layout) clone.layout = 'colItem'
-      if (clone.layout === 'colItem') {
+      if (clone.layout === 'colItem'||clone.layout === 'dynamicItem') {
         let uId = "fd_"+getSimpleId();
         clone.id = uId;
+        clone._id = uId;
         tempActiveData = clone;
-      }else if(clone.layout === 'rowItem'){
+      }else{
         let uId = "row_"+getSimpleId();
         clone.id = uId;
+        clone._id = uId;
         tempActiveData = clone;
       }
       this.$refs.designer.activeItem = tempActiveData;
@@ -100,7 +97,7 @@ export default {
           this.designList.splice(obj.newIndex,0,this.activeData);
         }
       }else{
-        this.$refs.designer.activeItem = undefined;
+        this.$refs.designer.activeItem = {};
       }
       
     }

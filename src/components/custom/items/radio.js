@@ -6,6 +6,7 @@
 
 export let radio = {
   id:'',
+  _id:'',
   compType: 'radio',
   //控件名称
   name:'单选框',
@@ -29,7 +30,7 @@ export let radio = {
   //显示标签
   showLabel:true,
   //必填
-  required:true,
+  required:false,
   //禁用
   disabled:false,
   //是否有边框
@@ -48,6 +49,11 @@ export let radio = {
   }],
   value: '',
   // 验证错误提示信息
-  ruleError: '该字段不能为空'
-  
+  ruleError: '该字段不能为空',
+  event:{
+    change:''
+  },
+  watch:{
+    method:''
+  }
 }

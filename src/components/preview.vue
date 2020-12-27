@@ -1,17 +1,17 @@
 <template>
   <div >
     <el-row  :gutter="formConf.gutter">
-        <el-form
-            :rules="rules"
-            :ref="formConf.formModel"
-            :size="formConf.size"
-            :model="form"
-            :label-position="formConf.labelPosition"
-            :disabled="formConf.disabled"
-            :validate-on-rule-change="false"
-            :label-width="formConf.labelWidth + 'px'"
-          >
-          <template v-for="(element,index) in itemList"  >
+      <el-form
+          :rules="rules"
+          :ref="formConf.formModel"
+          :size="formConf.size"
+          :model="form"
+          label-position="formConf.labelPosition"
+          :disabled="formConf.disabled"
+          :validate-on-rule-change="false"
+          label-width="formConf.labelWidth + 'px'"
+        >
+          <template v-for="(element,index) in list"  >
             <!-- <el-input v-model="element.id" placeholder=""></el-input> -->
              <preview-row-item 
               v-if="element.compType === 'row'"
@@ -19,12 +19,13 @@
               :model="element"
               >
               <el-col v-for="(column) in element.columns" :key="column.index" :span="column.span">
-                <preview-item 
-                v-for="(item) in column.list"
-                :key="item.id" 
-                :model="item"
-                v-model="form[item.id]"
-                />
+                <template v-for="(col) in column.list">
+                  <preview-item 
+                  :key="col.id" 
+                  :model="col"
+                  v-model="form[col.id]"
+                  />
+                </template>
               </el-col>
             </preview-row-item> 
             <!--item-->
@@ -32,81 +33,65 @@
               <preview-item 
                 :model="element"
                 v-model="form[element.id]"
-                @itemCreate="handlerItemCreate"
               />
             </el-col>
           </template>
-          </el-form>
-      </el-row>
-      <center>
-        <span slot="footer" class="dialog-footer">
-              <el-button @click="handlerGetValue">获得表单数据</el-button>
-              <el-button type="primary" @click="handlerSubForm">提交</el-button>
-        </span>
-      </center>
+          
+        </el-form>
+    </el-row>
+    <el-divider></el-divider>
+    <center>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="handlerGetValue">获得表单数据</el-button>
+        <el-button type="primary" @click="handlerSubForm">提交</el-button>
+      </span>
+    </center>
   </div>
 </template>
 <script>
 import previewItem from "./previewItem";
 import previewRowItem from "./previewRowItem";
+import {datas} from "./custom/formDraw";
 export default {
   name:'preview',
   props:['itemList','formConf'],
   components:{
-    previewItem,previewRowItem
+    previewItem,
+    previewRowItem
   },
   data(){
     return{
       list: this.itemList,
-      form:{
-
-      },
-      rules:{
-        
-      }
+      form:{},
+      rules:{},
     }
   },
   methods:{
-    handlerItemCreate(key,orign){
-      this.$set(this.form,key,orign);
-    },
     handlerGetValue(){
       
     },
     handlerSubForm(){
       this.$refs[this.formConf.formModel].validate((valid) => {
-          if (valid) {
-            this.$message.success('成功!');
-          }
+        if (valid) {
+          this.$message.success('success');
+        }
       });
     }
+
   },
-  mounted(){
-    this.$nextTick(()=>{
-      this.list.forEach(val => {
-      //this.$set(this.form,val.id,val.value);
-      
-        if(val.required){
-          let field = val.id;
-          const r = [
-            {required: true, message: val.label+'必填', trigger: 'blur'}
-          ];
-          this.$set(this.rules,val.id,r);
-        }
-      })
+  created(){
+  },
+  mounted() {
+    this.$nextTick(()=> {
     })
   },
-  watch:{
-    'list':{
-      handler(newValue){
-        console.log(newValue);
-      },
-      deep:true
-    }
+  beforeCreate(){
+  },
+  computed:{
   }
 }
 </script>
-<style>
+<style scoped>
 .preview-board{
   border: 1px dashed #ccc
 }

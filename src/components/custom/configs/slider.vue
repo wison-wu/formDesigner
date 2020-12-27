@@ -3,12 +3,17 @@
     <!-- <el-form-item label="字段名">
       <el-input class="input" v-model="props"></el-input>
     </el-form-item> -->
+    <el-form-item label="ID">
+      <el-tooltip class="item" effect="dark" content="请注意,ID的修改可能会导致该组件相关事件失效！" placement="left">
+        <el-input class="input" v-model="props.id" @change="handlerChangeId"></el-input>
+      </el-tooltip>
+    </el-form-item>
     <el-form-item label="标题">
       <el-input class="input" v-model="props.label"></el-input>
     </el-form-item>
-    <el-form-item label="表单栅格">
+    <!-- <el-form-item label="表单栅格">
       <el-slider class="input" v-model="props.span" :max="24" :min="1" :marks="{12:''}"></el-slider>
-    </el-form-item>
+    </el-form-item> -->
     <el-form-item label="栅格间隔">
       <el-input-number v-model="props.gutter"  :min="0"></el-input-number>
     </el-form-item>
@@ -54,8 +59,8 @@
  */
 export default {
   name:"inputConfig",
-  props:{
-    props:{}
+  props:['props','getFormId'],
+  components: {
   },
   data(){
     return {
@@ -63,8 +68,22 @@ export default {
     }
   },
   methods:{
+    handlerChangeId(val){
+      let idArray = this.getFormId(this.props._id);
+      if(idArray.includes(val)){  //如果存在id相等，则提示
+        this.$message.error('该ID已经存在，请修改');
+        this.props.id=this.props._id;
+      }else{
+        this.props._id=val;
+      }
+    }
   },
   mounted(){
   }
 }
 </script>
+<style scoped>
+.input{
+  width:75%
+}
+</style>

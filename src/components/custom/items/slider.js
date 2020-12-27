@@ -3,6 +3,7 @@
  */
 export let slider = {
   id:'',
+  _id:'',
   compType: 'slider',
   ele: 'el-slider',
   //控件名称(左侧显示)
@@ -17,10 +18,10 @@ export let slider = {
    //栅格间隔
   gutter:15,
   labelWidth: '80',
-  value: undefined,
+  value: 0,
   span: 24,
   disabled: false,
-  required: true,
+  required: false,
   //最小值
   min: 0,
   //最大值
@@ -32,5 +33,11 @@ export let slider = {
   //是否显示tooltip
   'show-tooltip': true,
   //范围选择  1,50
-  range: false  
+  range: false,
+  event:{
+    change:''
+  },
+  watch:{
+    method:'' 
+  }  
 }

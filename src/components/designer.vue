@@ -27,12 +27,14 @@
                    :list="list" 
                    :animation="100" 
                    group="componentsGroup" 
+                   draggable=".drawing-item"
                    >
         <design-item 
             v-for="(element,index) in list" 
             :key="index" 
             :model="element" 
             :activeItem="activeItem"
+            @rowItemRollBack="handlerRollBack"
             @onActiveItemChange="handlerActiveItemChange"
             @copyItem="handlerItemCopy"
             @deleteItem="handlerItemDelete"/>
@@ -43,50 +45,54 @@
         </el-form>
       </el-row>
     </el-scrollbar>
-    <config-panel :activeItem="activeItem"/>
+    <config-panel :activeItem="activeItem" :itemList="list"/>
     <!-- 设计器配置弹出框 -->
-    <el-dialog  :visible.sync="formConfVisible" width="30%">
-        <el-form ref="formConf" :model="formConf" label-width="100px">
-          <el-form-item label="表单名">
-              <el-input class="input" v-model="formConf.formRef"></el-input>
-          </el-form-item>
-          <el-form-item label="表单模型">
-              <el-input class="input" v-model="formConf.formModel"></el-input>
-          </el-form-item>
-          <el-form-item label="校验模型">
-              <el-input class="input" v-model="formConf.formRules"></el-input>
-          </el-form-item>
-          <el-form-item label="表单尺寸">
-              <el-radio-group v-model="formConf.size">
-                <el-radio-button label="medium">中等</el-radio-button>
-                <el-radio-button label="small">较小</el-radio-button>
-                <el-radio-button label="mini">迷你</el-radio-button>
-              </el-radio-group>
-          </el-form-item>
-          <el-form-item label="标签对齐">
-              <el-radio-group v-model="formConf.labelPosition">
-                <el-radio-button label="right">右对齐</el-radio-button>
-                <el-radio-button label="left">左对齐</el-radio-button>
-                <el-radio-button label="top">顶部对齐</el-radio-button>
-              </el-radio-group>
-          </el-form-item>
-          <el-form-item label="标签宽度">
-              <el-input-number v-model="formConf.labelWidth"  :min="60" :max="140"></el-input-number>
-          </el-form-item>
-          <el-form-item label="栅格间隔">
-              <el-input-number v-model="formConf.gutter"  :min="0" :max="30"></el-input-number>
-          </el-form-item>
-          <el-form-item label="禁用表单">
-              <el-switch v-model="formConf.disabled"></el-switch>
-          </el-form-item>
-        </el-form>
+    <el-dialog  :visible.sync="formConfVisible" width="50%" top="30px" :center="true">
+      <el-tabs v-model="activeName">
+        <el-tab-pane label="表单配置" name="formConf">
+          <el-form ref="formConf" :model="formConf" label-width="100px">
+            <el-form-item label="表单名">
+                <el-input class="input" v-model="formConf.formRef"></el-input>
+            </el-form-item>
+            <el-form-item label="表单模型">
+                <el-input class="input" v-model="formConf.formModel"></el-input>
+            </el-form-item>
+            <el-form-item label="校验模型">
+                <el-input class="input" v-model="formConf.formRules"></el-input>
+            </el-form-item>
+            <el-form-item label="表单尺寸">
+                <el-radio-group v-model="formConf.size">
+                  <el-radio-button label="medium">中等</el-radio-button>
+                  <el-radio-button label="small">较小</el-radio-button>
+                  <el-radio-button label="mini">迷你</el-radio-button>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item label="标签对齐">
+                <el-radio-group v-model="formConf.labelPosition">
+                  <el-radio-button label="right">右对齐</el-radio-button>
+                  <el-radio-button label="left">左对齐</el-radio-button>
+                  <el-radio-button label="top">顶部对齐</el-radio-button>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item label="标签宽度">
+                <el-input-number v-model="formConf.labelWidth"  :min="60" :max="140"></el-input-number>
+            </el-form-item>
+            <el-form-item label="栅格间隔">
+                <el-input-number v-model="formConf.gutter"  :min="0" :max="30"></el-input-number>
+            </el-form-item>
+            <el-form-item label="禁用表单">
+                <el-switch v-model="formConf.disabled"></el-switch>
+            </el-form-item>
+          </el-form>
+        </el-tab-pane>
+        <!-- <el-tab-pane label="提交前" name="fourth">开发中...</el-tab-pane> -->
+      </el-tabs>
         <span slot="footer" class="dialog-footer">
-            <el-button @click="formConfVisible = false">取 消</el-button>
             <el-button type="primary" @click="handlerSaveFormConf">确 定</el-button>
         </span>
     </el-dialog>
-    <el-dialog :visible.sync="previewVisible" width="50%" title="预览" :modal="true" :destroy-on-close="true">
-      <preview :itemList="itemList"  :formConf="formConf"/>
+    <el-dialog :visible.sync="previewVisible" width="70%" title="预览" @open="handlerPreviewOpen">
+      <preview :itemList="itemList"  :formConf="formConf" v-if="previewVisible"/>
     </el-dialog>
   </div>
 </template>
@@ -98,6 +104,7 @@ import {getSimpleId} from "./utils/IdGenerate";
 import {isLayout} from "./utils/index";
 import formConf from "./custom/formConf";
 import preview from "./preview";
+import {dialogOpen} from "./custom/formDraw";
 
 export default {
   name:"Designer",
@@ -120,7 +127,9 @@ export default {
       lastActiveItem:{},
       formConfVisible:false,
       previewVisible:false,
-      itemList:[]
+      itemList:[],
+      activeName:'formConf',
+      editorCode:''
     }
   },
   mounted() {
@@ -152,12 +161,14 @@ export default {
           const clone = JSON.parse(JSON.stringify(origin))
           const uId = "row_"+getSimpleId();
           clone.id = uId;
+          clone._id = uId;
           clone.columns.map((column,index)=>{
             let itemList = [];
             column.list.map((item,i)=>{
               const cloneitem = JSON.parse(JSON.stringify(item))
               const uId = "fd_"+getSimpleId();
               cloneitem.id = uId;
+              cloneitem._id = uId;
               itemList.push(cloneitem);
             })
             column.list = [];
@@ -172,6 +183,7 @@ export default {
               const clone = JSON.parse(JSON.stringify(origin))
               const uId = "fd_"+getSimpleId();
               clone.id = uId;
+              clone._id = uId;
               column.list.push(clone);
               this.handlerActiveItemChange(clone);
             }
@@ -180,6 +192,7 @@ export default {
           const clone = JSON.parse(JSON.stringify(origin))
           const uId = "fd_"+getSimpleId();
           clone.id = uId;
+          clone._id = uId;
           this.list.push(clone);
           this.handlerActiveItemChange(clone);
         }
@@ -206,7 +219,14 @@ export default {
     },
     handlerSaveFormConf(){
       this.formConfVisible = false
-    }
+    },
+    handlerRollBack(rowItem,oldIndex){  //还原
+      this.list.splice(oldIndex,0,rowItem);
+    },
+    handlerCodeChange(code,evt){
+      //this.formConf.initFunc = code;
+    },
+    handlerPreviewOpen:dialogOpen
   },
   computed:{
     infoShow() {
@@ -216,7 +236,7 @@ export default {
   watch: {
     activeItem (newValue,oldValue) {
       this.lastActiveItem = oldValue;
-    }
+    },
   }
 }
 

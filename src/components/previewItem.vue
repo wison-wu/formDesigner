@@ -1,26 +1,18 @@
 <script>
-import draggable from 'vuedraggable'
 import render from './custom/previewRender'
-import { jsonClone } from './utils'
 
-const layout = {
-  colFormItem(h, element) {
+const layouts = {
+  colItem(h, element,value) {
     let labelWidth = element.labelWidth ? `${element.labelWidth}px` : null
-    //if (element.showLabel === false) labelWidth = '0'
-    const {itemCreate} = this.$listeners;
+    const {valChange} = this.$listeners;
     return (
-      <el-col span={element.span}  >
         <el-form-item label={element.showLabel ? element.label : ''}
                       label-width={labelWidth} 
                       prop={element.id}
-                      required={element.required}
                       > 
-          <render key={element.id} conf={element}  onInput={ event => {
-              this.$set(element,'value',event);
-              itemCreate(element.id,event);
-            }} />
+          <render key={element.id} conf={element} value={value}  onInput={ event => {
+          }}/>
         </el-form-item>
-      </el-col>
     )
   }
 }
@@ -28,24 +20,16 @@ const layout = {
 export default {
   name:"previewItem",
   components: {
-    render,
-    draggable
+    render
   },
-  props: {
-    model: { 
-      type: Object,
-      default:{}
-    }
-  },
+  props: ['model','value'],
   data(){
     return {
-      
+      eleConfig:this.model
     }
   },
   render(h) {
-    return layout.colFormItem.call(this, h,  this.model)
-  },
-  computed:{
+    return layouts.colItem.call(this, h, this.eleConfig,this.value)
   }
 }
 </script>

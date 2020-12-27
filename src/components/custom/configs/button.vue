@@ -59,6 +59,8 @@ export default {
   props:{
     props:{}
   },
+  components:{
+  },
   data(){
     return {
     }

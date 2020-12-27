@@ -3,6 +3,7 @@
  */
 export let time = {
   id:'',
+  _id:'',
   compType: 'time',
   ele: 'el-time-picker',
   //控件名称(左侧显示)
@@ -30,10 +31,16 @@ export let time = {
   clearable:true,
   disabled:false,
   readonly:false,
-  value: undefined,
+  value: '',
   'picker-options': {
     selectableRange: '00:00:00-23:59:59'
   },
   format: 'HH:mm:ss',
   'value-format': 'HH:mm:ss',
+  event:{
+    change:''
+  },
+  watch:{
+    method:'' 
+  }
 }

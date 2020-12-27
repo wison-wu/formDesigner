@@ -75,8 +75,7 @@ export default {
       style: {}
     }
     const confClone = JSON.parse(JSON.stringify(this.conf))
-    let children = []
-
+    let children = [];
     const childObjs = componentChild[confClone.ele]
     if (childObjs&&childObjs.options) {
       Object.keys(childObjs).forEach(key => {
@@ -89,19 +88,22 @@ export default {
     if (childObjs&&childObjs.innerText) {
       children = childObjs.innerText(confClone);
     }
+
     Object.keys(confClone).forEach(key => {
       const val = confClone[key]
       if (key === 'id') {
-        vModel(this, dataObject, confClone.value)
+        vModel(this, dataObject, this.value)
       } else if (dataObject[key]) {
         dataObject[key] = val
       } else if (!isAttr(key)) {
         dataObject.props[key] = val
       } else {
-        dataObject.attrs[key] = val
+        if(key !=='value'){
+          dataObject.attrs[key] = val
+        }
       }
     })
     return h(confClone.ele, dataObject, children)
   },
-  props: ['conf']
+  props: ['conf','value']
 }

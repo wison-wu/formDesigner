@@ -13,7 +13,6 @@ import {date} from "./items/date";
 import {time} from "./items/time";
 import {row} from "./items/row";
 
-
 const formList = {
   input: input,
   button: button,

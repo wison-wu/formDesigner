@@ -3,6 +3,7 @@
  */
 export let date = {
   id:'',
+  _id:'',
   compType: 'date',
   ele: 'el-date-picker',
   //控件名称(左侧显示)
@@ -30,8 +31,14 @@ export let date = {
   clearable:true,
   disabled:false,
   readonly:false,
-  value: undefined,
+  value: '',
   //时间类型
   type:'date',
-  format:undefined
+  format:'yyyy-MM-dd',
+  event:{
+    change:''
+  },
+  watch:{
+    method:''
+  }
 }

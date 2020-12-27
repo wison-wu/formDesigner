@@ -3,6 +3,7 @@
  */
 export let rate = {
   id:'',
+  _id:'',
   compType: 'rate',
   ele: 'el-rate',
   //控件名称(左侧显示)
@@ -20,8 +21,14 @@ export let rate = {
   value: 1,
   span: 24,
   disabled: false,
-  required: true,
+  required: false,
   max: 5,
   'allow-half': false,
-  'show-score': false
+  'show-score': false,
+  event:{
+    change:''
+  },
+  watch:{
+    method:''
+  }
 }

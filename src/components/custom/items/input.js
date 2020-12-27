@@ -3,6 +3,7 @@
  */
 export let input = {
   id:'',
+  _id:'',
   compType: 'input',
   ele: 'el-input',
   //控件名称(左侧显示)
@@ -32,8 +33,11 @@ export let input = {
   readonly:false,
   //状态，正常，只读，禁用
   status:'normal',
-  value: undefined,
-  // 验证错误提示信息
-  ruleError: '该字段不能为空'
-  //暂时只有必填校验
+  value: '',
+  event:{
+    change:''
+  },
+  watch:{
+    method:''
+  }
 }

@@ -1,12 +1,17 @@
 <template>
   <div v-show="props.compType === 'Switch'">
 
+    <el-form-item label="ID">
+      <el-tooltip class="item" effect="dark" content="请注意,ID的修改可能会导致该组件相关事件失效！" placement="left">
+        <el-input class="input" v-model="props.id" @change="handlerChangeId"></el-input>
+      </el-tooltip>
+    </el-form-item>
     <el-form-item label="标题">
       <el-input class="input" v-model="props.label"></el-input>
     </el-form-item>
-    <el-form-item label="表单栅格">
+    <!-- <el-form-item label="表单栅格">
       <el-slider class="input" v-model="props.span" :max="24" :min="1" :marks="{12:''}"></el-slider>
-    </el-form-item>
+    </el-form-item> -->
     <el-form-item label="栅格间隔">
       <el-input-number v-model="props.gutter"  :min="0"></el-input-number>
     </el-form-item>
@@ -26,10 +31,10 @@
       <el-color-picker v-model="props['inactive-color']"></el-color-picker>
     </el-form-item>
     <el-form-item label="开启时值">
-      <el-input v-model="props['active-value']"></el-input>
+      <el-input class="input" v-model="props['active-value']"></el-input>
     </el-form-item>
     <el-form-item label="关闭时值">
-      <el-input v-model="props['inactive-value']"></el-input>
+      <el-input class="input" v-model="props['inactive-value']"></el-input>
     </el-form-item>
     <el-form-item label="默认值">
       <el-switch v-model="props.value"></el-switch>
@@ -42,8 +47,8 @@
  */
 export default {
   name:"inputConfig",
-  props:{
-    props:{}
+  props:['props','getFormId'],
+  components: {
   },
   data(){
     return {
@@ -59,9 +64,23 @@ export default {
     },
     handlerChangeReadStatus(val){
       this.props.disabled = val?false:true
+    },
+    handlerChangeId(val){
+      let idArray = this.getFormId(this.props._id);
+      if(idArray.includes(val)){  //如果存在id相等，则提示
+        this.$message.error('该ID已经存在，请修改');
+        this.props.id=this.props._id;
+      }else{
+        this.props._id=val;
+      }
     }
   },
   mounted(){
   }
 }
 </script>
+<style scoped>
+.input{
+  width:75%
+}
+</style>

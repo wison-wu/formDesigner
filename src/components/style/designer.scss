@@ -3,6 +3,7 @@ $lighterBlue: #409EFF;
 .drawing-board {
   height: 100%;
   position: relative;
+  border:1px dashed #ccc;
   .components-body {
     padding: 0;
     margin: 0;
@@ -288,4 +289,14 @@ $lighterBlue: #409EFF;
 }
 .drawing-row-item .el-col{
   margin-bottom:10px;
+}
+.components-item.dynamicGhost {
+  width: 5px;
+  height: 120px;
+  background-color: #409EFF;
+}
+.dynamic-table_item.dynamicGhost {
+  width: 5px;
+  height: 120px;
+  background-color: #409EFF;
 }

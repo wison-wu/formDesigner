@@ -3,6 +3,7 @@
  */
 export let inputNumber = {
   id:'',
+  _id:'',
   compType: 'inputNumber',
   ele: 'el-inputNumber',
   //控件名称(左侧显示)
@@ -26,6 +27,14 @@ export let inputNumber = {
   precision: 0,
   'controls-position': 'default',
   disabled: false,
-  required: true,
-  regList: []
+  readonly: false,
+  required: false,
+  value:'',
+  regList: [],
+  event:{
+    change:''
+  },
+  watch:{
+    method:'' 
+  }
 }

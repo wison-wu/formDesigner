@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import designer from '@/components/FancyFormDesigner'
+import designer from '@/components/formDesigner'
+
 
 Vue.use(VueRouter)
 

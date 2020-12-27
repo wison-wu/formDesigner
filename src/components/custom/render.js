@@ -36,8 +36,8 @@ const componentChild = {
     options(h, conf, key) {
       const list = []
       conf.options.forEach(item => {
-        if (conf.optionType === 'button') list.push(<el-radio-button label={item.value}>{item.label}</el-radio-button>)
-        else list.push(<el-radio label={item.value} border={conf.border}>{item.label}</el-radio>)
+        if (conf.optionType === 'button') list.push(<el-radio-button label={item.value} style="">{item.label}</el-radio-button>)
+        else list.push(<el-radio label={item.value} style="" border={conf.border}>{item.label}</el-radio>)
       })
       return list
     }
@@ -47,7 +47,7 @@ const componentChild = {
       const list = []
       conf.options.forEach(item => {
         if (conf.optionType === 'button') list.push(<el-checkbox-button label={item.value}>{item.label}</el-checkbox-button>)
-        else list.push(<el-checkbox label={item.value} border={conf.border}>{item.label}</el-checkbox>)
+        else list.push(<el-checkbox label={item.value} style="display:block;" border={conf.border}>{item.label}</el-checkbox>)
       })
       return list
     }
@@ -74,9 +74,8 @@ export default {
       style: {}
     }
     const confClone = JSON.parse(JSON.stringify(this.conf))
-    let children = [];
+    let children = []
     const childObjs = componentChild[confClone.ele]
-    //select、radio、checkbox子选项处理
     if (childObjs&&childObjs.options) {
       Object.keys(childObjs).forEach(key => {
         const childFunc = childObjs[key]
@@ -88,7 +87,6 @@ export default {
     if (childObjs&&childObjs.innerText) {
       children = childObjs.innerText(confClone);
     }
-    
 
     Object.keys(confClone).forEach(key => {
       const val = confClone[key]
@@ -102,7 +100,6 @@ export default {
         dataObject.attrs[key] = val
       }
     })
-    
     return h(confClone.ele, dataObject, children)
   },
   props: ['conf']

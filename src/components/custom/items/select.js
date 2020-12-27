@@ -29,7 +29,7 @@ export let select = {
   //显示标签
   showLabel:true,
   //必填
-  required:true,
+  required:false,
   //多选
   multiple:false,
   //禁用
@@ -52,5 +52,12 @@ export let select = {
   value: '',
   // 验证错误提示信息
   ruleError: '该字段不能为空',
-  id:''
+  id:'',
+  _id:'',
+  event:{
+    change:''
+  },
+  watch:{
+    method:'' 
+  }
 }
