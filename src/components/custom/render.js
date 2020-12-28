@@ -61,6 +61,11 @@ const componentChild = {
     innerText(conf) {
       return conf.text;
     }
+  },
+  'el-link': {
+    innerText(conf) {
+      return conf.text;
+    }
   }
   
 }

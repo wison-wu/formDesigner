@@ -1,5 +1,5 @@
 <template>
-  <div v-show="props.compType === 'alert'">
+  <div v-show="props.compType === 'link'">
     <!-- <el-form-item label="字段名">
       <el-input class="input" v-model="props"></el-input>
     </el-form-item> -->
@@ -8,37 +8,23 @@
         <el-input class="input" v-model="props.id" ></el-input>
       </el-tooltip>
     </el-form-item>
-    <el-form-item label="标题">
-      <el-input class="input" v-model="props.title"></el-input>
+    <el-form-item label="链接文字">
+      <el-input class="input" v-model="props.text"></el-input>
     </el-form-item>
     <el-form-item label="类型" >
       <el-select v-model="props.type" placeholder="请选择">
+        <el-option label="primary" value="primary"/>
         <el-option label="success" value="success"/>
         <el-option label="warning" value="warning"/>
-        <el-option label="error" value="error"/>
+        <el-option label="danger" value="danger"/>
         <el-option label="info" value="info"/>
       </el-select>
     </el-form-item>
-    <el-form-item label="辅助文字">
-      <el-input class="input" v-model="props.description"></el-input>
+    <el-form-item label="url">
+      <el-input class="input" v-model="props.href"></el-input>
     </el-form-item>
-    <el-form-item label="关闭">
-      <el-switch v-model="props.closable"></el-switch>
-    </el-form-item>
-    <el-form-item label="居中">
-      <el-switch v-model="props.center"></el-switch>
-    </el-form-item>
-    <el-form-item label="关闭按钮自定义文本">
-      <el-input class="input" v-model="props['close-text']"/>
-    </el-form-item>
-    <el-form-item label="显示图标">
-      <el-switch v-model="props['show-icon']"></el-switch>
-    </el-form-item>
-    <el-form-item label="主题">
-      <el-radio-group v-model="props.effect">
-        <el-radio-button label="light">light</el-radio-button>
-        <el-radio-button label="dark">dark</el-radio-button>
-      </el-radio-group>
+    <el-form-item label="禁用">
+      <el-switch v-model="props.disabled"></el-switch>
     </el-form-item>
   </div>
 </template>

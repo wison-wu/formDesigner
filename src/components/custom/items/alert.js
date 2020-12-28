@@ -1,5 +1,5 @@
 /**
- * 分割线
+ * 警告
  */
 export let alert = {
   id:'',

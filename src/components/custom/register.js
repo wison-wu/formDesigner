@@ -14,6 +14,7 @@ const components = [
   'button',
   'divider',
   'alert',
+  'link',
   'row'
 ];
 

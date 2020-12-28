@@ -13,11 +13,10 @@ import {button} from "./items/button";
 import {divider} from "./items/divider";
 import {row} from "./items/row";
 import {alert} from "./items/alert";
+import {link} from "./items/link";
 
 const formList = {
   input: input,
-  button: button,
-  divider: divider,
   select: select,
   radio:radio,
   checkbox:checkbox,
@@ -29,7 +28,10 @@ const formList = {
   date:date,
   time:time,
   row:row,
-  alert:alert
+  button: button,
+  divider: divider,
+  alert:alert,
+  link:link
 };
 let items = [];
 for (let i in formList) {
