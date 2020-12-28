@@ -6,16 +6,30 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "762208",
+      "name": "警告",
+      "font_class": "-alert",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "15603541",
+      "name": "alert",
+      "font_class": "-alert1",
+      "unicode": "e68e",
+      "unicode_decimal": 59022
+    },
+    {
       "icon_id": "8372144",
       "name": "gitee",
-      "font_class": "logo_gitee_icon",
+      "font_class": "-gitee",
       "unicode": "e608",
       "unicode_decimal": 58888
     },
     {
       "icon_id": "18789786",
       "name": "Logo GitHub",
-      "font_class": "github",
+      "font_class": "-github",
       "unicode": "e607",
       "unicode_decimal": 58887
     },
@@ -64,7 +78,7 @@
     {
       "icon_id": "17692220",
       "name": "按钮",
-      "font_class": "anniu1",
+      "font_class": "-button1",
       "unicode": "e705",
       "unicode_decimal": 59141
     },

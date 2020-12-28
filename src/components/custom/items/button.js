@@ -3,6 +3,7 @@
  */
 export let button = {
   id:'',
+  _id:'',
   compType: 'button',
   ele: 'el-button',
   //控件名称(左侧显示)

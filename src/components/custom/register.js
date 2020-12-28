@@ -1,8 +1,6 @@
 //在此注册组件
 const components = [
   'input',
-  'button',
-  'divider',
   'select',
   'radio',
   'checkbox',
@@ -13,6 +11,9 @@ const components = [
   'rate',
   'date',
   'time',
+  'button',
+  'divider',
+  'alert',
   'row'
 ];
 

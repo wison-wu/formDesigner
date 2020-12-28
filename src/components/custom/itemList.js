@@ -1,6 +1,4 @@
 import {input} from "./items/input";
-import {button} from "./items/button";
-import {divider} from "./items/divider";
 import {select} from "./items/select";
 import {radio} from "./items/radio";
 import {checkbox} from "./items/checkbox";
@@ -11,7 +9,10 @@ import {slider} from "./items/slider";
 import {rate} from "./items/rate";
 import {date} from "./items/date";
 import {time} from "./items/time";
+import {button} from "./items/button";
+import {divider} from "./items/divider";
 import {row} from "./items/row";
+import {alert} from "./items/alert";
 
 const formList = {
   input: input,
@@ -27,7 +28,8 @@ const formList = {
   rate:rate,
   date:date,
   time:time,
-  row:row
+  row:row,
+  alert:alert
 };
 let items = [];
 for (let i in formList) {

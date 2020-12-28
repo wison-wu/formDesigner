@@ -3,6 +3,7 @@
  */
 export let divider = {
   id:'',
+  _id:'',
   compType: 'divider',
   ele: 'el-divider',
   name:'分割线',
