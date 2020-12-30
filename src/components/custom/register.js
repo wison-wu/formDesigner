@@ -15,6 +15,7 @@ const components = [
   'divider',
   'alert',
   'link',
+  'text',
   'row'
 ];
 
