@@ -49,11 +49,5 @@ export let checkbox = {
   }],
   value: [],
   // 验证错误提示信息
-  ruleError: '该字段不能为空',
-  event:{
-    change:''
-  },
-  watch:{
-    method:'' 
-  }
+  ruleError: '该字段不能为空'
 }

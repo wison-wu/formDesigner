@@ -34,11 +34,5 @@ export let date = {
   value: '',
   //时间类型
   type:'date',
-  format:'yyyy-MM-dd',
-  event:{
-    change:''
-  },
-  watch:{
-    method:''
-  }
+  format:'yyyy-MM-dd'
 }

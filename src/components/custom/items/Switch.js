@@ -26,11 +26,5 @@ export let Switch = {
   'active-color': '#409EFF',
   'inactive-color': '#DCDFE6',
   'active-value': 'true',
-  'inactive-value': 'false',
-  event:{
-    change:''
-  },
-  watch:{
-    method:''  
-  }
+  'inactive-value': 'false'
 }

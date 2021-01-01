@@ -36,11 +36,5 @@ export let time = {
     selectableRange: '00:00:00-23:59:59'
   },
   format: 'HH:mm:ss',
-  'value-format': 'HH:mm:ss',
-  event:{
-    change:''
-  },
-  watch:{
-    method:'' 
-  }
+  'value-format': 'HH:mm:ss'
 }

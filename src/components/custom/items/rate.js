@@ -24,11 +24,5 @@ export let rate = {
   required: false,
   max: 5,
   'allow-half': false,
-  'show-score': false,
-  event:{
-    change:''
-  },
-  watch:{
-    method:''
-  }
+  'show-score': false
 }

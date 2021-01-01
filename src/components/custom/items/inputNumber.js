@@ -30,11 +30,5 @@ export let inputNumber = {
   readonly: false,
   required: false,
   value:'',
-  regList: [],
-  event:{
-    change:''
-  },
-  watch:{
-    method:'' 
-  }
+  regList: []
 }

@@ -33,11 +33,5 @@ export let input = {
   readonly:false,
   //状态，正常，只读，禁用
   status:'normal',
-  value: '',
-  event:{
-    change:''
-  },
-  watch:{
-    method:''
-  }
+  value: ''
 }

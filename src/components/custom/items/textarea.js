@@ -39,12 +39,5 @@ export let textarea = {
   status:'normal',
   value: '',
   // 验证错误提示信息
-  ruleError: '该字段不能为空',
-  //暂时只有必填校验
-  event:{
-    change:''
-  },
-  watch:{
-    method:''  
-  }
+  ruleError: '该字段不能为空'
 }

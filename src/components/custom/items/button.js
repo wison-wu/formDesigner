@@ -34,8 +34,5 @@ export let button = {
   //加载中
   loading:false,
   //禁用
-  disabled:false,
-  event:{
-    change:''
-  }
+  disabled:false
 }

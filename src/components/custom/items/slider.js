@@ -33,11 +33,5 @@ export let slider = {
   //是否显示tooltip
   'show-tooltip': true,
   //范围选择  1,50
-  range: false,
-  event:{
-    change:''
-  },
-  watch:{
-    method:'' 
-  }  
+  range: false
 }
