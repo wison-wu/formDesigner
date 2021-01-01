@@ -17,6 +17,7 @@ import {row} from "./items/row";
 import {alert} from "./items/alert";
 import {link} from "./items/link";
 import {text} from "./items/text";
+import {html} from "./items/html";
 
 
 const formList = {
@@ -37,7 +38,8 @@ const formList = {
   divider: divider,
   alert:alert,
   link:link,
-  text:text
+  text:text,
+  html:html
 };
 let items = [];
 for (let i in formList) {

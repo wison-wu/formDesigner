@@ -3,6 +3,7 @@ import designer from '@/components/designer'
 import designItem from '@/components/designItem'
 import configPanel from '@/components/configPanel'
 import fancyText from '@/components/extend/fancyText'
+import fancyHtml from '@/components/extend/fancyHtml'
 import fancyEditor from '@/components/extend/fancyEditor'
 const plugins = {
   install : function (Vue) {
@@ -11,6 +12,7 @@ const plugins = {
     Vue.component('designItem',designItem);
     Vue.component('configPanel',configPanel);
     Vue.component('fancy-text',fancyText);
+    Vue.component('fancy-html',fancyHtml);
     Vue.component('fancy-editor',fancyEditor);
   }
 };

@@ -17,6 +17,7 @@ const components = [
   'alert',
   'link',
   'text',
+  'html',
   'row'
 ];
 
