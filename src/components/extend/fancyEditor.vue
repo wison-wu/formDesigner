@@ -27,18 +27,17 @@ export default {
     },
     data() {
         return {
-            content: '',
+            content: this.value,
             editorOption: {}
         }
     },
     methods: {
         onEditorReady(editor) { // 准备编辑器
-            if(this.value!==''){
-                this.content = this.value;
-            }
         },
         onEditorBlur(){}, // 失去焦点事件
-        onEditorFocus(){}, // 获得焦点事件
+        onEditorFocus(){
+            console.log('test');
+        }, // 获得焦点事件
         onEditorChange(v){
             this.$emit('input',this.content);
         }, // 内容改变事件
@@ -46,6 +45,11 @@ export default {
     computed: {
         editor() {
             return this.$refs.myQuillEditor.quill;
+        }
+    },
+    watch:{
+        value(newVal){
+            this.content = newVal;
         }
     }
 
