@@ -11,6 +11,7 @@ const components = [
   'rate',
   'date',
   'time',
+  'editor',
   'button',
   'divider',
   'alert',

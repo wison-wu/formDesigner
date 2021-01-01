@@ -9,12 +9,15 @@ import {slider} from "./items/slider";
 import {rate} from "./items/rate";
 import {date} from "./items/date";
 import {time} from "./items/time";
+import {editor} from "./items/editor";
+
 import {button} from "./items/button";
 import {divider} from "./items/divider";
 import {row} from "./items/row";
 import {alert} from "./items/alert";
 import {link} from "./items/link";
 import {text} from "./items/text";
+
 
 const formList = {
   input: input,
@@ -28,6 +31,7 @@ const formList = {
   rate:rate,
   date:date,
   time:time,
+  editor:editor,
   row:row,
   button: button,
   divider: divider,

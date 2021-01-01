@@ -19,29 +19,41 @@ export default {
     components:{
         quillEditor
     },
+    props:{
+        value:{
+            type:String,
+            default:''
+        }
+    },
     data() {
         return {
-            content: '富文本编辑器',
+            content: '',
             editorOption: {}
         }
     },
     methods: {
         onEditorReady(editor) { // 准备编辑器
-
+            if(this.value!==''){
+                this.content = this.value;
+            }
         },
         onEditorBlur(){}, // 失去焦点事件
         onEditorFocus(){}, // 获得焦点事件
-        onEditorChange(){}, // 内容改变事件
+        onEditorChange(v){
+            this.$emit('input',this.content);
+        }, // 内容改变事件
     },
     computed: {
         editor() {
             return this.$refs.myQuillEditor.quill;
-        },
+        }
     }
 
 }
 </script>
 
 <style>
-
+.ql-editor{
+    height:400px;
+}
 </style>
