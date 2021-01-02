@@ -29,6 +29,9 @@
     <el-form-item label="必填">
       <el-switch v-model="props.required"></el-switch>
     </el-form-item>
+    <el-form-item label="垂直">
+      <el-switch v-model="props.vertical"></el-switch>
+    </el-form-item>
     <el-form-item label="选项样式">
       <el-radio-group v-model="props.optionType">
         <el-radio-button label="default">默认</el-radio-button>

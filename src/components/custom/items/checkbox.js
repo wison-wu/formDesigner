@@ -35,6 +35,8 @@ export let checkbox = {
   disabled:false,
   //是否有边框
   border:false,
+  //选项是否垂直
+  vertical:true,
   //选项大小
   size:'medium',
   //是否是按钮

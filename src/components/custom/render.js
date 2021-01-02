@@ -34,10 +34,11 @@ const componentChild = {
   },
   'el-radio-group': {
     options(h, conf, key) {
-      const list = []
+      const list = [];
+      const vertical = conf.vertical?'display:block;':'';
       conf.options.forEach(item => {
         if (conf.optionType === 'button') list.push(<el-radio-button label={item.value} style="">{item.label}</el-radio-button>)
-        else list.push(<el-radio label={item.value} style="" border={conf.border}>{item.label}</el-radio>)
+        else list.push(<el-radio label={item.value} style={vertical} border={conf.border}>{item.label}</el-radio>)
       })
       return list
     }
@@ -45,9 +46,10 @@ const componentChild = {
   'el-checkbox-group': {
     options(h, conf, key) {
       const list = []
+      const vertical = conf.vertical?'display:block;':'';
       conf.options.forEach(item => {
-        if (conf.optionType === 'button') list.push(<el-checkbox-button label={item.value}>{item.label}</el-checkbox-button>)
-        else list.push(<el-checkbox label={item.value} style="display:block;" border={conf.border}>{item.label}</el-checkbox>)
+        if (conf.optionType === 'button') list.push(<el-checkbox-button  label={item.value}>{item.label}</el-checkbox-button>)
+        else list.push(<el-checkbox label={item.value} style={vertical} border={conf.border}>{item.label}</el-checkbox>)
       })
       return list
     }

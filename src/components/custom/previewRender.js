@@ -36,9 +36,10 @@ const componentChild = {
   'el-radio-group': {
     options(h, conf, key) {
       const list = []
+      const vertical = conf.vertical?'display:block;':'';
       conf.options.forEach(item => {
-        if (conf.optionType === 'button') list.push(<el-radio-button label={item.value}>{item.label}</el-radio-button>)
-        else list.push(<el-radio label={item.value} border={conf.border}>{item.label}</el-radio>)
+        if (conf.optionType === 'button') list.push(<el-radio-button label={item.value} style="">{item.label}</el-radio-button>)
+        else list.push(<el-radio label={item.value} style={vertical} border={conf.border}>{item.label}</el-radio>)
       })
       return list
     }
@@ -46,9 +47,10 @@ const componentChild = {
   'el-checkbox-group': {
     options(h, conf, key) {
       const list = []
+      const vertical = conf.vertical?'display:block;':'';
       conf.options.forEach(item => {
         if (conf.optionType === 'button') list.push(<el-checkbox-button label={item.value}>{item.label}</el-checkbox-button>)
-        else list.push(<el-checkbox label={item.value} style="display:block;" border={conf.border}>{item.label}</el-checkbox>)
+        else list.push(<el-checkbox label={item.value} style={vertical} border={conf.border}>{item.label}</el-checkbox>)
       })
       return list
     }
@@ -80,7 +82,7 @@ export default {
       style: {}
     }
     const confClone = JSON.parse(JSON.stringify(this.conf))
-    let children = [];
+    let children = []
     const childObjs = componentChild[confClone.ele]
     if (childObjs&&childObjs.options) {
       Object.keys(childObjs).forEach(key => {
@@ -97,15 +99,13 @@ export default {
     Object.keys(confClone).forEach(key => {
       const val = confClone[key]
       if (key === 'id') {
-        vModel(this, dataObject, this.value)
+        vModel(this, dataObject, confClone.value)
       } else if (dataObject[key]) {
         dataObject[key] = val
       } else if (!isAttr(key)) {
         dataObject.props[key] = val
       } else {
-        if(key !=='value'){
-          dataObject.attrs[key] = val
-        }
+        dataObject.attrs[key] = val
       }
     })
     return h(confClone.ele, dataObject, children)

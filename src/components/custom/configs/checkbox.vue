@@ -29,6 +29,9 @@
     <el-form-item label="必填">
       <el-switch v-model="props.required"></el-switch>
     </el-form-item>
+    <el-form-item label="垂直">
+      <el-switch v-model="props.vertical"></el-switch>
+    </el-form-item>
     <el-form-item label="最小数量">
       <el-input-number v-model="props.min"  :min="1" ></el-input-number>
     </el-form-item>
