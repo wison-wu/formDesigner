@@ -36,7 +36,7 @@ export let radio = {
   //是否有边框
   border:false,
   //选项是否垂直
-  vertical:true,
+  vertical:false,
   //选项大小
   size:'medium',
   //是否是按钮
