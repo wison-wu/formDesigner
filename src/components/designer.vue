@@ -263,7 +263,7 @@ export default {
     code() {
       let json = {};
       json.formConf = this.formConf;
-      json.itemList = this.itemList;
+      json.itemList = this.list;
       return JSON.stringify(json,null,4);
     }
   },
