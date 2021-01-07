@@ -45,7 +45,6 @@
     <el-divider></el-divider>
     <center>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="handlerGetValue">获得表单数据</el-button>
         <el-button type="primary" @click="handlerSubForm">提交</el-button>
       </span>
     </center>
@@ -66,12 +65,12 @@ export default {
     return{
       list: this.itemList,
       form:{},
-      rules:{}
+      rules:{},
+      jsonConfVisible:false
     }
   },
   methods:{
     handlerGetValue(){
-
     },
     handlerValChange(key,orign){
       this.$set(this.form,key,orign);

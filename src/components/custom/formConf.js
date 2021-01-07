@@ -11,8 +11,7 @@ const formConf = {
   labelWidth: 80,
   formRules: 'rules',
   gutter: 15,
-  disabled: false,
-  initFunc:''
+  disabled: false
 };
 export default formConf;
 

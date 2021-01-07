@@ -18,6 +18,7 @@
     "monaco": "^1.201704190613.0",
     "voca": "^1.4.0",
     "vue": "^2.6.11",
+    "vue-codemirror": "^4.0.6",
     "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.1.6",
     "vuedraggable": "^2.24.3"

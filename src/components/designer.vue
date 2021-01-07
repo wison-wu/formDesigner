@@ -5,6 +5,9 @@
       <el-button icon="el-icon-view" type="text" @click="preview">
         预览
       </el-button>
+      <el-button icon="el-icon-tickets" type="text" @click="viewJSON">
+        JSON
+      </el-button>
       <el-button icon="el-icon-s-tools" type="text" @click="setting">
         设置
       </el-button>
@@ -94,6 +97,9 @@
     <el-dialog :visible.sync="previewVisible" width="70%" title="预览" @open="handlerPreviewOpen">
       <preview :itemList="itemList"  :formConf="formConf" v-if="previewVisible"/>
     </el-dialog>
+    <el-dialog :visible.sync="JSONVisible" width="70%" title="JSON" >
+      <codemirror v-model="code" :options="options"/>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -105,6 +111,12 @@ import {isLayout} from "./utils/index";
 import formConf from "./custom/formConf";
 import preview from "./preview";
 import {dialogOpen} from "./custom/formDraw";
+import {codemirror} from 'vue-codemirror';
+// 核心样式
+import 'codemirror/lib/codemirror.css';
+// 引入主题后还需要在 options 中指定主题才会生效
+import 'codemirror/theme/dracula.css';
+import 'codemirror/mode/javascript/javascript'
 
 export default {
   name:"Designer",
@@ -112,7 +124,8 @@ export default {
     draggable,
     configPanel,
     designItem,
-    preview
+    preview,
+    codemirror
   },
   props:{
     list: { 
@@ -127,9 +140,21 @@ export default {
       lastActiveItem:{},
       formConfVisible:false,
       previewVisible:false,
+      JSONVisible:false,
       itemList:[],
       activeName:'formConf',
-      editorCode:''
+      editorCode:'',
+      // 默认配置
+      options: {
+        tabSize: 2, // 缩进格式
+        theme: 'dracula', // 主题，对应主题库 JS 需要提前引入
+        lineNumbers: true, // 显示行号
+        line: true,
+        styleActiveLine: true, // 高亮选中行
+        hintOptions: {
+          completeSingle: true // 当匹配只有一项的时候是否自动补全
+        }
+      }
     }
   },
   mounted() {
@@ -140,6 +165,9 @@ export default {
       const clone = JSON.parse(JSON.stringify(this.list))
       this.itemList = clone;
       this.previewVisible= true;
+    },
+    viewJSON(){
+      this.JSONVisible = true;
     },
     setting(){
       this.formConfVisible = true;
@@ -231,6 +259,12 @@ export default {
   computed:{
     infoShow() {
       return this.list.length<1;
+    },
+    code() {
+      let json = {};
+      json.formConf = this.formConf;
+      json.itemList = this.itemList;
+      return JSON.stringify(json,null,4);
     }
   },
   watch: {
