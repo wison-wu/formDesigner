@@ -6,7 +6,7 @@
           :ref="formConf.formModel"
           :size="formConf.size"
           :model="form"
-          label-position="formConf.labelPosition"
+          :label-position="formConf.labelPosition"
           :disabled="formConf.disabled"
           :validate-on-rule-change="false"
           label-width="formConf.labelWidth + 'px'"
