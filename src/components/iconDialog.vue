@@ -51,7 +51,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .icon-list{
   padding:0;
   margin:0;

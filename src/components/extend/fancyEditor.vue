@@ -1,5 +1,5 @@
 <template>
-  <div class="edit_container">
+  <div class="edit_container" :class="{warn_edit_container:warnTextLength}">
         <quill-editor 
             v-model="content" 
             ref="myQuillEditor" 
@@ -7,6 +7,7 @@
             @blur="onEditorBlur($event)" @focus="onEditorFocus($event)"
             @change="onEditorChange($event)">
         </quill-editor>
+        <div class="text_number_tips" :class="{warn_text_number_tips:warnTextLength}">{{currentLength}}/{{maxTextLength}}</div>
     </div>
 </template>
 
@@ -23,28 +24,45 @@ export default {
         value:{
             type:String,
             default:''
+        },
+        maxLength:{
+            type:Number,
+            default:0
         }
     },
     data() {
         return {
             content: this.value,
+            currentLength:0,
+            defaultMaxLength:2000,
             editorOption: {}
         }
     },
     methods: {
-        onEditorReady(editor) { // 准备编辑器
-        },
-        onEditorBlur(){}, // 失去焦点事件
-        onEditorFocus(){
-            console.log('test');
+        
+        onEditorBlur(v){
+
+        }, // 失去焦点事件
+        onEditorFocus(v){
         }, // 获得焦点事件
         onEditorChange(v){
+            this.currentLength = v.text.length-1;
             this.$emit('input',this.content);
         }, // 内容改变事件
     },
     computed: {
         editor() {
             return this.$refs.myQuillEditor.quill;
+        },
+        maxTextLength(){
+            let len = this.defaultMaxLength;
+            if(this.maxLength>=1){
+                len = this.maxLength;
+            }
+            return len;
+        },
+        warnTextLength(){
+            return this.currentLength>this.maxTextLength;
         }
     },
     watch:{
@@ -59,5 +77,16 @@ export default {
 <style>
 .ql-editor{
     height:400px;
+}
+.edit_container .text_number_tips{
+    float:right;
+    margin-top:-30px;
+    padding-right:10px;
+}
+.warn_edit_container{
+    border: solid 1px #F56C6C;
+}
+.warn_text_number_tips{
+    color:#F56C6C;
 }
 </style>

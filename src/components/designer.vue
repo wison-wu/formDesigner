@@ -100,9 +100,6 @@
     <el-dialog :visible.sync="JSONVisible" width="70%" title="JSON" >
       <codemirror v-model="code" :options="options"/>
     </el-dialog>
-    <el-dialog :visible.sync="iconDialogVisible" width="70%" title="选择icon" >
-      <codemirror v-model="code" :options="options"/>
-    </el-dialog>
   </div>
 </template>
 <script>
