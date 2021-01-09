@@ -5,7 +5,7 @@
       <ul class="icon-list">
         <li v-for="iconName in icons" :key="iconName" @click="handlerSelectIcon(iconName)" :class="{activeIcon:iconName ===value}">
             <i :class="iconName"></i>
-            <div class="icon-name">{{iconName}}</div>
+            <!-- <div class="icon-name">{{iconName}}</div> -->
         </li>
       </ul>
     </el-dialog>
@@ -58,13 +58,13 @@ export default {
   font-size:0;
 }
 .icon-list li{
-  width: 16.66%;
-  height:100px;
+  width: 10%;
+  height:60px;
   font-size:14px;
   text-align: center;
   list-style-type: none;
   overflow: hidden;
-  padding: 15px 6px 6px 6px;
+  padding: 15px 6px 6px 0px;
   display: inline-block;
   box-sizing: border-box;
 }
@@ -79,7 +79,7 @@ export default {
 .icon-list li i{
   width:100%;
   font-size: 30px;
-  padding: 6px 6px 6px 6px;
+  padding: 6px 6px 6px 0px;
 }
 .icon-name{
   display: block;

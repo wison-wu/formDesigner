@@ -51,7 +51,7 @@
       <el-switch v-model="props.circle"></el-switch>
     </el-form-item>
     <el-form-item label="图标">
-      <el-input placeholder="请选择图标" readonly  v-model="props.icon" >
+      <el-input placeholder="请选择图标" readonly  v-model="props.icon">
         <template slot="append" >
           <i class="el-icon-picture" style="cursor: pointer;" @click="handlerSelectIcon"/>
         </template>
