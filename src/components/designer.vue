@@ -8,6 +8,9 @@
       <el-button icon="el-icon-tickets" type="text" @click="viewJSON">
         JSON
       </el-button>
+      <el-button icon="el-icon-tickets" type="text" @click="chooseIcon">
+        icon
+      </el-button>
       <el-button icon="el-icon-s-tools" type="text" @click="setting">
         设置
       </el-button>
@@ -100,6 +103,9 @@
     <el-dialog :visible.sync="JSONVisible" width="70%" title="JSON" >
       <codemirror v-model="code" :options="options"/>
     </el-dialog>
+    <el-dialog :visible.sync="iconDialogVisible" width="70%" title="选择icon" >
+      <codemirror v-model="code" :options="options"/>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -141,6 +147,7 @@ export default {
       formConfVisible:false,
       previewVisible:false,
       JSONVisible:false,
+      iconDialogVisible:false,
       itemList:[],
       activeName:'formConf',
       editorCode:'',
@@ -168,6 +175,9 @@ export default {
     },
     viewJSON(){
       this.JSONVisible = true;
+    },
+    chooseIcon(){
+      this.iconDialogVisible = true;
     },
     setting(){
       this.formConfVisible = true;
