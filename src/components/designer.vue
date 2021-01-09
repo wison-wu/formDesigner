@@ -8,9 +8,6 @@
       <el-button icon="el-icon-tickets" type="text" @click="viewJSON">
         JSON
       </el-button>
-      <el-button icon="el-icon-tickets" type="text" @click="chooseIcon">
-        icon
-      </el-button>
       <el-button icon="el-icon-s-tools" type="text" @click="setting">
         设置
       </el-button>
@@ -147,7 +144,6 @@ export default {
       formConfVisible:false,
       previewVisible:false,
       JSONVisible:false,
-      iconDialogVisible:false,
       itemList:[],
       activeName:'formConf',
       editorCode:'',
@@ -175,9 +171,6 @@ export default {
     },
     viewJSON(){
       this.JSONVisible = true;
-    },
-    chooseIcon(){
-      this.iconDialogVisible = true;
     },
     setting(){
       this.formConfVisible = true;

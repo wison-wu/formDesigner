@@ -10,7 +10,7 @@ export let slider = {
   name:'滑块',
   label: '滑块',
   //图标
-  icon:'slider',
+  compIcon:'slider',
   //暂时默认为true，无法更改，后期考虑某些时候无法配置
   config: true,
   // 控件左侧label内容

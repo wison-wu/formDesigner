@@ -7,7 +7,7 @@ export let text = {
     compType: 'text',
     ele: 'fancy-text',
     name:'文本',
-    icon:'text',
+    compIcon:'text',
     config: true,
     form:false,
     show:true,

@@ -10,7 +10,7 @@ export let rate = {
   name:'评分',
   label: '评分',
   //图标
-  icon:'rate',
+  compIcon:'rate',
   //暂时默认为true，无法更改，后期考虑某些时候无法配置
   config: true,
   // 控件左侧label内容

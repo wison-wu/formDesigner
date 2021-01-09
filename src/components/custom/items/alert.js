@@ -7,7 +7,7 @@ export let alert = {
   compType: 'alert',
   ele: 'el-alert',
   name:'警告',
-  icon:'alert',
+  compIcon:'alert',
   config: true,
   
   form:false, //是否表单组件

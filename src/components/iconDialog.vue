@@ -1,12 +1,11 @@
 <!--elementUI 图标选择器-->
 <template>
   <div >
-    <el-button @click.native="handlerchangeopen">展开</el-button>
-    <el-dialog title="选择icon" width="60%" :visible.sync="iconDialogVisible">
+    <el-dialog title="选择icon" width="60%" :visible.sync="dialogVisible">
       <ul class="icon-list">
-        <li v-for="c in icons" :key="c">
-            <i :class="c"></i>
-            <div class="icon-name">{{c}}</div>
+        <li v-for="iconName in icons" :key="iconName" @click="handlerSelectIcon(iconName)" :class="{activeIcon:iconName ===value}">
+            <i :class="iconName"></i>
+            <div class="icon-name">{{iconName}}</div>
         </li>
       </ul>
     </el-dialog>
@@ -17,23 +16,36 @@
 import iconList from './utils/icon.json';
 export default {
   props:{
-    // iconDialogVisible:{
-    //   type: Boolean,
-    //   default:true
-    // }
+    visible:{
+      type: Boolean,
+      default:true
+    },
+    value:{
+      type:String,
+      default:''
+    }
   },
   data(){
     return{
-      iconDialogVisible:true,
-      icons:iconList
+      icons:iconList,
     } 
   },
-  created(){
-    console.log(iconList);
-  },
   methods:{
-    handlerchangeopen(){
-      this.iconDialogVisible = true;
+    handlerSelectIcon(iconName){
+      this.$emit('input',iconName);
+      this.$emit('update:visible',false); 
+    }
+  },
+  computed:{
+    dialogVisible:{
+       // getter
+      get: function () {
+        return this.visible;
+      },
+      // setter
+      set: function (newValue) {
+        this.$emit('update:visible',false); 
+      }
     }
   }
 }
@@ -57,6 +69,10 @@ export default {
   box-sizing: border-box;
 }
 .icon-list li:hover{
+  background-color: #F2F6FC;
+  cursor: pointer;
+}
+.activeIcon{
   background-color: #F2F6FC;
   cursor: pointer;
 }

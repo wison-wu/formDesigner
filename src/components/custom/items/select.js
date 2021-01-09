@@ -12,7 +12,7 @@ export let select = {
   //element标签
   ele: 'el-select',
   //图标
-  icon:'select',
+  compIcon:'select',
   // 是否可配置
   config: true,
   // 控件左侧label内容

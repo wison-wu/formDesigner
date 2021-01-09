@@ -13,7 +13,7 @@ export let checkbox = {
   //element标签
   ele: 'el-checkbox-group',
   //图标
-  icon:'checkbox',
+  compIcon:'checkbox',
   // 是否可配置
   config: true,
   // 控件左侧label内容

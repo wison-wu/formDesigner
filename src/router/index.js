@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import designer from '@/components/formDesigner'
-import iconDialog from '@/components/iconDialog'
+import dialogTest from '@/components/dialogTest'
 
 
 Vue.use(VueRouter)
@@ -12,9 +12,9 @@ const routes = [
     name: 'designer',
     component: designer
   },{
-    path: '/iconDialog',
-    name: 'iconDialog',
-    component: iconDialog
+    path: '/dialog',
+    name: 'dialogTest',
+    component: dialogTest
   }
 ]
 

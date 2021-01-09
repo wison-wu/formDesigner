@@ -7,7 +7,7 @@ export let link = {
     compType: 'link',
     ele: 'el-link',
     name:'文字链接',
-    icon:'link',
+    compIcon:'link',
     config: true,
     
     form:false, //是否表单组件

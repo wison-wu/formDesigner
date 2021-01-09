@@ -9,7 +9,7 @@ export let date = {
   //控件名称(左侧显示)
   name:'日期',
   //图标
-  icon:'date',
+  compIcon:'date',
 
   // 是否可配置
   //暂时默认为true，无法更改，后期考虑某些时候无法配置

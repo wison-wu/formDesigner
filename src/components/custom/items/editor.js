@@ -7,7 +7,7 @@ export let editor = {
     compType: 'editor',
     ele: 'fancy-editor',
     name:'编辑器',
-    icon:'editor',
+    compIcon:'editor',
     config: true,
     form:true,
     // 控件左侧label内容

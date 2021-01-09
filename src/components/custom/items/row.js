@@ -17,7 +17,7 @@ export let row = {
   //element标签
   ele: 'el-row',
   //图标
-  icon:'col',
+  compIcon:'col',
   layout:'rowItem',
   // 是否可配置
   config: true,

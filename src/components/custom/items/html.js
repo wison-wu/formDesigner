@@ -7,7 +7,7 @@ export let html = {
   compType: 'html',
   ele: 'fancy-html',
   name:'HTML',
-  icon:'html',
+  compIcon:'html',
   config: true,
   form:false,
   text:'<span style="color:red">html</span>',

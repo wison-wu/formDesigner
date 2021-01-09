@@ -50,6 +50,14 @@
     <el-form-item label="圆形">
       <el-switch v-model="props.circle"></el-switch>
     </el-form-item>
+    <el-form-item label="图标">
+      <el-input placeholder="请选择图标" readonly  v-model="props.icon" >
+        <template slot="append" >
+          <i class="el-icon-picture" style="cursor: pointer;" @click="handlerSelectIcon"/>
+        </template>
+      </el-input>
+    </el-form-item>
+    <icon-dialog v-model="props.icon" :visible.sync="iconDialogVisible"/>
   </div>
 </template>
 <script>
@@ -61,10 +69,9 @@ export default {
   props:{
     props:{}
   },
-  components:{
-  },
   data(){
     return {
+      iconDialogVisible:false
     }
   },
   methods:{
@@ -74,6 +81,9 @@ export default {
       }else{
         this.props.labelWidth = 0;
       }
+    },
+    handlerSelectIcon(){
+      this.iconDialogVisible = true;
     }
   },
   mounted(){

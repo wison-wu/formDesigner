@@ -9,7 +9,7 @@ export let button = {
   //控件名称(左侧显示)
   name:'按钮',
   //图标
-  icon:'button',
+  compIcon:'button',
 
   //暂时默认为true，无法更改，后期考虑某些时候无法配置
   config: true,
@@ -34,5 +34,7 @@ export let button = {
   //加载中
   loading:false,
   //禁用
-  disabled:false
+  disabled:false,
+  //图标
+  icon:'',
 }

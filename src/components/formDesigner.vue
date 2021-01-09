@@ -28,7 +28,7 @@
               @click="addComponent(element)"
             >
               <div class="components-body">
-                <icon :code="element.icon" :text="element.name"/>
+                <icon :code="element.compIcon" :text="element.name"/>
               </div>
             </div>
           </draggable>
