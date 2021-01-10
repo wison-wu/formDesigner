@@ -16,6 +16,7 @@
 
 ## 后期规划
 - 基础控件的功能完善
+- 增加渲染组件，提供对应的数据接口
 
 ## 预览地址
   [formdesigner](http://wurong19870715.gitee.io/formdesigner)
