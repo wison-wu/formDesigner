@@ -40,8 +40,8 @@ export default {
     },
     methods: {
         
-        onEditorBlur(v){
-
+        onEditorBlur(editor){
+            
         }, // 失去焦点事件
         onEditorFocus(v){
         }, // 获得焦点事件

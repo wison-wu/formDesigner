@@ -14,8 +14,11 @@ export let editor = {
     showLabel:true,
     labelWidth: '80',
     label:'文本编辑器',
-    value:'文本编辑器',
-    required:false
-
+    value:'',
+    required:false,
+    //最大长度
+    max:2000,
+    //自定义rules
+    customRules:[]
   }
   

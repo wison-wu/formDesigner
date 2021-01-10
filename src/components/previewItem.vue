@@ -17,7 +17,6 @@ const layouts = {
                       > 
           <render key={element.id} conf={element} value={value} onInput={ event => {
             this.$set(element,'value',event);
-            itemCreate(element.id,event);
           }}/>
         </el-form-item>
     )
