@@ -249,9 +249,6 @@ export default {
     },
     handlerRollBack(rowItem,oldIndex){  //还原
       this.list.splice(oldIndex,0,rowItem);
-    },
-    handlerCodeChange(code,evt){
-      //this.formConf.initFunc = code;
     }
   },
   computed:{
