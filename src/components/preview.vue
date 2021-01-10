@@ -53,7 +53,6 @@
 <script>
 import previewItem from "./previewItem";
 import previewRowItem from "./previewRowItem";
-import {datas} from "./custom/formDraw";
 export default {
   name:'preview',
   props:['itemList','formConf'],

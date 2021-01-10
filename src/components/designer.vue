@@ -94,7 +94,7 @@
             <el-button type="primary" @click="handlerSaveFormConf">确 定</el-button>
         </span>
     </el-dialog>
-    <el-dialog :visible.sync="previewVisible" width="70%" title="预览" @open="handlerPreviewOpen">
+    <el-dialog :visible.sync="previewVisible" width="70%" title="预览">
       <preview :itemList="itemList"  :formConf="formConf" v-if="previewVisible"/>
     </el-dialog>
     <el-dialog :visible.sync="JSONVisible" width="70%" title="JSON" >
@@ -110,7 +110,6 @@ import {getSimpleId} from "./utils/IdGenerate";
 import {isLayout} from "./utils/index";
 import formConf from "./custom/formConf";
 import preview from "./preview";
-import {dialogOpen} from "./custom/formDraw";
 import {codemirror} from 'vue-codemirror';
 // 核心样式
 import 'codemirror/lib/codemirror.css';
@@ -253,8 +252,7 @@ export default {
     },
     handlerCodeChange(code,evt){
       //this.formConf.initFunc = code;
-    },
-    handlerPreviewOpen:dialogOpen
+    }
   },
   computed:{
     infoShow() {
