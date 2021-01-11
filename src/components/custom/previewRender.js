@@ -102,6 +102,8 @@ export default {
         vModel(this, dataObject, confClone.value)
       } else if (dataObject[key]) {
         dataObject[key] = val
+      } else if(key ==='width'){
+        dataObject.style= 'width:'+val+'%';
       } else if (!isAttr(key)) {
         dataObject.props[key] = val
       } else {

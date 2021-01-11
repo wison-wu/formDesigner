@@ -11,6 +11,12 @@
     <el-form-item label="标题">
       <el-input class="input" v-model="props.label"></el-input>
     </el-form-item>
+    <el-form-item label="栅格">
+      <el-input-number v-model="props.span"  :min="1" :max="24"/>
+    </el-form-item>
+    <el-form-item label="宽度">
+      <el-input-number v-model="props.width"  :min="1" :max="100"/>%
+    </el-form-item>
     <el-form-item label="提示符">
       <el-input class="input" v-model="props.placeholder" placeholder="请输入提示符"/>
     </el-form-item>

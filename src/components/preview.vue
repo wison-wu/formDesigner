@@ -17,7 +17,6 @@
               v-if="element.compType === 'row'"
               :key="'row-'+index" 
               :model="element"
-              
               >
               <el-col v-for="(column) in element.columns" :key="column.index" :span="column.span">
                 <template v-for="(col) in column.list">

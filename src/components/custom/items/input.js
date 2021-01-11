@@ -27,6 +27,8 @@ export let input = {
   gutter:15,
   //默认栅格
   span:24,
+  //默认宽度
+  width:100,
   //是否可清空
   clearable:true,
   disabled:false,
