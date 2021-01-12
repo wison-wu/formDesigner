@@ -165,8 +165,4 @@ export default {
 <style  lang="scss" scoped>
 @import "./style/designer.css";
 @import "./style/designer.scss";
-.drawing-row-item .el-col{
-  margin-top:15px;
-  margin-bottom:0px;
-}
 </style>
