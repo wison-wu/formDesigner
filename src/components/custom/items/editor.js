@@ -16,6 +16,7 @@ export let editor = {
     label:'文本编辑器',
     value:'',
     required:false,
+    validateMaxText:false,
     //最大长度
     max:2000,
     //自定义rules

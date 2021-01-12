@@ -17,6 +17,9 @@
     <el-form-item label="必填">
       <el-switch v-model="props.required"></el-switch>
     </el-form-item>
+    <el-form-item label="验证最大字数">
+      <el-switch v-model="props.validateMaxText"></el-switch>
+    </el-form-item>
     <el-form-item label="最大字数">
       <el-input-number v-model="props.max"  :min="100" ></el-input-number>
     </el-form-item>

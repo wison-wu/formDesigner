@@ -25,9 +25,17 @@ export default {
             type:String,
             default:''
         },
-        maxLength:{
+        max:{
             type:Number,
             default:0
+        },
+        validateMaxText:{
+            type:Boolean,
+            default:false
+        },
+        id:{
+            type:String,
+            default:''
         }
     },
     data() {
@@ -56,19 +64,21 @@ export default {
         },
         maxTextLength(){
             let len = this.defaultMaxLength;
-            if(this.maxLength>=1){
-                len = this.maxLength;
+            if(this.max>=1){
+                len = this.max;
             }
             return len;
         },
         warnTextLength(){
-            return this.currentLength>this.maxTextLength;
+            const warn =this.validateMaxText&&this.currentLength>this.maxTextLength;
+            return warn;
         }
     },
     watch:{
         value(newVal){
             this.content = newVal;
-        }
+        },
+        
     }
 
 }
