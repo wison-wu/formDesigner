@@ -44,9 +44,25 @@
     <el-form-item label="只读">
       <el-switch v-model="props.readOnly" @change="handlerChangeReadStatus('readOnly')"></el-switch>
     </el-form-item>
+    <el-form-item label="前置图标">
+      <el-input placeholder="请选择图标" readonly  v-model="props['prefix-icon']">
+        <template slot="append" >
+          <i class="el-icon-picture" style="cursor: pointer;" @click="handlerPrefixSelectIcon"/>
+        </template>
+      </el-input>
+    </el-form-item>
+    <el-form-item label="后置图标">
+      <el-input placeholder="请选择图标" readonly  v-model="props['suffix-icon']">
+        <template slot="append" >
+          <i class="el-icon-picture" style="cursor: pointer;" @click="handlerSuffixSelectIcon"/>
+        </template>
+      </el-input>
+    </el-form-item>
     <el-form-item label="默认值">
       <el-input class="input" v-model="props.value"></el-input>
     </el-form-item>
+    <icon-dialog v-model="props['suffix-icon']" :visible.sync="iconDialogVisible_suffix"/>
+    <icon-dialog v-model="props['prefix-icon']" :visible.sync="iconDialogVisible_prefix"/>
   </div>
 </template>
 <script>
@@ -61,6 +77,8 @@ export default {
   data(){
     return {
       val:'',
+      iconDialogVisible_suffix:false,
+      iconDialogVisible_prefix:false
     }
   },
   methods:{
@@ -81,6 +99,12 @@ export default {
       }else{
         this.props._id=val;
       }
+    },
+    handlerSuffixSelectIcon(){
+      this.iconDialogVisible_suffix = true;
+    },
+    handlerPrefixSelectIcon(){
+      this.iconDialogVisible_prefix = true;
     }
   },
   mounted(){

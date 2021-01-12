@@ -35,5 +35,9 @@ export let input = {
   readonly:false,
   //状态，正常，只读，禁用
   status:'normal',
+  //后置图标
+  'prefix-icon':'',
+  //前置图标
+  'suffix-icon':'',
   value: ''
 }
