@@ -24,7 +24,7 @@
   [formdesigner](http://wurong19870715.gitee.io/formdesigner)
   
 ## 感谢作者
-- [https://gitee.com/mrhj/form-generator](https://gitee.com/mrhj/form-generator)
+- [form-generator](https://gitee.com/mrhj/form-generator)
 
 如果这个项目对您有帮助，麻烦给个star，谢谢！
 
