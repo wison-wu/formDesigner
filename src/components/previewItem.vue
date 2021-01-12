@@ -10,6 +10,7 @@ const layouts = {
       r.push({required: true, message: element.label+'不能为空', trigger: ['blur','change']});
     }
     return (
+        <el-col span={element.span}>
         <el-form-item label={element.showLabel ? element.label : ''}
                       label-width={labelWidth} 
                       prop={element.id}
@@ -19,6 +20,7 @@ const layouts = {
             this.$set(element,'value',event);
           }}/>
         </el-form-item>
+        </el-col>
     )
   }
 }

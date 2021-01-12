@@ -30,7 +30,7 @@ const layouts = {
     let labelWidth = element.labelWidth ? `${element.labelWidth}px` : null
     const {onActiveItemChange} = this.$listeners;
     return (
-      <div  class={className}>
+      <el-col span={element.span} class={className}>
         <el-form-item label={element.showLabel ? element.label : ''}
                       label-width={labelWidth} 
                       required={element.required} nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}> 
@@ -40,14 +40,14 @@ const layouts = {
           />
         </el-form-item>
         {components.itemBtns.apply(this, arguments)}
-
-      </div>
+      </el-col>
     ) 
   },
   rowItem(h, element){
     const { onActiveItemChange } = this.$listeners
     const className = this.activeItem.id === element.id ? 'drawing-item drawing-row-item active-from-item' : 'drawing-item drawing-row-item'    
     return (
+      <el-col span={24}>
       <el-row  gutter={element.gutter} class={className}  nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
         <span class="component-name">{element.id}</span>
         <div class="drag-wrapper">
@@ -71,6 +71,7 @@ const layouts = {
         </div>
         {components.itemBtns.call(this,h,element)}
       </el-row>
+      </el-col>
     )    
   }
 }
@@ -164,4 +165,8 @@ export default {
 <style  lang="scss" scoped>
 @import "./style/designer.css";
 @import "./style/designer.scss";
+.drawing-row-item .el-col{
+  margin-top:15px;
+  margin-bottom:0px;
+}
 </style>
