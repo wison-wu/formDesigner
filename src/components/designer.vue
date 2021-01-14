@@ -5,6 +5,9 @@
       <el-button icon="el-icon-view" type="text" @click="preview">
         预览
       </el-button>
+      <el-button icon="el-icon-view" type="text" @click="view">
+        查看
+      </el-button>
       <el-button icon="el-icon-tickets" type="text" @click="viewJSON">
         JSON
       </el-button>
@@ -168,6 +171,10 @@ export default {
     viewJSON(){
       this.JSONVisible = true;
     },
+    view(){
+      localStorage.setItem("formValue",this.code);
+      window.open('#/view');
+    },
     setting(){
       this.formConfVisible = true;
     },
@@ -257,8 +264,8 @@ export default {
     },
     code() {
       let json = {};
-      json.formConf = this.formConf;
-      json.itemList = this.list;
+      json.config = this.formConf;
+      json.list = this.list;
       return JSON.stringify(json,null,4);
     }
   },

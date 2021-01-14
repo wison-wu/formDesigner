@@ -47,7 +47,7 @@ export let select = {
     label: '选项二',
     value: 2
   }],
-  //默认渲染的数据
+  //默认渲染的数据(暂缓)
   remoteUrl:'https://www.fastmock.site/mock/51715c0157535b99010bde55f2df33c8/formDesigner/api/options',
   remote_options:[
     
