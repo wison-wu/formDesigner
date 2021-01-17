@@ -77,6 +77,13 @@ export default {
     handlerGetValue(){
       
     },
+    validate(){
+      this.$refs[this.formConf.formModel].validate((valid) => {
+        if (valid) {
+          this.$message.success('success');
+        }
+      });
+    }
   },
   created(){
   },
