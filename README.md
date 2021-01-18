@@ -2,6 +2,9 @@
 基于vue+ElementUI的表单设计器。让表单拖拽更加简单方便
 ![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/designer.png)
 ![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/preview.png)
+![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/edit-form.png)
+![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/config-json.png)
+![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/val-json.png)
 
 
 #开发日志

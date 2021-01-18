@@ -16,7 +16,7 @@
             </div>
           </div>
           <codemirror v-model="code" :options="codeMirror" v-show="item.name ==='config'||item.name ==='value'"/>
-          <div v-if="item.name==='view'">test</div>
+          <div v-if="item.name==='view'">开发中</div>
         </el-tab-pane>
       </el-tabs>
 

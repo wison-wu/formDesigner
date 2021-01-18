@@ -81,7 +81,7 @@ export default {
       this.$refs[this.formConf.formModel].validate((valid) => {
         if (valid) {
           this.$message.success('success');
-          this.$emit('input',JSON.stringify(this.form));
+          this.$emit('input',JSON.stringify(this.form,null,4));
         }else{
           this.$emit('input','');
         }
