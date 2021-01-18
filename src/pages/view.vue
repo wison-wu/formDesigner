@@ -2,20 +2,24 @@
   <div >
     <el-card class="box-card">
       <el-tabs v-model="tabName">
-        <el-tab-pane label="编辑表单" name="form" class="tab-pane">
-          <form-builder ref="formBuilder" v-model="formVal" :buildData="formCode" v-if="itemList.length>0"/>
-          <div style="margin-bottom:15px;text-align:center">
-              <el-button type="primary" class="button" @click="handlerSubForm">提交</el-button>
+        <el-tab-pane
+          :key="item.name"
+          v-for="item in tableTabs"
+          :label="item.title"
+          :name="item.name"
+          class="tab-pane"
+        >
+          <div v-if="item.name ==='form'">
+            <form-builder ref="formBuilder" v-model="formVal" :buildData="formCode" v-if="itemList.length>0"/>
+            <div style="margin-bottom:15px;text-align:center">
+                <el-button type="primary" class="button" @click="handlerSubForm">提交</el-button>
+            </div>
           </div>
-        </el-tab-pane>
-        <el-tab-pane label="配置" name="config">
-          <codemirror v-model="formCode" :options="codeMirror"/>
-        </el-tab-pane>
-        <el-tab-pane label="数据" name="value">
-          <codemirror v-model="formCode" :options="codeMirror"/>
+          <codemirror v-model="code" :options="codeMirror" v-show="item.name ==='config'||item.name ==='value'"/>
+          <div v-if="item.name==='view'">test</div>
         </el-tab-pane>
       </el-tabs>
-      
+
     </el-card>
   </div>
 </template>
@@ -48,6 +52,16 @@ export default {
       formCode:'',
       formVal:'',
       tabName:'form',
+      tableTabs: [{
+          title: '编辑表单',
+          name: 'form',
+        }, {
+          title: '配置',
+          name: 'config',
+        }, {
+          title: '数据',
+          name: 'value',
+        }],
       codeMirror:options
     } 
   },
@@ -62,7 +76,16 @@ export default {
     handlerchangeopen(){
     },
     handlerSubForm(){
-      this.$refs['formBuilder'].validate();
+      this.$refs['formBuilder'][0].validate();
+      if(this.formVal!==''){
+        this.addNewTab();
+      }
+    },
+    addNewTab(){
+      this.tableTabs.push({
+        title: '查看表单',
+        name: 'view'
+      });
     }
   },
   computed:{
@@ -73,6 +96,18 @@ export default {
       }else{
         return [];
       }
+    },
+    code:{
+      get() {
+        if(this.tabName ==='form'){
+          return ''
+        }else if(this.tabName === 'config'){
+          return this.formCode
+        }else{
+          return this.formVal
+        }
+      },
+      set(){}
     }
   }
 }

@@ -81,6 +81,9 @@ export default {
       this.$refs[this.formConf.formModel].validate((valid) => {
         if (valid) {
           this.$message.success('success');
+          this.$emit('input',JSON.stringify(this.form));
+        }else{
+          this.$emit('input','');
         }
       });
     }
@@ -90,7 +93,7 @@ export default {
   mounted() {
     this.$nextTick(()=> {
       if(this.value !==''){
-        //const jsonValue = JSON.parse(this.value)
+        
       }
     })
   },
