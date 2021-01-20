@@ -16,7 +16,9 @@
             </div>
           </div>
           <codemirror v-model="code" :options="codeMirror" v-show="item.name ==='config'||item.name ==='value'"/>
-          <div v-if="item.name==='view'">开发中</div>
+          <div v-if="item.name==='view'">
+            <form-viewer ref="formViewer" v-model="formVal" :buildData="formCode"></form-viewer>
+          </div>
         </el-tab-pane>
       </el-tabs>
 
@@ -26,6 +28,7 @@
 
 <script>
 import formBuilder from '../components/formBuilder'
+import formViewer from '../components/formViewer'
 import {codemirror} from 'vue-codemirror';
 // 核心样式
 import 'codemirror/lib/codemirror.css';
@@ -45,7 +48,8 @@ const options = {
 export default {
   components:{
     formBuilder,
-    codemirror
+    codemirror,
+    formViewer
   },
   data(){
     return{
