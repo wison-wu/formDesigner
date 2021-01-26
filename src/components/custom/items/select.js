@@ -13,6 +13,8 @@ export let select = {
   ele: 'el-select',
   //图标
   compIcon:'select',
+  //展示表单的模式
+  viewType:'component',
   // 是否可配置
   config: true,
   // 控件左侧label内容

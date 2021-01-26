@@ -11,6 +11,8 @@ export let rate = {
   label: '评分',
   //图标
   compIcon:'rate',
+  //展示表单的模式
+  viewType:'component',
   //暂时默认为true，无法更改，后期考虑某些时候无法配置
   config: true,
   // 控件左侧label内容

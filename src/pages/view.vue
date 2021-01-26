@@ -86,10 +86,13 @@ export default {
       }
     },
     addNewTab(){
-      this.tableTabs.push({
-        title: '查看表单',
-        name: 'view'
-      });
+      if(this.tableTabs.length<4){
+        this.tableTabs.push({
+          title: '查看表单',
+          name: 'view'
+        });
+      }
+      
     }
   },
   computed:{
@@ -129,6 +132,7 @@ export default {
   right:0;
   bottom:0;
   margin:auto;
+  height:fit-content;
 }
 #app{
   position: relative;

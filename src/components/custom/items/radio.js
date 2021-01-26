@@ -14,6 +14,8 @@ export let radio = {
   ele: 'el-radio-group',
   //图标
   compIcon:'radio',
+  //展示表单的模式
+  viewType:'component',
   // 是否可配置
   config: true,
   // 控件左侧label内容

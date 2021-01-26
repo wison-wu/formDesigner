@@ -10,6 +10,8 @@ export let button = {
   name:'按钮',
   //图标
   compIcon:'button',
+  //展示表单的模式
+  viewType:'component',
 
   //暂时默认为true，无法更改，后期考虑某些时候无法配置
   config: true,

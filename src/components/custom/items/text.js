@@ -8,6 +8,8 @@ export let text = {
     ele: 'fancy-text',
     name:'文本',
     compIcon:'text',
+    //展示表单的模式
+    viewType:'component',
     config: true,
     form:false,
     show:true,

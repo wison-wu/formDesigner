@@ -11,6 +11,8 @@ export let inputNumber = {
   label: '计数器',
   //图标
   compIcon:'inputNumber',
+  //展示表单的模式
+  viewType:'text',
   //暂时默认为true，无法更改，后期考虑某些时候无法配置
   config: true,
   // 控件左侧label内容

@@ -8,6 +8,8 @@ export let editor = {
     ele: 'fancy-editor',
     name:'编辑器',
     compIcon:'editor',
+    //展示表单的模式
+    viewType:'html',
     config: true,
     form:true,
     // 控件左侧label内容

@@ -10,6 +10,8 @@ export let input = {
   name:'单行文本',
   //图标
   compIcon:'input',
+  //展示表单的模式
+  viewType:'text',
 
   // 是否可配置
   //暂时默认为true，无法更改，后期考虑某些时候无法配置

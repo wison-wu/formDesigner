@@ -8,6 +8,8 @@ export let divider = {
   ele: 'el-divider',
   name:'分割线',
   compIcon:'divider',
+  //展示表单的模式
+  viewType:'component',
   config: true,
   form:false,
   //内容坐标 left|center|right

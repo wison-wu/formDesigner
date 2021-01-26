@@ -8,8 +8,10 @@ export let alert = {
   ele: 'el-alert',
   name:'警告',
   compIcon:'alert',
+  //展示表单的模式
+  viewType:'component',
   config: true,
-  
+
   form:false, //是否表单组件
   // 控件左侧label内容
   showLabel:false,
