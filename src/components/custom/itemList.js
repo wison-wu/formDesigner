@@ -10,6 +10,7 @@ import {rate} from "./items/rate";
 import {date} from "./items/date";
 import {time} from "./items/time";
 import {editor} from "./items/editor";
+import {colorPicker} from "./items/colorPicker";
 
 import {button} from "./items/button";
 import {divider} from "./items/divider";
@@ -33,6 +34,7 @@ const formList = {
   date:date,
   time:time,
   editor:editor,
+  colorPicker:colorPicker,
   row:row,
   button: button,
   divider: divider,

@@ -12,6 +12,7 @@ const components = [
   'date',
   'time',
   'editor',
+  'colorPicker',
   'button',
   'divider',
   'alert',

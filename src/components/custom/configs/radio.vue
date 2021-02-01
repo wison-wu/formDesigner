@@ -41,7 +41,7 @@
     <el-form-item label="显示边框">
       <el-switch v-model="props.border"></el-switch>
     </el-form-item>
-    <el-form-item label="选项尺寸" v-show="props.border||props.optionType ==='button'">
+    <el-form-item label="大小" v-show="props.border||props.optionType ==='button'">
       <el-radio-group v-model="props.size">
         <el-radio-button label="medium">正常</el-radio-button>
         <el-radio-button label="small">略小</el-radio-button>

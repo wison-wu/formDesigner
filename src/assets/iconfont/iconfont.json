@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "7213053",
+      "name": "Color picker",
+      "font_class": "-colorpicker",
+      "unicode": "e666",
+      "unicode_decimal": 58982
+    },
+    {
+      "icon_id": "14463272",
+      "name": "省市区",
+      "font_class": "-shengshiqu",
+      "unicode": "e75f",
+      "unicode_decimal": 59231
+    },
+    {
       "icon_id": "3385558",
       "name": "文本",
       "font_class": "-text",
