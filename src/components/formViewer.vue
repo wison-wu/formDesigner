@@ -39,7 +39,6 @@
 
 <script>
 import formViewItem from "./formViewItem";
-import FormViewItem from './formViewItem.vue';
 import previewRowItem from "./previewRowItem";
 export default {
   name:'formViewer',
@@ -60,8 +59,12 @@ export default {
   },
   components:{
     formViewItem,
-    previewRowItem,
-    FormViewItem
+    previewRowItem
+  },
+  mounted() {
+    this.$nextTick(()=> {
+      this.form = this._value;
+    })
   },
   computed:{
     itemList(){

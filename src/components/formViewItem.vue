@@ -4,10 +4,9 @@ const layouts = {
   colItem(h, element,value) {
     element.disabled= true;
     let labelWidth = element.labelWidth ? `${element.labelWidth}px` : null
-    console.log(element);
+    console.log(value);
     if(element.viewType === 'component'){
       return (
-        <el-col span={element.span}>
           <el-form-item label={element.showLabel ? element.label : ''}
             label-width={labelWidth} 
             prop={element.id}
@@ -16,19 +15,33 @@ const layouts = {
               this.$set(element,'value',event);
             }}/>
           </el-form-item>
-        </el-col>
       )
     }else if(element.viewType === 'html'){
-      <fancy-html text={value}/>
+      return (
+        <el-form-item label={element.showLabel ? element.label : ''}
+            label-width={labelWidth} 
+            prop={element.id}
+            >
+          <fancy-html text={value}/>
+        </el-form-item>
+      )
     }else{
-      <fancy-text text={value}/>
+      console.log(value);
+      return (
+        <el-form-item label={element.showLabel ? element.label : ''}
+            label-width={labelWidth} 
+            prop={element.id}
+            >
+          <fancy-text text={value}/>
+        </el-form-item>
+      )
     }
     
   }
 }
 
 export default {
-  name:"previewItem",
+  name:"formViewItem",
   components: {
     render
   },
@@ -39,7 +52,13 @@ export default {
     }
   },
   render(h) {
+    console.log(this.value);
     return layouts.colItem.call(this, h, this.eleConfig,this.value)
   }
 }
 </script>
+<style>
+/* .el-form-item__label{
+  font-weight: 600;
+} */
+</style>

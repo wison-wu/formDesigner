@@ -124,6 +124,7 @@ export default {
 /* .box-card >>> .el-tabs__header{
   margin: 0px 0px 0px 0px;
 } */
+
 .box-card{
   width:60%;
   position:absolute;
@@ -132,7 +133,8 @@ export default {
   right:0;
   bottom:0;
   margin:auto;
-  height:fit-content;
+  overflow: auto;
+  display: block;
 }
 #app{
   position: relative;

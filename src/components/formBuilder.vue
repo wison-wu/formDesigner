@@ -28,6 +28,7 @@
               </el-col>
             </preview-row-item> 
             <!--item-->
+            
             <el-col class="drag-col-wrapper" :key="index"   :span="element.span" v-else>
               <preview-item 
                 :model="element"

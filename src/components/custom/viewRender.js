@@ -17,8 +17,8 @@ const isAttr = makeMap(
   + 'target,title,type,usemap,value,width,wrap'
 )
 
-function vModel(self, dataObject, value) {
-  dataObject.props.value = value
+function vModel(self, dataObject) {
+  dataObject.props.value = self.value
   dataObject.on.input = val => {
     self.$emit('input', val)
   }
@@ -96,11 +96,10 @@ export default {
     if (childObjs&&childObjs.innerText) {
       children = childObjs.innerText(confClone);
     }
-
     Object.keys(confClone).forEach(key => {
       const val = confClone[key]
       if (key === 'id') {
-        vModel(this, dataObject, confClone.value)
+        vModel(this, dataObject);
       } else if (dataObject[key]) {
         dataObject[key] = val
       } else if(key ==='width'){
