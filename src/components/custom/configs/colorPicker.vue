@@ -28,13 +28,13 @@
       </el-radio-group>
     </el-form-item>
     <el-form-item label="预定义颜色">
-        <div class="select-item" v-for="(item) in props.predefine" :key="item">
+        <div class="select-item" v-for="(item,index) in props.predefine" :key="item">
             <span class="el-color-picker__color"><!--style="background-color: rgb(64, 158, 255);"-->
                 <span class="el-color-picker__color-inner" :style="{'background-color':item}">
                 </span>
             </span>
             <div class="close-btn select-line-icon">
-                <i class="el-icon-remove-outline" />
+                <i class="el-icon-remove-outline" @click="handlerRemoveColor(index)"/>
             </div>
         </div>
         <br/>
@@ -68,6 +68,9 @@ export default {
         console.log(val);
         this.props.predefine.push(val);
         console.log(this.props.predefine);
+    },
+    handlerRemoveColor(index){
+        this.props.predefine.splice(index,1);
     }
   },
   mounted(){
