@@ -30,13 +30,19 @@
       <el-input-number v-model="props.labelWidth"  :min="1" :max="200"></el-input-number>
     </el-form-item>
     <el-form-item label="显示标签">
-      <el-switch v-model="props.showLabel" @change="handlerChangeLabel"></el-switch>
+      <el-switch v-model="props.showLabel"></el-switch>
+    </el-form-item>
+    <el-form-item label="URL">
+      <el-input v-model="props.action"></el-input>
     </el-form-item>
     <el-form-item label="清除">
       <el-switch v-model="props.clearable"></el-switch>
     </el-form-item>
     <el-form-item label="禁用">
       <el-switch v-model="props.disabled" ></el-switch>
+    </el-form-item>
+    <el-form-item label="完整路径">
+      <el-switch v-model="props['show-all-levels']" ></el-switch>
     </el-form-item>
   </div>
 </template>

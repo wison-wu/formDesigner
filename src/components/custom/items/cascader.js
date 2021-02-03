@@ -1,5 +1,5 @@
 /**
- * 单行&多行输入框
+ * 级联选择器
  */
 export let cascader = {
     id:'',
@@ -34,8 +34,37 @@ export let cascader = {
     clearable:false,
     //显示完整路径
     'show-all-levels':false,
-    //显示完整路径
-    'collapse-tags':false
-
+    //请求地址
+    action:'',
+    options:[
+      {
+        value: 'zhinan',
+        label: '指南',
+        disabled: true,
+        children: [{
+          value: 'shejiyuanze',
+          label: '设计原则',
+          children: [{
+            value: 'yizhi',
+            label: '一致'
+          }, {
+            value: 'fankui',
+            label: '反馈'
+          }, {
+            value: 'xiaolv',
+            label: '效率'
+          }, {
+            value: 'kekong',
+            label: '可控'
+          }]
+        }]
+      }
+    ],
+    props:{
+      //触发方式,hover
+      expandTrigger:'click',
+      //多选
+      multiple:false,
+    }
   }
   
