@@ -18,6 +18,7 @@
 - 2021-01-09: 增加icon选择组件，增加button选择按钮的支持
 - 2021-01-12: 增加编辑器字数限制的校验、增加input输入框前后图标的配置
 - 2021-01-18: 增加form-builder组件，增加渲染，查看配置统一界面，查看渲染界面
+- 2021-02-01: 增加颜色选择器
 
 ## 后期规划
 - 基础控件的功能完善
@@ -28,7 +29,7 @@
   [formdesigner](http://wurong19870715.gitee.io/formdesigner)
   
 ## 感谢作者
-- [form-generator](https://gitee.com/mrhj/form-generator)
+  [form-generator](https://gitee.com/mrhj/form-generator)
 
 如果这个项目对您有帮助，麻烦给个star，谢谢！
 

@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "16768231",
+      "name": "级联",
+      "font_class": "-cascader",
+      "unicode": "e697",
+      "unicode_decimal": 59031
+    },
+    {
       "icon_id": "7213053",
       "name": "Color picker",
       "font_class": "-colorpicker",

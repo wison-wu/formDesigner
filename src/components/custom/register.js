@@ -13,6 +13,7 @@ const components = [
   'time',
   'editor',
   'colorPicker',
+  'cascader',
   'button',
   'divider',
   'alert',
