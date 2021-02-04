@@ -15,7 +15,7 @@
       <el-input-number v-model="props.span"  :min="1" :max="24"/>
     </el-form-item>
     <el-form-item label="宽度">
-      <el-input-number v-model="props.width"  :min="1" :max="100"/>%
+      <el-input-number v-model="props.width"  :min="0" :max="100"/>%
     </el-form-item>
     <el-form-item label="提示符">
       <el-input class="input" v-model="props.placeholder" placeholder="请输入提示符"/>
@@ -27,10 +27,17 @@
       <el-input-number v-model="props.gutter"  :min="0"></el-input-number>
     </el-form-item>
     <el-form-item label="标签宽度">
-      <el-input-number v-model="props.labelWidth"  :min="1" :max="200"></el-input-number>
+      <el-input-number v-model="props.labelWidth"  :min="0" :max="200"></el-input-number>
     </el-form-item>
     <el-form-item label="显示标签">
-      <el-switch v-model="props.showLabel"></el-switch>
+      <el-switch v-model="props.showLabel"  @change="handlerChangeLabel"></el-switch>
+    </el-form-item>
+    <el-form-item label="大小">
+      <el-radio-group v-model="props.size">
+        <el-radio-button label="medium">正常</el-radio-button>
+        <el-radio-button label="small">略小</el-radio-button>
+        <el-radio-button label="mini">迷你</el-radio-button>
+      </el-radio-group>
     </el-form-item>
     <el-form-item label="URL">
       <el-input v-model="props.action"></el-input>
@@ -44,6 +51,9 @@
     <el-form-item label="完整路径">
       <el-switch v-model="props['show-all-levels']" ></el-switch>
     </el-form-item>
+    <el-form-item label="分隔符">
+      <el-input v-model="props.separator" ></el-input>
+    </el-form-item>
   </div>
 </template>
 <script>
@@ -51,13 +61,12 @@
  * input的配置项
  */
 export default {
-  name:"inputConfig",
-  props:['props','getFormId'],
+  name:"cascaderConfig",
+  props:['props'],
   components:{
   },
   data(){
     return {
-      val:''
     }
   },
   methods:{
@@ -69,7 +78,10 @@ export default {
       }else{
         this.props._id=val;
       }
-    }
+    },
+    handlerChangeLabel(val){
+      this.props.labelWidth = val?'80':'1'
+    },
   },
   mounted(){
   },
