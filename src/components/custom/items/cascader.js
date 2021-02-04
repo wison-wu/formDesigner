@@ -30,16 +30,18 @@ export let cascader = {
     size:"medium",
     //禁用
     disabled:false,
-    
-    //分隔符
-    separator:"/",
-    //显示完整路径
-    'show-all-levels':true,
+    //数据类型 static，dymanic
+    dataType:'static',
     //请求地址
-    action:'',
+    action:'https://www.fastmock.site/mock/51715c0157535b99010bde55f2df33c8/formDesigner/api/cascaderOptions',
     props:{
       //清空
       clearable:true,
+      //分隔符
+      separator:"/",
+      //显示完整路径
+      'show-all-levels':true,
+      filterable:false,
       props: {
         
         //触发方式,hover

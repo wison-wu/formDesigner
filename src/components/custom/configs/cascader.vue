@@ -39,9 +39,6 @@
         <el-radio-button label="mini">迷你</el-radio-button>
       </el-radio-group>
     </el-form-item>
-    <el-form-item label="URL">
-      <el-input v-model="props.action"></el-input>
-    </el-form-item>
     <el-form-item label="清除">
       <el-switch v-model="props.clearable"></el-switch>
     </el-form-item>
@@ -49,11 +46,40 @@
       <el-switch v-model="props.disabled" ></el-switch>
     </el-form-item>
     <el-form-item label="完整路径">
-      <el-switch v-model="props['show-all-levels']" ></el-switch>
+      <el-switch v-model="props.props['show-all-levels']" ></el-switch>
     </el-form-item>
     <el-form-item label="分隔符">
-      <el-input v-model="props.separator" ></el-input>
+      <el-input v-model="props.props.separator" ></el-input>
     </el-form-item>
+    <el-form-item label="搜索">
+      <el-switch v-model="props.props.filterable" ></el-switch>
+    </el-form-item>
+    <el-form-item label="数据类型">
+      <el-radio v-model="props.dataType" label="static">静态数据</el-radio>
+      <el-radio v-model="props.dataType" label="dymanic">动态数据</el-radio>
+    </el-form-item>
+    <div v-show="props.dataType ==='dymanic'">
+    <el-form-item label="地址">
+      <el-input v-model="props.action"></el-input>
+    </el-form-item>
+    <el-form-item label="显示标识">
+      <el-input v-model="props.props.props.label"></el-input>
+    </el-form-item>
+    <el-form-item label="值标识">
+      <el-input v-model="props.props.props.value"></el-input>
+    </el-form-item>
+    <el-form-item label="下级标识">
+      <el-input v-model="props.props.props.children"></el-input>
+    </el-form-item>
+    </div>
+    <div v-show="props.dataType ==='static'">
+        
+    </div>
+    <!-- <el-form-item label="URL">
+      <el-input v-model="props.action"></el-input>
+    </el-form-item> -->
+    
+
   </div>
 </template>
 <script>
