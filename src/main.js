@@ -1,12 +1,14 @@
 import vue from 'vue'
 import App from './App.vue'
+import axios from 'axios';
 import './assets/iconfont/iconfont.js'
 import plugins from './components/index';
 import './assets/iconfont/iconfont.css'
 //import formDesigner from './index'
 import router from '@/router'
 
-vue.config.productionTip = false
+vue.config.productionTip = false;
+Vue.prototype.$axios = axios
 vue.use(plugins);
 
 new vue({

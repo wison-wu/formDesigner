@@ -40,7 +40,7 @@ export let cascader = {
       //分隔符
       separator:"/",
       //显示完整路径
-      'show-all-levels':true,
+      'show-all-levels':false,
       filterable:false,
       props: {
         
@@ -48,6 +48,8 @@ export let cascader = {
         expandTrigger:'click',
         //多选
         multiple:false,
+        //可选任一级
+        checkStrictly:true,
         label: 'label',
         value: 'value',
         children: 'children'

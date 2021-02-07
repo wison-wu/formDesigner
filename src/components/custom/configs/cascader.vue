@@ -54,35 +54,74 @@
     <el-form-item label="搜索">
       <el-switch v-model="props.props.filterable" ></el-switch>
     </el-form-item>
+    <el-form-item label="展开方式">
+      <el-radio v-model="props.props.props.expandTrigger" label="click">点击</el-radio>
+      <el-radio v-model="props.props.props.expandTrigger" label="hover">悬停</el-radio>
+    </el-form-item>
+    <el-form-item label="多选">
+      <el-switch v-model="props.props.props.multiple"></el-switch>
+    </el-form-item>
+    <el-form-item label="任一级可选">
+      <el-switch v-model="props.props.props.checkStrictly"></el-switch>
+    </el-form-item>
     <el-form-item label="数据类型">
       <el-radio v-model="props.dataType" label="static">静态数据</el-radio>
       <el-radio v-model="props.dataType" label="dymanic">动态数据</el-radio>
     </el-form-item>
     <div v-show="props.dataType ==='dymanic'">
-    <el-form-item label="地址">
-      <el-input v-model="props.action"></el-input>
-    </el-form-item>
-    <el-form-item label="显示标识">
-      <el-input v-model="props.props.props.label"></el-input>
-    </el-form-item>
-    <el-form-item label="值标识">
-      <el-input v-model="props.props.props.value"></el-input>
-    </el-form-item>
-    <el-form-item label="下级标识">
-      <el-input v-model="props.props.props.children"></el-input>
-    </el-form-item>
+      <el-form-item label="地址">
+        <el-input v-model="props.action"></el-input>
+      </el-form-item>
+      <el-form-item label="显示标识">
+        <el-input v-model="props.props.props.label"></el-input>
+      </el-form-item>
+      <el-form-item label="值标识">
+        <el-input v-model="props.props.props.value"></el-input>
+      </el-form-item>
+      <el-form-item label="下级标识">
+        <el-input v-model="props.props.props.children"></el-input>
+      </el-form-item>
     </div>
     <div v-show="props.dataType ==='static'">
-        
+        <el-form-item label="静态数据">
+          <el-button icon="el-icon-edit-outline" circle @click="handlerStaticData"></el-button>
+        </el-form-item>
     </div>
     <!-- <el-form-item label="URL">
       <el-input v-model="props.action"></el-input>
     </el-form-item> -->
     
-
+    <el-dialog  :visible.sync="staticDataVisible" width="70%"
+                :close-on-press-escape="false"
+                :close-on-click-modal="false"
+                :show-close="false"
+                :center="true"
+                top="20px"
+    >
+      <codemirror v-model="staticOptions" :options="codeMirror"/>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="handlerSave">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
+import {codemirror} from 'vue-codemirror';
+// 核心样式
+import 'codemirror/lib/codemirror.css';
+// 引入主题后还需要在 options 中指定主题才会生效
+import 'codemirror/theme/dracula.css';
+import 'codemirror/mode/javascript/javascript'
+const options = {
+    tabSize: 2, // 缩进格式
+    theme: 'dracula', // 主题，对应主题库 JS 需要提前引入
+    lineNumbers: true, // 显示行号
+    line: true,
+    styleActiveLine: true, // 高亮选中行
+    hintOptions: {
+      completeSingle: true // 当匹配只有一项的时候是否自动补全
+    }
+  }
 /**
  * input的配置项
  */
@@ -90,9 +129,13 @@ export default {
   name:"cascaderConfig",
   props:['props'],
   components:{
+    codemirror
   },
   data(){
     return {
+      staticDataVisible:false,
+      codeMirror:options,
+      staticOptions:''
     }
   },
   methods:{
@@ -108,6 +151,15 @@ export default {
     handlerChangeLabel(val){
       this.props.labelWidth = val?'80':'1'
     },
+    handlerStaticData(){
+      this.staticOptions = JSON.stringify(this.props.options,null,4);
+      this.staticDataVisible = true;
+      
+    },
+    handlerSave(){
+      this.props.options = JSON.parse(this.staticOptions);
+      this.staticDataVisible = false;
+    }
   },
   mounted(){
   },
