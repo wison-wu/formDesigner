@@ -55,8 +55,10 @@
       <el-switch v-model="props.props.filterable" ></el-switch>
     </el-form-item>
     <el-form-item label="展开方式">
-      <el-radio v-model="props.props.props.expandTrigger" label="click">点击</el-radio>
-      <el-radio v-model="props.props.props.expandTrigger" label="hover">悬停</el-radio>
+      <el-radio-group v-model="props.props.props.expandTrigger">
+      <el-radio-button label="click">点击</el-radio-button>
+      <el-radio-button label="hover">悬停</el-radio-button>
+      </el-radio-group>
     </el-form-item>
     <el-form-item label="多选">
       <el-switch v-model="props.props.props.multiple"></el-switch>
@@ -65,8 +67,10 @@
       <el-switch v-model="props.props.props.checkStrictly"></el-switch>
     </el-form-item>
     <el-form-item label="数据类型">
-      <el-radio v-model="props.dataType" label="static">静态数据</el-radio>
-      <el-radio v-model="props.dataType" label="dymanic">动态数据</el-radio>
+      <el-radio-group v-model="props.dataType" @change="handlerChangeDataType">
+        <el-radio-button label="static">静态数据</el-radio-button>
+        <el-radio-button label="dymanic">动态数据</el-radio-button>
+      </el-radio-group>
     </el-form-item>
     <div v-show="props.dataType ==='dymanic'">
       <el-form-item label="地址">
@@ -135,7 +139,8 @@ export default {
     return {
       staticDataVisible:false,
       codeMirror:options,
-      staticOptions:''
+      staticOptions:'',
+      tempOptions:[]
     }
   },
   methods:{
@@ -159,6 +164,15 @@ export default {
     handlerSave(){
       this.props.options = JSON.parse(this.staticOptions);
       this.staticDataVisible = false;
+    },
+    handlerChangeDataType(value){
+      if(value === 'static'){
+        this.props.options = [];
+        this.props.options = this.tempOptions;
+      }else{
+        this.tempOptions = this.props.options;
+        this.props.options = [];
+      }
     }
   },
   mounted(){

@@ -49,7 +49,7 @@ export let cascader = {
         //多选
         multiple:false,
         //可选任一级
-        checkStrictly:true,
+        checkStrictly:false,
         label: 'label',
         value: 'value',
         children: 'children'

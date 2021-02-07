@@ -73,13 +73,18 @@ const componentChild = {
 }
 
 export default {
-  render(h) {
+   render(h) {
     let dataObject = {
       attrs: {},
       props: {},
       on: {},
       style: {}
     }
+
+    //远程获取数据
+     this.getRemoteData();
+
+    
     const confClone = JSON.parse(JSON.stringify(this.conf))
     let children = []
     const childObjs = componentChild[confClone.ele]
@@ -94,6 +99,8 @@ export default {
     if (childObjs&&childObjs.innerText) {
       children = childObjs.innerText(confClone);
     }
+
+    
 
     Object.keys(confClone).forEach(key => {
       const val = confClone[key]
@@ -111,5 +118,19 @@ export default {
     })
     return h(confClone.ele, dataObject, children)
   },
-  props: ['conf']
+  props: ['conf'],
+  methods:{
+    getRemoteData(){
+      //动态数据
+      if(this.conf.dataType === 'dymanic'){
+         this.$axios.get(this.conf.action)
+        .then(res => {
+          if(this.conf.options.length==0){
+            this.conf.options = this.conf.options.concat(res.data);
+          }
+          
+        })
+      }
+    }
+  }
 }
