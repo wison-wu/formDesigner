@@ -18,7 +18,14 @@ const isAttr = makeMap(
 )
 
 function vModel(self, dataObject) {
-  dataObject.props.value = self.value
+  let _val = undefined;
+  // console.log(typeof self.value);
+  // if(typeof self.value !=='undefined'){
+  //   _val = JSON.parse(self.value);
+  // }else{
+  //   _val = self.value;
+  // }
+  dataObject.props.value = _val
   dataObject.on.input = val => {
     self.$emit('input', val)
   }
@@ -82,6 +89,9 @@ export default {
       on: {},
       style: {}
     }
+
+    //远程获取数据
+    this.getRemoteData();
     const confClone = JSON.parse(JSON.stringify(this.conf))
     let children = []
     const childObjs = componentChild[confClone.ele]
@@ -112,5 +122,18 @@ export default {
     })
     return h(confClone.ele, dataObject, children)
   },
-  props: ['conf','value']
+  props: ['conf','value'],
+  methods:{
+    getRemoteData(){
+      //动态数据
+      if(this.conf.dataType === 'dymanic'){
+         this.$axios.get(this.conf.action)
+        .then(res => {
+          if(this.conf.options.length==0){
+            this.conf.options = this.conf.options.concat(res.data);
+          }
+        })
+      }
+    }
+  }
 }

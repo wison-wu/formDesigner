@@ -128,7 +128,6 @@ export default {
           if(this.conf.options.length==0){
             this.conf.options = this.conf.options.concat(res.data);
           }
-          
         })
       }
     }

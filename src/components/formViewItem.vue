@@ -4,7 +4,6 @@ const layouts = {
   colItem(h, element,value) {
     element.disabled= true;
     let labelWidth = element.labelWidth ? `${element.labelWidth}px` : null
-    console.log(value);
     if(element.viewType === 'component'){
       return (
           <el-form-item label={element.showLabel ? element.label : ''}
@@ -26,7 +25,6 @@ const layouts = {
         </el-form-item>
       )
     }else{
-      console.log(value);
       return (
         <el-form-item label={element.showLabel ? element.label : ''}
             label-width={labelWidth} 
@@ -52,7 +50,6 @@ export default {
     }
   },
   render(h) {
-    console.log(this.value);
     return layouts.colItem.call(this, h, this.eleConfig,this.value)
   }
 }

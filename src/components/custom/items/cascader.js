@@ -12,7 +12,6 @@ export let cascader = {
     compIcon:'cascader',
     //展示表单的模式
     viewType:'component',
-  
     // 是否可配置
     //暂时默认为true，无法更改，后期考虑某些时候无法配置
     config: true,
