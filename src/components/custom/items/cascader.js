@@ -32,6 +32,7 @@ export let cascader = {
     disabled:false,
     //数据类型 static，dymanic
     dataType:'static',
+    'china-area-data':false,
     //请求地址
     action:'https://www.fastmock.site/mock/51715c0157535b99010bde55f2df33c8/formDesigner/api/cascaderOptions',
     props:{

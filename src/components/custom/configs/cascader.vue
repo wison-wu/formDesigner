@@ -90,6 +90,9 @@
         <el-form-item label="静态数据">
           <el-button icon="el-icon-edit-outline" circle @click="handlerStaticData"></el-button>
         </el-form-item>
+        <el-form-item label="省市区">
+          <el-checkbox v-model="props['china-area-data']" @change="handlerSetAreaData"/>
+        </el-form-item>
     </div>
     <!-- <el-form-item label="URL">
       <el-input v-model="props.action"></el-input>
@@ -175,10 +178,18 @@ export default {
         this.tempOptions = this.props.options;
         this.props.options = [];
       }
+    },
+    handlerSetAreaData(val){
+      if(val){
+        const areaoptions = areaData();
+        this.tempOptions = this.props.options;
+        this.props.options = areaoptions;
+      }else{
+        this.props.options = this.tempOptions;
+      }
     }
   },
   mounted(){
-    areaData();
   },
   watch:{
   }
