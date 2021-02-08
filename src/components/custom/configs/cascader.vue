@@ -110,6 +110,8 @@
   </div>
 </template>
 <script>
+//引入 省市区 数据
+import {areaData} from '../../utils/chinaAreaData';
 import {codemirror} from 'vue-codemirror';
 // 核心样式
 import 'codemirror/lib/codemirror.css';
@@ -176,6 +178,7 @@ export default {
     }
   },
   mounted(){
+    areaData();
   },
   watch:{
   }
