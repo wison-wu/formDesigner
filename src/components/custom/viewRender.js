@@ -18,14 +18,7 @@ const isAttr = makeMap(
 )
 
 function vModel(self, dataObject) {
-  let _val = undefined;
-  // console.log(typeof self.value);
-  // if(typeof self.value !=='undefined'){
-  //   _val = JSON.parse(self.value);
-  // }else{
-  //   _val = self.value;
-  // }
-  dataObject.props.value = _val
+  dataObject.props.value = self.value;
   dataObject.on.input = val => {
     self.$emit('input', val)
   }
@@ -108,9 +101,7 @@ export default {
     }
     Object.keys(confClone).forEach(key => {
       const val = confClone[key]
-      if (key === 'id') {
-        vModel(this, dataObject);
-      } else if (dataObject[key]) {
+      if (dataObject[key]) {
         dataObject[key] = val
       } else if(key ==='width'){
         dataObject.style= 'width:'+val+'%';
@@ -120,6 +111,8 @@ export default {
         dataObject.attrs[key] = val
       }
     })
+    /*调整赋值模式，规避cascader组件赋值props会出现覆盖预制参数的bug */
+    vModel(this, dataObject);
     return h(confClone.ele, dataObject, children)
   },
   props: ['conf','value'],
