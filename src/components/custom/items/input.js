@@ -7,7 +7,7 @@ export let input = {
   compType: 'input',
   ele: 'el-input',
   //控件名称(左侧显示)
-  name:'单行文本',
+  compName:'单行文本',
   //图标
   compIcon:'input',
   //展示表单的模式

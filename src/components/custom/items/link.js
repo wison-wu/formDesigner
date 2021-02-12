@@ -6,7 +6,7 @@ export let link = {
     _id:'',
     compType: 'link',
     ele: 'el-link',
-    name:'文字链接',
+    compName:'文字链接',
     compIcon:'link',
     //展示表单的模式
     viewType:'component',

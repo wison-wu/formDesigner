@@ -6,7 +6,7 @@ export let alert = {
   _id:'',
   compType: 'alert',
   ele: 'el-alert',
-  name:'警告',
+  compName:'警告',
   compIcon:'alert',
   //展示表单的模式
   viewType:'component',

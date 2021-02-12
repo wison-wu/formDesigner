@@ -13,7 +13,7 @@ export let row = {
   _id:'',
   compType: 'row',
   //控件名称
-  name:'栅格布局',
+  compName:'栅格布局',
   //element标签
   ele: 'el-row',
   //图标

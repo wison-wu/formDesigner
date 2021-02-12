@@ -9,7 +9,7 @@ export let radio = {
   _id:'',
   compType: 'radio',
   //控件名称
-  name:'单选框',
+  compName:'单选框',
   //element标签
   ele: 'el-radio-group',
   //图标

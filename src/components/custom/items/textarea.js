@@ -7,7 +7,7 @@ export let textarea = {
   compType: 'textarea',
   ele: 'el-input',
   //控件名称(左侧显示)
-  name:'多行文本',
+  compName:'多行文本',
   //图标
   compIcon:'textarea',
   //展示表单的模式

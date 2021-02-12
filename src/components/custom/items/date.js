@@ -7,7 +7,7 @@ export let date = {
   compType: 'date',
   ele: 'el-date-picker',
   //控件名称(左侧显示)
-  name:'日期',
+  compName:'日期',
   //图标
   compIcon:'date',
   //展示表单的模式

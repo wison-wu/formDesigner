@@ -7,7 +7,7 @@ export let cascader = {
     compType: 'cascader',
     ele: 'el-cascader',
     //控件名称(左侧显示)
-    name:'级联选择器',
+    compName:'级联选择器',
     //图标
     compIcon:'cascader',
     //展示表单的模式

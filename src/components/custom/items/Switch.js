@@ -7,7 +7,7 @@ export let Switch = {
   compType: 'Switch',
   ele: 'el-switch',
   //控件名称(左侧显示)
-  name:'开关',
+  compName:'开关',
   label: '开关',
   //图标
   compIcon:'switch',

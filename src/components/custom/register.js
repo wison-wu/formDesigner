@@ -14,6 +14,7 @@ const components = [
   'editor',
   'colorPicker',
   'cascader',
+  'upload',
   'button',
   'divider',
   'alert',

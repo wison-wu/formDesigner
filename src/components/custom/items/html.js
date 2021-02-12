@@ -6,7 +6,7 @@ export let html = {
   _id:'',
   compType: 'html',
   ele: 'fancy-html',
-  name:'HTML',
+  compName:'HTML',
   compIcon:'html',
   //展示表单的模式
   viewType:'component',

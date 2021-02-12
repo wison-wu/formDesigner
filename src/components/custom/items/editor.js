@@ -6,7 +6,7 @@ export let editor = {
     _id:'',
     compType: 'editor',
     ele: 'fancy-editor',
-    name:'编辑器',
+    compName:'编辑器',
     compIcon:'editor',
     //展示表单的模式
     viewType:'html',

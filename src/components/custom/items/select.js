@@ -8,7 +8,7 @@ export let select = {
   
   compType: 'select',
   //控件名称
-  name:'下拉框',
+  compName:'下拉框',
   //element标签
   ele: 'el-select',
   //图标

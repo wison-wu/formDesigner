@@ -6,7 +6,7 @@ export let divider = {
   _id:'',
   compType: 'divider',
   ele: 'el-divider',
-  name:'分割线',
+  compName:'分割线',
   compIcon:'divider',
   //展示表单的模式
   viewType:'component',

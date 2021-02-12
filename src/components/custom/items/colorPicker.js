@@ -7,7 +7,7 @@ export let colorPicker = {
     compType: 'colorPicker',
     ele: 'el-color-picker',
     //控件名称(左侧显示)
-    name:'颜色选择器',
+    compName:'颜色选择器',
     //图标
     compIcon:'colorpicker',
     //展示表单的模式

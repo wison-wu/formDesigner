@@ -7,7 +7,7 @@ export let button = {
   compType: 'button',
   ele: 'el-button',
   //控件名称(左侧显示)
-  name:'按钮',
+  compName:'按钮',
   //图标
   compIcon:'button',
   //展示表单的模式

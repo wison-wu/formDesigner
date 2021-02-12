@@ -7,7 +7,7 @@ export let slider = {
   compType: 'slider',
   ele: 'el-slider',
   //控件名称(左侧显示)
-  name:'滑块',
+  compName:'滑块',
   label: '滑块',
   //图标
   compIcon:'slider',

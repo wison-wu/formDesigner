@@ -12,6 +12,7 @@ import {time} from "./items/time";
 import {editor} from "./items/editor";
 import {colorPicker} from "./items/colorPicker";
 import {cascader} from "./items/cascader";
+import {upload} from "./items/upload";
 
 import {button} from "./items/button";
 import {divider} from "./items/divider";
@@ -37,6 +38,7 @@ const formList = {
   editor:editor,
   colorPicker:colorPicker,
   cascader:cascader,
+  upload:upload,
   row:row,
   button: button,
   divider: divider,

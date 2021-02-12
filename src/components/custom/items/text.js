@@ -6,7 +6,7 @@ export let text = {
     _id:'',
     compType: 'text',
     ele: 'fancy-text',
-    name:'文本',
+    compName:'文本',
     compIcon:'text',
     //展示表单的模式
     viewType:'component',

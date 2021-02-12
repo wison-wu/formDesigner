@@ -7,7 +7,7 @@ export let time = {
   compType: 'time',
   ele: 'el-time-picker',
   //控件名称(左侧显示)
-  name:'时间',
+  compName:'时间',
   //图标
   compIcon:'time',
   //展示表单的模式

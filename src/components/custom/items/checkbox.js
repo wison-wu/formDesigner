@@ -9,7 +9,7 @@ export let checkbox = {
   _id:'',
   compType: 'checkbox',
   //控件名称
-  name:'复选框',
+  compName:'复选框',
   //element标签
   ele: 'el-checkbox-group',
   //图标

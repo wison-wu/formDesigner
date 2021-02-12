@@ -7,7 +7,7 @@ export let rate = {
   compType: 'rate',
   ele: 'el-rate',
   //控件名称(左侧显示)
-  name:'评分',
+  compName:'评分',
   label: '评分',
   //图标
   compIcon:'rate',
