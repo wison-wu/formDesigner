@@ -16,7 +16,7 @@ const isAttr = makeMap(
   + 'target,title,type,usemap,value,width,wrap'
 )
 
-function vModel(self, dataObject, value) {
+function vModel(self, dataObject) {
   dataObject.on.input = val => {
     self.$emit('input', val)
   }
@@ -54,6 +54,23 @@ const componentChild = {
       return list
     }
   },
+  'el-upload':{
+    'list-type': (h, conf, key) => {
+      const list = []
+      const config = conf.__config__
+      if (conf['list-type'] === 'picture-card') {
+        list.push(<i class="el-icon-plus"></i>)
+      } else {
+        list.push(<el-button size="small" type="primary" icon="el-icon-upload">{conf.buttonText}</el-button>)
+      }
+      // if (config.showTip) {
+      //   list.push(
+      //     <div slot="tip" class="el-upload__tip">只能上传不超过 {config.fileSize}{config.sizeUnit} 的{conf.accept}文件</div>
+      //   )
+      // }
+      return list
+    }
+  },
   'el-button': {
     innerText(conf) {
       return conf.text;
@@ -88,7 +105,8 @@ export default {
     const confClone = JSON.parse(JSON.stringify(this.conf))
     let children = []
     const childObjs = componentChild[confClone.ele]
-    if (childObjs&&childObjs.options) {
+    console.log(childObjs);
+    if (childObjs&&(childObjs.options||childObjs['list-type'])) {
       Object.keys(childObjs).forEach(key => {
         const childFunc = childObjs[key]
         if (confClone[key]) {
@@ -99,13 +117,12 @@ export default {
     if (childObjs&&childObjs.innerText) {
       children = childObjs.innerText(confClone);
     }
-
     
 
     Object.keys(confClone).forEach(key => {
       const val = confClone[key]
       if (key === 'id') {
-        vModel(this, dataObject, confClone.value)
+        vModel(this, dataObject)
       } else if (dataObject[key]) {
         dataObject[key] = val
       } else if (!isAttr(key)) {
