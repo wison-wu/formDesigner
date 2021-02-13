@@ -56,6 +56,23 @@ const componentChild = {
       return list
     }
   },
+  'el-upload':{
+    'list-type': (h, conf, key) => {
+      const list = []
+      const config = conf.__config__
+      if (conf['list-type'] === 'picture-card') {
+        list.push(<i class="el-icon-plus"></i>)
+      } else {
+        list.push(<el-button size="small" type="primary" icon="el-icon-upload">{conf.buttonText}</el-button>)
+      }
+      if (conf.showTip) {
+        list.push(
+          <div slot="tip" class="el-upload__tip">{conf.tips}</div>
+        )
+      }
+      return list
+    }
+  },
   'el-button': {
     innerText(conf) {
       return conf.text;
@@ -88,7 +105,7 @@ export default {
     const confClone = JSON.parse(JSON.stringify(this.conf))
     let children = []
     const childObjs = componentChild[confClone.ele]
-    if (childObjs&&childObjs.options) {
+    if (childObjs&&(childObjs.options||childObjs['list-type'])) {
       Object.keys(childObjs).forEach(key => {
         const childFunc = childObjs[key]
         if (confClone[key]) {

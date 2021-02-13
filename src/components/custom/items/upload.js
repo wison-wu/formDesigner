@@ -20,22 +20,28 @@ export let upload = {
   showLabel:true,
   label: '附件上传',
   labelWidth: '80',
+  //栅格间隔
+  gutter:15,
+  //默认栅格
+  span:24,
   // 是否必填
   required: false,
-  //禁用
-  disable:false,
   //上传地址
-  action:'http://www.baidu.com',
+  action:'https://www.mocky.io/v2/5185415ba171ea3a00704eed/posts/',
   //多选上传
   multiple:false,
   name:'file',
+  //显示上传文件列表
   'show-file-list':true,
-  //拖拽上传
-  drag:false,
   //文件列表类型
   'list-type':'text',
   value:'',
-  accept: '',
   //按钮文字
-  buttonText:'请上传'
+  buttonText:'请上传附件',
+  //是否显示描述
+  showTip:false,
+  //描述内容
+  tips:'点击按钮上传附件',
+  //允许文件类型
+  accept:'.pdf, .doc, .docx, .xls, .xlsx'
 }

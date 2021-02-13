@@ -63,11 +63,11 @@ const componentChild = {
       } else {
         list.push(<el-button size="small" type="primary" icon="el-icon-upload">{conf.buttonText}</el-button>)
       }
-      // if (config.showTip) {
-      //   list.push(
-      //     <div slot="tip" class="el-upload__tip">只能上传不超过 {config.fileSize}{config.sizeUnit} 的{conf.accept}文件</div>
-      //   )
-      // }
+      if (conf.showTip) {
+        list.push(
+          <div slot="tip" class="el-upload__tip">{conf.tips}</div>
+        )
+      }
       return list
     }
   },

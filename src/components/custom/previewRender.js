@@ -1,3 +1,4 @@
+
 import { makeMap } from '../utils/index'
 
 const isAttr = makeMap(
@@ -16,8 +17,8 @@ const isAttr = makeMap(
   + 'target,title,type,usemap,value,width,wrap'
 )
 
-function vModel(self, dataObject, value) {
-  dataObject.props.value = value
+function vModel(self, dataObject) {
+  dataObject.props.value = self.value;
   dataObject.on.input = val => {
     self.$emit('input', val)
   }
@@ -55,6 +56,23 @@ const componentChild = {
       return list
     }
   },
+  'el-upload':{
+    'list-type': (h, conf, key) => {
+      const list = []
+      const config = conf.__config__
+      if (conf['list-type'] === 'picture-card') {
+        list.push(<i class="el-icon-plus"></i>)
+      } else {
+        list.push(<el-button size="small" type="primary" icon="el-icon-upload">{conf.buttonText}</el-button>)
+      }
+      if (conf.showTip) {
+        list.push(
+          <div slot="tip" class="el-upload__tip">{conf.tips}</div>
+        )
+      }
+      return list
+    }
+  },
   'el-button': {
     innerText(conf) {
       return conf.text;
@@ -81,10 +99,13 @@ export default {
       on: {},
       style: {}
     }
+
+    //远程获取数据
+    this.getRemoteData();
     const confClone = JSON.parse(JSON.stringify(this.conf))
     let children = []
     const childObjs = componentChild[confClone.ele]
-    if (childObjs&&childObjs.options) {
+    if (childObjs&&(childObjs.options||childObjs['list-type'])) {
       Object.keys(childObjs).forEach(key => {
         const childFunc = childObjs[key]
         if (confClone[key]) {
@@ -95,12 +116,9 @@ export default {
     if (childObjs&&childObjs.innerText) {
       children = childObjs.innerText(confClone);
     }
-
     Object.keys(confClone).forEach(key => {
       const val = confClone[key]
-      if (key === 'id') {
-        vModel(this, dataObject, confClone.value)
-      } else if (dataObject[key]) {
+      if (dataObject[key]) {
         dataObject[key] = val
       } else if(key ==='width'){
         dataObject.style= 'width:'+val+'%';
@@ -110,7 +128,22 @@ export default {
         dataObject.attrs[key] = val
       }
     })
+    /*调整赋值模式，规避cascader组件赋值props会出现覆盖预制参数的bug */
+    vModel(this, dataObject);
     return h(confClone.ele, dataObject, children)
   },
-  props: ['conf','value']
+  props: ['conf','value'],
+  methods:{
+    getRemoteData(){
+      //动态数据
+      if(this.conf.dataType === 'dymanic'){
+         this.$axios.get(this.conf.action)
+        .then(res => {
+          if(this.conf.options.length==0){
+            this.conf.options = this.conf.options.concat(res.data);
+          }
+        })
+      }
+    }
+  }
 }
