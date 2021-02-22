@@ -1,4 +1,4 @@
-## 简介
+## 简介 
 基于vue+ElementUI的表单设计器。让表单拖拽更加简单方便
 ![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/designer.png)
 ![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/preview.png)
