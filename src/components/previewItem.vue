@@ -25,7 +25,7 @@ const layouts = {
                       > 
           <render key={element.id} conf={element} value={value} onInput={ event => {
             this.$set(element,'value',event);
-            this.$emit('valChange',element.id,event);
+            valChange(element.id,event);
           }}/>
         </el-form-item>
         </el-col>
