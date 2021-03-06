@@ -1,12 +1,28 @@
 <!--文本扩展-->
 <template>
-  <div >
+  <div class="query-dialog">
       <el-input v-model="dialogValue" readonly @click.native="handlerShowDialog" style="width:95%"></el-input>
       <el-dialog 
       :visible.sync="dialogVisible" 
       :title="title"
       width="60%"
+      center
+      :show-close="false"
+      :before-close="handleClose"
+      :lock-scroll="true"
       >
+        <el-table 
+            :data="gridData"
+            border
+            :row-class-name="tableRowClassName"
+            :row-style="{height: '10px'}"
+            :cell-style="{padding: '5px 0'}"
+            max-height="600"
+        >
+            <el-table-column property="date" label="日期" width="150" align="center"></el-table-column>
+            <el-table-column property="name" label="姓名" width="200" align="center"></el-table-column>
+            <el-table-column property="address" label="地址" align="center"></el-table-column>
+        </el-table>
       <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
             <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
@@ -33,18 +49,123 @@ export default {
             default:false
         },
         type:{
-            type:Stirng,
-            default:'list'  //list,tree
+            type:String,
+            default:'list'  //暂时先只考虑list，暂时不考虑tree,dialogtree
         },
         searchable:{    //是否可搜索
-            type:boolean,
+            type:Boolean,
             default:false
         }
     },
     data() {
         return {
           dialogValue:'',
-          dialogVisible:false
+          dialogVisible:false,
+          gridData: [{
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-04',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-01',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+            }]
         }
     },
     methods:{
@@ -55,7 +176,26 @@ export default {
             this.dialogValue = '';
             this.$emit('input',this.dialogValue);
             this.dialogVisible = false;
+        },
+        handleClose(){
+
+        },
+        tableRowClassName(v){
+            if(v.rowIndex%2 ==1){
+                return 'odd-row';
+            }
+            return '';
         }
     }
 }
 </script>
+<style scoped>
+.query-dialog >>>.el-table--enable-row-hover .el-table__body tr:hover>td{
+    background-color: #e6f7ff;
+}
+</style>
+<style>
+.el-table .odd-row {
+    background-color:#eeeeee;
+}
+</style>
