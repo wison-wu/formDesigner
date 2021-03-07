@@ -35,7 +35,7 @@
         </div>
       </el-scrollbar>
     </div>
-    <designer ref="designer" :list="designList" @clear="designList = []" :activeData="activeData"/>
+    <designer ref="designer" :list="designList" :formConfig="formConfig" @clear="designList = []" :activeData="activeData"/>
   </div>
 </template>
 <script>
@@ -46,7 +46,7 @@ import draggable from "vuedraggable";
 import formItems from "./custom/itemList";
 import Icon from "./icon";
 import {getSimpleId} from "./utils/IdGenerate";
-
+import formConf from "./custom/formConf";
 let tempActiveData;
 
 export default {
@@ -59,7 +59,14 @@ export default {
     return {
       formItems:formItems,
       designList:[],
-      activeData:{}
+      activeData:{},
+      formConfig:formConf
+    }
+  },
+  props:{
+    value:{
+      type:String,
+      default:''
     }
   },
   mounted() {
@@ -99,6 +106,30 @@ export default {
         this.$refs.designer.activeItem = {};
       }
       
+    },
+    getFormData(){
+      return this.formData;
+    }
+  },
+  computed:{
+    formData:function(){
+      const list = this.designList;
+      const config = this.formConfig;
+      let formData = {};
+      formData.list = list;
+      formData.config = config;
+      console.log(formData);
+      return JSON.stringify(formData);
+        //this.$emit('input',JSON.stringify(formData));
+    }
+  },
+  watch:{
+    value(newVal){
+      if(newVal !==''){
+        const formData = JSON.parse(newVal);
+        this.designList= formData.list;
+        this.formConfig = formData.config;
+      }
     }
   }
 }

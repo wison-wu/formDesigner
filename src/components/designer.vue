@@ -133,6 +133,10 @@ export default {
     list: { 
       type: Array,
       default:[]
+    },
+    formConfig:{
+      type:Object,
+      default:formConf
     }
   },
   data() {
@@ -272,7 +276,7 @@ export default {
   watch: {
     activeItem (newValue,oldValue) {
       this.lastActiveItem = oldValue;
-    },
+    }
   }
 }
 
