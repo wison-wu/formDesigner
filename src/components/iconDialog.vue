@@ -1,7 +1,7 @@
 <!--elementUI 图标选择器-->
 <template>
   <div >
-    <el-dialog title="选择icon" width="60%" :visible.sync="dialogVisible">
+    <el-dialog title="选择icon" width="60%" top="0vh" :visible.sync="dialogVisible">
       <ul class="icon-list">
         <li v-for="iconName in icons" :key="iconName" @click="handlerSelectIcon(iconName)" :class="{activeIcon:iconName ===value}">
             <i :class="iconName"></i>

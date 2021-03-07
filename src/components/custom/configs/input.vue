@@ -66,6 +66,7 @@
   </div>
 </template>
 <script>
+import iconDialog from '../../iconDialog';
 /**
  * input的配置项
  */
@@ -73,6 +74,7 @@ export default {
   name:"inputConfig",
   props:['props','getFormId'],
   components:{
+    iconDialog
   },
   data(){
     return {
