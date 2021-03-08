@@ -42,7 +42,7 @@
       <el-switch v-model="props.disabled" @change="handlerChangeDisStatus('disabled')"></el-switch>
     </el-form-item>
     <el-form-item label="只读">
-      <el-switch v-model="props.readOnly" @change="handlerChangeReadStatus('readOnly')"></el-switch>
+      <el-switch v-model="props.readonly" @change="handlerChangeReadStatus('readonly')"></el-switch>
     </el-form-item>
     <el-form-item label="前置图标">
       <el-input placeholder="请选择图标" readonly  v-model="props['prefix-icon']">
