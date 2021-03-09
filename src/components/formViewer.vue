@@ -44,7 +44,6 @@ export default {
   name:'formViewer',
   data(){
     return{
-      form:{}
     }
   },
   props:{
@@ -63,7 +62,6 @@ export default {
   },
   mounted() {
     this.$nextTick(()=> {
-      this.form = this._value;
     })
   },
   computed:{
@@ -75,7 +73,7 @@ export default {
         return [];
       }
     },
-    _value(){ //转换成json的值
+    form(){ //转换成json的值
       if(this.value!==''){
         const value = JSON.parse(this.value);
         return value;
