@@ -167,7 +167,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import "../../style/designer.scss";
 .input{
   width:75%
 }

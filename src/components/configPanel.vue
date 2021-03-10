@@ -69,6 +69,3 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-@import "./style/designer.scss";
-</style>

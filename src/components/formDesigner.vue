@@ -136,7 +136,6 @@ export default {
 
 </script>
 <style scoped>
-@import "./style/designer.css";
 .container{
   padding:0px
 }

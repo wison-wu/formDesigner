@@ -181,7 +181,6 @@ let vm = {
 export default vm;
 </script>
 <style lang="scss" scoped>
-@import "../../style/designer.scss";
 .input{
   width:75%
 }

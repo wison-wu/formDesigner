@@ -289,3 +289,9 @@ export default {
   display: none;
 }
 </style>
+<style lang="scss">
+@import "./style/designer.scss";
+</style>
+<style>
+@import "./style/designer.css";
+</style>
