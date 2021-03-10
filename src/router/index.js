@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import designer from '@/components/formDesigner'
 import dialogTest from '@/pages/dialogTest'
 import view from '@/pages/view'
+import view1 from '@/pages/view1'
 
 
 Vue.use(VueRouter)
@@ -20,6 +21,10 @@ const routes = [
     path: '/view',
     name: 'view',
     component: view
+  },{
+    path: '/view1',
+    name: 'view1',
+    component: view1
   }
 ]
 

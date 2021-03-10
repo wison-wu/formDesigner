@@ -121,9 +121,7 @@ body{
 .center-board-row .el-form {
   height: calc(100vh - 69px);
 }
-.el-scrollbar__wrap{
-  overflow-x: hidden!important;
-}
+
 .dynamic-table{
   margin: 0px;
   height: auto;

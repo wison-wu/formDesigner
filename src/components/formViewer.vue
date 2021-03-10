@@ -100,6 +100,7 @@ export default {
 }
 .form-viewer{
   padding: 20px;
+  border:1px solid #dcdfe6;
 }
 .el-form-item{
   margin-left:10px;

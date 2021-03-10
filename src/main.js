@@ -3,7 +3,6 @@ import App from './App.vue'
 import axios from 'axios';
 import './assets/iconfont/iconfont.js'
 import plugins from './components/index';
-import './assets/iconfont/iconfont.css'
 //import formDesigner from './index'
 import router from '@/router'
 

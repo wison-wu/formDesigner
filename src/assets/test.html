@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=0,maximum-scale=0,user-scalable=yes,shrink-to-fit=no">
+  <title>formdesigner</title>
+ 
+  <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.0/theme-chalk/index.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.15.0/index.min.js"></script>
+</head>
+
+<body>
+  <noscript>
+    <strong>抱歉，javascript被禁用，请开启后重试。</strong>
+  </noscript>
+  <div id="app">
+    <el-select v-model="value" placeholder="请选择">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+  </div>
+</body>
+<script>
+    new Vue({
+      el: '#app',
+      data: function() {
+        return {
+            options: [{
+              value: '选项1',
+              label: '黄金糕'
+            }, {
+              value: '选项2',
+              label: '双皮奶'
+            }, {
+              value: '选项3',
+              label: '蚵仔煎'
+            }, {
+              value: '选项4',
+              label: '龙须面'
+            }, {
+              value: '选项5',
+              label: '北京烤鸭'
+            }],
+            value: ''        
+        }
+      }
+    })
+  </script>
+</html>

@@ -282,7 +282,6 @@ export default {
 
 </script>
 <style  scoped>
-
 .el-rate{
   display:inline-block;
 }
