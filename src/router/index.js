@@ -21,10 +21,6 @@ const routes = [
     path: '/view',
     name: 'view',
     component: view
-  },{
-    path: '/view1',
-    name: 'view1',
-    component: view1
   }
 ]
 
