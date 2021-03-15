@@ -288,6 +288,9 @@ export default {
 .center-scrollbar >>> .el-scrollbar__bar.is-horizontal {
   display: none;
 }
+.center-scrollbar >>> .el-scrollbar__wrap{
+  overflow-x: hidden;
+}
 </style>
 <style lang="scss">
 @import "./style/designer.scss";

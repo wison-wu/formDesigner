@@ -69,3 +69,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.field-box >>> .el-scrollbar__wrap{
+  overflow-x: hidden;
+}
+</style>
