@@ -26,11 +26,11 @@
             :highlight-current-row="!multi"
             max-height="600"
             @current-change="handleCurrentChange"
+            @selection-change="handleSelectionChange"
         >
+            <el-table-column type="selection" width="55" v-if="multi"></el-table-column>
             <el-table-column type="index" v-if="showIndex"></el-table-column>
-            <el-table-column property="date" label="日期" width="150" align="center"></el-table-column>
-            <el-table-column property="name" label="姓名" width="200" align="center"></el-table-column>
-            <el-table-column property="address" label="地址" align="center"></el-table-column>
+            <el-table-column :property="item.property" :label="item.label" :width="item.width" align="center" :key="index" v-for="(item,index) in jsonColConf"/>
         </el-table>
         <span slot="footer" class="dialog-footer">
             <el-button type="primary" @click="handlerSelect">确 定</el-button>
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+const splitKey = ";";
 export default {
     name:"fancyQueryDialog",
     props:{
@@ -58,10 +59,6 @@ export default {
             type:Boolean,
             default:false
         },
-        type:{
-            type:String,
-            default:'list'  //暂时先只考虑list，暂时不考虑tree,treeList
-        },
         searchable:{    //是否可搜索
             type:Boolean,
             default:false
@@ -74,7 +71,11 @@ export default {
             type:String,
             default:''
         },
-        val:{
+        colConf:{
+            type:String,
+            default:''
+        },
+        val:{//
             type:String,
             default:'id'
         },
@@ -103,8 +104,7 @@ export default {
                         this.dialogValue = row[this.label];
                     }
                 }
-            })
-            
+            })  
         })
     },
     methods:{
@@ -123,10 +123,17 @@ export default {
         handleCurrentChange(val) {
             this.currentRow = val;
         },
+        handleSelectionChange(val){
+            this.currentRow = val;
+        },
         handlerSelect(){
             this.dialogVisible = false;
-            this.dialogValue = this.currentRow[this.label];
-            this.$emit('input',this.currentRow[this.val]+'');
+            let dialogVal = '';
+            let dialogId = '';
+            dialogVal = this.selectName;
+            dialogId = this.selectId;
+            this.dialogValue = dialogVal;
+            this.$emit('input',dialogId);
         },
         handlerHideDialog(){
             this.dialogVisible = false;
@@ -143,6 +150,45 @@ export default {
                 this.setDialogValue();
             })
         }
+    },
+    computed:{
+        jsonColConf(){
+            return JSON.parse(this.colConf);
+        },
+        selectName(){
+            if(this.currentRow == null){
+                return '';
+            }
+            if(this.multi){
+                let names = '';
+                this.currentRow.forEach(element=>{
+                    names = names+splitKey+element.name;
+                })
+                if(names.length>0){
+                    names = names.substring(1);
+                }
+                return names;
+            }else{
+                return this.currentRow.name;
+            }
+        },
+        selectId(){
+            if(this.currentRow == null){
+                return '';
+            }
+            if(this.multi){
+                let ids = '';
+                this.currentRow.forEach(element=>{
+                    ids = ids+splitKey+element.id;
+                })
+                if(ids.length>0){
+                    ids = ids.substring(1);
+                }
+                return ids;
+            }else{
+                return this.currentRow.id;
+            }
+        }
     }
 }
 </script>
@@ -154,6 +200,6 @@ export default {
 </style>
 <style>
 .el-table .odd-row {
-    background-color:#eeeeee;
+    background-color:#FAFAFA;
 }
 </style>
