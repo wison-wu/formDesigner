@@ -13,7 +13,7 @@ import queryDialog from '../components/extend/fancyQueryDialog'
 export default {
   data(){
     return{
-     value:'99',
+     value:'94;68;60',
      title:'',
      colConf:'[{"label":"姓名","property":"name","width":"250"},{"label":"日期","property":"date","width":"150"},{"label":"地址","property":"address","width":""}]',
      action:'https://www.fastmock.site/mock/51715c0157535b99010bde55f2df33c8/formDesigner/api/dialogListData'

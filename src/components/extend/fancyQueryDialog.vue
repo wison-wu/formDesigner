@@ -75,7 +75,7 @@ export default {
             type:String,
             default:''
         },
-        val:{//
+        val:{
             type:String,
             default:'id'
         },
@@ -98,11 +98,25 @@ export default {
                 this.gridData = [];
                 this.gridData = this.gridData.concat(res.data.list);
                 if(this.value !=='' && this.dialogValue ===''){
-                    const index = this.gridData.findIndex(element=>element[this.val] == this.value);
-                    if(index>0){
-                        const row = this.gridData[index];
-                        this.dialogValue = row[this.label];
+                    if(this.multi){
+                        const ids = this.value.split(splitKey);
+                        this.currentRow = [];
+                        ids.forEach(e=>{
+                            const index = this.gridData.findIndex(element=>element[this.val] == e);
+                            if(index>0){
+                                const row = this.gridData[index];
+                                this.currentRow.push(row);
+                            }
+                        })
+                        this.dialogValue = this.selectName;
+                    }else{
+                        const index = this.gridData.findIndex(element=>element[this.val] == this.value);
+                        if(index>0){
+                            const row = this.gridData[index];
+                            this.dialogValue = row[this.label];
+                        }
                     }
+                    
                 }
             })  
         })
@@ -141,9 +155,16 @@ export default {
             this.$emit('input','');
         },
         setDialogValue(){
-            const index = this.gridData.findIndex(element=>element[this.val] == this.value);
-            const row = this.gridData[index];
-            this.$refs.dataTable.setCurrentRow(row);
+            if(this.multi){
+                this.currentRow.forEach(element=>{
+                    this.$refs.dataTable.toggleRowSelection(element);
+                })
+            }else{
+                const index = this.gridData.findIndex(element=>element[this.val] == this.value);
+                const row = this.gridData[index];
+                this.$refs.dataTable.setCurrentRow(row);
+            }
+            
         },
         show(){
             this.$nextTick(() => {
@@ -162,14 +183,14 @@ export default {
             if(this.multi){
                 let names = '';
                 this.currentRow.forEach(element=>{
-                    names = names+splitKey+element.name;
+                    names = names+splitKey+element[this.label];
                 })
                 if(names.length>0){
                     names = names.substring(1);
                 }
                 return names;
             }else{
-                return this.currentRow.name;
+                return this.currentRow[this.label];
             }
         },
         selectId(){
@@ -179,14 +200,14 @@ export default {
             if(this.multi){
                 let ids = '';
                 this.currentRow.forEach(element=>{
-                    ids = ids+splitKey+element.id;
+                    ids = ids+splitKey+element[this.val];
                 })
                 if(ids.length>0){
                     ids = ids.substring(1);
                 }
                 return ids;
             }else{
-                return this.currentRow.id;
+                return this.currentRow[this.val];
             }
         }
     }
