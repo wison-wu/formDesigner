@@ -44,6 +44,7 @@
  */
 import draggable from "vuedraggable";
 import formItems from "./custom/itemList";
+import designer from "./designer";
 import Icon from "./icon";
 import {getSimpleId} from "./utils/IdGenerate";
 import formConf from "./custom/formConf";
@@ -53,7 +54,8 @@ export default {
   name:"formDesigner",
   components:{
     draggable
-    ,Icon
+    ,Icon,
+    designer
   },
   data() {
     return {

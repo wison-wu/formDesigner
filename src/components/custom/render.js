@@ -89,7 +89,6 @@ export default {
     const confClone = JSON.parse(JSON.stringify(this.conf))
     let children = []
     const childObjs = componentChild[confClone.ele]
-    console.log(childObjs);
     if (childObjs&&(childObjs.options||childObjs['list-type'])) {
       Object.keys(childObjs).forEach(key => {
         const childFunc = childObjs[key]
@@ -115,7 +114,11 @@ export default {
       }
     })
     /*调整赋值模式，规避cascader组件赋值props会出现覆盖预制参数的bug */
+<<<<<<< HEAD
     vModel(this, dataObject)
+=======
+    vModel(this, dataObject);
+>>>>>>> queryDialog
     return h(confClone.ele, dataObject, children)
   },
   props: ['conf'],
