@@ -114,11 +114,7 @@ export default {
       }
     })
     /*调整赋值模式，规避cascader组件赋值props会出现覆盖预制参数的bug */
-<<<<<<< HEAD
-    vModel(this, dataObject)
-=======
     vModel(this, dataObject);
->>>>>>> queryDialog
     return h(confClone.ele, dataObject, children)
   },
   props: ['conf'],
