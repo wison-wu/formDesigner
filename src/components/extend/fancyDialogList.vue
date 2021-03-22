@@ -33,7 +33,7 @@
             @selection-change="handleSelectionChange"
         >
             <el-table-column type="selection" width="55" v-if="multi"></el-table-column>
-            <el-table-column type="index" v-if="showIndex"></el-table-column>
+            <el-table-column type="index" v-if="showIndex" align="center"></el-table-column>
             <el-table-column :property="item.property"  :label="item.label" :width="item.width" align="center" :key="index" v-for="(item,index) in jsonColConf"/>
         </el-table>
         <span slot="footer" class="dialog-footer">

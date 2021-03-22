@@ -20,7 +20,8 @@
     showLabel:true,
     label: '选择列表',
     labelWidth: '80',
-    placeholder: '请选择',
+    showLabel: true,
+    labelWidth: 80,
     // 是否必填
     required: false,
     //栅格间隔
