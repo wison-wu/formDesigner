@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "16383562",
+      "name": "Dialog",
+      "font_class": "-dialog",
+      "unicode": "e692",
+      "unicode_decimal": 59026
+    },
+    {
+      "icon_id": "17412502",
+      "name": "Organization Chart",
+      "font_class": "-address",
+      "unicode": "e6b5",
+      "unicode_decimal": 59061
+    },
+    {
       "icon_id": "16768231",
       "name": "级联",
       "font_class": "-cascader",

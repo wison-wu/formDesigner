@@ -13,6 +13,7 @@ import {editor} from "./items/editor";
 import {colorPicker} from "./items/colorPicker";
 import {cascader} from "./items/cascader";
 import {upload} from "./items/upload";
+import {dialogList} from "./items/dialogList";
 
 import {button} from "./items/button";
 import {divider} from "./items/divider";
@@ -39,6 +40,7 @@ const formList = {
   colorPicker:colorPicker,
   cascader:cascader,
   upload:upload,
+  dialogList:dialogList,
   row:row,
   button: button,
   divider: divider,

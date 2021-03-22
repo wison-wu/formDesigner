@@ -7,6 +7,7 @@ import plugins from './components/index';
 import router from '@/router'
 
 vue.config.productionTip = false;
+Vue.config.devtools = true;
 Vue.prototype.$axios = axios
 vue.use(plugins);
 

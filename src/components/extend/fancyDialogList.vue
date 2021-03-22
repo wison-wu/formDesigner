@@ -1,7 +1,7 @@
 <!--文本扩展-->
 <template>
-  <div class="query-dialog">
-      <el-input v-model="dialogValue" readonly @click.native="handlerShowDialog" style="width:95%" suffix-icon="el-icon-search"></el-input>
+  <div class="dialog-list">
+      <el-input v-model="dialogValue" readonly @click.native="handlerShowDialog" :disabled="disabled" style="width:95%" suffix-icon="el-icon-search"></el-input>
       <el-dialog 
       :visible.sync="dialogVisible" 
       :title="title"
@@ -48,7 +48,7 @@
 <script>
 const splitKey = ";";
 export default {
-    name:"fancyQueryDialog",
+    name:"fancyDialogList",
     props:{
         value: {
             type: String,
@@ -62,9 +62,9 @@ export default {
             type:Boolean,
             default:false
         },
-        searchable:{    //是否可搜索
+        disabled:{
             type:Boolean,
-            default:true
+            default:false
         },
         showIndex:{ //显示序号
             type:Boolean,
@@ -78,11 +78,11 @@ export default {
             type:String,
             default:''
         },
-        val:{
+        dval:{
             type:String,
             default:'id'
         },
-        label:{
+        dlabel:{
             type:String,
             default:'name'
         }
@@ -105,7 +105,7 @@ export default {
                         const ids = this.value.split(splitKey);
                         this.currentRow = [];
                         ids.forEach(e=>{
-                            const index = this.gridData.findIndex(element=>element[this.val] == e);
+                            const index = this.gridData.findIndex(element=>element[this.dval] == e);
                             if(index>0){
                                 const row = this.gridData[index];
                                 this.currentRow.push(row);
@@ -113,10 +113,10 @@ export default {
                         })
                         this.dialogValue = this.selectName;
                     }else{
-                        const index = this.gridData.findIndex(element=>element[this.val] == this.value);
+                        const index = this.gridData.findIndex(element=>element[this.dval] == this.value);
                         if(index>0){
                             const row = this.gridData[index];
-                            this.dialogValue = row[this.label];
+                            this.dialogValue = row[this.dlabel];
                         }
                     }
                     
@@ -126,6 +126,7 @@ export default {
     },
     methods:{
         handlerShowDialog(){
+            if(this.disabled) return;
             this.dialogVisible = true;
         },
         handleClose(){
@@ -164,14 +165,14 @@ export default {
                 const ids = this.value.split(splitKey);
                 this.currentRow = [];
                 ids.forEach(e=>{
-                    const index = this.gridData.findIndex(element=>element[this.val] == e);
+                    const index = this.gridData.findIndex(element=>element[this.dval] == e);
                     if(index>0){
                         const row = this.gridData[index];
                         this.$refs.dataTable.toggleRowSelection(row);
                     }
                 })
             }else{
-                const index = this.gridData.findIndex(element=>element[this.val] == this.value);
+                const index = this.gridData.findIndex(element=>element[this.dval] == this.value);
                 const row = this.gridData[index];
                 this.$refs.dataTable.setCurrentRow(row);
             }
@@ -194,14 +195,14 @@ export default {
             if(this.multi){
                 let names = '';
                 this.currentRow.forEach(element=>{
-                    names = names+splitKey+element[this.label];
+                    names = names+splitKey+element[this.dlabel];
                 })
                 if(names.length>0){
                     names = names.substring(1);
                 }
                 return names;
             }else{
-                return this.currentRow[this.label];
+                return this.currentRow[this.dlabel];
             }
         },
         selectId(){
@@ -211,14 +212,14 @@ export default {
             if(this.multi){
                 let ids = '';
                 this.currentRow.forEach(element=>{
-                    ids = ids+splitKey+element[this.val];
+                    ids = ids+splitKey+element[this.dval];
                 })
                 if(ids.length>0){
                     ids = ids.substring(1);
                 }
                 return ids;
             }else{
-                return this.currentRow[this.val];
+                return this.currentRow[this.dval];
             }
         },
         filterGridData(){
@@ -229,7 +230,7 @@ export default {
 </script>
 <style scoped>
 /**#e6f7ff; */
-.query-dialog >>>.el-table--enable-row-hover .el-table__body tr:hover>td{
+.dialog-list >>>.el-table--enable-row-hover .el-table__body tr:hover>td{
     background-color: #d1dfd5
 }
 .search-text{

@@ -19,6 +19,7 @@ const components = [
   'divider',
   'alert',
   'link',
+  'dialogList',
   'text',
   'html',
   'row'
