@@ -5,6 +5,7 @@
 ![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/edit-form.png)
 ![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/config-json.png)
 ![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/val-json.png)
+![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/dialogList.png)
 
 
 #开发日志
@@ -21,21 +22,20 @@
 - 2021-02-01: 增加颜色选择器
 - 2021-02-08: 增加级联选择器（包含省市区联动）
 - 2021-02-14: 增加附件组件
+- 2021-02-14: 增加dialogList,支持更多信息展示的列表
 
 ## 后期规划
 - 常用组件基本开发完毕，后续需要对各个组件、代码慢慢打磨。
 - 增加自定义验证功能
 - 增加后端的示例。
-<<<<<<< HEAD
 - 新分支开发新组件
 
 ## 今年要写论文，业余时间可能不会那么快更新这个项目，抱歉！
 
-=======
-- 增加查询的dialog,和dialogtree
->>>>>>> queryDialog
 ## 交流一下
+
 QQ群：816204482
+
 ## 预览地址
   [formdesigner](http://wurong19870715.gitee.io/formdesigner)
   
