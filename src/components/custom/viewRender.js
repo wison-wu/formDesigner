@@ -1,6 +1,7 @@
 import { isAttr } from '../utils/index'
 
 function vModel(self, dataObject) {
+  dataObject.props.value=self.value;
   dataObject.on.input = val => {
     self.$emit('input', val)
   }

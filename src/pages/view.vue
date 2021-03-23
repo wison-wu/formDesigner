@@ -75,7 +75,7 @@ export default {
       this.formCode = formValue;
       this.$axios.get('https://www.fastmock.site/mock/51715c0157535b99010bde55f2df33c8/formDesigner/api/cascaderOptions')
         .then(res => {
-          console.log(res.data);
+          //console.log(res.data);
         })
     })
     

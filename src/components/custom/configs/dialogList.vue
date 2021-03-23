@@ -20,6 +20,9 @@
     <el-form-item label="显示标签">
       <el-switch v-model="props.showLabel"></el-switch>
     </el-form-item>
+    <el-form-item label="必填">
+      <el-switch v-model="props.required"></el-switch>
+    </el-form-item>
     <el-form-item label="禁用" >
       <el-switch v-model="props.disabled"></el-switch>
     </el-form-item>

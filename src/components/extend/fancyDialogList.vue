@@ -1,7 +1,7 @@
 <!--文本扩展-->
 <template>
   <div class="dialog-list">
-      <el-input v-model="dialogValue" readonly @click.native="handlerShowDialog" :disabled="disabled" style="width:95%" suffix-icon="el-icon-search"></el-input>
+      <el-input v-model="dialogValue" readonly  @click.native="handlerShowDialog" :disabled="disabled" style="width:95%" suffix-icon="el-icon-search"></el-input>
       <el-dialog 
       :visible.sync="dialogVisible" 
       :title="title"
@@ -105,7 +105,7 @@ export default {
                         const ids = this.value.split(splitKey);
                         this.currentRow = [];
                         ids.forEach(e=>{
-                            const index = this.gridData.findIndex(element=>element[this.dval] == e);
+                            const index = this.gridData.findIndex(element=>(element[this.dval]+"") == e);
                             if(index>0){
                                 const row = this.gridData[index];
                                 this.currentRow.push(row);
