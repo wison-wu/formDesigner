@@ -26,6 +26,7 @@ export let link = {
     underline:true,   
     //是否禁用
     disabled:false,
-    text:'链接'
+    text:'链接',
+    target:'_blank'
   }
   

@@ -26,6 +26,9 @@
     <el-form-item label="禁用">
       <el-switch v-model="props.disabled"></el-switch>
     </el-form-item>
+    <el-form-item label="新窗口">
+      <el-switch v-model="isNewWindow" @change="handlerChangeTargetValue"></el-switch>
+    </el-form-item>
   </div>
 </template>
 <script>
@@ -41,6 +44,7 @@ export default {
   },
   data(){
     return {
+      isNewWindow:true  
     }
   },
   methods:{
@@ -49,6 +53,13 @@ export default {
         this.props.labelWidth = 80;
       }else{
         this.props.labelWidth = 0;
+      }
+    },
+    handlerChangeTargetValue(val){
+      if(val){
+        this.props.target = '_blank';
+      }else{
+        this.props.target = '_self';
       }
     }
   },
