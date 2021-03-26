@@ -31,7 +31,7 @@
     </el-form-item>
     <el-form-item label="时间类型">
       <el-select class="input" v-model="props.type" @change="handlerFormatChange">
-        <el-option v-for="item in dateTypeOptions" :key="item.value" text="item.label" :value="item.value"></el-option>
+        <el-option v-for="item in dateTypeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
     </el-form-item>
     <el-form-item label="时间格式">
