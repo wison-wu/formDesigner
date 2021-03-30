@@ -41,6 +41,9 @@
     <el-form-item label="显示序号">
         <el-switch v-model="props.showIndex"></el-switch>
     </el-form-item>
+    <el-form-item label="表格高度">
+        <el-input-number v-model="props.height" step="10" max="1500" min="100"></el-input-number>
+    </el-form-item>
     <el-form-item label="字段值">
         <el-input v-model="props.dval"></el-input>
     </el-form-item>

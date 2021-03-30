@@ -28,7 +28,8 @@
                 'border-bottom': '1px #e6f7ff solid'
             }"
             :highlight-current-row="!multi"
-            max-height="600"
+            :max-height="height"
+            @row-dblclick="handlerRowDoubleClick"
             @current-change="handleCurrentChange"
             @selection-change="handleSelectionChange"
         >
@@ -73,6 +74,10 @@ export default {
         action:{
             type:String,
             default:''
+        },
+        height:{
+            type:Number,
+            default:600
         },
         colConf:{
             type:String,
@@ -141,6 +146,13 @@ export default {
         handleCurrentChange(val) {
             if(!this.multi){
                 this.currentRow = val;
+            }
+        },
+        
+        handlerRowDoubleClick(val){
+            if(!this.multi){
+                this.currentRow = val;
+                this.handlerSelect();
             }
         },
         handleSelectionChange(val){
