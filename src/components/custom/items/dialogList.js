@@ -44,7 +44,7 @@
     dval:'id',
     //字段
     dlabel:'name',
-    height:600,
+    height:500,
     value: ''
   }
   
