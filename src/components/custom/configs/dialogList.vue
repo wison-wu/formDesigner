@@ -41,7 +41,7 @@
           <el-switch v-model="props.showIndex"></el-switch>
       </el-form-item>
       <el-form-item label="表格高度">
-          <el-input-number v-model="props.height" step="10" max="1500" min="100"></el-input-number>
+          <el-input-number v-model="props.height" :step="10" :max="1500" :min="100"></el-input-number>
       </el-form-item>
       <el-form-item label="字段值">
           <el-input v-model="props.dval"></el-input>
@@ -57,14 +57,10 @@
             <el-table-column property="label"  label="字段" align="center" />
             <el-table-column property="property"  label="属性"  align="center" />
             <el-table-column property="width"  label="宽度"  align="center" width="70" />
-            <el-table-column label="操作">
+            <el-table-column property="show"  label="显示"  align="center" width="70" >
               <template slot-scope="scope">
-              <el-button
-                @click.native.prevent="deleteRow(scope.$index)"
-                type="text"
-                size="small">
-                移除
-              </el-button>
+                {{scope}}
+                <el-switch v-model="scope.show"></el-switch>
             </template>
             </el-table-column>
           </el-table>
@@ -72,13 +68,16 @@
         <el-alert title="字段和属性不能为空,请检查" v-show="alertShow" type="error" :closable="false"/>
         <br>
         <el-form-item label="字段" label-width="60px">
-            <el-input v-model="dLabel" />
+            <el-input v-model="tableObj.dLabel" />
         </el-form-item>
         <el-form-item label="属性" label-width="60px">
-            <el-input v-model="dProperty"/>
+            <el-input v-model="tableObj.dProperty"/>
         </el-form-item>
         <el-form-item label="宽度" label-width="60px">
-            <el-input-number v-model="dWidth" />
+            <el-input-number v-model="tableObj.dWidth" />
+        </el-form-item>
+        <el-form-item label="显示" label-width="60px">
+            <el-switch v-model="tableObj.dShow" />
         </el-form-item>
         <div style="margin-left: 20px;">
           <el-button
@@ -112,20 +111,21 @@ export default {
     return {
       activePanel:'1',
       colOptions:[],
-      dLabel:'',
-      dProperty:'',
-      dWidth:150,
+      tableObj:{
+        dLabel:'',
+        dProperty:'',
+        dWidth:150,
+        dShow:true,
+      },
       alertShow:false
     }
   },
   methods:{
     addColItem(){
-      const obj = {};
-      if(this.dLabel!==''&&this.dProperty!==''){
+      if(this.tableObj.dLabel!==''&&this.tableObj.dProperty!==''){
         this.alertShow = false;
-        obj.label = this.dLabel;
-        obj.property = this.dProperty;
-        obj.width = this.dWidth;
+        const obj = {};
+        Object.assign(this.tableObj,obj);
         this.colOptions.push(obj);
         this.resetFields();
       }else{
@@ -133,9 +133,10 @@ export default {
       }
     },
     resetFields(){
-      this.dLabel = '';
-      this.dProperty = '';
-      this.dWidth = 150;
+      this.tableObj.dLabel = '';
+      this.tableObj.dProperty = '';
+      this.tableObj.dWidth = 150;
+      this.tableObj.dShow = true;
     },
     deleteRow(index){
       this.colOptions.splice(index,1);
