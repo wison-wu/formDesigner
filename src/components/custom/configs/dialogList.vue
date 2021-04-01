@@ -53,31 +53,29 @@
       <el-collapse-item title="字段配置" name="2">
             <el-table
             :data="colOptions"
+            @row-dblclick="handlerDeleteRow"
           >
             <el-table-column property="label"  label="字段" align="center" />
             <el-table-column property="property"  label="属性"  align="center" />
             <el-table-column property="width"  label="宽度"  align="center" width="70" />
-            <el-table-column property="show"  label="显示"  align="center" width="70" >
-              <template slot-scope="scope">
-                {{scope}}
-                <el-switch v-model="scope.show"></el-switch>
-            </template>
+            <el-table-column label="显示">
+              
             </el-table-column>
           </el-table>
         <br/>
         <el-alert title="字段和属性不能为空,请检查" v-show="alertShow" type="error" :closable="false"/>
         <br>
         <el-form-item label="字段" label-width="60px">
-            <el-input v-model="tableObj.dLabel" />
+            <el-input v-model="dLabel" />
         </el-form-item>
         <el-form-item label="属性" label-width="60px">
-            <el-input v-model="tableObj.dProperty"/>
+            <el-input v-model="dProperty"/>
         </el-form-item>
         <el-form-item label="宽度" label-width="60px">
-            <el-input-number v-model="tableObj.dWidth" />
+            <el-input-number v-model="dWidth" />
         </el-form-item>
         <el-form-item label="显示" label-width="60px">
-            <el-switch v-model="tableObj.dShow" />
+            <el-switch v-model="dShow" />
         </el-form-item>
         <div style="margin-left: 20px;">
           <el-button
@@ -111,21 +109,23 @@ export default {
     return {
       activePanel:'1',
       colOptions:[],
-      tableObj:{
-        dLabel:'',
-        dProperty:'',
-        dWidth:150,
-        dShow:true,
-      },
+      dLabel:'',
+      dProperty:'',
+      dWidth:150,
+      dShow:true,
       alertShow:false
     }
   },
   methods:{
     addColItem(){
-      if(this.tableObj.dLabel!==''&&this.tableObj.dProperty!==''){
+      if(this.dLabel!==''&&this.dProperty!==''){
         this.alertShow = false;
         const obj = {};
-        Object.assign(this.tableObj,obj);
+        obj.index = this.colOptions.length;
+        obj.show = this.dShow;
+        obj.label = this.dLabel;
+        obj.property = this.dProperty;
+        obj.width = this.dWidth;
         this.colOptions.push(obj);
         this.resetFields();
       }else{
@@ -133,13 +133,13 @@ export default {
       }
     },
     resetFields(){
-      this.tableObj.dLabel = '';
-      this.tableObj.dProperty = '';
-      this.tableObj.dWidth = 150;
-      this.tableObj.dShow = true;
+      this.dLabel = '';
+      this.dProperty = '';
+      this.dWidth = 150;
+      this.dShow = true;
     },
-    deleteRow(index){
-      this.colOptions.splice(index,1);
+    handlerDeleteRow(row,column){
+      this.colOptions.splice(row.index,1);
     }
   },
   mounted() {
