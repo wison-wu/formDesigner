@@ -59,7 +59,6 @@
             <el-table-column property="width"  label="宽度"  align="center" width="70" />
             <el-table-column property="show"  label="显示"  align="center" width="70" >
               <template slot-scope="scope">
-                {{scope}}
                 <el-switch v-model="scope.show"></el-switch>
             </template>
             </el-table-column>
@@ -154,3 +153,9 @@ export default {
   }
 }
 </script>
+<style scoped>
+.dialogList >>> .el-collapse-item__header{
+  background-color: #f4f6fc;
+  padding-left:10px;
+}
+</style>
