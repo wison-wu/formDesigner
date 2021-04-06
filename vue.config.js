@@ -39,8 +39,7 @@ module.exports = {
       vue: 'Vue',
       'vue-router': 'VueRouter',
       axios: 'axios',
-      'element-ui': 'ELEMENT',
-      beautifier: 'beautifier'
+      'element-ui': 'ELEMENT'
     }
   },
   chainWebpack(config) {
