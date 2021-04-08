@@ -36,8 +36,6 @@ export let select = {
   multiple:false,
   //禁用
   disabled:false,
-  //只读
-  readOnly:false,
   //搜索
   filterable:false,
   

@@ -33,10 +33,7 @@
       <el-switch v-model="props.clearable"></el-switch>
     </el-form-item>
     <el-form-item label="禁用">
-      <el-switch v-model="props.disabled" @change="handlerChangeDisStatus('disabled')"></el-switch>
-    </el-form-item>
-    <el-form-item label="只读">
-      <el-switch v-model="props.readOnly" @change="handlerChangeReadStatus('readOnly')"></el-switch>
+      <el-switch v-model="props.disabled"></el-switch>
     </el-form-item>
     <el-form-item label="多选">
       <el-switch v-model="props.multiple" @change="multipleChange"></el-switch>
@@ -101,12 +98,6 @@ export default {
   methods:{
     handlerChangeLabel(val){
       this.props.labelWidth = val?'80':'1'
-    },
-    handlerChangeDisStatus(val){
-      this.props.readOnly = val?false:true
-    },
-    handlerChangeReadStatus(val){
-      this.props.disabled = val?false:true
     },
     setvalue(val) {
       if (Array.isArray(val)) {
