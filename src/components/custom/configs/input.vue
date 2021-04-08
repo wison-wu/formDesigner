@@ -39,10 +39,10 @@
       <el-switch v-model="props.clearable"></el-switch>
     </el-form-item>
     <el-form-item label="禁用">
-      <el-switch v-model="props.disabled" @change="handlerChangeDisStatus('disabled')"></el-switch>
+      <el-switch v-model="props.disabled"></el-switch>
     </el-form-item>
     <el-form-item label="只读">
-      <el-switch v-model="props.readonly" @change="handlerChangeReadStatus('readonly')"></el-switch>
+      <el-switch v-model="props.readonly"></el-switch>
     </el-form-item>
     <el-form-item label="前置图标">
       <el-input placeholder="请选择图标" readonly  v-model="props['prefix-icon']">
@@ -86,12 +86,6 @@ export default {
   methods:{
     handlerChangeLabel(val){
       this.props.labelWidth = val?'80':'1'
-    },
-    handlerChangeDisStatus(val){
-      this.props.readOnly = val?false:true
-    },
-    handlerChangeReadStatus(val){
-      this.props.disabled = val?false:true
     },
     handlerChangeId(val){
       let idArray = this.getFormId(this.props._id);
