@@ -138,8 +138,9 @@ export default {
       this.dWidth = 150;
       this.dShow = true;
     },
-    handlerDeleteRow(row,column){
-      this.colOptions.splice(row.index,1);
+    handlerDeleteRow(row){
+      let index = this.colOptions.findIndex(item=>item.property==row.property);
+      this.colOptions.splice(index,1);
     }
   },
   mounted() {
@@ -154,3 +155,9 @@ export default {
   }
 }
 </script>
+<style scoped>
+.dialogList >>> .el-collapse-item__header{
+  background-color: #f4f6fc;
+  padding-left:10px;
+}
+</style>
