@@ -64,6 +64,7 @@
           </el-table>
         <br/>
         <el-alert title="字段和属性不能为空,请检查" v-show="alertShow" type="error" :closable="false"/>
+        <el-alert title="属性已存在请检查" v-show="propertyExistShow" type="error" :closable="false"/>
         <br>
         <el-form-item label="字段" label-width="60px">
             <el-input v-model="dLabel" />
@@ -113,21 +114,29 @@ export default {
       dProperty:'',
       dWidth:150,
       dShow:true,
-      alertShow:false
+      alertShow:false,
+      propertyExistShow:false,
     }
   },
   methods:{
     addColItem(){
       if(this.dLabel!==''&&this.dProperty!==''){
-        this.alertShow = false;
-        const obj = {};
-        obj.index = this.colOptions.length;
-        obj.show = this.dShow;
-        obj.label = this.dLabel;
-        obj.property = this.dProperty;
-        obj.width = this.dWidth;
-        this.colOptions.push(obj);
-        this.resetFields();
+        const existOptions = this.colOptions.find(item=>item.property === this.dProperty);
+        if( typeof existOptions === 'undefined'){
+          this.alertShow = false;
+          this.propertyExistShow = false;
+          const obj = {};
+          obj.index = this.colOptions.length;
+          obj.show = this.dShow;
+          obj.label = this.dLabel;
+          obj.property = this.dProperty;
+          obj.width = this.dWidth;
+          this.colOptions.push(obj);
+          this.resetFields();
+        }else{
+          this.propertyExistShow = true;
+        }
+        
       }else{
         this.alertShow = true;
       }
