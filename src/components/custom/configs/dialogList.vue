@@ -96,12 +96,10 @@
   </div>
 </template>
 <script>
-import fancyText from '../../extend/fancyText.vue';
 /**
  * text的配置项
  */
 export default {
-  components: { fancyText },
   name:"textConfig",
   props:{
     props:{}
@@ -136,7 +134,6 @@ export default {
         }else{
           this.propertyExistShow = true;
         }
-        
       }else{
         this.alertShow = true;
       }

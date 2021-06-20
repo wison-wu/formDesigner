@@ -46,8 +46,7 @@ const formList = {
   divider: divider,
   alert:alert,
   link:link,
-  text:text,
-  html:html
+  text:text
 };
 let items = [];
 for (let i in formList) {

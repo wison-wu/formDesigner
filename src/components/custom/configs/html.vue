@@ -1,3 +1,4 @@
+<!--废弃-->
 <template>
   <div v-show="props.compType === 'html'">
     <!-- <el-form-item label="字段名">

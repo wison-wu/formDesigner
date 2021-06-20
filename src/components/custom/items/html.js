@@ -1,5 +1,6 @@
+/**废弃 */
 /**
- * 分割线
+ * html
  */
 export let html = {
   id:'',
