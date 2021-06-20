@@ -1,9 +1,21 @@
 import { isAttr } from '../utils/index'
 
+//先修改在这里,后续需要优化
 function vModel(self, dataObject) {
   dataObject.on.input = val => {
     self.$emit('input', val)
   }
+  //判断是否为上传组件
+  if(self.conf.compType === 'upload'){
+    dataObject.attrs['before-upload'] = file=>{
+      const fileName = file.name;
+      const suffixName = fileName.split('.').pop();
+      if(!self.conf.accept.includes(suffixName)){ 
+        return false;
+      }
+    }
+  }
+  
 }
 //后续组件的子组件操作
 const componentChild = {
@@ -81,7 +93,6 @@ export default {
       on: {},
       style: {}
     }
-
     //远程获取数据
     this.getRemoteData();
     const confClone = JSON.parse(JSON.stringify(this.conf))
@@ -124,7 +135,7 @@ export default {
           if(this.conf.options.length==0){
             this.conf.options = this.conf.options.concat(res.data);
           }
-        })
+        })  
       }
     }
   }
