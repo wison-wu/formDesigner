@@ -13,7 +13,7 @@
 
 <script>
 export default {
-    name:"fancyText",
+    name:"fancyText", 
     props:{
         text: { 
             type: String,
