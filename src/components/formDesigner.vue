@@ -33,7 +33,7 @@
             </div>
           </draggable>
           <div class="components-title">
-            辅助组件
+            布局组件
           </div>
           <draggable
             class="components-draggable"
@@ -55,7 +55,7 @@
             </div>
           </draggable>
           <div class="components-title">
-            布局组件
+            辅助组件
           </div>
           <draggable
             class="components-draggable"
