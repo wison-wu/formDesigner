@@ -43,7 +43,7 @@ body{
   font-weight: 700;
 }
 .components-draggable{
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 .components-list {
   padding: 8px;
@@ -64,7 +64,7 @@ body{
   padding-top: 5px;
   cursor: move;
   border: 1px solid #409eff;
-  border-radius: 0px;
+  border-radius: 3px;
 }
 .components-body:hover {
   border: 1px dashed #f56c6c;

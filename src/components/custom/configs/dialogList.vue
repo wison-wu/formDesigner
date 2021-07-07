@@ -166,4 +166,8 @@ export default {
   background-color: #f4f6fc;
   padding-left:10px;
 }
+.dialogList >>> .el-collapse-item__header{
+  height:35px;
+  margin-bottom:10px;
+}
 </style>
