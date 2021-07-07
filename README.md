@@ -7,10 +7,10 @@
 ![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/val-json.png)
 ![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/dialogList.png)
 
-#GitHub地址
-[form-generator](https://gitee.com/mrhj/form-generator)
+# GitHub地址
+[formDesigner](https://github.com/wison-wu/formDesigner)
 
-#开发日志
+# 开发日志
 - 2020-12-15: 增加button组件
 - 2020-12-25: 增加分割线组件
 - 2020-12-28: 增加Alert 警告组件
