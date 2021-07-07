@@ -32,12 +32,12 @@ export default {
             default:''
         },
         size:{
-            type:String,
-            default:'',
+            type:Number,
+            default:14,
         },
         bold:{
-            type:String,
-            default:'',
+            type:Number,
+            default:400,
         }
     },
     data(){

@@ -36,6 +36,7 @@ export let upload = {
   //文件列表类型
   'list-type':'text',
   value:'',
+  width:100,
   //按钮文字
   buttonText:'请上传附件',
   //是否显示描述
@@ -43,5 +44,7 @@ export let upload = {
   //描述内容
   tips:'点击按钮上传附件',
   //允许文件类型
-  accept:'.pdf, .doc, .docx, .xls, .xlsx'
+  accept:'.pdf, .doc, .docx, .xls, .xlsx',
+  //文件大小MB
+  fileSize:10,
 }

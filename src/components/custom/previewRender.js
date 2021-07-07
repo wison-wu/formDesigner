@@ -8,9 +8,17 @@ function vModel(self, dataObject) {
   //判断是否为上传组件
   if(self.conf.compType === 'upload'){
     dataObject.attrs['before-upload'] = file=>{
+      //非限定后缀不允许上传
       const fileName = file.name;
       const suffixName = fileName.split('.').pop();
+      
       if(!self.conf.accept.includes(suffixName)){ 
+        self.$message.error('该后缀文件不允许上传');
+        return false;
+      }
+      const fileSize = file.size;
+      if(fileSize>dataObject.props.fileSize*1024*1024){
+        self.$message.error('文件大小超出限制，请检查！');
         return false;
       }
     }

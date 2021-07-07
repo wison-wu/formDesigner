@@ -112,7 +112,6 @@ export default {
     }
   },
   render(h) {
-    console.log(this.model);
     const layout = layouts[this.model.layout]
     if (layout) {
       return layout.call(this, h, this.model)
