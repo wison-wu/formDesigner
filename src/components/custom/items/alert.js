@@ -22,7 +22,7 @@ export let alert = {
   //主题
   type:'success',  
   //辅助文字
-  description:'',  
+  description:'form-designer',  
   //是否可关闭
   closable:true,   
   //是否居中

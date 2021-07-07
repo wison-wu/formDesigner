@@ -164,7 +164,6 @@ export default {
     }
   },
   mounted() {
-    //设计器加载时，需要加载默认的配置
   },
   methods: {
     preview(){
@@ -188,7 +187,7 @@ export default {
       })
     },
     help(){
-      this.$message('帮助！');
+      window.open('https://gitee.com/wurong19870715/formDesigner')
     },
     handlerActiveItemChange(obj){
       this.lastActiveItem = this.activeItem;

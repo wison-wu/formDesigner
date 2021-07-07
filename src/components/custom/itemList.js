@@ -21,35 +21,35 @@ import {row} from "./items/row";
 import {alert} from "./items/alert";
 import {link} from "./items/link";
 import {text} from "./items/text";
-import {html} from "./items/html";
 
 
-const formList = {
-  input: input,
-  select: select,
-  radio:radio,
-  checkbox:checkbox,
-  Switch:Switch,
-  inputNumber:inputNumber,
-  textarea:textarea,
-  slider:slider,
-  rate:rate,
-  date:date,
-  time:time,
-  editor:editor,
-  colorPicker:colorPicker,
-  cascader:cascader,
-  upload:upload,
-  dialogList:dialogList,
-  row:row,
-  button: button,
-  divider: divider,
-  alert:alert,
-  link:link,
-  text:text
-};
-let items = [];
-for (let i in formList) {
-  items.push(formList[i]);
-}
-export default items;
+// const formList = {
+//   input: input,
+//   select: select,
+//   radio:radio,
+//   checkbox:checkbox,
+//   Switch:Switch,
+//   inputNumber:inputNumber,
+//   textarea:textarea,
+//   slider:slider,
+//   rate:rate,
+//   date:date,
+//   time:time,
+//   editor:editor,
+//   colorPicker:colorPicker,
+//   cascader:cascader,
+//   upload:upload,
+//   dialogList:dialogList,
+//   row:row,
+//   button: button,
+//   divider: divider,
+//   alert:alert,
+//   link:link,
+//   text:text
+// };
+export  const formItems = [
+  input,select,radio,checkbox,Switch,inputNumber,textarea,slider
+  ,rate,date,time,editor,colorPicker,cascader,upload,dialogList
+];
+export  const assistFormItems = [button,divider,alert,link,text];
+export  const layoutFormItems = [row];

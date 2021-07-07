@@ -7,6 +7,8 @@
 ![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/val-json.png)
 ![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/dialogList.png)
 
+#GitHub地址
+[form-generator](https://gitee.com/mrhj/form-generator)
 
 #开发日志
 - 2020-12-15: 增加button组件
@@ -23,16 +25,15 @@
 - 2021-02-08: 增加级联选择器（包含省市区联动）
 - 2021-02-14: 增加附件组件
 - 2021-03-23: 增加dialogList,支持更多信息展示的列表
+- 2021-06-28: 更新文本组件，增加字体颜色，字体大小，居中布局
 
 ## 后期规划
-- 常用组件基本开发完毕，后续需要对各个组件、代码慢慢打磨。
 - 增加自定义验证功能
-- 增加后端的示例。
-- 新分支开发新组件
+- 新分支开发明细表
+- vue3.0版本筹备
 
 
 ## 友情链接
-
 - [高性能 vue3 表格组件 vma-grid](https://gitee.com/sleiphur/vma-grid)
 
 ## 交流一下

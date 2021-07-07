@@ -32,6 +32,50 @@
               </div>
             </div>
           </draggable>
+          <div class="components-title">
+            辅助组件
+          </div>
+          <draggable
+            class="components-draggable"
+            :list="layoutFormItems"
+            :group="{ name: 'componentsGroup', pull: 'clone', put: false }"
+            :clone="cloneComponent"
+            draggable=".components-item"
+            :sort="false"
+            @start="onStart"
+            @end="onEnd"
+          >
+            <div
+              v-for="(element, index) in layoutFormItems" :key="index" class="components-item"
+              @click="addComponent(element)"
+            >
+              <div class="components-body">
+                <icon :code="element.compIcon" :text="element.compName"/>
+              </div>
+            </div>
+          </draggable>
+          <div class="components-title">
+            布局组件
+          </div>
+          <draggable
+            class="components-draggable"
+            :list="assistFormItems"
+            :group="{ name: 'componentsGroup', pull: 'clone', put: false }"
+            :clone="cloneComponent"
+            draggable=".components-item"
+            :sort="false"
+            @start="onStart"
+            @end="onEnd"
+          >
+            <div
+              v-for="(element, index) in assistFormItems" :key="index" class="components-item"
+              @click="addComponent(element)"
+            >
+              <div class="components-body">
+                <icon :code="element.compIcon" :text="element.compName"/>
+              </div>
+            </div>
+          </draggable>
         </div>
       </el-scrollbar>
     </div>
@@ -43,7 +87,7 @@
  * 1.0版本
  */
 import draggable from "vuedraggable";
-import formItems from "./custom/itemList";
+import {formItems,assistFormItems,layoutFormItems} from "./custom/itemList";
 import designer from "./designer";
 import Icon from "./icon";
 import {getSimpleId} from "./utils/IdGenerate";
@@ -60,6 +104,8 @@ export default {
   data() {
     return {
       formItems:formItems,
+      assistFormItems:assistFormItems,
+      layoutFormItems:layoutFormItems,
       designList:[],
       activeData:{},
       formConfig:formConf

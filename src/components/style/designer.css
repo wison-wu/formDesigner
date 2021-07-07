@@ -40,6 +40,7 @@ body{
   font-size: 14px;
   color: #222;
   margin: 6px 2px;
+  font-weight: 700;
 }
 .components-draggable{
   padding-bottom: 20px;
@@ -59,7 +60,7 @@ body{
   padding: 8px 10px;
   background: #f4f6fc;
   font-size: 12px;
-  text-align: center;
+  margin-left: 5px;
   padding-top: 5px;
   cursor: move;
   border: 1px solid #409eff;
