@@ -61,6 +61,25 @@
     <el-form-item label="默认值">
       <el-input class="input" v-model="props.value"></el-input>
     </el-form-item>
+    <el-divider>校验</el-divider>
+    <div v-for="(item, index) in props.rules" :key="index" class="rule-item">
+        <el-input v-model="item.rule" placeholder="正则" size="small" />
+        <p/>
+        <el-input v-model="item.msg" placeholder="自定义提示" size="small" />
+        <div class="close-btn select-line-icon" @click="props.rules.splice(index, 1)">
+          <i class="el-icon-remove-outline close-icon" />
+        </div>
+      </div>
+    <div style="margin-left: 20px;">
+      <el-button
+        style="padding-bottom: 0"
+        icon="el-icon-circle-plus-outline"
+        type="text"
+        @click="addRuleItem"
+      >
+        添加选项
+      </el-button>
+    </div>
     <icon-dialog v-model="props['suffix-icon']" :visible.sync="iconDialogVisible_suffix"/>
     <icon-dialog v-model="props['prefix-icon']" :visible.sync="iconDialogVisible_prefix"/>
   </div>
@@ -101,6 +120,12 @@ export default {
     },
     handlerPrefixSelectIcon(){
       this.iconDialogVisible_prefix = true;
+    },
+    addRuleItem(){
+      this.props.rules.push({
+        rule: '',
+        msg: ''
+      })
     }
   },
   mounted(){
@@ -112,5 +137,18 @@ export default {
 <style scoped>
 .input{
   width:75%
+}
+.rule-item{
+ padding-top: 5px;
+ padding-bottom: 5px;
+}
+.close-btn{
+  text-align: center;
+}
+.close-icon:hover{
+  cursor: pointer;
+}
+.close-btn >>> .el-icon-remove-outline{
+  color:"red"
 }
 </style>
