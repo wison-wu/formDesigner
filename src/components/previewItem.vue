@@ -9,6 +9,17 @@ const layouts = {
     if(element.required){
       r.push({required: true, message: element.label+'不能为空', trigger: ['blur','change']});
     }
+    //后期需要改写，不然关联太多，后期会很复杂
+    
+    //判断是否有规则
+    if(typeof element.rules !== 'undefined'&&element.rules){
+      element.rules.forEach(obj=>{
+        const rule = {};
+        rule.pattern = `/${obj.rule}/`;
+        rule.message=obj.msg;
+        r.push(rule);
+      })
+    }
     //编辑器最大字数验证
     if(typeof element.validateMaxText !== 'undefined'&&element.validateMaxText){
       const maxRules = {

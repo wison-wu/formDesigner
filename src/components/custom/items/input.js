@@ -43,5 +43,7 @@ export let input = {
   'suffix-icon':'',
   value: '',
   //验证规则(字符,phone,email,number)
-  rules:[]
+  rules:[],
+  //验证规则
+  rulesType:'default'
 }

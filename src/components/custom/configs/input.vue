@@ -62,6 +62,9 @@
       <el-input class="input" v-model="props.value"></el-input>
     </el-form-item>
     <el-divider>校验</el-divider>
+    <el-form-item label="验证类型">
+      <el-input class="input" v-model="props.value"></el-input>
+    </el-form-item>
     <div v-for="(item, index) in props.rules" :key="index" class="rule-item">
         <el-input v-model="item.rule" placeholder="正则" size="small" />
         <p/>

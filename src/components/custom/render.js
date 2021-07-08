@@ -70,7 +70,6 @@ const componentChild = {
       return conf.text;
     }
   }
-  
 }
 
 export default {
