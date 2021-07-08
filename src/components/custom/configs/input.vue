@@ -63,7 +63,14 @@
     </el-form-item>
     <el-divider>校验</el-divider>
     <el-form-item label="验证类型">
-      <el-input class="input" v-model="props.value"></el-input>
+      <el-select v-model="props.rulesType" @change="handlerChangeRulesType">
+        <el-option label="无" value="default"/>
+        <el-option label="电话" value="phone"/>
+        <el-option label="邮箱" value="email"/>
+        <el-option label="纯数字" value="number"/>
+        <el-option label="身份证" value="idcard"/>
+        <el-option label="汉字" value="ChineseCharacter"/>
+      </el-select>
     </el-form-item>
     <div v-for="(item, index) in props.rules" :key="index" class="rule-item">
         <el-input v-model="item.rule" placeholder="正则" size="small" />
@@ -89,6 +96,13 @@
 </template>
 <script>
 import iconDialog from '../../iconDialog';
+const defaultRules={
+  'phone':{'rule':'^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$','msg':'您输入的电话号码不符合规则'},
+  'email':{'rule':'^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$','msg':'您输入的邮件地址不符合规则'},
+  'number':{'rule':'^[0-9]*$','msg':'您输入的内容不符合纯数字规则'},
+  'idcard':{'rule':'^\d{15}|\d{18}$','msg':'您输入的身份证号码不符合规则'},
+  'ChineseCharacter':{'rule':'^[\u4e00-\u9fa5]{0,}$','msg':'请输入汉字'},
+}
 /**
  * input的配置项
  */
@@ -128,6 +142,13 @@ export default {
       this.props.rules.push({
         rule: '',
         msg: ''
+      })
+    },
+    handlerChangeRulesType(val){
+      const obj = defaultRules[val];
+      this.props.rules.push({
+        rule: obj.rule,
+        msg: obj.msg
       })
     }
   },
