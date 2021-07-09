@@ -1,5 +1,6 @@
-import { isAttr } from '../utils/index'
-
+import { isAttr,jsonClone } from '../utils';
+import childrenItem from './slot/index';
+import {remoteData} from './mixin';
 //先修改在这里,后续需要优化
 function vModel(self, dataObject) {
   dataObject.on.input = val => {
@@ -25,73 +26,7 @@ function vModel(self, dataObject) {
   }
   
 }
-//后续组件的子组件操作
-const componentChild = {
-  'el-select': {
-    options(h, conf, key) {
-      const list = []
-      conf.options.forEach(item => {
-        list.push(<el-option label={item.label} value={item.value} disabled={item.disabled}></el-option>)
-      })
-      return list;
-    }
-  },
-  'el-radio-group': {
-    options(h, conf, key) {
-      const list = []
-      const vertical = conf.vertical?'display:block;':'';
-      conf.options.forEach(item => {
-        if (conf.optionType === 'button') list.push(<el-radio-button label={item.value} style="">{item.label}</el-radio-button>)
-        else list.push(<el-radio label={item.value} style={vertical} border={conf.border}>{item.label}</el-radio>)
-      })
-      return list
-    }
-  },
-  'el-checkbox-group': {
-    options(h, conf, key) {
-      const list = []
-      const vertical = conf.vertical?'display:block;':'';
-      conf.options.forEach(item => {
-        if (conf.optionType === 'button') list.push(<el-checkbox-button label={item.value}>{item.label}</el-checkbox-button>)
-        else list.push(<el-checkbox label={item.value} style={vertical} border={conf.border}>{item.label}</el-checkbox>)
-      })
-      return list
-    }
-  },
-  'el-upload':{
-    'list-type': (h, conf, key) => {
-      const list = []
-      const config = conf.__config__
-      if (conf['list-type'] === 'picture-card') {
-        list.push(<i class="el-icon-plus"></i>)
-      } else {
-        list.push(<el-button size="small" type="primary" icon="el-icon-upload">{conf.buttonText}</el-button>)
-      }
-      if (conf.showTip) {
-        list.push(
-          <div slot="tip" class="el-upload__tip">{conf.tips}</div>
-        )
-      }
-      return list
-    }
-  },
-  'el-button': {
-    innerText(conf) {
-      return conf.text;
-    }
-  },
-  'el-divider': {
-    innerText(conf) {
-      return conf.text;
-    }
-  },
-  'el-link': {
-    innerText(conf) {
-      return conf.text;
-    }
-  }
-  
-}
+
 
 export default {
   render(h) {
@@ -103,20 +38,8 @@ export default {
     }
     //远程获取数据
     this.getRemoteData();
-    const confClone = JSON.parse(JSON.stringify(this.conf))
-    let children = []
-    const childObjs = componentChild[confClone.ele]
-    if (childObjs&&(childObjs.options||childObjs['list-type'])) {
-      Object.keys(childObjs).forEach(key => {
-        const childFunc = childObjs[key]
-        if (confClone[key]) {
-          children.push(childFunc(h, confClone, key))
-        }
-      })
-    }
-    if (childObjs&&childObjs.innerText) {
-      children = childObjs.innerText(confClone);
-    }
+    const confClone = jsonClone(this.conf);
+    const children = childrenItem(h,confClone);
     Object.keys(confClone).forEach(key => {
       const val = confClone[key]
       if (dataObject[key]) {
@@ -134,17 +57,5 @@ export default {
     return h(confClone.ele, dataObject, children)
   },
   props: ['conf','value'],
-  methods:{
-    getRemoteData(){
-      //动态数据
-      if(this.conf.dataType === 'dymanic'){
-         this.$axios.get(this.conf.action)
-        .then(res => {
-          if(this.conf.options.length==0){
-            this.conf.options = this.conf.options.concat(res.data);
-          }
-        })  
-      }
-    }
-  }
+  mixins:[remoteData]
 }

@@ -99,7 +99,7 @@ function stringify(obj) {
 }
 
 function parse(str) {
-  JSON.parse(str, (k, v) => {
+  return JSON.parse(str, (k, v) => {
     if (v.indexOf && v.indexOf('function') > -1) {
       return eval(`(${v})`)
     }
@@ -108,7 +108,8 @@ function parse(str) {
 }
 
 export function jsonClone(obj) {
-  return parse(stringify(obj))
+  const o = parse(stringify(obj));
+  return o;
 }
 
 export function isLayout(obj) {

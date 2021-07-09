@@ -61,6 +61,7 @@
   </div>
 </template>
 <script>
+
 /**
  * input的配置项
  */
