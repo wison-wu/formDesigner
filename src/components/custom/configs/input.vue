@@ -69,7 +69,6 @@
         <el-option label="邮箱" value="email"/>
         <el-option label="纯数字" value="number"/>
         <el-option label="身份证" value="idcard"/>
-        <el-option label="汉字" value="ChineseCharacter"/>
       </el-select>
     </el-form-item>
     <div v-for="(item, index) in props.rules" :key="index" class="rule-item">
@@ -97,11 +96,10 @@
 <script>
 import iconDialog from '../../iconDialog';
 const defaultRules={
-  'phone':{'rule':'^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$','msg':'您输入的电话号码不符合规则'},
-  'email':{'rule':'^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$','msg':'您输入的邮件地址不符合规则'},
+  'phone':{'rule':'0?(13|14|15|17|18|19)[0-9]{9}','msg':'您输入的电话号码不符合规则'},
+  'email':{'rule':'\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}','msg':'您输入的邮件地址不符合规则'},
   'number':{'rule':'^[0-9]*$','msg':'您输入的内容不符合纯数字规则'},
-  'idcard':{'rule':'^\d{15}|\d{18}$','msg':'您输入的身份证号码不符合规则'},
-  'ChineseCharacter':{'rule':'^[\u4e00-\u9fa5]{0,}$','msg':'请输入汉字'},
+  'idcard':{'rule':'\\d{17}[\\d|x]|\\d{15}','msg':'您输入的身份证号码不符合规则'}
 }
 /**
  * input的配置项

@@ -15,11 +15,8 @@ const layouts = {
     if(typeof element.rules !== 'undefined'&&element.rules){
       element.rules.forEach(obj=>{
         const rule = {};
-        rule.pattern = `/${obj.rule}/g`;
-        console.log(rule.pattern);
-        //rule.pattern = `/^[0-9]*$/`;
-        console.log(rule.pattern);
-        
+        const reg = new RegExp(obj.rule);
+        rule.pattern = reg;
         rule.message=obj.msg;
         rule.trigger= ['blur','change'];
         r.push(rule);
