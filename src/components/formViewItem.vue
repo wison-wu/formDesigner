@@ -18,19 +18,25 @@ const layouts = {
     }else if(element.viewType === 'html'){
       return (
         <el-form-item label={element.showLabel ? element.label : ''}
-            label-width={labelWidth} 
-            prop={element.id}
-            >
+          label-width={labelWidth} 
+          prop={element.id}
+        >
           <fancy-html text={value}/>
         </el-form-item>
       )
     }else{
+      console.log(typeof value);
+      if(typeof value === 'object'){
+        console.log(element['range-separator']);
+        const val = value[0]+' '+element['range-separator']+' '+value[1];
+        value = val;
+      }
       return (
         <el-form-item label={element.showLabel ? element.label : ''}
-            label-width={labelWidth} 
-            prop={element.id}
-            >
-          <fancy-text text={value}/>
+          label-width={labelWidth} 
+          prop={element.id}
+        >
+          {value}
         </el-form-item>
       )
     }

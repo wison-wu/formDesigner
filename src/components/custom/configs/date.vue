@@ -29,7 +29,7 @@
       </el-select>
     </el-form-item>
     <el-form-item label="时间格式">
-      <el-input class="input" :value="props.format"/>
+      <el-input class="input" :value="props.format" @change="handlerChangeValueFormat"/>
     </el-form-item>
     <el-form-item label="清空">
       <el-switch v-model="props.clearable"></el-switch>
@@ -40,7 +40,7 @@
     <el-form-item label="禁用">
       <el-switch v-model="props.disabled"></el-switch>
     </el-form-item>
-    <el-form-item label="分隔符">
+    <el-form-item label="分隔符" v-show="props.type === 'monthrange'||props.type === 'daterange'||props.type === 'datetimerange'">
       <el-input v-model="props['range-separator']"></el-input>
     </el-form-item>
     <el-form-item label="默认值">
@@ -110,6 +110,10 @@ export default {
   methods:{
     handlerFormatChange(val){
       this.props.format = dateTimeFormat[val];
+      this.props['value-format'] = dateTimeFormat[val];
+    },
+    handlerChangeValueFormat(val){
+      this.props['value-format'] = val;
     },
     handlerChangeId(val){
       let idArray = this.getFormId(this.props._id);

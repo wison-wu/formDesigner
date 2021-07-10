@@ -36,9 +36,10 @@ export let time = {
   'picker-options': {
     selectableRange: '00:00:00-23:59:59'
   },
-  'arrow-control':false,
+  'arrow-control':true,
   align:'left',
   format: 'HH:mm:ss',
   'value-format': 'HH:mm:ss',
-  'is-range':false
+  'is-range':false,
+  'range-separator':'-'
 }
