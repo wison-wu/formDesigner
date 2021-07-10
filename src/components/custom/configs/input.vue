@@ -58,6 +58,14 @@
         </template>
       </el-input>
     </el-form-item>
+    <el-form-item label="前缀">
+      <el-input  v-model="props.prepend">
+      </el-input>
+    </el-form-item>
+    <el-form-item label="后缀">
+      <el-input  v-model="props.append">
+      </el-input>
+    </el-form-item>
     <el-form-item label="默认值">
       <el-input class="input" v-model="props.value"></el-input>
     </el-form-item>

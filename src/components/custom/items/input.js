@@ -37,13 +37,17 @@ export let input = {
   readonly:false,
   //状态，正常，只读，禁用
   status:'normal',
-  //后置图标
-  'prefix-icon':'',
   //前置图标
+  'prefix-icon':'',
+  //后置图标
   'suffix-icon':'',
   value: '',
   //验证规则(字符,phone,email,number)
   rules:[],
   //验证规则
-  rulesType:'default'
+  rulesType:'default',
+  //前缀
+  prepend:'',
+  //后缀
+  append:''
 }
