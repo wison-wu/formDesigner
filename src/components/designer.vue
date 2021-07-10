@@ -48,6 +48,7 @@
           <div v-show="infoShow" class="empty-info">
             从左侧拖入或点选组件进行表单设计
           </div>
+          
         </el-form>
       </el-row>
     </el-scrollbar>
