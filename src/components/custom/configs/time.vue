@@ -38,6 +38,19 @@
     <el-form-item label="禁用">
       <el-switch v-model="props.disabled"></el-switch>
     </el-form-item>
+    <el-form-item label="箭头显示">
+      <el-switch v-model="props['arrow-control']"></el-switch>
+    </el-form-item>
+    <el-form-item label="范围选择">
+      <el-switch v-model="props['is-range']"></el-switch>
+    </el-form-item>
+    <!-- <el-form-item label="对齐方式">
+      <el-radio-group v-model="props.align">
+        <el-radio-button label="left">左</el-radio-button>
+        <el-radio-button label="center">中</el-radio-button>
+        <el-radio-button label="right">右</el-radio-button>
+      </el-radio-group>
+    </el-form-item> -->
     <el-form-item label="默认值">
       <el-time-picker class="input" v-model="props.value" placeholder="选择默认时间"/>
     </el-form-item>

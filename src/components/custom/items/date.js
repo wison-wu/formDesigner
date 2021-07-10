@@ -35,5 +35,8 @@ export let date = {
   value: '',
   //时间类型
   type:'date',
-  format:'yyyy-MM-dd'
+  format:'yyyy-MM-dd',
+  'range-separator':'-',
+  'start-placeholder':'开始日期',
+  'end-placeholder':'结束日期'
 }
