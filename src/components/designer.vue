@@ -200,7 +200,7 @@ export default {
           const uId = "row_"+getSimpleId();
           clone.id = uId;
           clone._id = uId;
-          clone.columns.map((column,index)=>{
+          clone.columns.map((column)=>{
             let itemList = [];
             column.list.map((item,i)=>{
               const cloneitem = JSON.parse(JSON.stringify(item))
@@ -216,7 +216,7 @@ export default {
           this.handlerActiveItemChange(clone);
       }else{  //如果是普通组件，需要判断他是否再布局组件下。
         if(parent){
-          parent.columns.map((column,index)=>{
+          parent.columns.map((column)=>{
             if(column.list.some(item => item.id === origin.id)){
               const clone = JSON.parse(JSON.stringify(origin))
               const uId = "fd_"+getSimpleId();
