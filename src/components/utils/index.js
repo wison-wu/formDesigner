@@ -108,8 +108,7 @@ function parse(str) {
 }
 
 export function jsonClone(obj) {
-  const o = parse(stringify(obj));
-  return o;
+  return parse(stringify(obj));
 }
 
 export function isLayout(obj) {

@@ -25,9 +25,7 @@ const layouts = {
         </el-form-item>
       )
     }else{
-      console.log(typeof value);
       if(typeof value === 'object'){
-        console.log(element['range-separator']);
         const val = value[0]+' '+element['range-separator']+' '+value[1];
         value = val;
       }

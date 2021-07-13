@@ -1,7 +1,6 @@
 <script>
 import draggable from 'vuedraggable'
 import render from './custom/render'
-import {getSimpleId} from "./utils/IdGenerate";
 
 
 /**
@@ -137,27 +136,6 @@ export default {
         }
       }
       
-    },
-    handlerCopyItem(evt,element,index){
-      const item = element.columns[index];
-      const clone = JSON.parse(JSON.stringify(item))
-      let uId = "fd_"+getSimpleId();
-      clone.id = uId;
-      clone._id = uId;
-      element.columns.push(clone);
-    },
-    handlerDeleteItem(evt,element,index){
-      const item = element.columns[index];
-      element.columns.splice(index,1);
-    }
-  },
-  computed:{
-  },
-  watch:{
-    activeItem (newValue,oldValue) {
-      // console.log('this.activeItem');
-      // console.log(this.activeItem);
-      // console.log(newValue);
     }
   }
 }

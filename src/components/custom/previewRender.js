@@ -24,9 +24,7 @@ function vModel(self, dataObject) {
       }
     }
   }
-  
 }
-
 
 export default {
   render(h) {

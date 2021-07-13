@@ -1,10 +1,12 @@
-let randomId = '';
 export function getSimpleId(){
-  setTimeout(generateTime(),10);
-  console.log(randomId);
-  return randomId;
+  sleep(10); //主要为了延时工作
+  const time = new Date().getTime();
+  console.log(time);
+  return time;
 }
 
-function generateTime(){
-  randomId = new Date().getTime();
-}
+const sleep = function(time) {
+  const startTime = new Date().getTime() + parseInt(time, 10);
+  while(new Date().getTime() < startTime) {}
+};
+
