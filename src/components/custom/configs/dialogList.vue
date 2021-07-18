@@ -168,6 +168,5 @@ export default {
 }
 .dialogList >>> .el-collapse-item__header{
   height:35px;
-  margin-bottom:10px;
 }
 </style>
