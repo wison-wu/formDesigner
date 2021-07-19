@@ -2,6 +2,8 @@ import formDesigner from '@/components/formDesigner';
 import fancyEditor from '@/components/extend/fancyEditor';
 import fancyHtml from '@/components/extend/fancyHtml';
 import fancyText from '@/components/extend/fancyText';
+import fancyBarCode from 'vue-barcode';
+import fancyDialogList from '@/components/extend/fancyDialogList';
 import iconDialog from '@/components/iconDialog';
 const plugins = {
   install : function (Vue) {
@@ -9,6 +11,8 @@ const plugins = {
     Vue.component('fancy-editor',fancyEditor);
     Vue.component('fancy-html',fancyHtml);
     Vue.component('fancy-text',fancyText);
+    Vue.component('fancy-bar-code',fancyBarCode);
+    Vue.component('fancy-dialog-list',fancyDialogList);
     Vue.component('icon-dialog',iconDialog);
   }
 };

@@ -21,10 +21,11 @@ import {row} from "./items/row";
 import {alert} from "./items/alert";
 import {link} from "./items/link";
 import {text} from "./items/text";
+import {barCode} from "./items/barCode";
 
 export  const formItems = [
   input,select,radio,checkbox,Switch,inputNumber,textarea,slider
-  ,rate,date,time,editor,colorPicker,cascader,upload,dialogList
+  ,rate,date,time,editor,colorPicker,cascader,upload,dialogList,barCode
 ];
 export  const assistFormItems = [button,divider,alert,link,text];
 export  const layoutFormItems = [row];

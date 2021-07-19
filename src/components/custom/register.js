@@ -20,6 +20,7 @@ const components = [
   'alert',
   'link',
   'dialogList',
+  'barCode',
   'text',
   'html',
   'row'

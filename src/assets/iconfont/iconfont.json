@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "6801615",
+      "name": "Barcode",
+      "font_class": "-barcode2",
+      "unicode": "e66e",
+      "unicode_decimal": 58990
+    },
+    {
+      "icon_id": "8924414",
+      "name": "bar-code",
+      "font_class": "-barcode",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
       "icon_id": "16383562",
       "name": "Dialog",
       "font_class": "-dialog",
