@@ -101,8 +101,11 @@
     <el-dialog :visible.sync="previewVisible" width="70%" title="预览">
       <preview :itemList="itemList"  :formConf="formConf" v-if="previewVisible"/>
     </el-dialog>
-    <el-dialog :visible.sync="JSONVisible" width="70%" title="JSON" >
-      <codemirror v-model="code" :options="options"/>
+    <el-dialog :visible.sync="JSONVisible" width="70%" title="JSON" center :close-on-click-modal="false">
+      <codemirror v-model="viewCode" :options="options"/>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="handlerSetJson()">确 定</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
@@ -151,6 +154,7 @@ export default {
       itemList:[],
       activeName:'formConf',
       editorCode:'',
+      viewCode:'',
       // 默认配置
       options: {
         tabSize: 2, // 缩进格式
@@ -260,6 +264,10 @@ export default {
     },
     handlerRollBack(rowItem,oldIndex){  //还原
       this.list.splice(oldIndex,0,rowItem);
+    },
+    handlerSetJson(){
+      this.$emit('updateJSON',this.viewCode);
+      this.JSONVisible = false;
     }
   },
   computed:{

@@ -79,7 +79,7 @@
         </div>
       </el-scrollbar>
     </div>
-    <designer ref="designer" :list="designList" :formConfig="formConfig" @clear="designList = []" :activeData="activeData"/>
+    <designer ref="designer" :list="designList" :formConfig="formConfig" @clear="designList = []" @updateJSON="handlerUpdateJSON" :activeData="activeData"/>
   </div>
 </template>
 <script>
@@ -157,6 +157,11 @@ export default {
     },
     getFormData(){
       return this.formData;
+    },
+    handlerUpdateJSON(json){
+      const jsonObject = JSON.parse(json);
+      this.designList = [];
+      this.designList = this.designList.concat(jsonObject.list);
     }
   },
   computed:{
