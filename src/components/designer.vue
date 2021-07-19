@@ -177,6 +177,7 @@ export default {
       this.previewVisible= true;
     },
     viewJSON(){
+      this.viewCode = this.code;
       this.JSONVisible = true;
     },
     view(){
