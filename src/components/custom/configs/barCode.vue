@@ -24,10 +24,10 @@
       <el-input v-model="props.value"></el-input>
     </el-form-item>
     <el-form-item label="条码颜色" v-show="props.lineColor">
-      <el-color-picker v-model="props.lineColor" />
+      <el-color-picker v-model="props.lineColor" @change="handlerChangeBarCode"/>
     </el-form-item>
     <el-form-item label="背景颜色" v-show="props.background">
-      <el-color-picker v-model="props.background" />
+      <el-color-picker v-model="props.background" @change="handlerChangeBackground"/>
     </el-form-item>
     <!--暂不启用-->
     <!-- <el-form-item label="条码宽度">
@@ -62,6 +62,16 @@ export default {
         this.props.labelWidth = 80;
       }else{
         this.props.labelWidth = 0;
+      }
+    },
+    handlerChangeBarCode(val){
+      if(val == null){
+        this.props.lineColor = '#000';
+      }
+    },
+    handlerChangeBackground(val){
+      if(val == null){
+        this.props.background = '#fff';
       }
     }
   },
