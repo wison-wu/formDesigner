@@ -9,7 +9,7 @@ export const remoteData = {
                         this.conf.options = this.conf.options.concat(res.data);
                     }
                 })
-          }
+            }
         }
     }
 }
