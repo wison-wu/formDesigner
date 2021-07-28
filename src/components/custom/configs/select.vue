@@ -38,6 +38,9 @@
     <el-form-item label="多选">
       <el-switch v-model="props.multiple" @change="multipleChange"></el-switch>
     </el-form-item>
+    <el-form-item label="折叠" v-show="props.multiple">
+      <el-switch v-model="props['collapse-tags']" ></el-switch>
+    </el-form-item>
     <el-form-item label="搜索">
       <el-switch v-model="props.filterable"></el-switch>
     </el-form-item>
@@ -92,7 +95,6 @@ export default {
   
   data(){
     return {
-      val:123
     }
   },
   methods:{

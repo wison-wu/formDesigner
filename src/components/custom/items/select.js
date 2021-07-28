@@ -1,9 +1,3 @@
-// export default (_self, h) => {
-//   return [
-//     h("Input", {})
-//   ];
-// };
-
 export let select = {
   
   compType: 'select',
@@ -34,6 +28,7 @@ export let select = {
   required:false,
   //多选
   multiple:false,
+  'collapse-tags':false,
   //禁用
   disabled:false,
   //搜索
@@ -49,9 +44,6 @@ export let select = {
   }],
   //默认渲染的数据(暂缓)
   remoteUrl:'https://www.fastmock.site/mock/51715c0157535b99010bde55f2df33c8/formDesigner/api/options',
-  remote_options:[
-    
-  ],
   //是否可以清空
   clearable:false,
   value: '',
