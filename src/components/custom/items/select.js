@@ -1,5 +1,6 @@
 export let select = {
-  
+  id:'',
+  _id:'',
   compType: 'select',
   //控件名称
   compName:'下拉框',
@@ -50,7 +51,5 @@ export let select = {
   clearable:false,
   value: '',
   // 验证错误提示信息
-  ruleError: '该字段不能为空',
-  id:'',
-  _id:''
+  ruleError: '该字段不能为空'
 }

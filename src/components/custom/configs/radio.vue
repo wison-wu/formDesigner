@@ -58,6 +58,13 @@
         @input="onDefaultValueInput"
       />
     </el-form-item>
+    <el-form-item label="数据类型">
+      <el-radio-group v-model="props.dataType" @change="handlerChangeDataType">
+        <el-radio-button label="static">静态数据</el-radio-button>
+        <el-radio-button label="dymanic">动态数据</el-radio-button>
+      </el-radio-group>
+    </el-form-item>
+    <div v-show='props.dataType ==="static"'>
     <el-divider>选项</el-divider>
 
       <div v-for="(item, index) in props.options" :key="index" class="select-item">
@@ -75,7 +82,6 @@
           <i class="el-icon-remove-outline" />
         </div>
       </div>
-
     <div style="margin-left: 20px;">
       <el-button
         style="padding-bottom: 0"
@@ -85,6 +91,12 @@
       >
         添加选项
       </el-button>
+    </div>
+    </div>
+    <div v-show='props.dataType ==="dymanic"'>
+      <el-form-item label="地址">
+        <el-input v-model="props.action"></el-input>
+      </el-form-item>
     </div>
   </div>
 </template>
@@ -166,6 +178,15 @@ let vm = {
         this.props.id=this.props._id;
       }else{
         this.props._id=val;
+      }
+    },
+    handlerChangeDataType(value){
+      if(value === 'static'){
+        this.props.options = [];
+        this.props.options = this.tempOptions;
+      }else{
+        this.tempOptions = this.props.options;
+        this.props.options = [];
       }
     }
   },

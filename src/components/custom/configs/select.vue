@@ -46,9 +46,9 @@
     </el-form-item>
     <el-form-item label="默认值">
       <el-input class="input"
-        :value="setvalue(props.value)"
+        :value="setValue(props.value)"
         placeholder="请输入默认值"
-        @input="onvalueInput"
+        @input="onValueInput"
       />
     </el-form-item>
     <el-form-item label="数据类型">
@@ -115,7 +115,7 @@ export default {
     handlerChangeLabel(val){
       this.props.labelWidth = val?'80':'1'
     },
-    setvalue(val) {
+    setValue(val) {
       if (Array.isArray(val)) {
         return val.join(',')
       }
@@ -127,7 +127,7 @@ export default {
       }
       return val
     },
-    onvalueInput(str) {
+    onValueInput(str) {
       if (Array.isArray(this.props.value)) {
         // 数组
         this.$set(

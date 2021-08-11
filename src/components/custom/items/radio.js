@@ -51,6 +51,10 @@ export let radio = {
     label: '选项二',
     value: 2
   }],
+  //数据类型 static，dymanic
+  dataType:'static',
+  //默认渲染的数据
+  action:'https://www.fastmock.site/mock/51715c0157535b99010bde55f2df33c8/formDesigner/api/options',
   value: '',
   // 验证错误提示信息
   ruleError: '该字段不能为空'
