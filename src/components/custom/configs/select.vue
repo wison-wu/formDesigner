@@ -88,7 +88,7 @@
     </div>
     <div v-show='props.dataType ==="dymanic"'>
       <el-form-item label="地址">
-        <el-input v-model="props.dynamic.action"></el-input>
+        <el-input v-model="props.action"></el-input>
       </el-form-item>
     </div>
   </div>
