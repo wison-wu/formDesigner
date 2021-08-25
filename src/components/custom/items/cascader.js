@@ -29,7 +29,7 @@ export let cascader = {
     size:"medium",
     //禁用
     disabled:false,
-    //数据类型 static，dymanic
+    //数据类型 static，dynamic
     dataType:'static',
     'china-area-data':false,
     //请求地址

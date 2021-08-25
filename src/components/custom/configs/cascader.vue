@@ -69,10 +69,10 @@
     <el-form-item label="数据类型">
       <el-radio-group v-model="props.dataType" @change="handlerChangeDataType">
         <el-radio-button label="static">静态数据</el-radio-button>
-        <el-radio-button label="dymanic">动态数据</el-radio-button>
+        <el-radio-button label="dynamic">动态数据</el-radio-button>
       </el-radio-group>
     </el-form-item>
-    <div v-show="props.dataType ==='dymanic'">
+    <div v-show="props.dataType ==='dynamic'">
       <el-form-item label="地址">
         <el-input v-model="props.action"></el-input>
       </el-form-item>
