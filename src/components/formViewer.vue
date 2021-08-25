@@ -23,7 +23,25 @@
                 v-model="form[item.id]"
                 />
               </el-col>
-            </preview-row-item> 
+            </preview-row-item>
+            <fancy-dynamic-view-table
+                v-else-if="element.compType === 'dynamicTable'"
+                :key="'dynamic-'+index"
+                :data="form[element.id]"
+                :ref="element.id"
+                :conf="element"
+            >
+              <template v-slot:item="{rowScope,item}">
+                <fancy-dynamic-table-view-item
+                    :model="item"
+                    :ref="item.id+rowScope.$index"
+                    :parent="element"
+                    :key="'tableIndex-'+rowScope.$index"
+                    :index="rowScope.$index"
+                    v-model="rowScope.row[item.id]"
+                />
+              </template>
+            </fancy-dynamic-view-table>
             <!--item-->
             <el-col class="drag-col-wrapper" :key="index"   :span="element.span" v-else>
               <form-view-item
@@ -40,6 +58,8 @@
 <script>
 import formViewItem from "./formViewItem";
 import previewRowItem from "./previewRowItem";
+import fancyDynamicViewTable from "./dynamic/fancyDynamicViewTable";
+import fancyDynamicTableViewItem from "./dynamic/fancyDynamicTableViewItem";
 export default {
   name:'formViewer',
   data(){
@@ -58,7 +78,9 @@ export default {
   },
   components:{
     formViewItem,
-    previewRowItem
+    previewRowItem,
+    fancyDynamicViewTable,
+    fancyDynamicTableViewItem
   },
   mounted() {
     this.$nextTick(()=> {

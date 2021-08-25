@@ -45,6 +45,8 @@
 <script>
 import previewItem from "./previewItem";
 import previewRowItem from "./previewRowItem";
+import fancyDynamicTable from "./dynamic/fancyDynamicTable";
+import fancyDynamicTableItem from "./dynamic/fancyDynamicTableItem";
 export default {
   name:'formBuilder',
   props:{
@@ -63,7 +65,9 @@ export default {
   },
   components:{
     previewItem,
-    previewRowItem
+    previewRowItem,
+    fancyDynamicTable,
+    fancyDynamicTableItem
   },
   data(){
     return{

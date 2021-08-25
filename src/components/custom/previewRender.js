@@ -3,6 +3,7 @@ import childrenItem from './slot/index';
 import {remoteData} from './mixin';
 //先修改在这里,后续需要优化
 function vModel(self, dataObject) {
+  dataObject.props.value = self.value;
   dataObject.on.input = val => {
     self.$emit('input', val)
   }
@@ -46,8 +47,10 @@ export default {
         dataObject.style= 'width:'+val+'%';
       } else if (!isAttr(key)) {
         dataObject.props[key] = val
-      } else {
-        dataObject.attrs[key] = val
+      }else {
+        if(key !== 'value'){
+          dataObject.attrs[key] = val
+        }
       }
     })
     /*调整赋值模式，规避cascader组件赋值props会出现覆盖预制参数的bug */

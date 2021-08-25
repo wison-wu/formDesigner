@@ -1,7 +1,9 @@
 <script>
 import draggable from 'vuedraggable'
 import render from './custom/render'
-
+import {dynamicTableAllowedItems} from "./custom/formConf";
+import dynamicTable from './dynamic/dynamicTable'
+import dynamicTableItem from './dynamic/dynamicTableItem'
 
 /**
  * 动态表单允许增加的组件列表
@@ -72,6 +74,34 @@ const layouts = {
       </el-row>
       </el-col>
     )    
+  },
+  dynamicItem(h,element){
+    let className = "";
+    className = this.activeItem.id === element.id ? className+'drawing-item active-from-item' : className+'drawing-item'
+    const {onActiveItemChange} = this.$listeners;
+    return (
+        <div class={className} onClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
+          <dynamic-table conf={element} activeItem={this.activeItem}>
+            <draggable tag="div" class="dynamic-table__content row-drag" ghost-class="dynamicGhost" v-model={element.columns} animation="100"
+                       group="componentsGroup"
+                       onAdd={(e)=>{this.handlerDynamicAdd(e,element)}}
+            >
+              {
+                element.columns.map((item,index)=>{
+                  return (
+                      <dynamic-table-item item={item} activeItem={this.activeItem}
+                                          onSelectItem={(evt,item)=>{onActiveItemChange(item);evt.stopPropagation()}}
+                                          onCopyItem={(evt)=>{this.handlerCopyItem(evt,element,index);evt.stopPropagation()}}
+                                          onDeleteItem={(evt)=>{this.handlerDeleteItem(evt,element,index);evt.stopPropagation()}}
+                      />
+                  )
+                })
+              }
+            </draggable>
+          </dynamic-table>
+          {components.itemBtns.call(this,h,element)}
+        </div>
+    )
   }
 }
 /**
@@ -93,7 +123,9 @@ export default {
   name:"designItem",
   components: {
     render,
-    draggable
+    draggable,
+    dynamicTable,
+    dynamicTableItem
   },
   props: {
     model: { 
@@ -135,7 +167,28 @@ export default {
           return false;
         }
       }
-      
+    },
+    /**
+     * 动态表单
+     */
+    handlerDynamicAdd(evt,item){
+      if(evt.pullMode === 'clone'){
+        if(dynamicTableAllowedItems.includes(this.activeItem.compType)){
+          item.columns.splice(evt.newIndex,0,this.activeItem);
+        }else{
+          this.$message.error('该组件不允许被放入动态表格内！');
+        }
+      }else{
+        if(evt.item.className.indexOf('el-row')>-1){  //防止row嵌套
+          const newIndex = evt.newIndex;
+          const oldIndex = evt.oldIndex;
+          const rowItem = item.columns[newIndex];
+          item.columns.splice(newIndex,1);
+          this.$message.error('布局组件不允许放入动态表格！');
+          this.$emit('rowItemRollBack',rowItem,oldIndex);  //还原到原先的列表中
+          return false;
+        }
+      }
     }
   }
 }

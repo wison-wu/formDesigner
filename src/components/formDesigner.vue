@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <div class="left-board">
-      <div class="logo-wrapper">
-        <div class="logo">
+      <div class="d-logo-wrapper">
+        <div class="d-logo">
           Form designer
         </div>
       </div>

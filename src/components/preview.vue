@@ -28,7 +28,27 @@
                   />
                 </template>
               </el-col>
-            </preview-row-item> 
+            </preview-row-item>
+            <fancy-dynamic-table
+                v-else-if="element.compType === 'dynamicTable'"
+                :key="'dynamic-'+index"
+                :data="form[element.id]"
+                :ref="element.id"
+                :conf="element"
+                @addRow="handlerAddRow"
+            >
+              <template v-slot:item="{rowScope,item}">
+                <fancy-dynamic-table-item
+                    :model="item"
+                    :ref="item.id+rowScope.$index"
+                    :parent="element"
+                    :key="'tableIndex-'+rowScope.$index"
+                    :index="rowScope.$index"
+                    v-model="rowScope.row[item.id]"
+                    @valChange="handlerDynamicValChange"
+                />
+              </template>
+            </fancy-dynamic-table>
             <!--item-->
             <el-col class="drag-col-wrapper" :key="index"   :span="element.span" v-else>
               <preview-item 
@@ -52,26 +72,34 @@
 <script>
 import previewItem from "./previewItem";
 import previewRowItem from "./previewRowItem";
+import fancyDynamicTable from "./dynamic/fancyDynamicTable";
+import fancyDynamicTableItem from "./dynamic/fancyDynamicTableItem";
+import {datas,addRow} from "./custom/formDraw";
 export default {
   name:'preview',
   props:['itemList','formConf'],
   components:{
     previewItem,
-    previewRowItem
+    previewRowItem,
+    fancyDynamicTable,
+    fancyDynamicTableItem
   },
   data(){
     return{
       list: this.itemList,
       form:{},
       rules:{},
-      jsonConfVisible:false
+      currentIndex:-1
     }
   },
   methods:{
-    handlerGetValue(){
+    handlerValChange(key,origin){
+      this.$set(this.form,key,origin);
     },
-    handlerValChange(key,orign){
-      this.$set(this.form,key,orign);
+    handlerDynamicValChange(parentId,index,key,origin){
+      console.log(1);
+      this.$set(this.form[parentId][index],key,origin);
+      this.currentIndex = index;
     },
     handlerSubForm(){
       this.$refs[this.formConf.formModel].validate((valid) => {
@@ -79,10 +107,12 @@ export default {
           this.$message.success('success');
         }
       });
-    }
-
+    },
+    handlerAddRow:addRow,
+    handlerInitDatas:datas,
   },
   created(){
+    this.handlerInitDatas();//初始化表单
   },
   mounted() {
     this.$nextTick(()=> {

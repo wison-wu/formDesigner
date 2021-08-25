@@ -23,7 +23,8 @@ const components = [
   'barCode',
   'text',
   'html',
-  'row'
+  'row',
+  'dynamicTable'
 ];
 
 

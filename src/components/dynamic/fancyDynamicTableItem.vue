@@ -1,0 +1,54 @@
+<script>
+import render from '../custom/previewRender'
+
+const layouts = {
+  colItem(element,value,parent,index) {
+    const {valChange} = this.$listeners;
+    let r = [];
+    const req = element.required;
+    r.push({required: req, message: element.label+'不能为空', trigger: ['blur','change']});
+    return (
+          <el-form-item label={''}
+            label-width={'0px'} 
+            prop={parent.id+'.'+index+'.'+element.id}
+            rules={r}
+            >
+          <render key={element.id} conf={element} value={value}  onInput={ event => {
+            this.eleValue = event;
+            valChange(this.eleParent.id,this.index,element.id,this.eleValue);
+          }}/>
+          {element.required?<span style="color:#F56C6C">*</span>:''}
+          </el-form-item>
+    )
+  }
+}
+
+export default {
+  name:"fancyDynamicTableItem",
+  components: {
+    render
+  },
+  props: ['model','value','parent','index'],
+  mounted(){
+    
+    let __eleConfig = {};
+    Object.assign(__eleConfig,this.model);
+    this.eleConfig = __eleConfig;
+  },
+  data(){
+    return {
+      eleConfig:{},
+      eleParent:this.parent,
+      eleValue:this.value
+    }
+  },
+  render() {
+    return layouts.colItem.call(this,this.eleConfig,this.eleValue,this.eleParent,this.index)
+  },
+  watch:{
+    value(newVal){
+      this.eleValue=newVal;
+    }
+  }
+}
+</script>

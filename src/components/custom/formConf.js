@@ -15,6 +15,21 @@ const formConf = {
 };
 export default formConf;
 
+//动态表单允许放入的组件
+export const dynamicTableAllowedItems = [
+  'input',
+  'select',
+  'radio',
+  'checkbox',
+  'Switch',
+  'inputNumber',
+  'textarea',
+  'slider',
+  'rate',
+  'date',
+  'time'
+];
+
 //row允许放入的items
 export const rowAllowedItems = [
   'input',
