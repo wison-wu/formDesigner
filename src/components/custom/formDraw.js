@@ -54,3 +54,8 @@ export function addRow(element){
     let obj =dataResolveDynamicItem(element);
     this.form[element.id].push(obj);
 }
+
+
+export function deleteRow(scope,element){
+    this.form[element.id].splice(scope.$index,1);
+}

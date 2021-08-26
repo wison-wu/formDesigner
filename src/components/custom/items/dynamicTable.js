@@ -19,6 +19,8 @@ export let dynamicTable = {
     config: true,
     //显示新增按钮
     buttonAdd:true,
+    //显示删除按钮
+    buttonDel:true,
     visible:true,
     columns:[
 

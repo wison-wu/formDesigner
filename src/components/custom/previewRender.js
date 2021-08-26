@@ -44,7 +44,7 @@ export default {
       if (dataObject[key]) {
         dataObject[key] = val
       } else if(key ==='width'){
-        dataObject.style= 'width:'+val+'%';
+        dataObject.style= 'width:'+val;
       } else if (!isAttr(key)) {
         dataObject.props[key] = val
       }else {

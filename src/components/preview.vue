@@ -36,6 +36,7 @@
                 :ref="element.id"
                 :conf="element"
                 @addRow="handlerAddRow"
+                @deleteRow="handlerDeleteRow"
             >
               <template v-slot:item="{rowScope,item}">
                 <fancy-dynamic-table-item
@@ -74,7 +75,7 @@ import previewItem from "./previewItem";
 import previewRowItem from "./previewRowItem";
 import fancyDynamicTable from "./dynamic/fancyDynamicTable";
 import fancyDynamicTableItem from "./dynamic/fancyDynamicTableItem";
-import {datas,addRow} from "./custom/formDraw";
+import {datas,addRow,deleteRow} from "./custom/formDraw";
 export default {
   name:'preview',
   props:['itemList','formConf'],
@@ -109,6 +110,7 @@ export default {
       });
     },
     handlerAddRow:addRow,
+    handlerDeleteRow:deleteRow,
     handlerInitDatas:datas,
   },
   created(){
