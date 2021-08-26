@@ -7,7 +7,6 @@ const layouts = {
     let labelWidth = element.labelWidth ? `${element.labelWidth}px` : null
     const {valChange} = this.$listeners;
     const rules = checkRules(element);
-    console.log(rules);
     return (
         <el-col span={element.span}>
         <el-form-item label={element.showLabel ? element.label : ''}

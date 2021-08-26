@@ -20,12 +20,33 @@
               >
               <el-col v-for="(column) in element.columns" :key="column.index" :span="column.span">
                 <template v-for="(col) in column.list">
-                  <preview-item 
-                  :key="col.id" 
-                  :model="col"
-                  v-model="form[col.id]"
-                  @valChange="handlerValChange"
+                  <preview-item
+                    v-if="col.compType!== 'dynamicTable'"
+                    :key="col.id"
+                    :model="col"
+                    v-model="form[col.id]"
+                    @valChange="handlerValChange"
                   />
+                  <fancy-dynamic-table
+                      v-else-if="col.compType === 'dynamicTable'"
+                      ref="dynamicTable"
+                      :key="'dynamic-'+index"
+                      :data="form[col.id]"
+                      :conf="col"
+                      @addRow="handlerAddRow"
+                      @deleteRow="handlerDeleteRow"
+                  >
+                    <template v-slot:item="{rowScope,item}">
+                      <fancy-dynamic-table-item
+                          :model="item"
+                          :parent="col"
+                          :key="'tableIndex-'+rowScope.$index"
+                          :index="rowScope.$index"
+                          v-model="rowScope.row[item.id]"
+                          @valChange="handlerDynamicValChange"
+                      />
+                    </template>
+                  </fancy-dynamic-table>
                 </template>
               </el-col>
             </preview-row-item>

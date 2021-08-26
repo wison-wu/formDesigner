@@ -18,15 +18,58 @@
               :model="element"
               >
               <el-col v-for="(column) in element.columns" :key="column.index" :span="column.span">
-                <preview-item 
-                v-for="(item) in column.list"
-                :key="item.id" 
-                :model="item"
-                v-model="form[item.id]"
-                @valChange="handlerValChange"
-                />
+                <template v-for="(col) in column.list">
+                  <preview-item
+                      v-if="col.compType!== 'dynamicTable'"
+                      :key="col.id"
+                      :model="col"
+                      v-model="form[col.id]"
+                      @valChange="handlerValChange"
+                  />
+                  <fancy-dynamic-table
+                      v-else-if="col.compType === 'dynamicTable'"
+                      ref="dynamicTable"
+                      :key="'dynamic-'+index"
+                      :data="form[col.id]"
+                      :conf="col"
+                      @addRow="handlerAddRow"
+                      @deleteRow="handlerDeleteRow"
+                  >
+                    <template v-slot:item="{rowScope,item}">
+                      <fancy-dynamic-table-item
+                          :model="item"
+                          :parent="col"
+                          :key="'tableIndex-'+rowScope.$index"
+                          :index="rowScope.$index"
+                          v-model="rowScope.row[item.id]"
+                          @valChange="handlerDynamicValChange"
+                      />
+                    </template>
+                  </fancy-dynamic-table>
+                </template>
               </el-col>
-            </preview-row-item> 
+            </preview-row-item>
+            <fancy-dynamic-table
+                v-else-if="element.compType === 'dynamicTable'"
+                :key="'dynamic-'+index"
+                :data="form[element.id]"
+                :ref="element.id"
+                :conf="element"
+                @addRow="handlerAddRow"
+                @deleteRow="handlerDeleteRow"
+            >
+              <template v-slot:item="{rowScope,item}">
+                <fancy-dynamic-table-item
+                    :model="item"
+                    :ref="item.id+rowScope.$index"
+                    :parent="element"
+                    :key="'tableIndex-'+rowScope.$index"
+                    :index="rowScope.$index"
+                    v-model="rowScope.row[item.id]"
+                    @valChange="handlerDynamicValChange"
+                />
+              </template>
+            </fancy-dynamic-table>
             <!--item-->
             
             <el-col class="drag-col-wrapper" :key="index"   :span="element.span" v-else>
@@ -47,6 +90,8 @@ import previewItem from "./previewItem";
 import previewRowItem from "./previewRowItem";
 import fancyDynamicTable from "./dynamic/fancyDynamicTable";
 import fancyDynamicTableItem from "./dynamic/fancyDynamicTableItem";
+import {datas,addRow,deleteRow} from "./custom/formDraw";
+
 export default {
   name:'formBuilder',
   props:{
@@ -73,14 +118,16 @@ export default {
     return{
       form:{},
       rules:{},
+      currentIndex:-1
     }
   },
   methods:{
-    handlerValChange(key,orign){
-      this.$set(this.form,key,orign);
+    handlerValChange(key,origin){
+      this.$set(this.form,key,origin);
     },
-    handlerGetValue(){
-      
+    handlerDynamicValChange(parentId,index,key,origin){
+      this.$set(this.form[parentId][index],key,origin);
+      this.currentIndex = index;
     },
     validate(){
       this.$refs[this.formConf.formModel].validate((valid) => {
@@ -91,18 +138,13 @@ export default {
           this.$emit('input','');
         }
       });
-    }
+    },
+    handlerAddRow:addRow,
+    handlerDeleteRow:deleteRow,
+    handlerInitDatas:datas,
   },
   created(){
-  },
-  mounted() {
-    this.$nextTick(()=> {
-      if(this.value !==''){
-        
-      }
-    })
-  },
-  beforeCreate(){
+    this.handlerInitDatas();
   },
   computed:{
     itemList(){
