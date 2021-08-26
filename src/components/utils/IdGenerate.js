@@ -1,8 +1,6 @@
 export function getSimpleId(){
   sleep(10); //主要为了延时工作
-  const time = new Date().getTime();
-  console.log(time);
-  return time;
+  return new Date().getTime();
 }
 
 const sleep = function(time) {
