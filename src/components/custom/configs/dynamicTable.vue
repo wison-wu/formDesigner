@@ -5,6 +5,15 @@
         <el-input class="input" v-model="props.id" @change="handlerChangeId"></el-input>
       </el-tooltip>
     </el-form-item>
+    <el-form-item label="显示新增按钮" label-width="120px">
+      <el-switch v-model="props.buttonAdd"></el-switch>
+    </el-form-item>
+    <el-form-item label="显示删除按钮" label-width="120px">
+      <el-switch v-model="props.buttonDel"></el-switch>
+    </el-form-item>
+    <el-form-item label="显示行号" label-width="120px">
+      <el-switch v-model="props.showIndex"></el-switch>
+    </el-form-item>
   </div>
 </template>
 <script>
@@ -25,8 +34,6 @@ export default {
         this.props._id=val;
       }
     }
-  },
-  mounted(){
   }
 }
 </script>

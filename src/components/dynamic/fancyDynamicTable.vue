@@ -9,7 +9,7 @@
     :cell-style="{padding:'5px 0'}"
     :header-cell-style="{background:'#F5F7FA'}"
     style="width: 100%">
-    <el-table-column align="center" type="index" label="序号" width="50px" fixed="left"/>
+    <el-table-column align="center" type="index" label="序号" width="50px" v-if="conf.showIndex" fixed="left"/>
     <el-table-column align="center" v-for="(item,index) in conf.columns" :key="index" min-width="150px;">
       <template slot="header">
         {{tableColumnLabels[index]}}

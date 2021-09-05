@@ -21,8 +21,9 @@ export let dynamicTable = {
     buttonAdd:true,
     //显示删除按钮
     buttonDel:true,
+    //显示行号
+    showIndex:true,
     visible:true,
     columns:[
-
     ]
 }
