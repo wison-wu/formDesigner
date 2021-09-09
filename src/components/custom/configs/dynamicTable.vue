@@ -14,6 +14,9 @@
     <el-form-item label="显示行号" label-width="120px">
       <el-switch v-model="props.showIndex"></el-switch>
     </el-form-item>
+    <el-form-item label="多选" label-width="120px">
+      <el-switch v-model="props.multiCheck"></el-switch>
+    </el-form-item>
   </div>
 </template>
 <script>

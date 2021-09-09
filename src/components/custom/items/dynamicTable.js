@@ -24,6 +24,7 @@ export let dynamicTable = {
     //显示行号
     showIndex:true,
     visible:true,
+    multiCheck:false,
     columns:[
     ]
 }

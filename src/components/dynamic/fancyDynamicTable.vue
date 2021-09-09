@@ -5,10 +5,15 @@
     :data="tableData"
     :fit="true"
     border
+    :ref="conf.id"
     size="mini"
     :cell-style="{padding:'5px 0'}"
     :header-cell-style="{background:'#F5F7FA'}"
-    style="width: 100%">
+    style="width: 100%"
+    :row-class-name="tableRowClassName"
+    @selection-change="handlerSelectionChange"
+  >
+    <el-table-column align="center" type="selection" width="35px" v-if="conf.multiCheck" fixed="left"/>
     <el-table-column align="center" type="index" label="序号" width="50px" v-if="conf.showIndex" fixed="left"/>
     <el-table-column align="center" v-for="(item,index) in conf.columns" :key="index" min-width="150px;">
       <template slot="header">
@@ -26,8 +31,9 @@
       </template>
     </el-table-column>
   </el-table>
-  <div class="column-buttons" v-if="conf.buttonAdd">
-    <el-button type="primary" icon="el-icon-plus" circle @click="handlerAdd(conf)"></el-button>
+  <div class="column-buttons">
+    <i class="el-icon-circle-plus-outline optIcon button-plus"  v-if="conf.buttonAdd" @click="handlerAdd(conf)"/>
+    <i class="el-icon-remove-outline optIcon button-plus " v-if="BachDeleteButtonShow(conf.id)" @click="handlerBachDelete"/>
   </div>
 </div>
 </template>
@@ -39,7 +45,9 @@ export default {
     return {
       tableData:this.data,
       tableColumns:[],
-      tableColumnLabels:[]
+      tableColumnLabels:[],
+      multipleSelection: [],
+      componentsMount:false
     }
   },
   mounted(){
@@ -49,6 +57,7 @@ export default {
       Object.assign(tableCol,element);
       this.tableColumns.push(tableCol);
     });
+    this.componentsMount = true;
   },
   components:{
   },
@@ -58,6 +67,29 @@ export default {
     },
     handlerDelete(scope,element){
       this.$emit('deleteRow',scope,element);
+    },
+    handlerBachDelete(){
+      this.$confirm('确认删除选中的数据?').then(() => {
+        const indexs = [];
+        this.multipleSelection.forEach(item=>indexs.push(item.index));
+        this.$emit('batchDeleteRow',indexs,this.conf);
+      })
+    },
+    handlerSelectionChange(val) {
+      this.multipleSelection = val;
+
+    },
+    tableRowClassName(row) {
+      row.row.index = row.rowIndex;
+    }
+  },
+  computed:{
+    BachDeleteButtonShow(){
+      return function(id){
+        if(this.componentsMount){
+          return this.conf.multiCheck&&this.$refs[id].selection.length>0;
+        }
+      }
     }
   }
 }
@@ -68,12 +100,20 @@ export default {
   padding:10px;
 }
 .column-buttons{
-  margin-top:15px;
+  padding:5px 0 5px 0;
   text-align: center;
+  background-color: #f6f6f6;
 }
 .optIcon{
   font-size:18px;
   margin-right:5px;
   cursor: pointer;
+}
+.button-plus{
+  font-size:30px;
+  margin-right:10px;
+}
+.button-plus:hover{
+  color: #000000;
 }
 </style>

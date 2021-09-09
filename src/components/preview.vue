@@ -35,6 +35,7 @@
                       :conf="col"
                       @addRow="handlerAddRow"
                       @deleteRow="handlerDeleteRow"
+                      @batchDeleteRow="handlerBatchDeleteRow"
                   >
                     <template v-slot:item="{rowScope,item}">
                       <fancy-dynamic-table-item
@@ -58,6 +59,7 @@
                 :conf="element"
                 @addRow="handlerAddRow"
                 @deleteRow="handlerDeleteRow"
+                @batchDeleteRow="handlerBatchDeleteRow"
             >
               <template v-slot:item="{rowScope,item}">
                 <fancy-dynamic-table-item
@@ -132,6 +134,7 @@ export default {
     },
     handlerAddRow:addRow,
     handlerDeleteRow:deleteRow,
+    handlerBatchDeleteRow:batchDeleteRow,
     handlerInitDatas:datas,
   },
   created(){

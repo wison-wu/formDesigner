@@ -55,7 +55,13 @@ export function addRow(element){
     this.form[element.id].push(obj);
 }
 
-
 export function deleteRow(scope,element){
     this.form[element.id].splice(scope.$index,1);
+}
+
+export function batchDeleteRow(indexs,element){
+    for(let i =0;i<indexs.length;i++){
+        const index = indexs[i];
+        this.form[element.id].splice(index,1);
+    }
 }
