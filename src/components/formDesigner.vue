@@ -27,7 +27,7 @@
               v-for="(element, index) in formItems" :key="index" class="components-item"
               @click="addComponent(element)"
             >
-              <div class="components-body">
+              <div class="components-body" :class="{ 'dynamicTable-tips': dynamicTableExist(element)}">
                 <icon :code="element.compIcon" :text="element.compName"/>
               </div>
             </div>
@@ -92,6 +92,7 @@ import designer from "./designer";
 import Icon from "./icon";
 import {getSimpleId} from "./utils/IdGenerate";
 import formConf from "./custom/formConf";
+import {dynamicTableAllowedItems} from "./custom/formConf";
 let tempActiveData;
 
 export default {
@@ -174,6 +175,13 @@ export default {
       console.log(formData);
       return JSON.stringify(formData);
         //this.$emit('input',JSON.stringify(formData));
+    },
+    dynamicTableExist(){
+      return function(element){
+        return  this.formConfig.dynamicTableAllowed
+            &&this.designList.filter(item=>item.compType === 'dynamicTable').length>0
+            &&dynamicTableAllowedItems.includes(element.compType);
+      }
     }
   },
   watch:{
@@ -191,5 +199,8 @@ export default {
 <style scoped>
 .container{
   padding:0px
+}
+.dynamicTable-tips{
+  border:1px solid#F08080
 }
 </style>

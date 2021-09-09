@@ -87,6 +87,9 @@
             <el-form-item label="栅格间隔">
                 <el-input-number v-model="formConf.gutter"  :min="0" :max="30"></el-input-number>
             </el-form-item>
+            <el-form-item label="动态表格支持组件高亮显示">
+              <el-switch v-model="formConfig.dynamicTableAllowed"></el-switch>
+            </el-form-item>
             <el-form-item label="禁用表单">
                 <el-switch v-model="formConf.disabled"></el-switch>
             </el-form-item>

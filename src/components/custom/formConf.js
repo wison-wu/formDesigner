@@ -11,7 +11,8 @@ const formConf = {
   labelWidth: 80,
   formRules: 'rules',
   gutter: 15,
-  disabled: false
+  disabled: false,
+  dynamicTableAllowed:true
 };
 export default formConf;
 

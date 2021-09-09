@@ -86,11 +86,11 @@
         </el-form>
     </el-row>
     <el-divider></el-divider>
-    <center>
+    <div style="text-align: center;">
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="handlerSubForm">提交</el-button>
       </span>
-    </center>
+    </div>
   </div>
 </template>
 <script>
@@ -98,7 +98,7 @@ import previewItem from "./previewItem";
 import previewRowItem from "./previewRowItem";
 import fancyDynamicTable from "./dynamic/fancyDynamicTable";
 import fancyDynamicTableItem from "./dynamic/fancyDynamicTableItem";
-import {datas,addRow,deleteRow} from "./custom/formDraw";
+import {datas,addRow,batchDeleteRow,deleteRow} from "./custom/formDraw";
 export default {
   name:'preview',
   props:['itemList','formConf'],
