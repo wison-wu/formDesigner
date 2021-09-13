@@ -7,7 +7,7 @@ const colItem = function(h,element){
   const { selectItem,copyItem,deleteItem} = this.$listeners
   return (
     <div class={{'dynamic-table__item':true,'active':this.isHover||this.isActive}}
-      style="min-width:150px;width: auto;position:relative" onClick={(e)=>{selectItem(e,element)}}
+      style="min-width:200px;width: auto;position:relative" onClick={(e)=>{selectItem(e,element)}}
       onMouseover={(e)=>{this.isHover = true}}
       onMouseleave={(e)=>{this.isHover = false}}
       >

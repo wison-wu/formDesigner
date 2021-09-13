@@ -21,6 +21,7 @@ export let rate = {
   gutter:15,
   labelWidth: '80',
   value: 1,
+  rules:[],
   span: 24,
   disabled: false,
   required: false,

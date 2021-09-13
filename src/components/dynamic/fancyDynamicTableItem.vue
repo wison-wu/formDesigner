@@ -4,20 +4,23 @@ import checkRules from '../custom/rule';
 const layouts = {
   colItem(element,value,parent,index) {
     const {valChange} = this.$listeners;
-    const rules = checkRules(element);
-    return (
+    let rules = [];
+    if(element&&element.rules) {
+      rules = rules.concat(checkRules(element));
+      return (
           <el-form-item label={''}
-            label-width={'0px'} 
-            prop={parent.id+'.'+index+'.'+element.id}
-            rules={rules}
-            >
-          <render key={element.id} conf={element} value={value}  onInput={ event => {
-            this.eleValue = event;
-            valChange(this.eleParent.id,this.index,element.id,this.eleValue);
-          }}/>
-          {element.required?<span style="color:#F56C6C">*</span>:''}
+                        label-width={'0px'}
+                        prop={parent.id + '.' + index + '.' + element.id}
+                        rules={rules}
+          >
+            <render key={element.id} conf={element} value={value} onInput={event => {
+              this.eleValue = event;
+              valChange(this.eleParent.id, this.index, element.id, this.eleValue);
+            }}/>
+            {element.required ? <span style="color:#F56C6C">*</span> : ''}
           </el-form-item>
-    )
+      )
+    }
   }
 }
 

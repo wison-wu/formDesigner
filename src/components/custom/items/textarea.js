@@ -39,6 +39,7 @@ export let textarea = {
   //状态，正常，只读，禁用
   status:'normal',
   value: '',
+  rules:[],
   // 验证错误提示信息
   ruleError: '该字段不能为空'
 }

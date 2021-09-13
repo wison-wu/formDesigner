@@ -15,7 +15,7 @@
   >
     <el-table-column align="center" type="selection" width="35px" v-if="conf.multiCheck" fixed="left"/>
     <el-table-column align="center" type="index" label="序号" width="50px" v-if="conf.showIndex" fixed="left"/>
-    <el-table-column align="center" v-for="(item,index) in conf.columns" :key="index" min-width="150px;">
+    <el-table-column align="center" v-for="(item,index) in conf.columns" :key="index" min-width="240px;">
       <template slot="header">
         {{tableColumnLabels[index]}}
       </template>

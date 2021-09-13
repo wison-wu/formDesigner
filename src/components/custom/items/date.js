@@ -33,6 +33,7 @@ export let date = {
   disabled:false,
   readonly:false,
   value: '',
+  rules:[],
   //时间类型
   type:'date',
   format:'yyyy-MM-dd',

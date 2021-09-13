@@ -21,6 +21,7 @@ export let slider = {
   gutter:15,
   labelWidth: '80',
   value: 0,
+  rules:[],
   span: 24,
   disabled: false,
   required: false,
