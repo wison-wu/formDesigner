@@ -1,17 +1,15 @@
 <script>
 import render from '../custom/previewRender'
-
+import checkRules from '../custom/rule';
 const layouts = {
   colItem(element,value,parent,index) {
     const {valChange} = this.$listeners;
-    let r = [];
-    const req = element.required;
-    r.push({required: req, message: element.label+'不能为空', trigger: ['blur','change']});
+    const rules = checkRules(element);
     return (
           <el-form-item label={''}
             label-width={'0px'} 
             prop={parent.id+'.'+index+'.'+element.id}
-            rules={r}
+            rules={rules}
             >
           <render key={element.id} conf={element} value={value}  onInput={ event => {
             this.eleValue = event;

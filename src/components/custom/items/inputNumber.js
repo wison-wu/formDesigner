@@ -31,6 +31,5 @@ export let inputNumber = {
   disabled: false,
   readonly: false,
   required: false,
-  value:'',
   regList: []
 }

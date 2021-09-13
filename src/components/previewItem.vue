@@ -9,16 +9,16 @@ const layouts = {
     const rules = checkRules(element);
     return (
         <el-col span={element.span}>
-        <el-form-item label={element.showLabel ? element.label : ''}
-                      label-width={labelWidth} 
-                      prop={element.id}
-                      rules={rules}
-                      > 
-          <render key={element.id} conf={element} value={value} onInput={ event => {
-            this.$set(element,'value',event);
-            valChange(element.id,event);
-          }}/>
-        </el-form-item>
+          <el-form-item label={element.showLabel ? element.label : ''}
+                        label-width={labelWidth}
+                        prop={element.id}
+                        rules={rules}
+                        >
+            <render key={element.id} conf={element} value={value} onInput={ event => {
+              this.$set(element,'value',event);
+              valChange(element.id,event);
+            }}/>
+          </el-form-item>
         </el-col>
     )
   }
