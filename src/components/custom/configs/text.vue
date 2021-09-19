@@ -5,7 +5,7 @@
     </el-form-item> -->
     <el-form-item label="ID" labelWidth="40px">
       <el-tooltip class="item" effect="dark" content="请注意,ID的修改可能会导致该组件相关事件失效！" placement="left">
-        <el-input class="input" v-model="props.id" ></el-input>
+        <el-input class="input" v-model="props.id" @change="handlerChangeId" ></el-input>
       </el-tooltip>
     </el-form-item>
     <el-form-item label="文本" labelWidth="40px">
@@ -30,9 +30,7 @@
   </div>
 </template>
 <script>
-/**
- * text的配置项
- */
+import {changeId} from '../mixin'
 export default {
   name:"textConfig",
   props:['props'],
@@ -40,6 +38,7 @@ export default {
     return{
     }
   },
+  mixins:[changeId],
   methods:{
     handlerChangeSize(val){
       this.props.size = val+'';

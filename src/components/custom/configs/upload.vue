@@ -66,14 +66,13 @@
   </div>
 </template>
 <script>
-/**
- * input的配置项
- */
+import {changeId} from '../mixin'
 export default {
   name:"uploadConfig",
   props:['props'],
   components:{
   },
+  mixins:[changeId],
   data(){
     return {
     }
@@ -81,15 +80,6 @@ export default {
   methods:{
     handlerChangeLabel(val){
       this.props.labelWidth = val?'80':'1'
-    },
-    handlerChangeId(val){
-      let idArray = this.getFormId(this.props._id);
-      if(idArray.includes(val)){  //如果存在id相等，则提示
-        this.$message.error('该ID已经存在，请修改');
-        this.props.id=this.props._id;
-      }else{
-        this.props._id=val;
-      }
     }
   },
   mounted(){

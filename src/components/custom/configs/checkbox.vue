@@ -107,6 +107,7 @@
   </div>
 </template>
 <script>
+import {changeId} from '../mixin'
 import draggable from "vuedraggable";
 import { isNumberStr } from '../../utils/index'
 /**
@@ -118,6 +119,7 @@ let vm = {
   components:{
     draggable
   },
+  mixins:[changeId],
   data(){
     return {
     }
@@ -127,10 +129,10 @@ let vm = {
       this.props.labelWidth = val?'80':'1'
     },
     handlerChangeDisStatus(val){
-      this.props.readOnly = val?false:true
+      this.props.readOnly = !val
     },
     handlerChangeReadStatus(val){
-      this.props.disabled = val?false:true
+      this.props.disabled = !val
     },
     setDefaultValue(val) {
       if (Array.isArray(val)) {
@@ -175,15 +177,6 @@ let vm = {
     },
     multipleChange(val){
     //   this.$set(this.props, 'value', val ? [] : '')
-    },
-    handlerChangeId(val){
-      let idArray = this.getFormId(this.props._id);
-      if(idArray.includes(val)){  //如果存在id相等，则提示
-        this.$message.error('该ID已经存在，请修改');
-        this.props.id=this.props._id;
-      }else{
-        this.props._id=val;
-      }
     },
     handlerChangeDataType(value){
       if(value === 'static'){

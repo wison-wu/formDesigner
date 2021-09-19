@@ -99,6 +99,7 @@
   </div>
 </template>
 <script>
+import {changeId} from '../mixin'
 import iconDialog from '../../iconDialog';
 const defaultRules={
   'phone':{'rule':'0?(13|14|15|17|18|19)[0-9]{9}','msg':'您输入的电话号码不符合规则'},
@@ -115,6 +116,7 @@ export default {
   components:{
     iconDialog
   },
+  mixins:[changeId],
   data(){
     return {
       val:'',
@@ -125,15 +127,6 @@ export default {
   methods:{
     handlerChangeLabel(val){
       this.props.labelWidth = val?'80':'1'
-    },
-    handlerChangeId(val){
-      let idArray = this.getFormId(this.props._id);
-      if(idArray.includes(val)){  //如果存在id相等，则提示
-        this.$message.error('该ID已经存在，请修改');
-        this.props.id=this.props._id;
-      }else{
-        this.props._id=val;
-      }
     },
     handlerSuffixSelectIcon(){
       this.iconDialogVisible_suffix = true;

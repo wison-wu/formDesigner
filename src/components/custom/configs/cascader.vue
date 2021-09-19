@@ -113,6 +113,7 @@
   </div>
 </template>
 <script>
+import {changeId} from '../mixin'
 //引入 省市区 数据
 import {areaData} from '../../utils/chinaAreaData';
 import {codemirror} from 'vue-codemirror';
@@ -140,6 +141,7 @@ export default {
   components:{
     codemirror
   },
+  mixins:[changeId],
   data(){
     return {
       staticDataVisible:false,
@@ -149,15 +151,6 @@ export default {
     }
   },
   methods:{
-    handlerChangeId(val){
-      let idArray = this.getFormId(this.props._id);
-      if(idArray.includes(val)){  //如果存在id相等，则提示
-        this.$message.error('该ID已经存在，请修改');
-        this.props.id=this.props._id;
-      }else{
-        this.props._id=val;
-      }
-    },
     handlerChangeLabel(val){
       this.props.labelWidth = val?'80':'1'
     },

@@ -50,9 +50,7 @@
   </div>
 </template>
 <script>
-/**
- * input的配置项
- */
+import {changeId} from '../mixin'
 const dateType =[
     {
       label: '日(date)',
@@ -97,11 +95,13 @@ const dateTimeFormat = {
   monthrange: 'yyyy-MM',
   datetimerange: 'yyyy-MM-dd HH:mm:ss'
 }
+
 export default {
   name:"inputConfig",
   props:['props','getFormId'],
   components: {
   },
+  mixins:[changeId],
   data(){
     return {
       dateTypeOptions:dateType
@@ -114,15 +114,6 @@ export default {
     },
     handlerChangeValueFormat(val){
       this.props['value-format'] = val;
-    },
-    handlerChangeId(val){
-      let idArray = this.getFormId(this.props._id);
-      if(idArray.includes(val)){  //如果存在id相等，则提示
-        this.$message.error('该ID已经存在，请修改');
-        this.props.id=this.props._id;
-      }else{
-        this.props._id=val;
-      }
     }
   },
   mounted(){

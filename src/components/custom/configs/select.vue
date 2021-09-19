@@ -94,18 +94,16 @@
   </div>
 </template>
 <script>
+import {changeId} from '../mixin'
 import draggable from "vuedraggable";
 import { isNumberStr } from '../../utils/index'
-/**
- * input的配置项
- */
 export default {
   name:"inputConfig",
   props:['props','getFormId'],
   components:{
     draggable
   },
-  
+  mixins:[changeId],
   data(){
     return {
       tempOptions:[]
@@ -158,15 +156,6 @@ export default {
     },
     multipleChange(val){
       this.$set(this.props, 'value', val ? [] : '')
-    },
-    handlerChangeId(val){
-      let idArray = this.getFormId(this.props._id);
-      if(idArray.includes(val)){  //如果存在id相等，则提示
-        this.$message.error('该ID已经存在，请修改');
-        this.props.id=this.props._id;
-      }else{
-        this.props._id=val;
-      }
     },
     handlerChangeDataType(value){
       if(value === 'static'){

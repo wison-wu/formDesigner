@@ -50,17 +50,15 @@
   </div>
 </template>
 <script>
-/**
- * input的配置项
- */
+import {changeId} from '../mixin'
 export default {
   name:"inputConfig",
   props:['props','getFormId'],
   components: {
   },
+  mixins:[changeId],
   data(){
     return {
-      val:123
     }
   },
   methods:{
@@ -68,19 +66,10 @@ export default {
       this.props.labelWidth = val?'80':'1'
     },
     handlerChangeDisStatus(val){
-      this.props.readOnly = val?false:true
+      this.props.readOnly = !val
     },
     handlerChangeReadStatus(val){
-      this.props.disabled = val?false:true
-    },
-    handlerChangeId(val){
-      let idArray = this.getFormId(this.props._id);
-      if(idArray.includes(val)){  //如果存在id相等，则提示
-        this.$message.error('该ID已经存在，请修改');
-        this.props.id=this.props._id;
-      }else{
-        this.props._id=val;
-      }
+      this.props.disabled = !val
     }
   },
   mounted(){

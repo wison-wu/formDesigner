@@ -2,7 +2,7 @@
   <div v-show="props.compType === 'editor'">
     <el-form-item label="ID">
       <el-tooltip class="item" effect="dark" content="请注意,ID的修改可能会导致该组件相关事件失效！" placement="left">
-        <el-input class="input" v-model="props.id" ></el-input>
+        <el-input class="input" v-model="props.id" @change="handlerChangeId" ></el-input>
       </el-tooltip>
     </el-form-item>
     <el-form-item label="显示标签">
@@ -26,14 +26,13 @@
   </div>
 </template>
 <script>
-/**
- * input的配置项
- */
+import {changeId} from '../mixin'
 export default {
   name:"editorConfig",
   props:{
     props:{}
   },
+  mixins:[changeId],
   methods:{
     handlerShowLabel(val){
       if(val){
