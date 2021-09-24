@@ -46,7 +46,7 @@
             @deleteItem="handlerItemDelete"/>
         </draggable>
           <div v-show="infoShow" class="empty-info">
-            从左侧拖入或点选组件进行表单设计
+            <el-empty description="从左侧拖拽添加控件"></el-empty>
           </div>
           
         </el-form>
@@ -302,6 +302,10 @@ export default {
 }
 .center-scrollbar >>> .el-scrollbar__wrap{
   overflow-x: hidden;
+}
+.empty-info >>> .el-empty__description p{
+  color: #ccb1ea;
+  font-size:16px;
 }
 </style>
 <style lang="scss">
