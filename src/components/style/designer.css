@@ -78,12 +78,11 @@ body{
 }
 .empty-info{
   position: absolute;
-  top: 46%;
+  top: 30%;
   left: 0;
   right: 0;
   text-align: center;
   font-size: 18px;
-  color: #ccb1ea;
   letter-spacing: 4px;
 }
 .action-bar{
