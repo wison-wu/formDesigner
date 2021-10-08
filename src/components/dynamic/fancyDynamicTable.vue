@@ -12,10 +12,11 @@
     style="width: 100%"
     :row-class-name="tableRowClassName"
     @selection-change="handlerSelectionChange"
+    :show-summary="conf['show-summary']"
   >
     <el-table-column align="center" type="selection" width="35px" v-if="conf.multiCheck" fixed="left"/>
     <el-table-column align="center" type="index" label="序号" width="50px" v-if="conf.showIndex" fixed="left"/>
-    <el-table-column align="center" v-for="(item,index) in conf.columns" :key="index" min-width="240px;">
+    <el-table-column align="center" :prop="item.id" v-for="(item,index) in conf.columns" :key="index" min-width="240px;">
       <template slot="header">
         {{tableColumnLabels[index]}}
       </template>

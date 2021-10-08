@@ -25,6 +25,8 @@ export let dynamicTable = {
     showIndex:true,
     visible:true,
     multiCheck:false,
+    //合计行
+    'show-summary':false,
     columns:[
     ]
 }
