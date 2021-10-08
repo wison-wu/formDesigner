@@ -9,6 +9,7 @@
     :cell-style="{padding:'5px 0'}"
     :header-cell-style="{background:'#F5F7FA'}"
     :show-summary="conf['show-summary']"
+    :summary-method="sumTotal"
     style="width: 100%">
     <el-table-column align="center" type="index" label="序号" width="50px" v-if="conf.showIndex" fixed="left"/>
     <el-table-column align="center" :prop="item.id" v-for="(item,index) in conf.columns" :key="index" min-width="150px;">
@@ -39,7 +40,34 @@ export default {
       Object.assign(tableCol,element);
       this.tableColumns.push(tableCol);
     });
-    
+  },
+  methods:{
+    sumTotal(param){
+      const { columns, data } = param;
+      const sums = [];
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = this.conf['sum-text'];
+          return;
+        }
+        const values = data.map(item => Number(item[column.property]));
+        if (!values.every(value => isNaN(value))) {
+          sums[index] = values.reduce((prev, curr) => {
+            const value = Number(curr);
+            if (!isNaN(value)) {
+              return prev + curr;
+            } else {
+              return prev;
+            }
+          }, 0);
+          sums[index] += ' '+this.conf['summary-text'];
+        } else {
+          sums[index] = '';
+        }
+      });
+
+      return sums;
+    }
   }
 }
 </script>

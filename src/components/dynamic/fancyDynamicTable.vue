@@ -13,6 +13,7 @@
     :row-class-name="tableRowClassName"
     @selection-change="handlerSelectionChange"
     :show-summary="conf['show-summary']"
+    :summary-method="sumTotal"
   >
     <el-table-column align="center" type="selection" width="35px" v-if="conf.multiCheck" fixed="left"/>
     <el-table-column align="center" type="index" label="序号" width="50px" v-if="conf.showIndex" fixed="left"/>
@@ -82,6 +83,32 @@ export default {
     },
     tableRowClassName(row) {
       row.row.index = row.rowIndex;
+    },
+    sumTotal(param){
+      const { columns, data } = param;
+      const sums = [];
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = this.conf['sum-text'];
+          return;
+        }
+        const values = data.map(item => Number(item[column.property]));
+        if (!values.every(value => isNaN(value))) {
+          sums[index] = values.reduce((prev, curr) => {
+            const value = Number(curr);
+            if (!isNaN(value)) {
+              return prev + curr;
+            } else {
+              return prev;
+            }
+          }, 0);
+          sums[index] += ' '+this.conf['summary-text'];
+        } else {
+          sums[index] = '';
+        }
+      });
+
+      return sums;
     }
   },
   computed:{
