@@ -20,6 +20,12 @@
     <el-form-item label="合计行" label-width="120px">
       <el-switch v-model="props['show-summary']"></el-switch>
     </el-form-item>
+    <el-form-item label="合计文本" label-width="120px">
+      <el-input v-model="props['sum-text']"></el-input>
+    </el-form-item>
+    <el-form-item label="单位文本" label-width="120px">
+      <el-input v-model="props['summary-text']"></el-input>
+    </el-form-item>
   </div>
 </template>
 <script>

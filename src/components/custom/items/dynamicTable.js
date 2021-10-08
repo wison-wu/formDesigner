@@ -27,6 +27,8 @@ export let dynamicTable = {
     multiCheck:false,
     //合计行
     'show-summary':false,
+    'sum-text':'合计',
+    'summary-text':'元',
     columns:[
     ]
 }
