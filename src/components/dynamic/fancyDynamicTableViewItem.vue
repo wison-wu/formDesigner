@@ -16,7 +16,7 @@ const layouts = {
       )
     }else{
       return (
-        <fancy-text text={value}/>
+        <fancy-text text={value}  align="center"/>
       )
     }
   }
