@@ -3,8 +3,7 @@ const componentChild = {};
 slots.keys().forEach(obj=>{
   const tag = obj.replace('./','').replace('.js','');
   if(tag !=='index'){
-    const content = slots(obj).default;
-    componentChild[tag] = content;
+    componentChild[tag] = slots(obj).default;
   }
 });
 

@@ -2,7 +2,7 @@ export default {
     slot(h,conf) {
         const list = [];
         if (conf['list-type'] === 'picture-card') {
-            list.push(<i class="el-icon-plus"></i>)
+            list.push(<i class="el-icon-plus"/>)
         } else {
             list.push(<el-button size="small" type="primary" icon="el-icon-upload">{conf.buttonText}</el-button>)
         }

@@ -1,5 +1,6 @@
 <script>
 import render from './custom/viewRender'
+
 const layouts = {
   colItem(h, element,value) {
     element.disabled= true;
@@ -26,8 +27,7 @@ const layouts = {
       )
     }else{
       if(typeof value === 'object'){
-        const val = value[0]+' '+element['range-separator']+' '+value[1];
-        value = val;
+        value = value[0] + ' ' + element['range-separator'] + ' ' + value[1];
       }
       return (
         <el-form-item label={element.showLabel ? element.label : ''}
