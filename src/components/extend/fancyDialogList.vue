@@ -7,6 +7,7 @@
       :title="title"
       width="60%"
       center
+      :append-to-body="true"
       :show-close="true"
       :lock-scroll="true"
       @open="show()"
