@@ -8,7 +8,7 @@ const layouts = {
     const {valChange} = this.$listeners;
     const rules = checkRules(element);
     return (
-        <el-col span={element.span}>
+        <el-col  style="padding-left: 7.5px; padding-right: 7.5px;">
           <el-form-item label={element.showLabel ? element.label : ''}
                         label-width={labelWidth}
                         prop={element.id}

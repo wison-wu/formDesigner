@@ -52,7 +52,7 @@ const layouts = {
         <el-col>
           <el-row  gutter={element.gutter} class={className}  nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
             <span class="component-name">{element.id}</span>
-            <div class="drag-wrapper">
+            <div class="drag-wrapper" style="padding-left: 7.5px; padding-right: 7.5px;">
               {
                 element.columns.map((item,index) =>{
                   return (
