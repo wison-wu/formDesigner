@@ -32,48 +32,48 @@ const layouts = {
     let labelWidth = element.labelWidth ? `${element.labelWidth}px` : null
     const {onActiveItemChange} = this.$listeners;
     return (
-      <div class={className}>
-        <el-form-item label={element.showLabel ? element.label : ''}
-                      label-width={labelWidth} 
-                      required={element.required} nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}> 
-          <render key={element.id} conf={element} onInput={ event => {
-              this.$set(element, 'value', event)
-            }} 
-          />
-        </el-form-item>
-        {components.itemBtns.apply(this, arguments)}
-      </div>
-    ) 
+        <el-col class={className} span={element.span}>
+          <el-form-item label={element.showLabel ? element.label : ''}
+                        label-width={labelWidth}
+                        required={element.required} nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
+            <render key={element.id} conf={element} onInput={ event => {
+                this.$set(element, 'value', event)
+              }}
+            />
+          </el-form-item>
+          {components.itemBtns.apply(this, arguments)}
+        </el-col>
+    )
   },
   rowItem(h, element){
     const { onActiveItemChange } = this.$listeners
     const className = this.activeItem.id === element.id ? 'drawing-item drawing-row-item active-from-item' : 'drawing-item drawing-row-item'    
     return (
-      <div className={className}>
-        <el-row  gutter={element.gutter} class={className}  nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
-          <span class="component-name">{element.id}</span>
-          <div class="drag-wrapper">
-            {
-              element.columns.map((item,index) =>{
-                return (
-                  <el-col class="drag-col-wrapper"  span={item.span}>
-                    <draggable class="drag-wrapper row-drag" v-model={item.list} animation="100" group="componentsGroup"
-                    onAdd={(e)=>{this.handlerAdd(e,item,element)}}
-                    >
-                      {
-                        item.list.map((obj,objIndex)=>{
-                          return renderChildren.call(this,h,obj,element)
-                        })
-                      }
-                    </draggable>
-                  </el-col>
-                )
-              })
-            }
-          </div>
-          {components.itemBtns.call(this,h,element)}
-        </el-row>
-      </div>
+        <el-col>
+          <el-row  gutter={element.gutter} class={className}  nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
+            <span class="component-name">{element.id}</span>
+            <div class="drag-wrapper">
+              {
+                element.columns.map((item,index) =>{
+                  return (
+                    <el-col class="drag-col-wrapper"  span={item.span}>
+                      <draggable class="drag-wrapper row-drag" v-model={item.list} animation="100" group="componentsGroup"
+                      onAdd={(e)=>{this.handlerAdd(e,item,element)}}
+                      >
+                        {
+                          item.list.map((obj,objIndex)=>{
+                            return renderChildren.call(this,h,obj,element)
+                          })
+                        }
+                      </draggable>
+                    </el-col>
+                  )
+                })
+              }
+            </div>
+            {components.itemBtns.call(this,h,element)}
+          </el-row>
+        </el-col>
     )    
   },
   dynamicItem(h,element){
