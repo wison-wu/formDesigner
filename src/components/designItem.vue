@@ -81,7 +81,7 @@ const layouts = {
     className = this.activeItem.id === element.id ? className+'drawing-item active-from-item' : className+'drawing-item'
     const {onActiveItemChange} = this.$listeners;
     return (
-        <div class={className} onClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
+        <el-col class={className} onClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
           <dynamic-table conf={element} activeItem={this.activeItem}>
             <draggable tag="div" class="dynamic-table__content row-drag" ghost-class="dynamicGhost" v-model={element.columns} animation="100"
                        group="componentsGroup"
@@ -101,7 +101,7 @@ const layouts = {
             </draggable>
           </dynamic-table>
           {components.itemBtns.call(this,h,element)}
-        </div>
+        </el-col>
     )
   }
 }
