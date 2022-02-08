@@ -49,8 +49,8 @@ const layouts = {
     const { onActiveItemChange } = this.$listeners
     const className = this.activeItem.id === element.id ? 'drawing-item drawing-row-item active-from-item' : 'drawing-item drawing-row-item'    
     return (
-        <el-col>
-          <el-row  gutter={element.gutter} class={className}  nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
+        <el-col class={className} >
+          <el-row  gutter={element.gutter}  nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
             <span class="component-name">{element.id}</span>
             <div class="drag-wrapper" style="padding-left: 7.5px; padding-right: 7.5px;">
               {
@@ -71,8 +71,8 @@ const layouts = {
                 })
               }
             </div>
-            {components.itemBtns.call(this,h,element)}
           </el-row>
+          {components.itemBtns.call(this,h,element)}
         </el-col>
     )    
   },
@@ -81,9 +81,8 @@ const layouts = {
     className = this.activeItem.id === element.id ? className+'drawing-item active-from-item' : className+'drawing-item'
     const {onActiveItemChange} = this.$listeners;
     return (
-        <el-col>
-          <div  class={className} onClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
-          <dynamic-table conf={element} activeItem={this.activeItem}>
+        <el-col  class={className} >
+          <dynamic-table conf={element} activeItem={this.activeItem} nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
             <draggable tag="div" class="dynamic-table__content row-drag" ghost-class="dynamicGhost" v-model={element.columns} animation="100"
                        group="componentsGroup"
                        onAdd={(e)=>{this.handlerDynamicAdd(e,element)}}
@@ -102,7 +101,6 @@ const layouts = {
             </draggable>
           </dynamic-table>
           {components.itemBtns.call(this,h,element)}
-          </div>
         </el-col>
     )
   }
