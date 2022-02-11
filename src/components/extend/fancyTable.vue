@@ -11,11 +11,6 @@
                         @contextmenu.prevent="rightClick($event,trIndex,tdIndex)"
                         :class={CellHide:td.hide}
                         >
-                        <draggable tag="div" class="dynamic-table__content row-drag" ghost-class="dynamicGhost" v-model="td.list" animation="100" 
-                            group="componentsGroup" @add="handlerDynamicAdd()"
-                        >
-                            <slot/>
-                        </draggable>
                         </td>
                 </tr>
             </tbody>
