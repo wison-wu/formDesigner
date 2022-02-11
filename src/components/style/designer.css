@@ -168,6 +168,9 @@ body{
 .el-checkbox:last-of-type{
   margin-right:30px;
 }
+.el-rate{
+  margin-top:10px;
+}
 /* .dynamic-table.active{
   border-left: 3px solid #409eff;
   background:#ecf5ff
