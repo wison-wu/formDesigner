@@ -1,5 +1,6 @@
+## 如果这个项目对您有帮助，麻烦给个star，谢谢！
 ## 简介
-基于vue+ElementUI的表单设计器。让表单拖拽更加简单方便
+基于vue+ElementUI的表单设计器。让表单拖拽更加简单方便,
 ![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/designer.png)
 ![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/preview.png)
 ![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/edit-form.png)
@@ -41,8 +42,6 @@
 
 [如何扩展一个自定义组件](https://my.oschina.net/wison/blog/5276172)
 
-## 友情链接
-- [高性能 vue3 表格组件 vma-grid](https://gitee.com/sleiphur/vma-grid)
 
 ## 交流一下
 
@@ -51,10 +50,17 @@ QQ群：816204482
 ## 预览地址
 [formdesigner](http://wurong19870715.gitee.io/formdesigner)
 
-## 感谢作者
-[form-generator](https://gitee.com/mrhj/form-generator)
 
-如果这个项目对您有帮助，麻烦给个star，谢谢！
+如果你觉得项目对你有帮助，欢迎赞助作者一杯咖啡/奶茶/快乐水
+## 捐赠
+微信
+
+![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/weixin.png)
+
+支付宝
+
+![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/zhifubao.png)
+
 
 ## 开源协议
 [MIT]
