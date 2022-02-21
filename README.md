@@ -51,11 +51,12 @@ QQ群：816204482
 [formdesigner](http://wurong19870715.gitee.io/formdesigner)
 
 
-如果你觉得项目对你有帮助，欢迎赞助作者一杯咖啡/奶茶/快乐水
+
 ## 捐赠
+如果你觉得项目对你有帮助，欢迎赞助作者一杯咖啡/奶茶/快乐水
 微信
 
-![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/weixin.png)
+![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/weixin.png )
 
 支付宝
 
