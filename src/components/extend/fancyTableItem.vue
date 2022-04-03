@@ -1,35 +1,16 @@
 <template>
-  <div>
-    <div style="padding:5px;margin-top:10px">
-        <table class="table-layout">
-            <tbody>
-                <tr v-for="(tr,trIndex) in layoutArray" :key="trIndex">
-                    <slot name="item" :item="tr" :index="trIndex"/>
-                    <!-- <td v-for="(td,tdIndex) in tr" 
-                        :key="tdIndex"
-                        :colspan="td.col" 
-                        :rowspan="td.row"
-                        @contextmenu.prevent="rightClick($event,trIndex,tdIndex)"
-                        :class={CellHide:td.hide}
-                        >
-                        
-                        </td> -->
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div 
-        v-show="showContextMunu"
-        class="right-menu" :style="{ top:  + positionY+'px',left:  + positionX+'px', }">
-            <ul style="list-style-type: none">
-                <li @click="handlerRightCol" v-if="showRightColMenu"><icon code="zuoyouhebing" text="向右合并单元格"/></li>
-                <li @click="handlerDownRow" v-if="showDownRowMenu"><icon code="shangxiahebing" text="向下合并单元格"/></li>
-                <li @click="handlerResetTable" v-if="showResetTableMenu"><icon code="chaifen" text="拆分单元格"/></li>
-                <li @click="handlerAppendCol"><icon code="zhuijiahang" text="追加行"/></li>
-                <li @click="handlerAppendRow"><icon code="zhuijialie" text="追加列"/></li>
-            </ul>
-    </div>
-  </div>
+<span style="width:100%">
+    <td v-for="(td,tdIndex) in trItem" 
+        :key="tdIndex"
+        :colspan="td.col" 
+        :rowspan="td.row"
+        @contextmenu.prevent="rightClick($event,trIndex,tdIndex)"
+        :class={CellHide:td.hide}
+        >
+            <slot/>
+        </td>
+</span>
+
 </template>
 
 <script>
@@ -37,24 +18,18 @@ import icon from '../icon';
 import {jsonClone} from "../utils";
 import draggable from 'vuedraggable';
 import {tableAllowedItems} from "../custom/formConf";
-import fancyTableItem from "./fancyTableItem";
 let td = {col:1,row:1,hide:false};
 let tr = [td,td];
 export default {
     name:'fancyTable',
     components:{
         icon,
-        draggable,
-        fancyTableItem
+        draggable
     },
     props:{
-        layoutArray:{
-            type:Array,
-            default:()=>[]
-        },
-        activeItem: {
-            type: Object,
-            default:{}
+        trItem: {
+            type: Array,
+            default:[]
         }
     },
     data(){
@@ -64,6 +39,7 @@ export default {
             showContextMunu:false,
             currentRowIndex:0,
             currentColIndex:0,
+            text:''
             //columns: this.trs
         }
     },
@@ -72,7 +48,6 @@ export default {
         document.addEventListener("click", this.hideRightContextMenu, true);
         document.addEventListener("contextmenu", this.hideRightContextMenu, true);
         //默认加载一行两列的表格
-        console.log(this.layoutArray);
         // this.handlerAppendCol();
         // this.handlerAppendCol();
     },
@@ -128,14 +103,6 @@ export default {
                 this.layoutArray[this.currentRowIndex+row][this.currentColIndex].hide=true;
                 this.layoutArray[this.currentRowIndex][this.currentColIndex].row=row+1;
             }
-            // let nextCol = this.columns[this.currentRowIndex+1][this.currentColIndex].col;
-            // let nextRow = this.columns[this.currentRowIndex+1][this.currentColIndex].row;
-            // if(nextCol<2&nextRow<2){
-                
-            // }else{
-            //     alert('请先拆分下方单元格！');
-            // }
-            
         },
         handlerResetTable(){
             //debugger;
@@ -151,14 +118,6 @@ export default {
             this.layoutArray[this.currentRowIndex][this.currentColIndex].row=1;
             this.layoutArray[this.currentRowIndex][this.currentColIndex].col=1;
         },
-        // handlerInsertCol(){
-        //     this.columns.splice(this.currentCol,0,this.defaultTr);
-        // },
-        // handlerInsertRow(){
-        //     this.columns.forEach((item)=>{
-        //         item.splice(this.currentRow,0,this.defaultTd);
-        //     })
-        // },
         //追加行
         handlerAppendCol(){
             const _tr = jsonClone(tr);

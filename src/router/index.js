@@ -4,6 +4,7 @@ import designer from '@/components/formDesigner'
 import dialogTest from '@/pages/dialogTest'
 import queryDialogTest from '@/pages/queryDialogTest'
 import view from '@/pages/view'
+import table from '@/pages/table'
 
 
 Vue.use(VueRouter)
@@ -25,6 +26,10 @@ const routes = [
     path: '/view',
     name: 'view',
     component: view
+  },{
+    path: '/table',
+    name: 'table',
+    component: table
   }
 ]
 
