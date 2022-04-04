@@ -49,8 +49,7 @@ QQ群：816204482
 
 ## 预览地址
 [formdesigner](http://wurong19870715.gitee.io/formdesigner)
-## 专业版预览：
-[fancyFormDesigner](http://wurong19870715.gitee.io/fancy-form-designer)
+
 
 
 

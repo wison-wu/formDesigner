@@ -1,5 +1,5 @@
 <template>
-<span style="width:100%">
+<span>
     <td v-for="(td,tdIndex) in trItem" 
         :key="tdIndex"
         :colspan="td.col" 
@@ -199,7 +199,7 @@ td{
     text-align: left;
     margin: 0 auto;
 }
-.table-layout > tbody > tr > td{
+.table-layout > tbody > tr >span > td{
     padding: 6px;
     word-break: break-word;
     border: 1px solid #d2d2d2;

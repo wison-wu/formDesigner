@@ -5,7 +5,8 @@ import {getSimpleId} from "./utils/IdGenerate";
 import {dynamicTableAllowedItems} from "./custom/formConf";
 import dynamicTable from './dynamic/dynamicTable'
 import dynamicTableItem from './dynamic/dynamicTableItem'
-
+import fancyTable from './extend/fancyTable'
+import fancyTableItem from './extend/fancyTableItem'
 /**
  * 动态表单允许增加的组件列表
  */
@@ -76,6 +77,30 @@ const layouts = {
         </el-col>
     )    
   },
+  tableItem(h, element){
+    let className = "";
+    className = this.activeItem.id === element.id ? 'drawing-item drawing-row-item active-from-item' : 'drawing-item drawing-row-item'
+    const {onActiveItemChange} = this.$listeners;
+    return (
+      <div class={className}>
+        <span class="component-name" style="margin-bottom:15px">{element.id}</span>
+        <fancy-table  layoutArray={element.layoutArray} nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}
+                      onHandlerTableAdd={(evt,item,index) =>{this.handlerTableAdd(evt,item,index)}}
+                      scopedSlots={{
+                        default: (tr,index) => {
+                          return (
+                              <fancy-table-item trItem={tr}>
+                                asdfasdf
+                              </fancy-table-item>
+                          );
+                        }
+                      }}
+        >
+        </fancy-table>
+        {components.itemBtns.call(this,h,element)}
+      </div>
+    )
+  },
   dynamicItem(h,element){
     let className = "";
     className = this.activeItem.id === element.id ? className+'drawing-item active-from-item' : className+'drawing-item'
@@ -126,7 +151,9 @@ export default {
     render,
     draggable,
     dynamicTable,
-    dynamicTableItem
+    dynamicTableItem,
+    fancyTable,
+    fancyTableItem
   },
   props: {
     model: { 
@@ -190,6 +217,9 @@ export default {
           return false;
         }
       }
+    },
+    handlerTableAdd(evt,item,index){
+      console.log(item);
     },
     handlerCopyItem(evt,element,index){
       const item = element.columns[index];

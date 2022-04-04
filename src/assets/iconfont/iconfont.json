@@ -6,6 +6,83 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "4766919",
+      "name": "table",
+      "font_class": "-table_layout",
+      "unicode": "e7de",
+      "unicode_decimal": 59358
+    },
+    {
+      "icon_id": "11179893",
+      "name": "拆分行",
+      "font_class": "-chaifenhang",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "11179898",
+      "name": "拆分列",
+      "font_class": "-chaifenlie",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "12819536",
+      "name": "拆分",
+      "font_class": "-chaifen",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "7040012",
+      "name": "行追加",
+      "font_class": "-zhuijiahang",
+      "unicode": "e6ce",
+      "unicode_decimal": 59086
+    },
+    {
+      "icon_id": "7040014",
+      "name": "列追加",
+      "font_class": "-zhuijialie",
+      "unicode": "e6cf",
+      "unicode_decimal": 59087
+    },
+    {
+      "icon_id": "10868107",
+      "name": "插入行",
+      "font_class": "-charuhang",
+      "unicode": "e8a2",
+      "unicode_decimal": 59554
+    },
+    {
+      "icon_id": "10868232",
+      "name": "插入列",
+      "font_class": "-charulie",
+      "unicode": "e8a4",
+      "unicode_decimal": 59556
+    },
+    {
+      "icon_id": "19324946",
+      "name": "上下合并",
+      "font_class": "-shangxiahebing",
+      "unicode": "e66a",
+      "unicode_decimal": 58986
+    },
+    {
+      "icon_id": "19324950",
+      "name": "左右合并",
+      "font_class": "-zuoyouhebing",
+      "unicode": "e66b",
+      "unicode_decimal": 58987
+    },
+    {
+      "icon_id": "19478268",
+      "name": "treeselect",
+      "font_class": "-treeselect",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
       "icon_id": "6801615",
       "name": "Barcode",
       "font_class": "-barcode2",

@@ -19,6 +19,7 @@ import {dynamicTable} from "./items/dynamicTable";
 import {button} from "./items/button";
 import {divider} from "./items/divider";
 import {row} from "./items/row";
+import {table} from "./items/table";
 
 import {alert} from "./items/alert";
 import {link} from "./items/link";
@@ -30,4 +31,4 @@ export  const formItems = [
   ,rate,date,time,editor,colorPicker,cascader,upload,dialogList,barCode,dynamicTable
 ];
 export  const assistFormItems = [button,divider,alert,link,text];
-export  const layoutFormItems = [row];
+export  const layoutFormItems = [row,table];

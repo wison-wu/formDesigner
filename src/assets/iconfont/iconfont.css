@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 1782818 */
-  src: url('iconfont.woff2?t=1626615531646') format('woff2'),
-       url('iconfont.woff?t=1626615531646') format('woff'),
-       url('iconfont.ttf?t=1626615531646') format('truetype');
+  src: url('iconfont.woff2?t=1636125596282') format('woff2'),
+       url('iconfont.woff?t=1636125596282') format('woff'),
+       url('iconfont.ttf?t=1636125596282') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,50 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-table_layout:before {
+  content: "\e7de";
+}
+
+.icon-chaifenhang:before {
+  content: "\e60a";
+}
+
+.icon-chaifenlie:before {
+  content: "\e60b";
+}
+
+.icon-chaifen:before {
+  content: "\e60d";
+}
+
+.icon-zhuijiahang:before {
+  content: "\e6ce";
+}
+
+.icon-zhuijialie:before {
+  content: "\e6cf";
+}
+
+.icon-charuhang:before {
+  content: "\e8a2";
+}
+
+.icon-charulie:before {
+  content: "\e8a4";
+}
+
+.icon-shangxiahebing:before {
+  content: "\e66a";
+}
+
+.icon-zuoyouhebing:before {
+  content: "\e66b";
+}
+
+.icon-treeselect:before {
+  content: "\e609";
 }
 
 .icon-barcode2:before {
