@@ -2,7 +2,7 @@
 import draggable from 'vuedraggable'
 import render from './custom/render'
 import {getSimpleId} from "./utils/IdGenerate";
-import {dynamicTableAllowedItems} from "./custom/formConf";
+import {dynamicTableAllowedItems,tableAllowedItems} from "./custom/formConf";
 import dynamicTable from './dynamic/dynamicTable'
 import dynamicTableItem from './dynamic/dynamicTableItem'
 import fancyTable from './extend/fancyTable'
@@ -85,18 +85,24 @@ const layouts = {
       <div class={className}>
         <span class="component-name" style="margin-bottom:15px">{element.id}</span>
         <fancy-table  layoutArray={element.layoutArray} nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}
-                      onHandlerTableAdd={(evt,item,index) =>{this.handlerTableAdd(evt,item,index)}}
                       scopedSlots={{
-                        default: (tr,index) => {
+                        default: (item) => {
                           return (
-                              <fancy-table-item trItem={tr}>
-                                asdfasdf
-                              </fancy-table-item>
+                                <draggable tag="div" class="dynamic-table__content row-drag"
+                                           ghost-class="dynamicGhost" v-model={item.td.list} animation="100"
+                                           group="componentsGroup"
+                                           onAdd={(e) => {this.handlerTableAdd(e, item);e.stopPropagation()}}
+                                >
+                                  {
+                                    item.td.list.map((obj)=>{
+                                      return renderChildren.call(this,h,obj,element)
+                                    })
+                                  }
+                                </draggable>
                           );
                         }
                       }}
-        >
-        </fancy-table>
+        />
         {components.itemBtns.call(this,h,element)}
       </div>
     )
@@ -218,8 +224,14 @@ export default {
         }
       }
     },
-    handlerTableAdd(evt,item,index){
-      console.log(item);
+    handlerTableAdd(evt,item){
+      if(evt.pullMode === 'clone'){
+        if(tableAllowedItems.includes(this.activeItem.compType)){
+          item.td.list.splice(evt.newIndex,0,this.activeItem);
+        }else{
+          this.$message.error('该组件不允许被放入表格内！');
+        }
+      }
     },
     handlerCopyItem(evt,element,index){
       const item = element.columns[index];

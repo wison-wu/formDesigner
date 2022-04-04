@@ -3,9 +3,17 @@
     <div style="padding:5px;margin-top:10px">
       <table class="table-layout">
         <tbody>
-          <tr v-for="(tr,trIndex) in layoutArray" :key="trIndex">
-              <slot :index="trIndex" :tr="tr"/>
-          </tr>
+        <tr v-for="(tr,trIndex) in layoutArray" :key="trIndex">
+          <td v-for="(td,tdIndex) in tr"
+              :key="tdIndex"
+              :colspan="td.col"
+              :rowspan="td.row"
+              @contextmenu.prevent="rightClick($event,trIndex,tdIndex)"
+              :class={CellHide:td.hide}
+          >
+            <slot :td="td"/>
+          </td>
+        </tr>
         </tbody>
       </table>
     </div>
@@ -27,7 +35,6 @@
 import icon from '../icon';
 import {jsonClone} from "../utils";
 import draggable from 'vuedraggable';
-import {tableAllowedItems} from "../custom/formConf";
 let td = {col:1,row:1,hide:false};
 let tr = [td,td];
 export default {
@@ -126,7 +133,7 @@ export default {
       //debugger;
       let col = this.layoutArray[this.currentRowIndex][this.currentColIndex].col;
       let row = this.layoutArray[this.currentRowIndex][this.currentColIndex].row;
-      if(col==1&&row==1)return;
+      if(col===1&&row===1)return;
 
       for(let i = 0;i<row;i++){
         for(let j = 0;j<col;j++){
@@ -155,10 +162,7 @@ export default {
         const _td = jsonClone(td);
         item.push(_td);
       })
-    },
-    handlerTableAdd(evt,td,index){
-      this.$emit('handlerTableAdd',evt,td,index);
-    },
+    }
   },
   computed:{
     showRightColMenu(){
