@@ -17,18 +17,22 @@
     layoutArray:[[{
         col:1,
         row:1,
+        hide:false,
         list:[]
       },{
         col:1,
         row:1,
+        hide:false,
         list:[]
       }],[{
         col:1,
         row:1,
+        hide:false,
         list:[]
       },{
         col:1,
         row:1,
+        hide:false,
         list:[]
       }]
     ]

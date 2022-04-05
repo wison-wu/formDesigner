@@ -88,8 +88,8 @@ const layouts = {
                       scopedSlots={{
                         default: (item) => {
                           return (
-                                <draggable tag="div" class="dynamic-table__content row-drag"
-                                           ghost-class="dynamicGhost" v-model={item.td.list} animation="100"
+                                <draggable tag="div" class="table__content row-drag"
+                                           v-model={item.td.list} animation="100"
                                            group="componentsGroup"
                                            onAdd={(e) => {this.handlerTableAdd(e, item);e.stopPropagation()}}
                                 >

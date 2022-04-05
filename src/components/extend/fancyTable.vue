@@ -35,7 +35,7 @@
 import icon from '../icon';
 import {jsonClone} from "../utils";
 import draggable from 'vuedraggable';
-let td = {col:1,row:1,hide:false};
+let td = {col:1,row:1,hide:false,list:[]};
 let tr = [td,td];
 export default {
   name:'fancyTable',
@@ -153,6 +153,7 @@ export default {
     // },
     //追加行
     handlerAppendCol(){
+      console.log(tr);
       const _tr = jsonClone(tr);
       this.layoutArray.push(_tr);
     },
@@ -219,6 +220,8 @@ td{
   padding: 8px !important;
   text-align: left;
   margin: 0 auto;
+  width: 100%; 
+  table-layout: fixed;
 }
 .table-layout > tbody > tr > td{
   padding: 6px;

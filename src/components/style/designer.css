@@ -162,6 +162,15 @@ body{
   padding:10px;
   text-align: center;
 }
+.table__content{
+  width:100%;
+  height:100%;
+  overflow-y: hidden;
+  outline: 1px dashed #ccc;
+  outline-offset: -1px;
+  min-height: 100px;
+  float:left
+}
 .el-radio:last-child {
   margin-right:30px;
 }
