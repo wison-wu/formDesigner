@@ -250,6 +250,10 @@ export default {
         this.list.splice(index,1);
       }else{  //如果不是布局组件，则先判断是不是再布局内部，如果不是，则直接删除就可以，如果是，则要在布局内部删除
         if(parent){
+          /**
+           * 先判断是否是表格里面的组件，后续此处要重写。
+           * */
+          if(inTable())
           parent.columns.map((column,index)=>{
             const colIndex = column.list.findIndex(item=>item.id === origin.id);
             if(colIndex>-1){
@@ -306,6 +310,9 @@ export default {
 .empty-info >>> .el-empty__description p{
   color: #ccb1ea;
   font-size:16px;
+}
+.drawing-board >>> .el-radio.is-bordered+.el-radio.is-bordered{
+  margin-left:0px;
 }
 </style>
 <style lang="scss">

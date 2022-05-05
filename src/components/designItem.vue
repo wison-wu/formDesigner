@@ -89,13 +89,13 @@ const layouts = {
                         default: (item) => {
                           return (
                                 <draggable tag="div" class="table__content row-drag"
-                                           v-model={item.td.list} animation="100"
+                                           v-model={item.td.columns} animation="100"
                                            group="componentsGroup"
-                                           onAdd={(e) => {this.handlerTableAdd(e, item);e.stopPropagation()}}
+                                           onAdd={(e) => {this.handlerTableAdd(e, item.td);e.stopPropagation()}}
                                 >
                                   {
-                                    item.td.list.map((obj)=>{
-                                      return renderChildren.call(this,h,obj,element)
+                                    item.td.columns.map((obj)=>{
+                                      return renderChildren.call(this,h,obj,item.td)
                                     })
                                   }
                                 </draggable>
@@ -224,10 +224,10 @@ export default {
         }
       }
     },
-    handlerTableAdd(evt,item){
+    handlerTableAdd(evt,td){
       if(evt.pullMode === 'clone'){
         if(tableAllowedItems.includes(this.activeItem.compType)){
-          item.td.list.splice(evt.newIndex,0,this.activeItem);
+          td.columns.splice(evt.newIndex,0,this.activeItem);
         }else{
           this.$message.error('该组件不允许被放入表格内！');
         }

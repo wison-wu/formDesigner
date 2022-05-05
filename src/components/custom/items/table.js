@@ -18,22 +18,22 @@
         col:1,
         row:1,
         hide:false,
-        list:[]
+        columns:[]
       },{
         col:1,
         row:1,
         hide:false,
-        list:[]
+        columns:[]
       }],[{
         col:1,
         row:1,
         hide:false,
-        list:[]
+        columns:[]
       },{
         col:1,
         row:1,
         hide:false,
-        list:[]
+        columns:[]
       }]
     ]
 

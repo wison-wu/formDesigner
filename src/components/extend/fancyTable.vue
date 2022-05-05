@@ -35,7 +35,7 @@
 import icon from '../icon';
 import {jsonClone} from "../utils";
 import draggable from 'vuedraggable';
-let td = {col:1,row:1,hide:false,list:[]};
+let td = {col:1,row:1,hide:false,columns:[]};
 let tr = [td,td];
 export default {
   name:'fancyTable',
