@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <el-row  :gutter="formConf.gutter" class="form-builder">
       <el-form
           :rules="rules"
@@ -179,5 +179,10 @@ export default {
   margin-left:10px;
   margin-right:10px;
 }
-
+.form-builder >>> .el-radio.is-bordered+.el-radio.is-bordered{
+  margin-left:0px;
+}
+.form-builder >>> .el-checkbox.is-bordered+.el-checkbox.is-bordered{
+  margin-left:0px;
+}
 </style>

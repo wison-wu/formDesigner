@@ -314,6 +314,9 @@ export default {
 .drawing-board >>> .el-radio.is-bordered+.el-radio.is-bordered{
   margin-left:0px;
 }
+.drawing-board >>> .el-checkbox.is-bordered+.el-checkbox.is-bordered{
+  margin-left:0px;
+}
 </style>
 <style lang="scss">
 @import "./style/designer.scss";

@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div class="preview">
     <el-row  :gutter="formConf.gutter">
       <el-form
           :rules="rules"
@@ -153,5 +153,11 @@ export default {
 <style scoped>
 .preview-board{
   border: 1px dashed #ccc
+}
+.preview >>> .el-radio.is-bordered+.el-radio.is-bordered{
+  margin-left:0px;
+}
+.preview >>> .el-checkbox.is-bordered+.el-checkbox.is-bordered{
+  margin-left:0px;
 }
 </style>
