@@ -59,5 +59,6 @@ export const tableAllowedItems = [
   'slider',
   'rate',
   'date',
-  'time'
+  'time',
+  'text'
 ]
