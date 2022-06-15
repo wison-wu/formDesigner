@@ -224,16 +224,28 @@ export default {
           this.handlerActiveItemChange(clone);
       }else{  //如果是普通组件，需要判断他是否再布局组件下。
         if(parent){
-          parent.columns.map((column)=>{
-            if(column.list.some(item => item.id === origin.id)){
+          if (inTable(parent)) { //增加表格组件的支持
+            if (parent.columns.some(item => item.id === origin.id)) {
               const clone = JSON.parse(JSON.stringify(origin))
-              const uId = "fd_"+getSimpleId();
+              const uId = "fd_" + getSimpleId();
               clone.id = uId;
               clone._id = uId;
-              column.list.push(clone);
+              parent.columns.push(clone);
               this.handlerActiveItemChange(clone);
             }
-          })
+          } else {
+            parent.columns.map((column) => {
+              if (column.list.some(item => item.id === origin.id)) {
+                const clone = JSON.parse(JSON.stringify(origin))
+                const uId = "fd_" + getSimpleId();
+                clone.id = uId;
+                clone._id = uId;
+                column.list.push(clone);
+                this.handlerActiveItemChange(clone);
+              }
+            })
+          }
+          
         }else{
           const clone = JSON.parse(JSON.stringify(origin))
           const uId = "fd_"+getSimpleId();
@@ -252,7 +264,7 @@ export default {
         this.list.splice(index,1);
       }else{  //如果不是布局组件，则先判断是不是再布局内部，如果不是，则直接删除就可以，如果是，则要在布局内部删除
         if(parent){
-          if (inTable(parent)){
+          if (inTable(parent)){ //增加表格组件的支持
             const colIndex = parent.columns.findIndex(item => item.id === origin.id);
             if (colIndex > -1) {
               parent.columns.splice(colIndex, 1);
