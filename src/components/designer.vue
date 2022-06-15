@@ -117,7 +117,7 @@ import draggable from "vuedraggable";
 import configPanel from './configPanel'
 import designItem from './designItem'
 import {getSimpleId} from "./utils/IdGenerate";
-import {isLayout} from "./utils/index";
+import { isLayout, isTable, inTable } from "./utils/index";
 import formConf from "./custom/formConf";
 import preview from "./preview";
 import {codemirror} from 'vue-codemirror';
@@ -245,21 +245,27 @@ export default {
       }
     },
     handlerItemDelete(origin,parent){
-      if(isLayout(origin)){ //如果是布局组件,则直接删除
+      console.log(origin);
+      console.log(parent);
+      if (isLayout(origin) || isTable(origin)){ //如果是布局组件,则直接删除
         const index = this.list.findIndex(item=>item.id === origin.id);
         this.list.splice(index,1);
       }else{  //如果不是布局组件，则先判断是不是再布局内部，如果不是，则直接删除就可以，如果是，则要在布局内部删除
         if(parent){
-          /**
-           * 先判断是否是表格里面的组件，后续此处要重写。
-           * */
-          if(inTable())
-          parent.columns.map((column,index)=>{
-            const colIndex = column.list.findIndex(item=>item.id === origin.id);
-            if(colIndex>-1){
-              column.list.splice(colIndex,1);
+          if (inTable(parent)){
+            const colIndex = parent.columns.findIndex(item => item.id === origin.id);
+            if (colIndex > -1) {
+              parent.columns.splice(colIndex, 1);
             }
-          })
+          }else{
+            parent.columns.map((column) => {
+              const colIndex = column.list.findIndex(item => item.id === origin.id);
+              if (colIndex > -1) {
+                column.list.splice(colIndex, 1);
+              }
+            })
+          }
+          
         }else{
           const index = this.list.findIndex(item=>item.id === origin.id);
           this.list.splice(index,1);

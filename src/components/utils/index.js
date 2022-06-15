@@ -114,8 +114,11 @@ export function jsonClone(obj) {
 export function isLayout(obj) {
   return obj.compType === 'row';
 }
-export function inTable(obj) {
+export function isTable(obj) {
   return obj.compType === 'table';
+}
+export function inTable(obj) {
+  return obj.col&&obj.row;
 }
 
 export const isAttr = makeMap(
