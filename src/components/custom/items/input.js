@@ -30,7 +30,7 @@ export let input = {
   //默认栅格
   span:24,
   //组件长度
-  width: '95%',
+  width: '100%',
   //是否可清空
   clearable:true,
   disabled:false,

@@ -40,7 +40,10 @@
 
 [项目结构](https://my.oschina.net/wison/blog/5276165)
 
+[如何将formDesigner集成到自己的项目中](https://my.oschina.net/wison/blog/5540167)
+
 [如何扩展一个自定义组件](https://my.oschina.net/wison/blog/5276172)
+
 
 
 ## 交流一下

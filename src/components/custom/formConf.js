@@ -46,7 +46,7 @@ export const rowAllowedItems = [
   'date',
   'time'
 ]
-//row允许放入的items
+//table允许放入的items
 export const tableAllowedItems = [
   'input',
   'input',
