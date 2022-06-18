@@ -3,29 +3,32 @@
     <div style="padding:5px;margin-top:10px">
       <table class="table-layout">
         <tbody>
-        <tr v-for="(tr,trIndex) in layoutArray" :key="trIndex">
-          <td v-for="(td,tdIndex) in tr"
-              :key="tdIndex"
-              :colspan="td.col"
-              :rowspan="td.row"
-              @contextmenu.prevent="rightClick($event,trIndex,tdIndex)"
-              :class={CellHide:td.hide}
-          >
-            <slot :td="td"/>
-          </td>
-        </tr>
+          <tr v-for="(tr,trIndex) in layoutArray" :key="trIndex">
+            <td v-for="(td,tdIndex) in tr" :key="tdIndex" :colspan="td.col" :rowspan="td.row"
+              @contextmenu.prevent="rightClick($event,trIndex,tdIndex)" :class="{CellHide:td.hide}">
+              <slot :td="td" />
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
-    <div
-        v-show="showContextMunu"
-        class="right-menu" :style="{ top:  + positionY+'px',left:  + positionX+'px', }">
+    <div v-show="showContextMunu" class="right-menu" :style="{ top:  + positionY+'px',left:  + positionX+'px', }">
       <ul style="list-style-type: none">
-        <li @click="handlerRightCol" v-if="showRightColMenu"><icon code="zuoyouhebing" text="向右合并单元格"/></li>
-        <li @click="handlerDownRow" v-if="showDownRowMenu"><icon code="shangxiahebing" text="向下合并单元格"/></li>
-        <li @click="handlerResetTable" v-if="showResetTableMenu"><icon code="chaifen" text="拆分单元格"/></li>
-        <li @click="handlerAppendCol"><icon code="zhuijiahang" text="追加行"/></li>
-        <li @click="handlerAppendRow"><icon code="zhuijialie" text="追加列"/></li>
+        <li @click="handlerRightCol" v-if="showRightColMenu">
+          <icon code="zuoyouhebing" text="向右合并单元格" />
+        </li>
+        <li @click="handlerDownRow" v-if="showDownRowMenu">
+          <icon code="shangxiahebing" text="向下合并单元格" />
+        </li>
+        <li @click="handlerResetTable" v-if="showResetTableMenu">
+          <icon code="chaifen" text="拆分单元格" />
+        </li>
+        <li @click="handlerAppendCol">
+          <icon code="zhuijiahang" text="追加行" />
+        </li>
+        <li @click="handlerAppendRow">
+          <icon code="zhuijialie" text="追加列" />
+        </li>
       </ul>
     </div>
   </div>

@@ -21,7 +21,7 @@ import {tableAllowedItems} from "../custom/formConf";
 let td = {col:1,row:1,hide:false};
 let tr = [td,td];
 export default {
-    name:'fancyTable',
+    name:'fancyTableItem',
     components:{
         icon,
         draggable

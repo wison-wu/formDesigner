@@ -98,6 +98,8 @@ import previewItem from "./previewItem";
 import previewRowItem from "./previewRowItem";
 import fancyDynamicTable from "./dynamic/fancyDynamicTable";
 import fancyDynamicTableItem from "./dynamic/fancyDynamicTableItem";
+import fancyEditTable from "./extend/fancyEditTable";
+import fancyEditTableItem from "./extend/fancyEditTableItem";
 import {datas,addRow,batchDeleteRow,deleteRow} from "./custom/formDraw";
 export default {
   name:'preview',
@@ -106,7 +108,9 @@ export default {
     previewItem,
     previewRowItem,
     fancyDynamicTable,
-    fancyDynamicTableItem
+    fancyDynamicTableItem,
+    fancyEditTable,
+    fancyEditTableItem
   },
   data(){
     return{
