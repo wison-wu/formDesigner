@@ -24,7 +24,8 @@ const components = [
   'text',
   'html',
   'row',
-  'dynamicTable'
+  'dynamicTable',
+  'table'
 ];
 
 
