@@ -1,11 +1,11 @@
 <template>
     <div>
         <div style="padding:5px;margin-top:10px">
-            <table class="table-layout">
+            <table class="table-layout" :style="tableWidth">
                 <tbody>
                     <tr v-for="(tr, trIndex) in layoutArray" :key="trIndex">
                         <td v-for="(td, tdIndex) in tr" :key="tdIndex" :colspan="td.col" :rowspan="td.row"
-                            :class="{ CellHide: td.hide }">
+                            :class="{ CellHide: td.hide }" :style="tdStyle">
                             <slot :td="td" />
                         </td>
                     </tr>
@@ -16,30 +16,26 @@
 </template>
 
 <script>
-import icon from '../icon';
-import { jsonClone } from "../utils";
-import draggable from 'vuedraggable';
-let td = { col: 1, row: 1, hide: false, columns: [] };
-let tr = [td, td];
 export default {
     name: 'fancyEditTable',
     components: {
-        icon,
-        draggable
     },
     props: {
         layoutArray: {
             type: Array,
             default: () => []
+        },
+        tdStyle:{
+            type:String,
+            default:''
+        },
+        width:{
+            type:Number,
+            default:100
         }
     },
     data() {
         return {
-            positionX: 0,
-            positionY: 0,
-            currentRowIndex: 0,
-            currentColIndex: 0,
-            //columns: this.trs
         }
     },
     mounted() {
@@ -50,6 +46,11 @@ export default {
     methods: {
     },
     computed: {
+        tableWidth(){
+            console.log(this.width);
+            console.log(this.tdStyle);
+            return 'width:'+this.width+'%';
+        }
     }
 }
 </script>

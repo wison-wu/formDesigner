@@ -35,7 +35,9 @@
         hide:false,
         columns:[]
       }]
-    ]
-
+    ],
+    //单元格样式
+    tdStyle:'',
+    width:100
   }
   

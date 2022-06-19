@@ -84,7 +84,10 @@ const layouts = {
     return (
       <div class={className}>
         <span class="component-name" style="margin-bottom:15px">{element.id}</span>
-        <fancy-table  layoutArray={element.layoutArray} nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}
+        <fancy-table  layoutArray={element.layoutArray} 
+                      tdStyle={element.tdStyle} 
+                      width={element.width}
+                      nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}
                       scopedSlots={{
                         default: (item) => {
                           return (

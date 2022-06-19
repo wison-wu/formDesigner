@@ -1,11 +1,11 @@
 <template>
   <div>
     <div style="padding:5px;margin-top:10px">
-      <table class="table-layout">
+      <table class="table-layout" :style="tableWidth">
         <tbody>
-          <tr v-for="(tr,trIndex) in layoutArray" :key="trIndex">
+          <tr v-for="(tr,trIndex) in layoutArray" :key="trIndex" >
             <td v-for="(td,tdIndex) in tr" :key="tdIndex" :colspan="td.col" :rowspan="td.row"
-              @contextmenu.prevent="rightClick($event,trIndex,tdIndex)" :class="{CellHide:td.hide}">
+              @contextmenu.prevent="rightClick($event,trIndex,tdIndex)" :class="{CellHide:td.hide}" :style="tdStyle">
               <slot :td="td" />
             </td>
           </tr>
@@ -50,6 +50,14 @@ export default {
     layoutArray:{
       type:Array,
       default:()=>[]
+    },
+    tdStyle:{
+      type:String,
+      default:''
+    },
+    width:{
+      type:Number,
+      default:100
     }
   },
   data(){
@@ -198,6 +206,9 @@ export default {
       }else{
         return false;
       }
+    },
+    tableWidth(){
+      return 'width:'+this.width+'%';
     }
   }
 }

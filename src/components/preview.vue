@@ -76,6 +76,8 @@
             <fancy-edit-table
               v-else-if="element.compType === 'table'"
               :layoutArray="element.layoutArray"
+              :tdStyle="element.tdStyle"
+              :width="element.width"
             >
              <template v-slot="{td}">
               <template v-for="(col) in td.columns">
@@ -115,7 +117,6 @@ import previewRowItem from "./previewRowItem";
 import fancyDynamicTable from "./dynamic/fancyDynamicTable";
 import fancyDynamicTableItem from "./dynamic/fancyDynamicTableItem";
 import fancyEditTable from "./extend/fancyEditTable";
-import fancyEditTableItem from "./extend/fancyEditTableItem";
 import {datas,addRow,batchDeleteRow,deleteRow} from "./custom/formDraw";
 export default {
   name:'preview',
@@ -125,8 +126,7 @@ export default {
     previewRowItem,
     fancyDynamicTable,
     fancyDynamicTableItem,
-    fancyEditTable,
-    fancyEditTableItem
+    fancyEditTable
   },
   data(){
     return{
