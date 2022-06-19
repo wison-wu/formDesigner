@@ -34,9 +34,11 @@ const layouts = {
     const {onActiveItemChange} = this.$listeners;
     return (
         <el-col class={className} span={element.span}>
+          <span class="component-name component-id">{element.id}</span>
           <el-form-item label={element.showLabel ? element.label : ''}
                         label-width={labelWidth}
                         required={element.required} nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
+            
             <render key={element.id} conf={element} onInput={ event => {
                 this.$set(element, 'value', event)
               }}
@@ -82,7 +84,7 @@ const layouts = {
     className = this.activeItem.id === element.id ? 'drawing-item drawing-row-item active-from-item' : 'drawing-item drawing-row-item'
     const {onActiveItemChange} = this.$listeners;
     return (
-      <div class={className}>
+      <el-col class={className} >
         <span class="component-name" style="margin-bottom:15px">{element.id}</span>
         <fancy-table  layoutArray={element.layoutArray} 
                       tdStyle={element.tdStyle} 
@@ -107,7 +109,7 @@ const layouts = {
                       }}
         />
         {components.itemBtns.call(this,h,element)}
-      </div>
+      </el-col>
     )
   },
   dynamicItem(h,element){

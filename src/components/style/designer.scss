@@ -38,6 +38,7 @@ $lighterBlue: #409EFF;
     & > .el-form-item{
       background: $selectedColor;
       border-radius:6px;
+      margin-top:15px;
     }
     & > .dynamic-table{
       background: $selectedColor;
@@ -52,7 +53,7 @@ $lighterBlue: #409EFF;
   }
   
   .el-form-item{
-    margin-bottom: 15px;
+    margin-bottom: 5px;
   }
 }
 .drawing-item{
@@ -63,11 +64,12 @@ $lighterBlue: #409EFF;
   }
   .el-form-item{
     padding: 12px 10px;
-    
+    margin-top:15px;
   }
 }
 .drawing-item{
   position: relative;
+  border: 1px dashed #ccc;
   cursor: move;
   .dynamic-table{
     padding: 12px 5px;
