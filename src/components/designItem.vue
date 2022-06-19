@@ -33,11 +33,11 @@ const layouts = {
     let labelWidth = element.labelWidth ? `${element.labelWidth}px` : null
     const {onActiveItemChange} = this.$listeners;
     return (
-        <el-col class={className} span={element.span}>
+        <el-col class={className} span={element.span} nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
           <span class="component-name component-id">{element.id}</span>
           <el-form-item label={element.showLabel ? element.label : ''}
                         label-width={labelWidth}
-                        required={element.required} nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
+                        required={element.required} >
             
             <render key={element.id} conf={element} onInput={ event => {
                 this.$set(element, 'value', event)
