@@ -70,6 +70,24 @@
                 />
               </template>
             </fancy-dynamic-table>
+            <fancy-edit-table
+              v-else-if="element.compType === 'table'"
+              :layoutArray="element.layoutArray"
+              :tdStyle="element.tdStyle"
+              :width="element.width"
+            >
+             <template v-slot="{td}">
+              <template v-for="(col) in td.columns">
+                  <preview-item
+                    v-if="col.compType!== 'dynamicTable'"
+                    :key="col.id"
+                    :model="col"
+                    v-model="form[col.id]"
+                    @valChange="handlerValChange"
+                  />
+             </template>
+            </template>
+            </fancy-edit-table>
             <!--item-->
             
             <el-col class="drag-col-wrapper" :key="index"   :span="element.span" v-else>
@@ -91,7 +109,7 @@ import previewRowItem from "./previewRowItem";
 import fancyDynamicTable from "./dynamic/fancyDynamicTable";
 import fancyDynamicTableItem from "./dynamic/fancyDynamicTableItem";
 import {datas,addRow,deleteRow} from "./custom/formDraw";
-
+import fancyEditTable from "./extend/fancyEditTable";
 export default {
   name:'formBuilder',
   props:{
@@ -112,7 +130,8 @@ export default {
     previewItem,
     previewRowItem,
     fancyDynamicTable,
-    fancyDynamicTableItem
+    fancyDynamicTableItem,
+    fancyEditTable
   },
   data(){
     return{

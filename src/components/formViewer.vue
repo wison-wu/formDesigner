@@ -42,6 +42,21 @@
                 />
               </template>
             </fancy-dynamic-view-table>
+            <fancy-edit-table
+              v-else-if="element.compType === 'table'"
+              :layoutArray="element.layoutArray"
+              :tdStyle="element.tdStyle"
+              :width="element.width"
+            >
+             <template v-slot="{td}">
+                <form-view-item 
+                  v-for="(item) in td.columns"
+                  :key="item.id" 
+                  :model="item"
+                  v-model="form[item.id]"
+                  />
+            </template>
+            </fancy-edit-table>
             <!--item-->
             <el-col class="drag-col-wrapper" :key="index"   :span="element.span" v-else>
               <form-view-item
@@ -60,6 +75,7 @@ import formViewItem from "./formViewItem";
 import previewRowItem from "./previewRowItem";
 import fancyDynamicViewTable from "./dynamic/fancyDynamicViewTable";
 import fancyDynamicTableViewItem from "./dynamic/fancyDynamicTableViewItem";
+import fancyEditTable from "./extend/fancyEditTable";
 export default {
   name:'formViewer',
   data(){
@@ -80,7 +96,8 @@ export default {
     formViewItem,
     previewRowItem,
     fancyDynamicViewTable,
-    fancyDynamicTableViewItem
+    fancyDynamicTableViewItem,
+    fancyEditTable
   },
   mounted() {
     this.$nextTick(()=> {
