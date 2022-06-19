@@ -73,6 +73,22 @@
                 />
               </template>
             </fancy-dynamic-table>
+            <fancy-edit-table
+              v-else-if="element.compType === 'table'"
+              :layoutArray="element.layoutArray"
+            >
+             <template v-slot="{td}">
+              <template v-for="(col) in td.columns">
+                  <preview-item
+                    v-if="col.compType!== 'dynamicTable'"
+                    :key="col.id"
+                    :model="col"
+                    v-model="form[col.id]"
+                    @valChange="handlerValChange"
+                  />
+             </template>
+            </template>
+            </fancy-edit-table>
             <!--item-->
             <el-col class="drag-col-wrapper" :key="index"   :span="element.span" v-else>
               <preview-item 
