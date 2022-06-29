@@ -115,7 +115,7 @@ body{
 }
 
 .center-board-row {
-  padding: 10px 12px 0px 12px;
+  padding: 10px 12px 100px 12px;
   box-sizing: border-box;
 }
 .center-board-row .el-form {
