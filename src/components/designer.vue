@@ -206,6 +206,7 @@ export default {
       if(isLayout(origin)){ //布局组件，需要复制布局组件以及下面的组件
           const clone = JSON.parse(JSON.stringify(origin))
           const uId = "row_"+getSimpleId();
+          console.log(uId);
           clone.id = uId;
           clone._id = uId;
           clone.columns.map((column)=>{

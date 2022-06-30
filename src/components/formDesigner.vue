@@ -89,7 +89,7 @@
 import draggable from "vuedraggable";
 import {formItems,assistFormItems,layoutFormItems} from "./custom/itemList";
 import designer from "./designer";
-import Icon from "./icon";
+import icon from "./icon";
 import {getSimpleId} from "./utils/IdGenerate";
 import formConf from "./custom/formConf";
 import {dynamicTableAllowedItems} from "./custom/formConf";
@@ -99,7 +99,7 @@ export default {
   name:"formDesigner",
   components:{
     draggable
-    ,Icon,
+    ,icon,
     designer
   },
   data() {
@@ -133,8 +133,13 @@ export default {
         clone.id = uId;
         clone._id = uId;
         tempActiveData = clone;
-      }else{
+      }else if (clone.layout === 'rowItem'){
         let uId = "row_"+getSimpleId();
+        clone.id = uId;
+        clone._id = uId;
+        tempActiveData = clone;
+      }else if(clone.layout === 'tableItem'){
+        let uId = "table_"+getSimpleId();
         clone.id = uId;
         clone._id = uId;
         tempActiveData = clone;
