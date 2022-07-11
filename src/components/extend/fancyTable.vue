@@ -5,7 +5,7 @@
         <tbody>
           <tr v-for="(tr,trIndex) in layoutArray" :key="trIndex" >
             <td v-for="(td,tdIndex) in tr" :key="tdIndex" :colspan="td.col" :rowspan="td.row"
-              @contextmenu.prevent="rightClick($event,trIndex,tdIndex)" :class="{CellHide:td.hide}" :style="tdStyle">
+              @contextmenu.prevent="rightClick($event,trIndex,tdIndex)" :class="{CellHide:td.hide}" :style="tdStyle" @click="handlerSelectedTd($event,trIndex,tdIndex)">
               <slot :td="td" />
             </td>
           </tr>
@@ -38,7 +38,15 @@
 import icon from '../icon';
 import {jsonClone} from "../utils";
 import draggable from 'vuedraggable';
-let td = {col:1,row:1,hide:false,columns:[]};
+let td = {
+  col:1,
+  row:1,
+  hide:false,
+  style:{
+    background:'#ffffff'
+  },
+  columns:[]
+};
 let tr = [td,td];
 export default {
   name:'fancyTable',
@@ -154,14 +162,11 @@ export default {
       this.layoutArray[this.currentRowIndex][this.currentColIndex].row=1;
       this.layoutArray[this.currentRowIndex][this.currentColIndex].col=1;
     },
-    // handlerInsertCol(){
-    //     this.columns.splice(this.currentCol,0,this.defaultTr);
-    // },
-    // handlerInsertRow(){
-    //     this.columns.forEach((item)=>{
-    //         item.splice(this.currentRow,0,this.defaultTd);
-    //     })
-    // },
+    handlerSelectedTd(e,rowIndex,colIndex){
+      console.log(e);
+      console.log(rowIndex);
+      console.log(colIndex);
+    },
     //追加行
     handlerAppendCol(){
       console.log(tr);
