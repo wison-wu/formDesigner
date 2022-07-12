@@ -4,10 +4,15 @@
       <table class="table-layout" :style="tableStyle">
         <tbody>
           <tr v-for="(tr,trIndex) in layoutArray" :key="trIndex" :style="trHeight">
-            <td v-for="(td,tdIndex) in tr" :key="tdIndex" :colspan="td.col" :rowspan="td.row" 
-              @contextmenu.prevent="rightClick($event,trIndex,tdIndex)" :class="{CellHide:td.hide}" :style="tdStyle" @click="handlerSelectedTd($event,trIndex,tdIndex)">
+            <fancy-table-item v-for="(td,tdIndex) in tr" :key="tdIndex" 
+              :item="td" 
+              :tdIndex="tdIndex" 
+              :trIndex="trIndex" 
+              :tdStyle="tdStyle" 
+              @rightClick="rightClick"
+            >
               <slot :td="td" />
-            </td>
+            </fancy-table-item>
           </tr>
         </tbody>
       </table>
@@ -36,6 +41,7 @@
 
 <script>
 import icon from '../icon';
+import fancyTableItem from './fancyTableItem';
 import {jsonClone} from "../utils";
 let td = {
   col:1,
@@ -51,7 +57,8 @@ let tr = [td,td];
 export default {
   name:'fancyTable',
   components:{
-    icon
+    icon,
+    fancyTableItem
   },
   props:{
     layoutArray:{
@@ -85,8 +92,6 @@ export default {
     // 添加监听取消右键菜单
     document.addEventListener("click", this.hideRightContextMenu, true);
     document.addEventListener("contextmenu", this.hideRightContextMenu, true);
-    //默认加载一行两列的表格
-    console.log(this.layoutArray);
     // this.handlerAppendCol();
     // this.handlerAppendCol();
   },
@@ -234,9 +239,6 @@ tbody{
   vertical-align: middle;
   border-color: inherit;
 }
-td{
-  border:1px #d2d2d2 solid;
-}
 .table-layout{
   background-color: #ffffff;
   border-collapse: collapse;
@@ -247,12 +249,7 @@ td{
   width: 100%; 
   table-layout: fixed;
 }
-.table-layout > tbody > tr > td{
-  padding: 6px;
-  word-break: break-word;
-  border: 1px solid #d2d2d2;
-  height: 20px;
-}
+
 .table-layout > tbody > tr{
   border-bottom: 1px solid #d2d2d2;
   border-top: 1px solid #d2d2d2;
