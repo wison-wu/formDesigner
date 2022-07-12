@@ -109,7 +109,7 @@ import previewRowItem from "./previewRowItem";
 import fancyDynamicTable from "./dynamic/fancyDynamicTable";
 import fancyDynamicTableItem from "./dynamic/fancyDynamicTableItem";
 import {datas,addRow,deleteRow} from "./custom/formDraw";
-import fancyEditTable from "./extend/fancyEditTable";
+import fancyEditTable from "./table/fancyEditTable";
 export default {
   name:'formBuilder',
   props:{

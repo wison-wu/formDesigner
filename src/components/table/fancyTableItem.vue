@@ -1,6 +1,12 @@
 <template>
-    <td  :colspan="item.col" :rowspan="item.row" :class="{CellHide:item.hide}" :style="tdStyle"
-    @contextmenu.prevent="rightClick($event,trIndex,tdIndex)">
+    <td  
+        :colspan="item.col" 
+        :rowspan="item.row" 
+        :class="{CellHide:item.hide}" 
+        :style="tdStyle"
+        style=""
+        @contextmenu.prevent="rightClick($event,trIndex,tdIndex)"
+    >
         <slot :td="item" />
     </td>
 </template>

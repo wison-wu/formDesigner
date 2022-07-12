@@ -10,6 +10,7 @@
               :trIndex="trIndex" 
               :tdStyle="tdStyle" 
               @rightClick="rightClick"
+              @click.native="handlerSelectedTd($event,td)"
             >
               <slot :td="td" />
             </fancy-table-item>
@@ -124,15 +125,7 @@ export default {
         this.layoutArray[this.currentRowIndex][this.currentColIndex+col].hide=true;
         this.layoutArray[this.currentRowIndex][this.currentColIndex].col=col+1;
       }
-      // let nextCol = this.columns[this.currentRowIndex][this.currentColIndex+col].col;
-      // let nextRow = this.columns[this.currentRowIndex][this.currentColIndex+col].row;
-      // if(nextCol<2&nextRow<2){
-
-      // }else{
-      //     alert('请先拆分右侧单元格！');
-      // }
-
-
+      
     },
     //向下合并单元格
     handlerDownRow(){
@@ -170,10 +163,9 @@ export default {
       this.layoutArray[this.currentRowIndex][this.currentColIndex].row=1;
       this.layoutArray[this.currentRowIndex][this.currentColIndex].col=1;
     },
-    handlerSelectedTd(e,rowIndex,colIndex){
-      console.log(e);
-      console.log(rowIndex);
-      console.log(colIndex);
+    handlerSelectedTd(e,td){
+      this.$emit('selectItem',td);
+      e.stopPropagation();
     },
     //追加行
     handlerAppendCol(){

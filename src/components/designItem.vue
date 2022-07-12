@@ -5,8 +5,8 @@ import {getSimpleId} from "./utils/IdGenerate";
 import {dynamicTableAllowedItems,tableAllowedItems} from "./custom/formConf";
 import dynamicTable from './dynamic/dynamicTable'
 import dynamicTableItem from './dynamic/dynamicTableItem'
-import fancyTable from './extend/fancyTable'
-import fancyTableItem from './extend/fancyTableItem'
+import fancyTable from './table/fancyTable'
+import fancyTableItem from './table/fancyTableItem'
 /**
  * 动态表单允许增加的组件列表
  */
@@ -84,13 +84,13 @@ const layouts = {
     className = this.activeItem.id === element.id ? 'drawing-item drawing-row-item active-from-item' : 'drawing-item drawing-row-item'
     const {onActiveItemChange} = this.$listeners;
     return (
-      <el-col class={className} >
+      <el-col class={className} nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
         <span class="component-name" style="margin-bottom:15px">{element.id}</span>
         <fancy-table  layoutArray={element.layoutArray} 
                       tdStyle={element.tdStyle} 
                       width={element.width}
                       height={element.height}
-                      nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}
+                      onSelectItem={(item)=>{onActiveItemChange(item);}}
                       scopedSlots={{
                         default: (item) => {
                           return (

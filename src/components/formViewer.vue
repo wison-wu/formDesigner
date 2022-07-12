@@ -75,7 +75,7 @@ import formViewItem from "./formViewItem";
 import previewRowItem from "./previewRowItem";
 import fancyDynamicViewTable from "./dynamic/fancyDynamicViewTable";
 import fancyDynamicTableViewItem from "./dynamic/fancyDynamicTableViewItem";
-import fancyEditTable from "./extend/fancyEditTable";
+import fancyEditTable from "./table/fancyEditTable";
 export default {
   name:'formViewer',
   data(){
