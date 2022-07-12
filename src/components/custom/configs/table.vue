@@ -6,6 +6,9 @@
     <el-form-item label="表格宽度">
       <el-inputNumber  class="input" :min="0" :max="500" v-model="props.width"></el-inputNumber>
     </el-form-item>
+    <el-form-item label="行高">
+      <el-inputNumber  class="input" :min="0" :max="1500" :step="5" v-model="props.height"></el-inputNumber>
+    </el-form-item>
   </div>
 </template>
 <script>

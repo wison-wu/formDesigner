@@ -38,6 +38,7 @@
     ],
     //单元格样式
     tdStyle:'',
-    width:100
+    width:100,
+    height:100
   }
   

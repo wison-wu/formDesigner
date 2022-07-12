@@ -89,6 +89,7 @@ const layouts = {
         <fancy-table  layoutArray={element.layoutArray} 
                       tdStyle={element.tdStyle} 
                       width={element.width}
+                      height={element.height}
                       nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}
                       scopedSlots={{
                         default: (item) => {

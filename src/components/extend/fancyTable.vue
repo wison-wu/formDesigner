@@ -1,10 +1,10 @@
 <template>
   <div>
     <div style="padding:5px;margin-top:10px">
-      <table class="table-layout" :style="tableWidth">
+      <table class="table-layout" :style="tableStyle">
         <tbody>
-          <tr v-for="(tr,trIndex) in layoutArray" :key="trIndex" >
-            <td v-for="(td,tdIndex) in tr" :key="tdIndex" :colspan="td.col" :rowspan="td.row"
+          <tr v-for="(tr,trIndex) in layoutArray" :key="trIndex" :style="trHeight">
+            <td v-for="(td,tdIndex) in tr" :key="tdIndex" :colspan="td.col" :rowspan="td.row" 
               @contextmenu.prevent="rightClick($event,trIndex,tdIndex)" :class="{CellHide:td.hide}" :style="tdStyle" @click="handlerSelectedTd($event,trIndex,tdIndex)">
               <slot :td="td" />
             </td>
@@ -37,13 +37,13 @@
 <script>
 import icon from '../icon';
 import {jsonClone} from "../utils";
-import draggable from 'vuedraggable';
 let td = {
   col:1,
   row:1,
   hide:false,
   style:{
-    background:'#ffffff'
+    background:'#ffffff',
+    width:25
   },
   columns:[]
 };
@@ -51,8 +51,7 @@ let tr = [td,td];
 export default {
   name:'fancyTable',
   components:{
-    icon,
-    draggable
+    icon
   },
   props:{
     layoutArray:{
@@ -64,6 +63,10 @@ export default {
       default:''
     },
     width:{
+      type:Number,
+      default:100
+    },
+    height:{
       type:Number,
       default:100
     }
@@ -202,7 +205,6 @@ export default {
       }else{
         return false;
       }
-
     },
     showResetTableMenu(){
       if(this.showContextMunu){
@@ -212,8 +214,11 @@ export default {
         return false;
       }
     },
-    tableWidth(){
-      return 'width:'+this.width+'%';
+    tableStyle(){
+      return 'width:'+this.width+'%;';
+    },
+    trHeight(){
+      return 'height:'+this.height+'px';
     }
   }
 }
