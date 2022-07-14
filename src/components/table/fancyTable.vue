@@ -44,17 +44,8 @@
 import icon from '../icon';
 import fancyTableItem from './fancyTableItem';
 import {jsonClone} from "../utils";
-let td = {
-  col:1,
-  row:1,
-  hide:false,
-  style:{
-    background:'#ffffff',
-    width:25
-  },
-  columns:[]
-};
-let tr = [td,td];
+import {getTrItem,getTdItem} from "./table";
+let tr = getTrItem();
 export default {
   name:'fancyTable',
   components:{
@@ -169,14 +160,13 @@ export default {
     },
     //追加行
     handlerAppendCol(){
-      console.log(tr);
-      const _tr = jsonClone(tr);
-      this.layoutArray.push(_tr);
+      const _trItem = jsonClone(tr);
+      this.layoutArray.push(_trItem);
     },
     handlerAppendRow(){
-      tr.push(td);
+      tr.push(getTdItem());
       this.layoutArray.forEach(item=>{
-        const _td = jsonClone(td);
+        const _td = jsonClone(getTdItem());
         item.push(_td);
       })
     }
@@ -269,7 +259,5 @@ tbody{
   cursor: pointer;
   background-color: #ccc;
 }
-.CellHide{
-  display: none;
-}
+
 </style>

@@ -90,7 +90,7 @@ import draggable from "vuedraggable";
 import {formItems,assistFormItems,layoutFormItems} from "./custom/itemList";
 import designer from "./designer";
 import icon from "./icon";
-import {getSimpleId} from "./utils/IdGenerate";
+import {getSimpleId,setTableId} from "./utils/IdGenerate";
 import formConf from "./custom/formConf";
 import {dynamicTableAllowedItems} from "./custom/formConf";
 let tempActiveData;
@@ -142,6 +142,9 @@ export default {
         let uId = "table_"+getSimpleId();
         clone.id = uId;
         clone._id = uId;
+        //增加td默认的id
+        setTableId(clone);
+        console.log(clone);
         tempActiveData = clone;
       }
       this.$refs.designer.activeItem = tempActiveData;

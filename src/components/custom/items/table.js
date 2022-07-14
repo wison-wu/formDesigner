@@ -15,24 +15,44 @@
     //暂时默认为true，无法更改，后期考虑某些时候无法配置
     config: true,
     layoutArray:[[{
+        id:'',
         col:1,
         row:1,
         hide:false,
+        style:{
+          background:'#ffffff',
+          width:25
+        },
         columns:[]
       },{
+        id:'',
         col:1,
         row:1,
         hide:false,
+        style:{
+          background:'#ffffff',
+          width:25
+        },
         columns:[]
       }],[{
+        id:'',
         col:1,
         row:1,
         hide:false,
+        style:{
+          background:'#ffffff',
+          width:25
+        },
         columns:[]
       },{
+        id:'',
         col:1,
         row:1,
         hide:false,
+        style:{
+          background:'#ffffff',
+          width:25
+        },
         columns:[]
       }]
     ],
@@ -41,4 +61,3 @@
     width:100,
     height:100
   }
-  

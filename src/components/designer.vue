@@ -128,7 +128,7 @@ import 'codemirror/theme/dracula.css';
 import 'codemirror/mode/javascript/javascript'
 
 export default {
-  name:"Designer",
+  name:"designer",
   components:{
     draggable,
     configPanel,
@@ -144,6 +144,11 @@ export default {
     formConfig:{
       type:Object,
       default:formConf
+    }
+  },
+  provide(){
+    return{
+      getContext:this
     }
   },
   data() {
@@ -258,8 +263,6 @@ export default {
       }
     },
     handlerItemDelete(origin,parent){
-      console.log(origin);
-      console.log(parent);
       if (isLayout(origin) || isTable(origin)){ //如果是布局组件,则直接删除
         const index = this.list.findIndex(item=>item.id === origin.id);
         this.list.splice(index,1);
