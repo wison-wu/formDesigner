@@ -1,3 +1,4 @@
+import constant from './constants';
 export function getSimpleId(){
   sleep(10); //主要为了延时工作
   return new Date().getTime();
@@ -11,6 +12,7 @@ const sleep = function(time) {
 export function setTableId(table){
   table.layoutArray.map((tr,trIndex)=>{
     tr[0].id=getSimpleId();
+    tr[0].style.background = constant.defaultTdColor;
     tr[1].id=getSimpleId();
   })
   return table;

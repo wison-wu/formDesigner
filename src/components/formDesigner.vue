@@ -144,7 +144,6 @@ export default {
         clone._id = uId;
         //增加td默认的id
         setTableId(clone);
-        console.log(clone);
         tempActiveData = clone;
       }
       this.$refs.designer.activeItem = tempActiveData;
