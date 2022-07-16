@@ -2,18 +2,7 @@ import {getSimpleId} from "../utils/IdGenerate";
 import constant from '../utils/constants'
 import {jsonClone} from "../utils";
 
-let titleItem = {
-    id:'',
-    col:1,
-    row:1,
-    hide:false,
-    style:{
-      background:constant.defaultTitleTdBackgroundColor,
-      width:'15%'
-    },
-    columns:[]
-  }
-let contentItem = {
+let tdItemObj = {
     id:'',
     col:1,
     row:1,
@@ -26,13 +15,14 @@ let contentItem = {
   }
 
 export function getTdItem(){
-    let tdItem = cloneObj(contentItem);
+    let tdItem = cloneObj(tdItemObj);
     tdItem.id = getSimpleId();
     return tdItem;
 }
 export function getTitleTdItem(){
-    let tdItem = cloneObj(titleItem);
-    console.log(tdItem.style.background);
+    let tdItem = cloneObj(tdItemObj);
+    tdItem.style.background = constant.defaultTitleTdBackgroundColor;
+    tdItem.style.width = '15%';
     tdItem.id = getSimpleId();
     return tdItem;
 }
@@ -44,10 +34,10 @@ function cloneObj(source){
 }
 
 export function getTrItem(){
-    let trItem= [getTitleTdItem(),getTdItem()];
+    let trItem= [getTitleTdItem(),getTdItem(),getTitleTdItem(),getTdItem()];
     return trItem;
 }
 export function getDefaultTrs(){
-    let trs = [[getTitleTdItem(),getTdItem(),getTitleTdItem(),getTdItem()],[getTitleTdItem(),getTdItem(),getTitleTdItem(),getTdItem()]];
+    let trs = [getTrItem(),getTrItem()];
     return trs;
 }
