@@ -3,7 +3,7 @@
         :colspan="item.col" 
         :rowspan="item.row" 
         :class="{cellHide:item.hide,activeItem:isActiveItem} " 
-        :style="{tdStyle,'background-color':item.style.background,'width':item.style.width}"
+        :style="{tdStyle,'background-color':item.style.background,'width':item.style.width+'%'}"
         style=""
         @contextmenu.prevent="rightClick($event,trIndex,tdIndex)"
     >

@@ -25,7 +25,8 @@ const components = [
   'html',
   'row',
   'dynamicTable',
-  'table'
+  'table',
+  'tdItem'
 ];
 
 

@@ -7,9 +7,10 @@ let tdItemObj = {
     col:1,
     row:1,
     hide:false,
+    compType:'tdItem',
     style:{
       background:constant.defaultTdBackgroundColor,
-      width:'35%'
+      width:35
     },
     columns:[]
   }
@@ -22,7 +23,7 @@ export function getTdItem(){
 export function getTitleTdItem(){
     let tdItem = cloneObj(tdItemObj);
     tdItem.style.background = constant.defaultTitleTdBackgroundColor;
-    tdItem.style.width = '15%';
+    tdItem.style.width = 15;
     tdItem.id = getSimpleId();
     return tdItem;
 }
