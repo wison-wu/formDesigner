@@ -11,7 +11,6 @@
         <span >{{item.id}}</span>
         <slot :td="item" />
     </div>
-        
     </td>
 </template>
 
@@ -66,6 +65,7 @@ td{
     word-break: break-word;
     border: 1px solid #d2d2d2;
     height: 20px;
+    height:20px;
 }
 .cellHide{
   display: none;

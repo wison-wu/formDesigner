@@ -32,6 +32,7 @@ export function getTdItem(){
 }
 export function getTitleTdItem(){
     let tdItem = cloneObj(titleItem);
+    console.log(tdItem.style.background);
     tdItem.id = getSimpleId();
     return tdItem;
 }

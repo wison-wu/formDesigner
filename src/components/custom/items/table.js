@@ -3,6 +3,7 @@
  */
 import {getDefaultTrs} from '../../table/table'
 let trs = getDefaultTrs();
+console.log(trs);
  export let table = {
     id:'',
     _id:'',
@@ -20,5 +21,5 @@ let trs = getDefaultTrs();
     //单元格样式
     tdStyle:'',
     width:100,
-    height:100
+    height:50
   }
