@@ -75,6 +75,7 @@
               :layoutArray="element.layoutArray"
               :tdStyle="element.tdStyle"
               :width="element.width"
+              :height="element.height"
             >
              <template v-slot="{td}">
               <template v-for="(col) in td.columns">

@@ -47,6 +47,7 @@
               :layoutArray="element.layoutArray"
               :tdStyle="element.tdStyle"
               :width="element.width"
+              :height="element.height"
             >
              <template v-slot="{td}">
                 <form-view-item 
@@ -145,5 +146,4 @@ export default {
   margin-left:10px;
   margin-right:10px;
 }
-
 </style>
