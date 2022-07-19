@@ -82,9 +82,7 @@
             >
              <template v-slot="{td}">
               <template v-for="(col) in td.columns">
-                  <preview-item
-                    v-if="col.compType!== 'dynamicTable'"
-                    :key="col.id"
+                  <preview-item                   
                     :model="col"
                     v-model="form[col.id]"
                     @valChange="handlerValChange"
@@ -139,10 +137,10 @@ export default {
   },
   methods:{
     handlerValChange(key,origin){
+      console.log(key);
       this.$set(this.form,key,origin);
     },
     handlerDynamicValChange(parentId,index,key,origin){
-      console.log(1);
       this.$set(this.form[parentId][index],key,origin);
       this.currentIndex = index;
     },

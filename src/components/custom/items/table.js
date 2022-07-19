@@ -3,7 +3,6 @@
  */
 import {getDefaultTrs} from '../../table/table'
 let trs = getDefaultTrs();
-console.log(trs);
  export let table = {
     id:'',
     _id:'',

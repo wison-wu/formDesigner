@@ -11,6 +11,8 @@ export function datas(){
             let array = [];
             array.push(obj);
             itemDatas[val.id] = array;
+        }else if(val.layout === 'tableItem'){ //表格布局
+            dataResolveTableItem(val);
         }else{    //表单
             dataResolveColItem(val);
         }
@@ -44,6 +46,14 @@ function dataResolveDynamicItem(val){
         obj[key] = v.value;
     })
     return obj;
+}
+
+function dataResolveTableItem(val){
+    val.layoutArray.map((tr)=>{
+        tr.map((td)=>{
+            td.columns.map(item=>dataResolveColItem(item));
+        })
+    })
 }
 
 function dataResolveColItem(val){
