@@ -45,6 +45,7 @@ import icon from '../icon';
 import fancyTableItem from './fancyTableItem';
 import {jsonClone} from "../utils";
 import {getTrItem,getTdItem} from "./table";
+import { getSimpleId } from '../utils/IdGenerate';
 let tr = getTrItem();
 export default {
   name:'fancyTable',
@@ -160,7 +161,8 @@ export default {
     },
     //追加行
     handlerAppendCol(){
-      const _trItem = jsonClone(tr);
+      let _trItem = jsonClone(tr);
+      _trItem.map(item=>item.id=getSimpleId());
       this.layoutArray.push(_trItem);
     },
     handlerAppendRow(){

@@ -48,6 +48,9 @@ function dataResolveDynamicItem(val){
     return obj;
 }
 
+/*
+遍历表格实现组件渲染
+*/
 function dataResolveTableItem(val){
     val.layoutArray.map((tr)=>{
         tr.map((td)=>{
