@@ -117,7 +117,7 @@ import draggable from "vuedraggable";
 import configPanel from './configPanel'
 import designItem from './designItem'
 import {getSimpleId} from "./utils/IdGenerate";
-import { isLayout, isTable, inTable } from "./utils/index";
+import { isLayout, isTable, inTable,jsonClone } from "./utils/index";
 import formConf from "./custom/formConf";
 import preview from "./preview";
 import {codemirror} from 'vue-codemirror';
@@ -128,7 +128,7 @@ import 'codemirror/theme/dracula.css';
 import 'codemirror/mode/javascript/javascript'
 
 export default {
-  name:"Designer",
+  name:"designer",
   components:{
     draggable,
     configPanel,
@@ -144,6 +144,11 @@ export default {
     formConfig:{
       type:Object,
       default:formConf
+    }
+  },
+  provide(){
+    return{
+      getContext:this
     }
   },
   data() {
@@ -203,16 +208,16 @@ export default {
       this.activeItem = obj;
     },
     handlerItemCopy(origin,parent){
-      if(isLayout(origin)){ //布局组件，需要复制布局组件以及下面的组件
-          const clone = JSON.parse(JSON.stringify(origin))
+      if(isLayout(origin)){ //row
+          const clone = jsonClone(origin);
           const uId = "row_"+getSimpleId();
           console.log(uId);
           clone.id = uId;
           clone._id = uId;
           clone.columns.map((column)=>{
             let itemList = [];
-            column.list.map((item,i)=>{
-              const cloneitem = JSON.parse(JSON.stringify(item))
+            column.list.map((item)=>{
+              const cloneitem = jsonClone(item);
               const uId = "fd_"+getSimpleId();
               cloneitem.id = uId;
               cloneitem._id = uId;
@@ -223,11 +228,33 @@ export default {
           })
           this.list.push(clone);
           this.handlerActiveItemChange(clone);
+      }else if(isTable(origin)){  //表格布局
+        const clone = jsonClone(origin);
+          const uId = "table_"+getSimpleId();
+          clone.id = uId;
+          clone._id = uId;
+          clone.layoutArray.map((tr)=>{
+            tr.map(td=>{
+              let itemList = [];
+              td.id=getSimpleId();
+              td.columns.map((item,i)=>{
+                const cloneitem = jsonClone(item);
+                const uId = "fd_"+getSimpleId();
+                cloneitem.id = uId;
+                cloneitem._id = uId;
+                itemList.push(cloneitem);
+              })
+              td.columns = [];
+              td.columns = itemList;
+            });
+          })
+          this.list.push(clone);
+          this.handlerActiveItemChange(clone);
       }else{  //如果是普通组件，需要判断他是否再布局组件下。
         if(parent){
           if (inTable(parent)) { //增加表格组件的支持
             if (parent.columns.some(item => item.id === origin.id)) {
-              const clone = JSON.parse(JSON.stringify(origin))
+              const clone = jsonClone(origin);
               const uId = "fd_" + getSimpleId();
               clone.id = uId;
               clone._id = uId;
@@ -237,7 +264,7 @@ export default {
           } else {
             parent.columns.map((column) => {
               if (column.list.some(item => item.id === origin.id)) {
-                const clone = JSON.parse(JSON.stringify(origin))
+                const clone = jsonClone(origin);
                 const uId = "fd_" + getSimpleId();
                 clone.id = uId;
                 clone._id = uId;
@@ -248,7 +275,7 @@ export default {
           }
           
         }else{
-          const clone = JSON.parse(JSON.stringify(origin))
+          const clone = jsonClone(origin);
           const uId = "fd_"+getSimpleId();
           clone.id = uId;
           clone._id = uId;
@@ -258,8 +285,6 @@ export default {
       }
     },
     handlerItemDelete(origin,parent){
-      console.log(origin);
-      console.log(parent);
       if (isLayout(origin) || isTable(origin)){ //如果是布局组件,则直接删除
         const index = this.list.findIndex(item=>item.id === origin.id);
         this.list.splice(index,1);

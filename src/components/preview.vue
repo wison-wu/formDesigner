@@ -78,12 +78,11 @@
               :layoutArray="element.layoutArray"
               :tdStyle="element.tdStyle"
               :width="element.width"
+              :height="element.height"
             >
              <template v-slot="{td}">
               <template v-for="(col) in td.columns">
-                  <preview-item
-                    v-if="col.compType!== 'dynamicTable'"
-                    :key="col.id"
+                  <preview-item                   
                     :model="col"
                     v-model="form[col.id]"
                     @valChange="handlerValChange"
@@ -116,7 +115,7 @@ import previewItem from "./previewItem";
 import previewRowItem from "./previewRowItem";
 import fancyDynamicTable from "./dynamic/fancyDynamicTable";
 import fancyDynamicTableItem from "./dynamic/fancyDynamicTableItem";
-import fancyEditTable from "./extend/fancyEditTable";
+import fancyEditTable from "./table/fancyEditTable";
 import {datas,addRow,batchDeleteRow,deleteRow} from "./custom/formDraw";
 export default {
   name:'preview',
@@ -138,10 +137,10 @@ export default {
   },
   methods:{
     handlerValChange(key,origin){
+      console.log(key);
       this.$set(this.form,key,origin);
     },
     handlerDynamicValChange(parentId,index,key,origin){
-      console.log(1);
       this.$set(this.form[parentId][index],key,origin);
       this.currentIndex = index;
     },
@@ -180,4 +179,5 @@ export default {
 .preview >>> .el-checkbox.is-bordered+.el-checkbox.is-bordered{
   margin-left:0px;
 }
+
 </style>

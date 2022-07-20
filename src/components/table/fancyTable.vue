@@ -1,13 +1,19 @@
 <template>
   <div>
     <div style="padding:5px;margin-top:10px">
-      <table class="table-layout" :style="tableWidth">
+      <table class="table-layout" :style="tableStyle">
         <tbody>
-          <tr v-for="(tr,trIndex) in layoutArray" :key="trIndex" >
-            <td v-for="(td,tdIndex) in tr" :key="tdIndex" :colspan="td.col" :rowspan="td.row"
-              @contextmenu.prevent="rightClick($event,trIndex,tdIndex)" :class="{CellHide:td.hide}" :style="tdStyle">
+          <tr v-for="(tr,trIndex) in layoutArray" :key="trIndex" :style="trHeight">
+            <fancy-table-item v-for="(td,tdIndex) in tr" :key="tdIndex" 
+              :item="td" 
+              :tdIndex="tdIndex" 
+              :trIndex="trIndex" 
+              :tdStyle="tdStyle" 
+              @rightClick="rightClick"
+              @click.native="handlerSelectedTd($event,td)"
+            >
               <slot :td="td" />
-            </td>
+            </fancy-table-item>
           </tr>
         </tbody>
       </table>
@@ -36,15 +42,16 @@
 
 <script>
 import icon from '../icon';
+import fancyTableItem from './fancyTableItem';
 import {jsonClone} from "../utils";
-import draggable from 'vuedraggable';
-let td = {col:1,row:1,hide:false,columns:[]};
-let tr = [td,td];
+import {getTrItem,getTdItem} from "./table";
+import { getSimpleId } from '../utils/IdGenerate';
+let tr = getTrItem();
 export default {
   name:'fancyTable',
   components:{
     icon,
-    draggable
+    fancyTableItem
   },
   props:{
     layoutArray:{
@@ -56,6 +63,10 @@ export default {
       default:''
     },
     width:{
+      type:Number,
+      default:100
+    },
+    height:{
       type:Number,
       default:100
     }
@@ -74,8 +85,6 @@ export default {
     // 添加监听取消右键菜单
     document.addEventListener("click", this.hideRightContextMenu, true);
     document.addEventListener("contextmenu", this.hideRightContextMenu, true);
-    //默认加载一行两列的表格
-    console.log(this.layoutArray);
     // this.handlerAppendCol();
     // this.handlerAppendCol();
   },
@@ -108,15 +117,7 @@ export default {
         this.layoutArray[this.currentRowIndex][this.currentColIndex+col].hide=true;
         this.layoutArray[this.currentRowIndex][this.currentColIndex].col=col+1;
       }
-      // let nextCol = this.columns[this.currentRowIndex][this.currentColIndex+col].col;
-      // let nextRow = this.columns[this.currentRowIndex][this.currentColIndex+col].row;
-      // if(nextCol<2&nextRow<2){
-
-      // }else{
-      //     alert('请先拆分右侧单元格！');
-      // }
-
-
+      
     },
     //向下合并单元格
     handlerDownRow(){
@@ -154,24 +155,20 @@ export default {
       this.layoutArray[this.currentRowIndex][this.currentColIndex].row=1;
       this.layoutArray[this.currentRowIndex][this.currentColIndex].col=1;
     },
-    // handlerInsertCol(){
-    //     this.columns.splice(this.currentCol,0,this.defaultTr);
-    // },
-    // handlerInsertRow(){
-    //     this.columns.forEach((item)=>{
-    //         item.splice(this.currentRow,0,this.defaultTd);
-    //     })
-    // },
+    handlerSelectedTd(e,td){
+      this.$emit('selectItem',td);
+      e.stopPropagation();
+    },
     //追加行
     handlerAppendCol(){
-      console.log(tr);
-      const _tr = jsonClone(tr);
-      this.layoutArray.push(_tr);
+      let _trItem = jsonClone(tr);
+      _trItem.map(item=>item.id=getSimpleId());
+      this.layoutArray.push(_trItem);
     },
     handlerAppendRow(){
-      tr.push(td);
+      tr.push(getTdItem());
       this.layoutArray.forEach(item=>{
-        const _td = jsonClone(td);
+        const _td = jsonClone(getTdItem());
         item.push(_td);
       })
     }
@@ -197,7 +194,6 @@ export default {
       }else{
         return false;
       }
-
     },
     showResetTableMenu(){
       if(this.showContextMunu){
@@ -207,8 +203,11 @@ export default {
         return false;
       }
     },
-    tableWidth(){
-      return 'width:'+this.width+'%';
+    tableStyle(){
+      return 'width:'+this.width+'%;';
+    },
+    trHeight(){
+      return 'height:'+this.height+'px';
     }
   }
 }
@@ -224,9 +223,6 @@ tbody{
   vertical-align: middle;
   border-color: inherit;
 }
-td{
-  border:1px #d2d2d2 solid;
-}
 .table-layout{
   background-color: #ffffff;
   border-collapse: collapse;
@@ -237,12 +233,7 @@ td{
   width: 100%; 
   table-layout: fixed;
 }
-.table-layout > tbody > tr > td{
-  padding: 6px;
-  word-break: break-word;
-  border: 1px solid #d2d2d2;
-  height: 20px;
-}
+
 .table-layout > tbody > tr{
   border-bottom: 1px solid #d2d2d2;
   border-top: 1px solid #d2d2d2;
@@ -270,7 +261,5 @@ td{
   cursor: pointer;
   background-color: #ccc;
 }
-.CellHide{
-  display: none;
-}
+
 </style>

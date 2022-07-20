@@ -3,11 +3,15 @@
         <div style="padding:5px;margin-top:10px">
             <table class="table-layout" :style="tableWidth">
                 <tbody>
-                    <tr v-for="(tr, trIndex) in layoutArray" :key="trIndex">
-                        <td v-for="(td, tdIndex) in tr" :key="tdIndex" :colspan="td.col" :rowspan="td.row"
-                            :class="{ CellHide: td.hide }" :style="tdStyle">
+                    <tr v-for="(tr, trIndex) in layoutArray" :key="trIndex" :style="trHeight">
+                        <fancy-edit-table-item v-for="(td,tdIndex) in tr" :key="tdIndex" 
+                            :item="td" 
+                            :tdIndex="tdIndex" 
+                            :trIndex="trIndex" 
+                            :tdStyle="tdStyle" 
+                        >
                             <slot :td="td" />
-                        </td>
+                        </fancy-edit-table-item>
                     </tr>
                 </tbody>
             </table>
@@ -16,9 +20,11 @@
 </template>
 
 <script>
+import fancyEditTableItem from './fancyEditTableItem';
 export default {
     name: 'fancyEditTable',
     components: {
+        fancyEditTableItem
     },
     props: {
         layoutArray: {
@@ -30,6 +36,10 @@ export default {
             default:''
         },
         width:{
+            type:Number,
+            default:100
+        },
+        height:{
             type:Number,
             default:100
         }
@@ -47,9 +57,10 @@ export default {
     },
     computed: {
         tableWidth(){
-            console.log(this.width);
-            console.log(this.tdStyle);
             return 'width:'+this.width+'%';
+        },
+        trHeight(){
+            return 'height:'+this.height+'px';
         }
     }
 }

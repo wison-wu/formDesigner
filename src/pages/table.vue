@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import fancyTable from '../components/extend/fancyTable'
-import fancyTableItem from '../components/extend/fancyTableItem'
+import fancyTable from '../components/table/fancyTable'
+import fancyTableItem from '../components/table/fancyTableItem'
 export default {
   components:{
     fancyTable,

@@ -48,17 +48,5 @@ export const rowAllowedItems = [
 ]
 //table允许放入的items
 export const tableAllowedItems = [
-  'input',
-  'input',
-  'select',
-  'radio',
-  'checkbox',
-  'Switch',
-  'inputNumber',
-  'textarea',
-  'slider',
-  'rate',
-  'date',
-  'time',
-  'text'
+  'row','dynamicTable'
 ]

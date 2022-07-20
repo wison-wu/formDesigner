@@ -1,6 +1,8 @@
 /**
  * 表格布局
  */
+import {getDefaultTrs} from '../../table/table'
+let trs = getDefaultTrs();
  export let table = {
     id:'',
     _id:'',
@@ -14,30 +16,9 @@
     // 是否可配置
     //暂时默认为true，无法更改，后期考虑某些时候无法配置
     config: true,
-    layoutArray:[[{
-        col:1,
-        row:1,
-        hide:false,
-        columns:[]
-      },{
-        col:1,
-        row:1,
-        hide:false,
-        columns:[]
-      }],[{
-        col:1,
-        row:1,
-        hide:false,
-        columns:[]
-      },{
-        col:1,
-        row:1,
-        hide:false,
-        columns:[]
-      }]
-    ],
+    layoutArray:trs,
     //单元格样式
     tdStyle:'',
-    width:100
+    width:100,
+    height:50
   }
-  

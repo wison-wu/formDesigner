@@ -47,6 +47,7 @@
               :layoutArray="element.layoutArray"
               :tdStyle="element.tdStyle"
               :width="element.width"
+              :height="element.height"
             >
              <template v-slot="{td}">
                 <form-view-item 
@@ -75,7 +76,7 @@ import formViewItem from "./formViewItem";
 import previewRowItem from "./previewRowItem";
 import fancyDynamicViewTable from "./dynamic/fancyDynamicViewTable";
 import fancyDynamicTableViewItem from "./dynamic/fancyDynamicTableViewItem";
-import fancyEditTable from "./extend/fancyEditTable";
+import fancyEditTable from "./table/fancyEditTable";
 export default {
   name:'formViewer',
   data(){
@@ -145,5 +146,4 @@ export default {
   margin-left:10px;
   margin-right:10px;
 }
-
 </style>

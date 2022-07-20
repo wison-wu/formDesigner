@@ -1,10 +1,10 @@
-import formDesigner from '@/components/formDesigner';
-import fancyEditor from '@/components/extend/fancyEditor';
-import fancyHtml from '@/components/extend/fancyHtml';
-import fancyText from '@/components/extend/fancyText';
+import formDesigner from './formDesigner';
+import fancyEditor from './extend/fancyEditor';
+import fancyHtml from './extend/fancyHtml';
+import fancyText from './extend/fancyText';
 import fancyBarCode from 'vue-barcode';
-import fancyDialogList from '@/components/extend/fancyDialogList';
-import iconDialog from '@/components/iconDialog';
+import fancyDialogList from './extend/fancyDialogList';
+import iconDialog from './iconDialog';
 const plugins = {
   install : function (Vue) {
     Vue.component('form-designer',formDesigner);
