@@ -232,7 +232,7 @@ export default {
     },
     handlerTableAdd(evt,td){
       if(evt.pullMode === 'clone'){
-        if(tableAllowedItems.includes(this.activeItem.compType)){
+        if(!tableAllowedItems.includes(this.activeItem.compType)){
           td.columns.splice(evt.newIndex,0,this.activeItem);
         }else{
           this.$message.error('该组件不允许被放入表格内！');
