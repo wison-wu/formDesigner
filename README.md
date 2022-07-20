@@ -8,6 +8,7 @@
 ![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/val-json.png)
 ![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/dialogList.png)
 ![dunamic_table](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/dynamic_table.png)
+![table_view](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/tableview.png)
 
 # GitHub地址
 [formDesigner](https://github.com/wison-wu/formDesigner)
