@@ -109,7 +109,7 @@ import previewItem from "./previewItem";
 import previewRowItem from "./previewRowItem";
 import fancyDynamicTable from "./dynamic/fancyDynamicTable";
 import fancyDynamicTableItem from "./dynamic/fancyDynamicTableItem";
-import {datas,addRow,deleteRow} from "./custom/formDraw";
+import {datas,addRow,deleteRow,fillDatas} from "./custom/formDraw";
 import fancyEditTable from "./table/fancyEditTable";
 export default {
   name:'formBuilder',
@@ -141,6 +141,14 @@ export default {
       currentIndex:-1
     }
   },
+  mounted() {
+    this.$nextTick(()=> {
+      if(this.value !==''){
+        const jsonValue = JSON.parse(this.value)
+        this.handlerFillDatas(jsonValue);
+      }
+    })
+  },
   methods:{
     handlerValChange(key,origin){
       this.$set(this.form,key,origin);
@@ -162,6 +170,7 @@ export default {
     handlerAddRow:addRow,
     handlerDeleteRow:deleteRow,
     handlerInitDatas:datas,
+    handlerFillDatas:fillDatas
   },
   created(){
     this.handlerInitDatas();

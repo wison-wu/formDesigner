@@ -12,6 +12,10 @@
 
 # GitHub地址
 [formDesigner](https://github.com/wison-wu/formDesigner)
+# 友情链接
+
+May大佬作品<br/>
+[RuoYi-Vue-Plus-Activiti](https://gitee.com/sgs98/RuoYi-Vue-Plus-Activiti)
 
 # 开发日志
 - 2020-12-15: 增加button组件
@@ -72,4 +76,5 @@ QQ群：816204482
 
 ## 开源协议
 [MIT]
+
 
