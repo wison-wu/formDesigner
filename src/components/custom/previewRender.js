@@ -1,6 +1,9 @@
 import { isAttr,jsonClone } from '../utils';
 import childrenItem from './slot/index';
 import {remoteData} from './mixin';
+import Vue from 'vue'
+import { ACCESS_TOKEN } from "@/store/mutation-types"
+
 //先修改在这里,后续需要优化
 function vModel(self, dataObject) {
   dataObject.props.value = self.value;
@@ -9,6 +12,9 @@ function vModel(self, dataObject) {
   }
   //判断是否为上传组件
   if(self.conf.compType === 'upload'){
+    //for token add by nbacheng 2022-09-07
+    const token = Vue.ls.get(ACCESS_TOKEN);
+    dataObject.attrs['headers'] = {"X-Access-Token":token};
     dataObject.attrs['before-upload'] = file=>{
       //非限定后缀不允许上传
       const fileName = file.name;
@@ -24,6 +30,48 @@ function vModel(self, dataObject) {
         return false;
       }
     }
+
+    //for get return file url add by nbacheng 2022-09-07
+    dataObject.attrs['on-success'] = file=>{
+        //console.log("on-success",file);
+        var filename=file.message.substring(file.message.lastIndexOf('/')+1)  //获取文件名称
+        let fileObj = {name: filename, url: file.message}
+        console.log("dataObject=",dataObject);
+        console.log("self.conf=",self.conf);
+        let oldValue = [];
+        if(dataObject.props.value) {
+           oldValue = JSON.parse(dataObject.props.value);
+        }else {
+          oldValue = [];
+        }
+        if (oldValue) {
+          oldValue.push(fileObj)
+        } else {
+          oldValue = [fileObj]
+        }
+        self.$emit('input',JSON.stringify(oldValue));
+        console.log("on-success value",oldValue);
+    } 
+    dataObject.attrs['on-remove'] = (file, fileList) => {
+      console.log("on-remove file,fileList",file,fileList);
+      let oldValue = JSON.parse(dataObject.props.value);
+      console.log("on-remove oldValue",oldValue);
+      //file 删除的文件
+      //过滤掉删除的文件  
+      let newValue = oldValue.filter(item => item.name !== file.name)
+      self.$emit('input',JSON.stringify(newValue));
+      console.log("on-remove newValue",newValue);
+    }
+    
+    dataObject.attrs['on-error'] = (file) => {
+      console.log("on-error file",file);
+    }
+    
+    dataObject.attrs['on-preview'] = (file) => {
+      console.log("on-preview file",file);
+      //download(file);
+    }
+    //for get return file url add by nbacheng 2022-09-07
   }
 }
 
