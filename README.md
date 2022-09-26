@@ -12,8 +12,11 @@
 
 # GitHub地址
 [formDesigner](https://github.com/wison-wu/formDesigner)
-# 友情链接
 
+# Vue3版本（升级中）
+[formDesigner3](https://gitee.com/wurong19870715/formDesigner3)
+
+# 友情链接
 May大佬作品<br/>
 [RuoYi-Vue-Plus-Activiti](https://gitee.com/sgs98/RuoYi-Vue-Plus-Activiti)
 
