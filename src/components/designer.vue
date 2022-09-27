@@ -2,22 +2,22 @@
   <!--中间面板-->
   <div class="center-board" >
     <div class="action-bar">
-      <el-button icon="el-icon-view" link @click="preview">
+      <el-button icon="el-icon-view" type="text" @click="preview">
         预览
       </el-button>
-      <el-button icon="el-icon-view" link @click="view">
+      <el-button icon="el-icon-view" type="text" @click="view">
         查看
       </el-button>
-      <el-button icon="el-icon-tickets" link @click="viewJSON">
+      <el-button icon="el-icon-tickets" type="text" @click="viewJSON">
         JSON
       </el-button>
-      <el-button icon="el-icon-s-tools" link @click="setting">
+      <el-button icon="el-icon-s-tools" type="text" @click="setting">
         设置
       </el-button>
-      <el-button class="delete-btn" icon="el-icon-delete-solid" link @click="clear">
+      <el-button class="delete-btn" icon="el-icon-delete-solid" type="text" @click="clear">
         清空
       </el-button>
-      <el-button icon="el-icon-question" link @click="help">
+      <el-button icon="el-icon-question" type="text" @click="help">
         帮助
       </el-button>
     </div>
@@ -201,7 +201,7 @@ export default {
       })
     },
     help(){
-      window.open('https://gitee.com/wurong19870715/formDesigner3')
+      window.open('https://gitee.com/wurong19870715/formDesigner')
     },
     handlerActiveItemChange(obj){
       this.lastActiveItem = this.activeItem;

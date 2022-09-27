@@ -44,7 +44,6 @@ export default {
   created() {
     this.cmps.forEach(c => {
       c.content = require(`./custom/configs/${c.name}`).default;
-      console.log(c.content);
     });
   },
   methods:{

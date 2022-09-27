@@ -82,7 +82,7 @@
           <el-button
             style="padding-bottom: 0"
             icon="el-icon-circle-plus-outline"
-            text
+            type="text"
             @click="addColItem"
           >
             添加选项
