@@ -1,8 +1,6 @@
 import { isAttr,jsonClone } from '../utils';
 import childrenItem from './slot/index';
 import {remoteData} from './mixin';
-import Vue from 'vue'
-//import { getToken } from "@/utils/auth";
 
 function vModel(self, dataObject) {
   dataObject.props.value=self.value;
@@ -13,7 +11,11 @@ function vModel(self, dataObject) {
   if(self.conf.compType === 'upload'){
     // add by nbacheng 2022-09-09
     //dataObject.attrs['headers'] = {"Authorization":"Bearer " + getToken()};
-    dataObject.attrs['headers'] = {"Authorization":"Bearer " + '这里为自己的token'};
+    /**
+     * 此处增加自定义的token,如果不能满足要求，可以重写此处代码
+     */
+    const token = '这里为自己的token';
+    dataObject.attrs['headers'] = {"Authorization":"Bearer " + token};
     const filevalue = JSON.parse(dataObject.props.value);
     dataObject.props['file-list'] = filevalue;
   }  
