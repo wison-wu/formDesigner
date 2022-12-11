@@ -72,7 +72,7 @@
     </el-form-item>
     <div v-show='props.dataType ==="static"'>
     <el-divider>选项</el-divider>
-      <draggable :list="props.options" handle=".option-drag">
+      <!-- <draggable :list="props.options" handle=".option-drag"> -->
         <div v-for="(item, index) in props.options" :key="index" class="select-item">
           <div class="select-line-icon option-drag">
             <i class="el-icon-s-operation" />
@@ -88,7 +88,7 @@
             <i class="el-icon-remove-outline" />
           </div>
         </div>
-      </draggable>
+      <!-- </draggable> -->
     <div style="margin-left: 20px;">
       <el-button
         style="padding-bottom: 0"

@@ -59,17 +59,19 @@ const layouts = {
               {
                 element.columns.map((item,index) =>{
                   return (
-                    <el-col class="drag-col-wrapper"  span={item.span}>
-                      <draggable class="drag-wrapper row-drag" v-model={item.list} animation="100" group="componentsGroup"
-                      onAdd={(e)=>{this.handlerAdd(e,item,element)}}
-                      >
-                        {
-                          item.list.map((obj,objIndex)=>{
-                            return renderChildren.call(this,h,obj,element)
-                          })
-                        }
-                      </draggable>
-                    </el-col>
+                    <el-col class="drag-col-wrapper" span={item.span} >
+                  <draggable class="drag-wrapper row-drag " v-model={item.list} animation="100" group="componentsGroup"
+                    onAdd={(e) => { this.handlerAdd(e, item, element) }}
+                  >
+                    {
+                      item.list.map((obj, objIndex) => {
+                        return (<el-row class='test-item'>
+                          {renderChildren.call(this, h, obj, element)}
+                        </el-row>)
+                      })
+                    }
+                  </draggable>
+                </el-col>
                   )
                 })
               }
