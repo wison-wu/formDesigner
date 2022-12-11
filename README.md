@@ -8,9 +8,17 @@
 ![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/val-json.png)
 ![Image text](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/dialogList.png)
 ![dunamic_table](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/dynamic_table.png)
+![table_view](https://gitee.com/wurong19870715/formDesigner/raw/master/public/img/tableview.png)
 
 # GitHub地址
 [formDesigner](https://github.com/wison-wu/formDesigner)
+
+# Vue3版本（升级中）
+[formDesigner3](https://gitee.com/wurong19870715/formDesigner3)
+
+# 友情链接
+May大佬作品<br/>
+[RuoYi-Vue-Plus-Activiti](https://gitee.com/sgs98/RuoYi-Vue-Plus-Activiti)
 
 # 开发日志
 - 2020-12-15: 增加button组件
@@ -30,7 +38,7 @@
 - 2021-06-28: 更新文本组件，增加字体颜色，字体大小，居中布局
 - 2021-07-11: 增加自定义验证功能,增加时间范围。
 - 2021-08-29: 增加动态表格。
-- 2020-06-01: 增加表格组件。
+- 2022-06-01: 增加表格组件。
 
 ## 后期规划
 - 简单的数据联动
@@ -71,4 +79,5 @@ QQ群：816204482
 
 ## 开源协议
 [MIT]
+
 

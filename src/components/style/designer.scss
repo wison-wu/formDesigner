@@ -14,6 +14,7 @@ $lighterBlue: #409EFF;
     display: block;
     overflow: hidden;
     &::before {
+      width: 100%;
       content: " ";
       position: absolute;
       left: 0;

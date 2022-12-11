@@ -28,27 +28,33 @@
           :label-position="formConf.labelPosition"
           :disabled="formConf.disabled"
           :label-width="formConf.labelWidth + 'px'"
+          class="design-form"
         >
-        <draggable class="drawing-board" 
-                   :list="list" 
-                   :animation="100" 
-                   group="componentsGroup" 
-                   draggable=".drawing-item"
-                   >
-        <design-item 
-            v-for="(element,index) in list" 
-            :key="index" 
-            :model="element" 
-            :activeItem="activeItem"
-            @rowItemRollBack="handlerRollBack"
-            @onActiveItemChange="handlerActiveItemChange"
-            @copyItem="handlerItemCopy"
-            @deleteItem="handlerItemDelete"/>
-        </draggable>
+          <draggable
+            class="drawing-board center-board-row"
+            :list="list"
+            :animation="100"
+            group="componentsGroup"
+          >
+            <template v-for="element in list">
+              <el-row
+                :gutter="formConf.gutter"
+                class="drawing-item"
+              >
+                <design-item
+                  :model="element"
+                  :activeItem="activeItem"
+                  @rowItemRollBack="handlerRollBack"
+                  @onActiveItemChange="handlerActiveItemChange"
+                  @copyItem="handlerItemCopy"
+                  @deleteItem="handlerItemDelete"
+                />
+              </el-row>
+            </template>
+          </draggable>
           <div v-show="infoShow" class="empty-info">
-            <el-empty description="从左侧拖拽添加控件"></el-empty>
+            <el-empty description="从左侧拖拽添加控件"></el-empty>    
           </div>
-          
         </el-form>
       </el-row>
     </el-scrollbar>

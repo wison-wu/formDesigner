@@ -7,6 +7,18 @@ function vModel(self, dataObject) {
   dataObject.on.input = val => {
     self.$emit('input', val)
   }
+  //判断是否为上传组件
+  if(self.conf.compType === 'upload'){
+    // add by nbacheng 2022-09-09
+    //dataObject.attrs['headers'] = {"Authorization":"Bearer " + getToken()};
+    /**
+     * 此处增加自定义的token,如果不能满足要求，可以重写此处代码
+     */
+    const token = '这里为自己的token';
+    dataObject.attrs['headers'] = {"Authorization":"Bearer " + token};
+    const filevalue = JSON.parse(dataObject.props.value);
+    dataObject.props['file-list'] = filevalue;
+  }  
 }
 
 export default {

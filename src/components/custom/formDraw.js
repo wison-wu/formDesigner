@@ -63,6 +63,32 @@ function dataResolveColItem(val){
     itemDatas[val.id] = val.value;
 }
 
+export function fillDatas(jsonValue){
+    const self = this;
+    Object.keys(jsonValue).forEach(key =>{
+       
+       if(typeof(self.form[key]) === 'string'||typeof(self.form[key]) === 'number'){
+         self.$set(self.form, key,jsonValue[key]);
+       }else if(self.form[key] instanceof Array){//有可能是多选或者是明细表
+         //判断是否数组中为对象
+         if(jsonValue[key].length>0){
+             const firsValue = jsonValue[key][0];//获取第一个对象判断是什么类型
+             if(typeof(firsValue) === 'string'||typeof(firsValue) === 'number'){
+               self.$set(self.form, key,jsonValue[key]);
+             }else{ //明细表数组
+               const arrayData = jsonValue[key];
+               //self.form[key] = [];
+               arrayData.forEach((v,index)=>{
+                 const newV = JSON.parse(JSON.stringify(v));
+                 self.$set(self.form[key],index,newV);
+               })
+             }
+         }
+       }
+     })
+     //console.log(this.form);
+   }
+
 export function addRow(element){
     let obj =dataResolveDynamicItem(element);
     this.form[element.id].push(obj);
