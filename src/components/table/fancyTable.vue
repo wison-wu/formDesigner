@@ -32,8 +32,14 @@
         <li @click="handlerAppendCol">
           <icon code="zhuijiahang" text="追加行" />
         </li>
+        <li @click="handlerDeleteCol">
+          <icon code="shanchuhang" text="删除行" />
+        </li>
         <li @click="handlerAppendRow">
           <icon code="zhuijialie" text="追加列" />
+        </li>
+        <li @click="handlerDeleteRow">
+          <icon code="shanchulie" text="删除列" />
         </li>
       </ul>
     </div>
@@ -132,14 +138,6 @@ export default {
         this.layoutArray[this.currentRowIndex+row][this.currentColIndex].hide=true;
         this.layoutArray[this.currentRowIndex][this.currentColIndex].row=row+1;
       }
-      // let nextCol = this.columns[this.currentRowIndex+1][this.currentColIndex].col;
-      // let nextRow = this.columns[this.currentRowIndex+1][this.currentColIndex].row;
-      // if(nextCol<2&nextRow<2){
-
-      // }else{
-      //     alert('请先拆分下方单元格！');
-      // }
-
     },
     handlerResetTable(){
       //debugger;
@@ -171,6 +169,13 @@ export default {
         const _td = jsonClone(getTdItem());
         item.push(_td);
       })
+    },
+    handlerDeleteRow(){
+      console.log('后续增加删除行');
+    }
+    ,
+    handlerDeleteCol(){
+      console.log('后续增加删除列');
     }
   },
   computed:{
