@@ -179,5 +179,7 @@ export default {
 .preview >>> .el-checkbox.is-bordered+.el-checkbox.is-bordered{
   margin-left:0px;
 }
-
+.preview >>> .el-form-item{
+  margin-bottom:15px;
+}
 </style>

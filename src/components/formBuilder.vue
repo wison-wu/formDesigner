@@ -207,11 +207,15 @@ export default {
 .el-form-item{
   margin-left:10px;
   margin-right:10px;
+  
 }
 .form-builder >>> .el-radio.is-bordered+.el-radio.is-bordered{
   margin-left:0px;
 }
 .form-builder >>> .el-checkbox.is-bordered+.el-checkbox.is-bordered{
   margin-left:0px;
+}
+.form-builder >>> .el-form-item{
+  margin-bottom: 15px;
 }
 </style>
