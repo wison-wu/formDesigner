@@ -44,7 +44,7 @@
       <el-input v-model="props['range-separator']"></el-input>
     </el-form-item>
     <el-form-item label="默认值">
-      <el-date-picker class="input" v-model="props.value" value-format="yyyy-MM-dd" type="date" placeholder="选择日期"/>
+      <el-date-picker class="input" v-model="props.value" :value-format="props['value-format']" :format="props.format" :type="props.type" placeholder="选择日期"/>
     </el-form-item>
     
   </div>
