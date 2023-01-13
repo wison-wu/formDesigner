@@ -52,7 +52,6 @@ import fancyTableItem from './fancyTableItem';
 import {jsonClone} from "../utils";
 import {getTrItem,getTdItem} from "./table";
 import { getSimpleId } from '../utils/IdGenerate';
-let tr = getTrItem();
 export default {
   name:'fancyTable',
   components:{
@@ -84,13 +83,14 @@ export default {
       showContextMunu:false,
       currentRowIndex:0,
       currentColIndex:0,
-      //columns: this.trs
+      tr:[],
     }
   },
   mounted() {
     // 添加监听取消右键菜单
     document.addEventListener("click", this.hideRightContextMenu, true);
     document.addEventListener("contextmenu", this.hideRightContextMenu, true);
+    this.tr = getTrItem();
     // this.handlerAppendCol();
     // this.handlerAppendCol();
   },
@@ -159,12 +159,12 @@ export default {
     },
     //追加行
     handlerAppendCol(){
-      let _trItem = jsonClone(tr);
+      let _trItem = jsonClone(this.tr);
       _trItem.map(item=>item.id=getSimpleId());
       this.layoutArray.push(_trItem);
     },
     handlerAppendRow(){
-      tr.push(getTdItem());
+      this.tr.push(getTdItem());
       this.layoutArray.forEach(item=>{
         const _td = jsonClone(getTdItem());
         item.push(_td);
