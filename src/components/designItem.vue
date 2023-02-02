@@ -49,6 +49,7 @@ const layouts = {
     )
   },
   rowItem(h, element){
+    console.log(element.gutter);
     const { onActiveItemChange } = this.$listeners
     const className = this.activeItem.id === element.id ? 'drawing-item drawing-row-item active-from-item' : 'drawing-item drawing-row-item'    
     return (

@@ -38,7 +38,7 @@
           >
             <template v-for="element in list">
               <el-row
-                :gutter="formConf.gutter"
+                :gutter="element.gutter"
                 class="drawing-item"
               >
                 <design-item
