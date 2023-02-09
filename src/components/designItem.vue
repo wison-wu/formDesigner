@@ -49,7 +49,6 @@ const layouts = {
     )
   },
   rowItem(h, element){
-    console.log(element.gutter);
     const { onActiveItemChange } = this.$listeners
     const className = this.activeItem.id === element.id ? 'drawing-item drawing-row-item active-from-item' : 'drawing-item drawing-row-item'    
     return (
@@ -195,12 +194,13 @@ export default {
   methods:{
     
     handlerAdd(evt,item,row){
+      //debugger;
       if(evt.pullMode === 'clone'){
         if(!(evt.to.className.indexOf('row-drag')>-1&&this.activeItem.compType==='row')){
           item.list.splice(evt.newIndex,0,this.activeItem);
         }
       }else{
-        if(evt.item.className.indexOf('el-row')>-1){  //防止row嵌套
+        if(evt.item.className.indexOf('el-row')>-1&&this.activeItem.compType!=='row'){  //防止row嵌套
           const newIndex = evt.newIndex;
           const oldIndex = evt.oldIndex;
           const rowItem = item.list[newIndex];

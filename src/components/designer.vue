@@ -53,7 +53,7 @@
             </template>
           </draggable>
           <div v-show="infoShow" class="empty-info">
-            <el-empty description="从左侧拖拽添加控件"></el-empty>    
+            <el-empty description="从左侧拖拽添加控件"></el-empty>
           </div>
         </el-form>
       </el-row>
