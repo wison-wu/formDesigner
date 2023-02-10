@@ -185,6 +185,9 @@ export default {
   mounted() {
   },
   methods: {
+    handlerTest(evt){
+      console.log(evt)
+    },
     preview(){
       const clone = JSON.parse(JSON.stringify(this.list))
       this.itemList = clone;

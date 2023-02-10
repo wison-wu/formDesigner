@@ -33,11 +33,12 @@ const layouts = {
     let labelWidth = element.labelWidth ? `${element.labelWidth}px` : null
     const {onActiveItemChange} = this.$listeners;
     return (
-        <el-col class={className} span={element.span} nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
+        <el-col class={className} span={element.span} comptype={element.compType} nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
           <span class="component-name component-id">{element.id}</span>
           <el-form-item label={element.showLabel ? element.label : ''}
                         label-width={labelWidth}
-                        required={element.required} >
+                        required={element.required}
+          >
             
             <render key={element.id} conf={element} onInput={ event => {
                 this.$set(element, 'value', event)
@@ -52,7 +53,7 @@ const layouts = {
     const { onActiveItemChange } = this.$listeners
     const className = this.activeItem.id === element.id ? 'drawing-item drawing-row-item active-from-item' : 'drawing-item drawing-row-item'    
     return (
-        <el-col class={className} >
+        <el-col class={className} comptype={element.compType}>
           <el-row  gutter={element.gutter}  nativeOnClick={event => { onActiveItemChange(element); event.stopPropagation()}}>
             <span class="component-name">{element.id}</span>
             <div class="drag-wrapper" style="padding-left: 7.5px; padding-right: 7.5px;">
@@ -60,12 +61,12 @@ const layouts = {
                 element.columns.map((item,index) =>{
                   return (
                     <el-col class="drag-col-wrapper" span={item.span} >
-                  <draggable class="drag-wrapper row-drag " v-model={item.list} animation="100" group="componentsGroup"
+                  <draggable class="drag-wrapper row-drag" v-model={item.list} animation="100" group="componentsGroup"
                     onAdd={(e) => { this.handlerAdd(e, item, element) }}
                   >
                     {
                       item.list.map((obj, objIndex) => {
-                        return (<el-row class='test-item'>
+                        return (<el-row class='test-item' >
                           {renderChildren.call(this, h, obj, element)}
                         </el-row>)
                       })
@@ -192,15 +193,18 @@ export default {
     return layoutIsNotFound.call(this)
   },
   methods:{
-    
     handlerAdd(evt,item,row){
-      //debugger;
       if(evt.pullMode === 'clone'){
         if(!(evt.to.className.indexOf('row-drag')>-1&&this.activeItem.compType==='row')){
           item.list.splice(evt.newIndex,0,this.activeItem);
         }
-      }else{
-        if(evt.item.className.indexOf('el-row')>-1&&this.activeItem.compType!=='row'){  //防止row嵌套
+      }
+      /**
+       *
+       * else{
+        const dragComp = evt.clone.lastElementChild.attributes.getNamedItem("comptype").value;
+        console.log(dragComp)
+        if(dragComp==='row'){  //防止row嵌套
           const newIndex = evt.newIndex;
           const oldIndex = evt.oldIndex;
           const rowItem = item.list[newIndex];
@@ -210,6 +214,7 @@ export default {
           return false;
         }
       }
+       */
     },
     /**
      * 动态表单
