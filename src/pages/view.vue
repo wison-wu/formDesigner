@@ -19,6 +19,12 @@
           <div v-if="item.name==='view'">
             <form-viewer ref="formViewer" v-model="formVal" :buildData="formCode"></form-viewer>
           </div>
+          <div v-if="item.name==='edit'">
+            <form-builder ref="formBuilder" v-model="formEditVal" :buildData="formEditCode" />
+            <div style="margin-bottom:15px;text-align:center">
+              <el-button type="primary" class="button" @click="editFormData()">回显数据</el-button>
+            </div>
+          </div>
         </el-tab-pane>
       </el-tabs>
 
@@ -55,6 +61,8 @@ export default {
     return{
       formCode:'',
       formVal:'',
+      formEditVal:'',
+      formEditCode:'',
       tabName:'form',
       tableTabs: [{
           title: '编辑表单',
@@ -79,10 +87,17 @@ export default {
   methods:{
     handlerchangeopen(){
     },
+    editFormData(){
+      this.formEditCode = this.formCode;
+      this.formEditVal = this.formVal;
+      console.log(this.formEditCode)
+      console.log(this.formEditVal)
+    },
     handlerSubForm(){
       this.$refs['formBuilder'][0].validate();
       if(this.formVal!==''){
         this.addNewTab();
+        this.addEditTab();
       }
     },
     addNewTab(){
@@ -93,6 +108,15 @@ export default {
         });
       }
       
+    },
+    addEditTab(){
+      if(this.tableTabs.length<5){
+        this.tableTabs.push({
+          title: '表单数据回显',
+          name: 'edit'
+        });
+      }
+
     }
   },
   computed:{

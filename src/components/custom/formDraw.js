@@ -1,25 +1,27 @@
 //初始化data里面的数据（1、默认为空，2、之前存在的数据。。）
 let itemDatas = {}
 export function datas(){
-    itemDatas = {};
-    let self = this;
-    this.itemList.forEach(val => {
-        if(val.layout === 'rowItem'){ //row布局
-            dataResolveRowItem(val);  //解析row布局
-        }else if(val.layout === 'dynamicItem'){ //动态表单布局
-            let obj =dataResolveDynamicItem(val);
-            let array = [];
-            array.push(obj);
-            itemDatas[val.id] = array;
-        }else if(val.layout === 'tableItem'){ //表格布局
-            dataResolveTableItem(val);
-        }else{    //表单
-            dataResolveColItem(val);
-        }
-    })
-    Object.keys(itemDatas).forEach(key =>{
-        this.$set(this.form, key, itemDatas[key]);
-    })
+    if(!this.isInitData){
+        itemDatas = {};
+        this.itemList.forEach(val => {
+            if(val.layout === 'rowItem'){ //row布局
+                dataResolveRowItem(val);  //解析row布局
+            }else if(val.layout === 'dynamicItem'){ //动态表单布局
+                let obj =dataResolveDynamicItem(val);
+                let array = [];
+                array.push(obj);
+                itemDatas[val.id] = array;
+            }else if(val.layout === 'tableItem'){ //表格布局
+                dataResolveTableItem(val);
+            }else{    //表单
+                dataResolveColItem(val);
+            }
+        })
+        Object.keys(itemDatas).forEach(key =>{
+            this.$set(this.form, key, itemDatas[key]);
+        })
+    }
+    return true;
 }
 
 function dataResolveRowItem(val){
@@ -39,7 +41,6 @@ function dataResolveRowItem(val){
 }
 function dataResolveDynamicItem(val){
     const columns = val.columns;
-
     let obj ={};
     columns.forEach(v =>{
         const key = v.id;
@@ -66,7 +67,6 @@ function dataResolveColItem(val){
 export function fillDatas(jsonValue){
     const self = this;
     Object.keys(jsonValue).forEach(key =>{
-       
        if(typeof(self.form[key]) === 'string'||typeof(self.form[key]) === 'number'){
          self.$set(self.form, key,jsonValue[key]);
        }else if(self.form[key] instanceof Array){//有可能是多选或者是明细表

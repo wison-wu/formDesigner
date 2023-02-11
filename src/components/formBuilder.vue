@@ -138,12 +138,26 @@ export default {
     return{
       form:{},
       rules:{},
+      itemList:[],
+      isInitData:false,
+      isBuildFormData:false,
       currentIndex:-1
     }
   },
   mounted() {
     this.$nextTick(()=> {
-      if(this.value !==''){
+//构建表单
+      if(this.buildData!==''&&!this.isBuildFormData){
+        const buildData = JSON.parse(this.buildData);
+        this.itemList = buildData.list;
+        this.isBuildFormData=true;
+      }
+
+      if(!this.isInitData){
+        //初始化form函数
+        this.handlerInitDatas();
+      }
+      if(this.value!==''){
         const jsonValue = JSON.parse(this.value)
         this.handlerFillDatas(jsonValue);
       }
@@ -172,18 +186,7 @@ export default {
     handlerInitDatas:datas,
     handlerFillDatas:fillDatas
   },
-  created(){
-    this.handlerInitDatas();
-  },
   computed:{
-    itemList(){
-      if(this.buildData!==''){
-        const buildData = JSON.parse(this.buildData);
-        return buildData.list;
-      }else{
-        return [];
-      }
-    },
     formConf(){
       if(this.buildData!==''){
         const buildData = JSON.parse(this.buildData);
@@ -191,6 +194,25 @@ export default {
         return buildData.config;
       }else{
         return {};
+      }
+    }
+  },
+  watch:{
+    value(newVal,oldVal){
+      //构建表单
+      if(this.buildData!==''&&!this.isBuildFormData){
+        const buildData = JSON.parse(this.buildData);
+        this.itemList = buildData.list;
+        this.isBuildFormData=true;
+      }
+
+      if(!this.isInitData){
+        //初始化form函数
+        this.handlerInitDatas();
+      }
+      if(this.value!==''){
+        const jsonValue = JSON.parse(this.value)
+        this.handlerFillDatas(jsonValue);
       }
     }
   }
