@@ -146,7 +146,7 @@ export default {
   },
   mounted() {
     this.$nextTick(()=> {
-//构建表单
+      //构建表单
       if(this.buildData!==''&&!this.isBuildFormData){
         const buildData = JSON.parse(this.buildData);
         this.itemList = buildData.list;

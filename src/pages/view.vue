@@ -90,8 +90,6 @@ export default {
     editFormData(){
       this.formEditCode = this.formCode;
       this.formEditVal = this.formVal;
-      console.log(this.formEditCode)
-      console.log(this.formEditVal)
     },
     handlerSubForm(){
       this.$refs['formBuilder'][0].validate();
