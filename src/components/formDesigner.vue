@@ -170,6 +170,8 @@ export default {
       const jsonObject = JSON.parse(json);
       this.designList = [];
       this.designList = this.designList.concat(jsonObject.list);
+      this.formConfig = Object.assign({}, jsonObject.config);
+      this.$refs['designer'].changeFormConfig(this.formConfig);
     }
   },
   computed:{

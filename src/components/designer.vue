@@ -149,7 +149,7 @@ export default {
     },
     formConfig:{
       type:Object,
-      default:formConf
+      default:{}
     }
   },
   provide(){
@@ -185,8 +185,8 @@ export default {
   mounted() {
   },
   methods: {
-    handlerTest(evt){
-      console.log(evt)
+    changeFormConfig(formConfig){
+      this.formConf = formConfig;
     },
     preview(){
       const clone = JSON.parse(JSON.stringify(this.list))
@@ -226,11 +226,11 @@ export default {
           clone.columns.map((column)=>{
             let itemList = [];
             column.list.map((item)=>{
-              const cloneitem = jsonClone(item);
+              const cloneItem = jsonClone(item);
               const uId = "fd_"+getSimpleId();
-              cloneitem.id = uId;
-              cloneitem._id = uId;
-              itemList.push(cloneitem);
+              cloneItem.id = uId;
+              cloneItem._id = uId;
+              itemList.push(cloneItem);
             })
             column.list = [];
             column.list = itemList;
@@ -247,11 +247,11 @@ export default {
               let itemList = [];
               td.id=getSimpleId();
               td.columns.map((item,i)=>{
-                const cloneitem = jsonClone(item);
+                const cloneItem = jsonClone(item);
                 const uId = "fd_"+getSimpleId();
-                cloneitem.id = uId;
-                cloneitem._id = uId;
-                itemList.push(cloneitem);
+                cloneItem.id = uId;
+                cloneItem._id = uId;
+                itemList.push(cloneItem);
               })
               td.columns = [];
               td.columns = itemList;
